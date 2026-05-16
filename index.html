@@ -268,7 +268,7 @@
 
         .customization-content {
             display: none;
-            max-height: 500px;
+            max-height: 600px;
             overflow-y: auto;
         }
 
@@ -338,6 +338,36 @@
             background: var(--accent-color, #00d4ff);
             color: #000;
             font-weight: bold;
+        }
+
+        .language-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .language-option {
+            padding: 10px;
+            border: 2px solid var(--accent-color, #00d4ff);
+            background: rgba(0, 212, 255, 0.1);
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .language-option:hover {
+            background: rgba(0, 212, 255, 0.3);
+            transform: scale(1.05);
+        }
+
+        .language-option.active {
+            background: var(--accent-color, #00d4ff);
+            color: #000;
+            box-shadow: 0 0 10px var(--accent-color, #00d4ff);
         }
 
         /* Logo */
@@ -609,6 +639,10 @@
             .color-grid {
                 grid-template-columns: repeat(5, 1fr);
             }
+
+            .language-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
     </style>
 </head>
@@ -656,11 +690,8 @@
                 </div>
             </div>
             <div class="customization-section">
-                <h3>🌐 Change Language</h3>
-                <div class="theme-buttons">
-                    <button class="theme-btn" id="langEnglish" onclick="setLanguage('en')">English</button>
-                    <button class="theme-btn" id="langLocal" onclick="setLanguageByCountry()">Local Language</button>
-                </div>
+                <h3>🌐 Languages (9 Options)</h3>
+                <div class="language-grid" id="languageGrid"></div>
             </div>
         </div>
     </div>
@@ -930,6 +961,19 @@
             }
         };
 
+        // Language metadata
+        const languageList = [
+            { code: 'en', name: 'English', flag: '🇬🇧' },
+            { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
+            { code: 'nl', name: 'Nederlands', flag: '🇳🇱' },
+            { code: 'fr', name: 'Français', flag: '🇫🇷' },
+            { code: 'es', name: 'Español', flag: '🇪🇸' },
+            { code: 'it', name: 'Italiano', flag: '🇮🇹' },
+            { code: 'ja', name: '日本語', flag: '🇯🇵' },
+            { code: 'zh', name: '中文', flag: '🇨🇳' },
+            { code: 'pt', name: 'Português', flag: '🇵🇹' }
+        ];
+
         // Country to Language Mapping
         const countryLanguageMap = {
             'DE': 'de', 'AT': 'de', 'CH': 'de',
@@ -991,10 +1035,7 @@
             updatePageLanguage();
             document.getElementById('languageModal').classList.add('hidden');
             localStorage.setItem('selectedLanguage', lang);
-            
-            const langBtns = document.querySelectorAll('[id^="lang"]');
-            langBtns.forEach(btn => btn.classList.remove('active'));
-            document.getElementById('lang' + (lang === 'en' ? 'English' : 'Local')).classList.add('active');
+            updateLanguageGrid();
         }
 
         // Set language by country
@@ -1012,6 +1053,36 @@
                     el.textContent = languages[currentLanguage][key];
                 }
             });
+        }
+
+        // Initialize language grid in customization panel
+        function initializeLanguageGrid() {
+            const languageGrid = document.getElementById('languageGrid');
+            languageGrid.innerHTML = '';
+            languageList.forEach(lang => {
+                const btn = document.createElement('button');
+                btn.className = 'language-option';
+                if (lang.code === currentLanguage) btn.classList.add('active');
+                btn.textContent = `${lang.flag} ${lang.code.toUpperCase()}`;
+                btn.onclick = () => setLanguage(lang.code);
+                languageGrid.appendChild(btn);
+            });
+        }
+
+        // Update language grid active state
+        function updateLanguageGrid() {
+            document.querySelectorAll('.language-option').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            const activeLang = languageList.find(l => l.code === currentLanguage);
+            if (activeLang) {
+                const buttons = document.querySelectorAll('.language-option');
+                buttons.forEach(btn => {
+                    if (btn.textContent.includes(activeLang.code.toUpperCase())) {
+                        btn.classList.add('active');
+                    }
+                });
+            }
         }
 
         // 33 Color Options
@@ -1269,6 +1340,7 @@
         // Initialize on load
         window.addEventListener('load', () => {
             initializeColors();
+            initializeLanguageGrid();
             loadPreferences();
             detectLocationAndLanguage();
             getWeatherData();
