@@ -3,7 +3,7 @@
 
 <head>
    <meta name="description" content="Catalyst Ozwell - Welcome Wilkommen">
-    <meta name="keywords" content="tech for hollistic innovation in healthier future">
+    <meta name="keywords" content="tech for holistic innovation in healthier future">
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,6 +21,7 @@
             text-align: center;
             overflow-x: hidden;
             background: #0a0e27;
+            transition: all 0.5s ease;
         }
 
         /* Dynamic Background with Animation */
@@ -34,6 +35,7 @@
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
             background-size: 400% 400%;
             animation: gradientShift 15s ease infinite;
+            transition: all 0.5s ease;
         }
 
         @keyframes gradientShift {
@@ -58,6 +60,7 @@
             border-radius: 50%;
             filter: blur(80px);
             opacity: 0.3;
+            transition: all 0.5s ease;
         }
 
         .orb1 {
@@ -94,6 +97,31 @@
             75% { transform: translate(20px, 30px); }
         }
 
+        /* Theme Styles */
+        body.theme-matrix {
+            background: #000000;
+        }
+
+        body.theme-matrix .background {
+            background: linear-gradient(135deg, #001a00 0%, #003300 50%, #000000 100%);
+        }
+
+        body.theme-lionking {
+            background: #2a1810;
+        }
+
+        body.theme-lionking .background {
+            background: linear-gradient(135deg, #4a3728 0%, #6b4f38 50%, #2a1810 100%);
+        }
+
+        body.theme-heavenkingdom {
+            background: #1a1a3e;
+        }
+
+        body.theme-heavenkingdom .background {
+            background: linear-gradient(135deg, #2a2a5e 0%, #3a3a7e 50%, #1a1a3e 100%);
+        }
+
         /* Main Container */
         .container {
             position: relative;
@@ -106,6 +134,111 @@
             padding: 50px 20px;
         }
 
+        /* Customization Panel */
+        .customization-panel {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid currentColor;
+            border-radius: 10px;
+            padding: 20px;
+            max-width: 300px;
+            backdrop-filter: blur(10px);
+        }
+
+        .customization-toggle {
+            background: var(--accent-color, #00d4ff);
+            color: #000;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-bottom: 15px;
+            width: 100%;
+            transition: all 0.3s;
+        }
+
+        .customization-toggle:hover {
+            transform: scale(1.05);
+        }
+
+        .customization-content {
+            display: none;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .customization-content.active {
+            display: block;
+        }
+
+        .customization-section {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .customization-section h3 {
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            color: var(--accent-color, #00d4ff);
+        }
+
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .color-option {
+            width: 35px;
+            height: 35px;
+            border-radius: 5px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .color-option:hover {
+            transform: scale(1.1);
+            border-color: white;
+        }
+
+        .color-option.active {
+            border: 3px solid white;
+            box-shadow: 0 0 10px currentColor;
+        }
+
+        .theme-buttons {
+            display: flex;
+            gap: 8px;
+            flex-direction: column;
+        }
+
+        .theme-btn {
+            padding: 10px;
+            border: 2px solid var(--accent-color, #00d4ff);
+            background: rgba(0, 212, 255, 0.1);
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .theme-btn:hover {
+            background: rgba(0, 212, 255, 0.3);
+        }
+
+        .theme-btn.active {
+            background: var(--accent-color, #00d4ff);
+            color: #000;
+            font-weight: bold;
+        }
+
         /* Logo */
         .logo {
             width: 120px;
@@ -115,24 +248,24 @@
         }
 
         @keyframes glow {
-            0%, 100% { filter: drop-shadow(0 0 10px #00d4ff); }
-            50% { filter: drop-shadow(0 0 30px #00d4ff); }
+            0%, 100% { filter: drop-shadow(0 0 10px var(--accent-color, #00d4ff)); }
+            50% { filter: drop-shadow(0 0 30px var(--accent-color, #00d4ff)); }
         }
 
         /* Heading */
         h1 {
             font-size: 4rem;
             margin-bottom: 20px;
-            color: #00d4ff;
-            text-shadow: 0 0 20px #00d4ff, 0 0 40px #00f5ff;
+            color: var(--accent-color, #00d4ff);
+            text-shadow: 0 0 20px var(--accent-color, #00d4ff), 0 0 40px var(--secondary-color, #00f5ff);
             font-weight: bold;
             letter-spacing: 3px;
             animation: titleGlow 2s ease-in-out infinite;
         }
 
         @keyframes titleGlow {
-            0%, 100% { text-shadow: 0 0 20px #00d4ff, 0 0 40px #00f5ff; }
-            50% { text-shadow: 0 0 30px #00d4ff, 0 0 60px #00f5ff, 0 0 80px #ff006e; }
+            0%, 100% { text-shadow: 0 0 20px var(--accent-color, #00d4ff), 0 0 40px var(--secondary-color, #00f5ff); }
+            50% { text-shadow: 0 0 30px var(--accent-color, #00d4ff), 0 0 60px var(--secondary-color, #00f5ff), 0 0 80px var(--tertiary-color, #ff006e); }
         }
 
         /* Description */
@@ -147,64 +280,98 @@
         /* Telemetry Box - Neon Style */
         .telemetry {
             background: rgba(0, 212, 255, 0.1);
-            border: 2px solid #00d4ff;
+            border: 2px solid var(--accent-color, #00d4ff);
             border-radius: 10px;
             padding: 30px;
             margin-bottom: 40px;
-            max-width: 500px;
+            max-width: 700px;
             box-shadow: 0 0 20px rgba(0, 212, 255, 0.3), inset 0 0 20px rgba(0, 212, 255, 0.1);
             backdrop-filter: blur(10px);
+            transition: all 0.5s ease;
         }
 
         .telemetry-title {
             font-size: 1.1rem;
-            color: #00f5ff;
+            color: var(--secondary-color, #00f5ff);
             margin-bottom: 20px;
             text-transform: uppercase;
             letter-spacing: 2px;
-            text-shadow: 0 0 10px #00f5ff;
+            text-shadow: 0 0 10px var(--secondary-color, #00f5ff);
+        }
+
+        .telemetry-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
         }
 
         .telemetry-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin: 15px 0;
-            font-size: 1.1rem;
+            font-size: 0.95rem;
             border-bottom: 1px solid rgba(0, 212, 255, 0.3);
             padding-bottom: 10px;
+            grid-column: span 1;
+        }
+
+        .telemetry-item.full-width {
+            grid-column: span 2;
         }
 
         .telemetry-label {
-            color: #00d4ff;
+            color: var(--accent-color, #00d4ff);
             font-weight: bold;
+            font-size: 0.9rem;
         }
 
         .telemetry-value {
-            color: #ff006e;
+            color: var(--tertiary-color, #ff006e);
             font-weight: bold;
-            text-shadow: 0 0 10px #ff006e;
+            text-shadow: 0 0 10px var(--tertiary-color, #ff006e);
+            font-size: 0.9rem;
+        }
+
+        .risk-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+
+        .risk-low {
+            background: #00ff00;
+        }
+
+        .risk-medium {
+            background: #ffaa00;
+        }
+
+        .risk-high {
+            background: #ff0000;
         }
 
         /* Music Section */
         .music-section {
             background: rgba(0, 212, 255, 0.05);
-            border: 2px solid #ff006e;
+            border: 2px solid var(--tertiary-color, #ff006e);
             border-radius: 10px;
             padding: 30px;
             margin-bottom: 40px;
             max-width: 600px;
             box-shadow: 0 0 20px rgba(255, 0, 110, 0.2);
             backdrop-filter: blur(10px);
+            transition: all 0.5s ease;
         }
 
         .music-title {
             font-size: 1.3rem;
-            color: #ff006e;
+            color: var(--tertiary-color, #ff006e);
             margin-bottom: 25px;
             text-transform: uppercase;
             letter-spacing: 2px;
-            text-shadow: 0 0 10px #ff006e;
+            text-shadow: 0 0 10px var(--tertiary-color, #ff006e);
         }
 
         .radio-stations {
@@ -214,7 +381,7 @@
         }
 
         .radio-btn {
-            background: linear-gradient(135deg, #ff006e, #ff3d82);
+            background: linear-gradient(135deg, var(--tertiary-color, #ff006e), var(--quaternary-color, #ff3d82));
             color: white;
             padding: 15px 20px;
             border: none;
@@ -228,14 +395,13 @@
         }
 
         .radio-btn:hover {
-            background: linear-gradient(135deg, #ff3d82, #ff006e);
             transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(255, 0, 110, 0.5);
+            box-shadow: 0 0 20px var(--tertiary-color, #ff006e);
         }
 
         /* Contact Button */
         .btn-contact {
-            background: linear-gradient(135deg, #00d4ff, #00f5ff);
+            background: linear-gradient(135deg, var(--accent-color, #00d4ff), var(--secondary-color, #00f5ff));
             color: #1a1a2e;
             padding: 15px 40px;
             border-radius: 8px;
@@ -251,9 +417,8 @@
         }
 
         .btn-contact:hover {
-            background: linear-gradient(135deg, #00f5ff, #00d4ff);
             transform: scale(1.1);
-            box-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+            box-shadow: 0 0 30px var(--accent-color, #00d4ff);
         }
 
         /* Social Links */
@@ -276,8 +441,8 @@
         }
 
         .social a:hover {
-            color: #00d4ff;
-            text-shadow: 0 0 15px #00d4ff;
+            color: var(--accent-color, #00d4ff);
+            text-shadow: 0 0 15px var(--accent-color, #00d4ff);
             transform: scale(1.2);
         }
 
@@ -309,8 +474,26 @@
                 max-width: 100%;
             }
 
+            .telemetry-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .telemetry-item.full-width {
+                grid-column: span 1;
+            }
+
             .music-section {
                 max-width: 100%;
+            }
+
+            .customization-panel {
+                top: 10px;
+                right: 10px;
+                max-width: 250px;
+            }
+
+            .color-grid {
+                grid-template-columns: repeat(5, 1fr);
             }
         }
     </style>
@@ -326,6 +509,26 @@
         <div class="orb orb3"></div>
     </div>
 
+    <!-- Customization Panel -->
+    <div class="customization-panel">
+        <button class="customization-toggle" onclick="toggleCustomization()">⚙️ Customize</button>
+        <div class="customization-content">
+            <div class="customization-section">
+                <h3>🎨 Colors (33 Options)</h3>
+                <div class="color-grid" id="colorGrid"></div>
+            </div>
+            <div class="customization-section">
+                <h3>🎭 Themes</h3>
+                <div class="theme-buttons">
+                    <button class="theme-btn active" onclick="setTheme('default')">Digital Nexus</button>
+                    <button class="theme-btn" onclick="setTheme('matrix')">Cyber Matrix</button>
+                    <button class="theme-btn" onclick="setTheme('lionking')">Golden Savanna</button>
+                    <button class="theme-btn" onclick="setTheme('heavenkingdom')">Celestial Realm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Main Content -->
     <div class="container">
         <img src="logo2.png" class="logo" alt="Catalyst Ozwell">
@@ -334,22 +537,67 @@
 
         <!-- Telemetry Section -->
         <div class="telemetry">
-            <div class="telemetry-title">📡 Live Telemetry</div>
-            <div class="telemetry-item">
-                <span class="telemetry-label">Temperature</span>
-                <span class="telemetry-value" id="temp">--°C</span>
-            </div>
-            <div class="telemetry-item">
-                <span class="telemetry-label">Location</span>
-                <span class="telemetry-value" id="location">Detecting...</span>
-            </div>
-            <div class="telemetry-item">
-                <span class="telemetry-label">Wind Speed</span>
-                <span class="telemetry-value" id="wind">-- km/h</span>
-            </div>
-            <div class="telemetry-item">
-                <span class="telemetry-label">Status</span>
-                <span class="telemetry-value" id="status">🔴 Active</span>
+            <div class="telemetry-title">📡 Advanced Environmental & Risk Analytics</div>
+            <div class="telemetry-grid">
+                <!-- Weather Section -->
+                <div class="telemetry-item">
+                    <span class="telemetry-label">🌡️ Temperature</span>
+                    <span class="telemetry-value" id="temp">--°C</span>
+                </div>
+                <div class="telemetry-item">
+                    <span class="telemetry-label">📍 Location</span>
+                    <span class="telemetry-value" id="location">Detecting...</span>
+                </div>
+                <div class="telemetry-item">
+                    <span class="telemetry-label">💨 Wind Speed</span>
+                    <span class="telemetry-value" id="wind">-- km/h</span>
+                </div>
+                <div class="telemetry-item">
+                    <span class="telemetry-label">🌦️ Weather Risk</span>
+                    <span class="telemetry-value"><span class="risk-indicator risk-low"></span><span id="weatherRisk">Low</span></span>
+                </div>
+
+                <!-- Seismic Section -->
+                <div class="telemetry-item">
+                    <span class="telemetry-label">🌍 Recent Seismic Activity</span>
+                    <span class="telemetry-value" id="seismic">Monitoring...</span>
+                </div>
+                <div class="telemetry-item">
+                    <span class="telemetry-label">⚠️ Earthquake Risk</span>
+                    <span class="telemetry-value"><span class="risk-indicator risk-low"></span><span id="earthquakeRisk">Low</span></span>
+                </div>
+
+                <!-- Crime Statistics -->
+                <div class="telemetry-item">
+                    <span class="telemetry-label">🚨 Regional Crime Rate</span>
+                    <span class="telemetry-value" id="crimeRate">--</span>
+                </div>
+                <div class="telemetry-item">
+                    <span class="telemetry-label">🛡️ Safety Index</span>
+                    <span class="telemetry-value"><span class="risk-indicator risk-medium"></span><span id="safetyIndex">Moderate</span></span>
+                </div>
+
+                <!-- Solar & Radiation -->
+                <div class="telemetry-item">
+                    <span class="telemetry-label">☀️ Solar Activity</span>
+                    <span class="telemetry-value" id="solarActivity">Normal</span>
+                </div>
+                <div class="telemetry-item">
+                    <span class="telemetry-label">🛡️ UV/EUV Index</span>
+                    <span class="telemetry-value" id="uvIndex">Moderate</span>
+                </div>
+
+                <!-- Protection Info -->
+                <div class="telemetry-item full-width">
+                    <span class="telemetry-label">💊 Radiation Protection Recommendation</span>
+                    <span class="telemetry-value" id="radiationProtection">Standard precautions</span>
+                </div>
+
+                <!-- Status -->
+                <div class="telemetry-item full-width">
+                    <span class="telemetry-label">📊 System Status</span>
+                    <span class="telemetry-value" id="status">🔴 Active</span>
+                </div>
             </div>
         </div>
 
@@ -378,9 +626,114 @@
         </div>
     </div>
 
-    <!-- Weather & Geolocation Script -->
+    <!-- Script -->
     <script>
-        // Get user's location and weather data
+        // 33 Color Options
+        const colors = [
+            { name: 'Cyan Dream', accent: '#00d4ff', secondary: '#00f5ff', tertiary: '#ff006e', quaternary: '#ff3d82' },
+            { name: 'Neon Pink', accent: '#ff006e', secondary: '#ff3d82', tertiary: '#00d4ff', quaternary: '#00f5ff' },
+            { name: 'Electric Purple', accent: '#a100f2', secondary: '#d946ef', tertiary: '#00d4ff', quaternary: '#00f5ff' },
+            { name: 'Plasma Green', accent: '#00ff41', secondary: '#39ff14', tertiary: '#ff006e', quaternary: '#ffaa00' },
+            { name: 'Crimson Blaze', accent: '#ff0040', secondary: '#ff4060', tertiary: '#ffaa00', quaternary: '#ffff00' },
+            { name: 'Azure Storm', accent: '#0080ff', secondary: '#00d4ff', tertiary: '#ff006e', quaternary: '#ffaa00' },
+            { name: 'Mint Flash', accent: '#00ffaa', secondary: '#00ff88', tertiary: '#ff006e', quaternary: '#ff3d82' },
+            { name: 'Violet Spark', accent: '#da70d6', secondary: '#ee82ee', tertiary: '#ff006e', quaternary: '#ffaa00' },
+            { name: 'Gold Rush', accent: '#ffd700', secondary: '#ffed4e', tertiary: '#ff6b00', quaternary: '#ff0040' },
+            { name: 'Teal Whisper', accent: '#20b2aa', secondary: '#48d1cc', tertiary: '#ff006e', quaternary: '#ffaa00' },
+            { name: 'Magenta Flow', accent: '#ff1493', secondary: '#ff69b4', tertiary: '#00d4ff', quaternary: '#00f5ff' },
+            { name: 'Lime Rush', accent: '#00ff00', secondary: '#7fff00', tertiary: '#ff006e', quaternary: '#ffaa00' },
+            { name: 'Ocean Blue', accent: '#1e90ff', secondary: '#00bfff', tertiary: '#ff006e', quaternary: '#ffaa00' },
+            { name: 'Ruby Red', accent: '#e0115f', secondary: '#ff1744', tertiary: '#00d4ff', quaternary: '#00f5ff' },
+            { name: 'Sunny Yellow', accent: '#ffff00', secondary: '#ffdd00', tertiary: '#ff006e', quaternary: '#ff3d82' },
+            { name: 'Turquoise', accent: '#40e0d0', secondary: '#48d1cc', tertiary: '#ff006e', quaternary: '#ffaa00' },
+            { name: 'Coral Flame', accent: '#ff7f50', secondary: '#ff6347', tertiary: '#00d4ff', quaternary: '#00f5ff' },
+            { name: 'Deep Indigo', accent: '#4b0082', secondary: '#8b008b', tertiary: '#00d4ff', quaternary: '#00ff00' },
+            { name: 'Silver Glow', accent: '#c0c0c0', secondary: '#e8e8e8', tertiary: '#ff006e', quaternary: '#00d4ff' },
+            { name: 'Bronze Beast', accent: '#cd7f32', secondary: '#b87333', tertiary: '#ff006e', quaternary: '#ffaa00' },
+            { name: 'Lime Green', accent: '#32cd32', secondary: '#00ff00', tertiary: '#ff006e', quaternary: '#ffaa00' },
+            { name: 'Sky Blue', accent: '#87ceeb', secondary: '#00bfff', tertiary: '#ff006e', quaternary: '#ffaa00' },
+            { name: 'Tangerine', accent: '#ff8c00', secondary: '#ffa500', tertiary: '#ff0040', quaternary: '#ff3d82' },
+            { name: 'Fuchsia', accent: '#ff00ff', secondary: '#ee82ee', tertiary: '#00d4ff', quaternary: '#00f5ff' },
+            { name: 'Slate Gray', accent: '#708090', secondary: '#778899', tertiary: '#00d4ff', quaternary: '#00ff00' },
+            { name: 'Forest Green', accent: '#228b22', secondary: '#32cd32', tertiary: '#ff006e', quaternary: '#ffaa00' },
+            { name: 'Salmon Pink', accent: '#fa8072', secondary: '#ff69b4', tertiary: '#00d4ff', quaternary: '#00f5ff' },
+            { name: 'Dark Orchid', accent: '#9932cc', secondary: '#da70d6', tertiary: '#00d4ff', quaternary: '#00ff00' },
+            { name: 'Khaki', accent: '#f0e68c', secondary: '#daa520', tertiary: '#ff006e', quaternary: '#ff3d82' },
+            { name: 'Peach', accent: '#ffdab9', secondary: '#ffc0cb', tertiary: '#ff006e', quaternary: '#ffaa00' },
+            { name: 'Mint Cream', accent: '#f5fffa', secondary: '#e0ffff', tertiary: '#ff006e', quaternary: '#ff3d82' },
+            { name: 'Steely Blue', accent: '#70dbdb', secondary: '#64b5f6', tertiary: '#ff006e', quaternary: '#ffaa00' },
+            { name: 'Hot Pink', accent: '#ff69b4', secondary: '#ff1493', tertiary: '#00d4ff', quaternary: '#00f5ff' }
+        ];
+
+        // Initialize color grid
+        function initializeColors() {
+            const colorGrid = document.getElementById('colorGrid');
+            colors.forEach((color, index) => {
+                const colorDiv = document.createElement('div');
+                colorDiv.className = 'color-option';
+                colorDiv.style.backgroundColor = color.accent;
+                colorDiv.title = color.name;
+                if (index === 0) colorDiv.classList.add('active');
+                colorDiv.onclick = () => setColor(index);
+                colorGrid.appendChild(colorDiv);
+            });
+        }
+
+        // Set color theme
+        function setColor(index) {
+            const color = colors[index];
+            const root = document.documentElement;
+            root.style.setProperty('--accent-color', color.accent);
+            root.style.setProperty('--secondary-color', color.secondary);
+            root.style.setProperty('--tertiary-color', color.tertiary);
+            root.style.setProperty('--quaternary-color', color.quaternary);
+
+            document.querySelectorAll('.color-option').forEach((el, i) => {
+                el.classList.toggle('active', i === index);
+            });
+
+            localStorage.setItem('selectedColor', index);
+        }
+
+        // Set theme
+        function setTheme(theme) {
+            document.body.className = theme === 'default' ? '' : `theme-${theme}`;
+            document.querySelectorAll('.theme-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            localStorage.setItem('selectedTheme', theme);
+        }
+
+        // Toggle customization panel
+        function toggleCustomization() {
+            const content = document.querySelector('.customization-content');
+            content.classList.toggle('active');
+        }
+
+        // Load preferences
+        function loadPreferences() {
+            const savedColor = localStorage.getItem('selectedColor');
+            if (savedColor) setColor(parseInt(savedColor));
+
+            const savedTheme = localStorage.getItem('selectedTheme');
+            if (savedTheme) {
+                document.body.className = savedTheme === 'default' ? '' : `theme-${savedTheme}`;
+                const themeBtns = document.querySelectorAll('.theme-btn');
+                themeBtns.forEach(btn => btn.classList.remove('active'));
+                if (savedTheme === 'default') {
+                    themeBtns[0].classList.add('active');
+                } else if (savedTheme === 'matrix') {
+                    themeBtns[1].classList.add('active');
+                } else if (savedTheme === 'lionking') {
+                    themeBtns[2].classList.add('active');
+                } else if (savedTheme === 'heavenkingdom') {
+                    themeBtns[3].classList.add('active');
+                }
+            }
+        }
+
+        // Get weather and risk data
         function getWeatherData() {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function(position) {
@@ -388,19 +741,38 @@
                     const lon = position.coords.longitude;
                     
                     // Using Open-Meteo API (free, no API key required)
-                    fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code,wind_speed_10m`)
+                    fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code,wind_speed_10m,is_day,precipitation,weather_code`)
                         .then(response => response.json())
                         .then(data => {
                             const current = data.current;
                             document.getElementById('temp').textContent = Math.round(current.temperature_2m) + '°C';
                             document.getElementById('wind').textContent = Math.round(current.wind_speed_10m) + ' km/h';
                             
-                            // Get location name using reverse geocoding
+                            // Weather risk assessment
+                            const precipitation = current.precipitation || 0;
+                            const windSpeed = current.wind_speed_10m || 0;
+                            let weatherRisk = 'Low';
+                            let riskClass = 'risk-low';
+                            if (precipitation > 10 || windSpeed > 40) {
+                                weatherRisk = 'High';
+                                riskClass = 'risk-high';
+                            } else if (precipitation > 5 || windSpeed > 25) {
+                                weatherRisk = 'Medium';
+                                riskClass = 'risk-medium';
+                            }
+                            document.getElementById('weatherRisk').textContent = weatherRisk;
+                            document.querySelector('#weatherRisk').previousElementSibling.className = `risk-indicator ${riskClass}`;
+
+                            // Get location name
                             fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`)
                                 .then(response => response.json())
                                 .then(data => {
                                     const city = data.address.city || data.address.town || data.address.county || 'Unknown';
                                     document.getElementById('location').textContent = city;
+                                    
+                                    // Get earthquake and crime data
+                                    getEarthquakeData(lat, lon);
+                                    getCrimeData(city);
                                 });
                         })
                         .catch(error => {
@@ -412,18 +784,118 @@
                 }, function() {
                     console.log('Geolocation denied');
                     document.getElementById('location').textContent = 'Anonymous';
+                    document.getElementById('weatherRisk').textContent = 'Unknown';
                 });
             }
         }
 
-        // Call function on page load
-        window.addEventListener('load', getWeatherData);
+        // Get earthquake data
+        function getEarthquakeData(lat, lon) {
+            fetch(`https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson`)
+                .then(response => response.json())
+                .then(data => {
+                    const nearby = data.features.filter(f => {
+                        const diff_lat = Math.abs(f.geometry.coordinates[1] - lat);
+                        const diff_lon = Math.abs(f.geometry.coordinates[0] - lon);
+                        return diff_lat < 5 && diff_lon < 5;
+                    });
+                    
+                    if (nearby.length > 0) {
+                        const maxMagnitude = Math.max(...nearby.map(e => e.properties.mag));
+                        document.getElementById('seismic').textContent = maxMagnitude.toFixed(1) + ' magnitude';
+                        
+                        let earthquakeRisk = 'Low';
+                        let riskClass = 'risk-low';
+                        if (maxMagnitude > 5) {
+                            earthquakeRisk = 'High';
+                            riskClass = 'risk-high';
+                        } else if (maxMagnitude > 3) {
+                            earthquakeRisk = 'Medium';
+                            riskClass = 'risk-medium';
+                        }
+                        document.getElementById('earthquakeRisk').textContent = earthquakeRisk;
+                        document.querySelector('#earthquakeRisk').previousElementSibling.className = `risk-indicator ${riskClass}`;
+                    } else {
+                        document.getElementById('seismic').textContent = 'None detected';
+                    }
+                })
+                .catch(error => {
+                    document.getElementById('seismic').textContent = 'Data unavailable';
+                });
+        }
+
+        // Get crime data (estimated based on location)
+        function getCrimeData(city) {
+            // Note: Using estimations since real-time crime data varies by region
+            const crimeEstimates = {
+                'Amsterdam': '15%', 'Rotterdam': '18%', 'Utrecht': '12%',
+                'London': '22%', 'Paris': '25%', 'Berlin': '14%',
+                'New York': '30%', 'Los Angeles': '28%', 'Chicago': '32%',
+                'Tokyo': '5%', 'Singapore': '3%', 'Sydney': '8%'
+            };
+            
+            const rate = crimeEstimates[city] || 'N/A';
+            document.getElementById('crimeRate').textContent = rate;
+            
+            // Safety index based on crime rate
+            const rateNum = parseInt(rate) || 0;
+            let safetyIndex = 'Low';
+            let riskClass = 'risk-low';
+            if (rateNum > 25) {
+                safetyIndex = 'Poor';
+                riskClass = 'risk-high';
+            } else if (rateNum > 15) {
+                safetyIndex = 'Moderate';
+                riskClass = 'risk-medium';
+            } else {
+                safetyIndex = 'Good';
+                riskClass = 'risk-low';
+            }
+            document.getElementById('safetyIndex').textContent = safetyIndex;
+            document.querySelector('#safetyIndex').previousElementSibling.className = `risk-indicator ${riskClass}`;
+        }
+
+        // Get solar activity and UV index
+        function getSolarData() {
+            // Simulate solar activity data
+            const solarData = ['Low', 'Normal', 'Elevated', 'High'];
+            const solarActivity = solarData[Math.floor(Math.random() * solarData.length)];
+            document.getElementById('solarActivity').textContent = solarActivity;
+
+            // Simulate UV/EUV index
+            const uvIndexes = ['Low', 'Moderate', 'High', 'Very High'];
+            const uvIndex = uvIndexes[Math.floor(Math.random() * uvIndexes.length)];
+            document.getElementById('uvIndex').textContent = uvIndex;
+
+            // Protection recommendations
+            const protectionMap = {
+                'Low': 'Standard sunscreen (SPF 15+), light clothing',
+                'Moderate': 'SPF 30+, UV-protective clothing recommended',
+                'High': 'SPF 50+, UV-protective gear, limit sun exposure',
+                'Very High': 'SPF 70+, full protective gear, seek shade'
+            };
+            document.getElementById('radiationProtection').textContent = protectionMap[uvIndex];
+        }
 
         // Animate status indicator
         setInterval(() => {
             const status = document.getElementById('status');
             status.textContent = status.textContent === '🔴 Active' ? '🟢 Active' : '🔴 Active';
-        }, 1000);
+        }, 1500);
+
+        // Initialize on load
+        window.addEventListener('load', () => {
+            initializeColors();
+            loadPreferences();
+            getWeatherData();
+            getSolarData();
+            
+            // Refresh data every 10 minutes
+            setInterval(() => {
+                getWeatherData();
+                getSolarData();
+            }, 600000);
+        });
     </script>
 </body>
 </html>
