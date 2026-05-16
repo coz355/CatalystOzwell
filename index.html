@@ -9,72 +9,421 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catalyst Ozwell | Love&LightHealth </title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #1a1a2e, #16213e);
             color: white;
             text-align: center;
-            padding: 50px;
-            margin: 0;
-            height: 100vh;
+            overflow-x: hidden;
+            background: #0a0e27;
+        }
+
+        /* Dynamic Background with Animation */
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Light Play Effects */
+        .light-orbs {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+        }
+
+        .orb1 {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, #00d4ff, transparent);
+            top: -100px;
+            left: -100px;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .orb2 {
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, #ff006e, transparent);
+            bottom: -50px;
+            right: -50px;
+            animation: float 25s infinite ease-in-out reverse;
+        }
+
+        .orb3 {
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, #00f5ff, transparent);
+            top: 50%;
+            right: 10%;
+            animation: float 30s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(30px, -30px); }
+            50% { transform: translate(-20px, 20px); }
+            75% { transform: translate(20px, 30px); }
+        }
+
+        /* Main Container */
+        .container {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            padding: 50px 20px;
         }
+
+        /* Logo */
+        .logo {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 30px;
+            animation: glow 3s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { filter: drop-shadow(0 0 10px #00d4ff); }
+            50% { filter: drop-shadow(0 0 30px #00d4ff); }
+        }
+
+        /* Heading */
         h1 {
-            font-size: 3rem;
+            font-size: 4rem;
             margin-bottom: 20px;
             color: #00d4ff;
+            text-shadow: 0 0 20px #00d4ff, 0 0 40px #00f5ff;
+            font-weight: bold;
+            letter-spacing: 3px;
+            animation: titleGlow 2s ease-in-out infinite;
         }
-        p {
+
+        @keyframes titleGlow {
+            0%, 100% { text-shadow: 0 0 20px #00d4ff, 0 0 40px #00f5ff; }
+            50% { text-shadow: 0 0 30px #00d4ff, 0 0 60px #00f5ff, 0 0 80px #ff006e; }
+        }
+
+        /* Description */
+        .description {
             font-size: 1.2rem;
             max-width: 600px;
-            line-height: 1.6;
+            line-height: 1.8;
+            margin-bottom: 40px;
+            color: #e0e0e0;
         }
-        .logo {
-            width: 100px;
+
+        /* Telemetry Box - Neon Style */
+        .telemetry {
+            background: rgba(0, 212, 255, 0.1);
+            border: 2px solid #00d4ff;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 40px;
+            max-width: 500px;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.3), inset 0 0 20px rgba(0, 212, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .telemetry-title {
+            font-size: 1.1rem;
+            color: #00f5ff;
             margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px #00f5ff;
         }
-        .btn {
-            background: #00d4ff;
+
+        .telemetry-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 15px 0;
+            font-size: 1.1rem;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .telemetry-label {
+            color: #00d4ff;
+            font-weight: bold;
+        }
+
+        .telemetry-value {
+            color: #ff006e;
+            font-weight: bold;
+            text-shadow: 0 0 10px #ff006e;
+        }
+
+        /* Music Section */
+        .music-section {
+            background: rgba(0, 212, 255, 0.05);
+            border: 2px solid #ff006e;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 40px;
+            max-width: 600px;
+            box-shadow: 0 0 20px rgba(255, 0, 110, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .music-title {
+            font-size: 1.3rem;
+            color: #ff006e;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px #ff006e;
+        }
+
+        .radio-stations {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .radio-btn {
+            background: linear-gradient(135deg, #ff006e, #ff3d82);
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+            text-decoration: none;
+            display: block;
+        }
+
+        .radio-btn:hover {
+            background: linear-gradient(135deg, #ff3d82, #ff006e);
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 0, 110, 0.5);
+        }
+
+        /* Contact Button */
+        .btn-contact {
+            background: linear-gradient(135deg, #00d4ff, #00f5ff);
             color: #1a1a2e;
-            padding: 12px 30px;
-            border-radius: 5px;
+            padding: 15px 40px;
+            border-radius: 8px;
             text-decoration: none;
             font-weight: bold;
-            margin-top: 20px;
+            margin-bottom: 30px;
             transition: all 0.3s;
+            font-size: 1.1rem;
             display: inline-block;
+            border: none;
+            cursor: pointer;
+            text-shadow: 0 0 5px rgba(0, 212, 255, 0.5);
         }
-        .btn:hover {
-            background: white;
-            transform: scale(1.05);
+
+        .btn-contact:hover {
+            background: linear-gradient(135deg, #00f5ff, #00d4ff);
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
         }
+
+        /* Social Links */
         .social {
-            margin-top: 30px;
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
         }
+
         .social a {
             color: white;
-            margin: 0 10px;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             text-decoration: none;
-            transition: color 0.3s;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
+
         .social a:hover {
             color: #00d4ff;
+            text-shadow: 0 0 15px #00d4ff;
+            transform: scale(1.2);
+        }
+
+        .instagram-link {
+            background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            padding: 12px 25px;
+            border-radius: 8px;
+            color: white !important;
+            font-weight: bold;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .instagram-link:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 25px rgba(240, 148, 51, 0.5);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .radio-stations {
+                grid-template-columns: 1fr;
+            }
+
+            .telemetry {
+                max-width: 100%;
+            }
+
+            .music-section {
+                max-width: 100%;
+            }
         }
     </style>
 </head>
 <body>
-    <img src="logo2.png" class="logo" alt="Catalyst Ozwell">
-    <h1>Catalyst Ozwell</h1>
-    <p>Coming soon, very soon promise KISSES CanbO....</p>
-    <a href="mailto:info@catalystozwell.com" class="btn">İletişime Geçin</a>
-    <div class="social">
-        <a href="#">LinkedIn</a>
-        <a href="#">Twitter</a>
-        <a href="#">Instagram</a>
+    <!-- Dynamic Background -->
+    <div class="background"></div>
+    
+    <!-- Light Play Effects -->
+    <div class="light-orbs">
+        <div class="orb orb1"></div>
+        <div class="orb orb2"></div>
+        <div class="orb orb3"></div>
     </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <img src="logo2.png" class="logo" alt="Catalyst Ozwell">
+        <h1>Catalyst Ozwell</h1>
+        <p class="description">Coming soon, very soon promise KISSES C.O....</p>
+
+        <!-- Telemetry Section -->
+        <div class="telemetry">
+            <div class="telemetry-title">📡 Live Telemetry</div>
+            <div class="telemetry-item">
+                <span class="telemetry-label">Temperature</span>
+                <span class="telemetry-value" id="temp">--°C</span>
+            </div>
+            <div class="telemetry-item">
+                <span class="telemetry-label">Location</span>
+                <span class="telemetry-value" id="location">Detecting...</span>
+            </div>
+            <div class="telemetry-item">
+                <span class="telemetry-label">Wind Speed</span>
+                <span class="telemetry-value" id="wind">-- km/h</span>
+            </div>
+            <div class="telemetry-item">
+                <span class="telemetry-label">Status</span>
+                <span class="telemetry-value" id="status">🔴 Active</span>
+            </div>
+        </div>
+
+        <!-- Music Section -->
+        <div class="music-section">
+            <div class="music-title">🎵 Free Radio Stations</div>
+            <div class="radio-stations">
+                <a href="https://www.skyradio.nl/" target="_blank" class="radio-btn">Sky Radio 🎶</a>
+                <a href="https://www.101.nl/" target="_blank" class="radio-btn">101.nl 🎧</a>
+                <a href="https://www.nporadio1.nl/" target="_blank" class="radio-btn">NPO Radio 1</a>
+                <a href="https://www.radiofrance.fr/" target="_blank" class="radio-btn">Radio France 🇫🇷</a>
+                <a href="https://www.bbc.co.uk/sounds/" target="_blank" class="radio-btn">BBC Sounds 🎙️</a>
+                <a href="https://tunein.com/" target="_blank" class="radio-btn">TuneIn Radio 📻</a>
+            </div>
+        </div>
+
+        <!-- Contact Button -->
+        <a href="https://instagram.com/catalystOzwell" target="_blank" class="btn-contact">📱 Contact Us</a>
+
+        <!-- Social Links -->
+        <div class="social">
+            <a href="https://instagram.com/catalystOzwell" target="_blank" class="instagram-link">
+                📸 @catalystOzwell
+            </a>
+            <a href="mailto:info@catalystozwell.com">📧 Email</a>
+        </div>
+    </div>
+
+    <!-- Weather & Geolocation Script -->
+    <script>
+        // Get user's location and weather data
+        function getWeatherData() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    const lat = position.coords.latitude;
+                    const lon = position.coords.longitude;
+                    
+                    // Using Open-Meteo API (free, no API key required)
+                    fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code,wind_speed_10m`)
+                        .then(response => response.json())
+                        .then(data => {
+                            const current = data.current;
+                            document.getElementById('temp').textContent = Math.round(current.temperature_2m) + '°C';
+                            document.getElementById('wind').textContent = Math.round(current.wind_speed_10m) + ' km/h';
+                            
+                            // Get location name using reverse geocoding
+                            fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`)
+                                .then(response => response.json())
+                                .then(data => {
+                                    const city = data.address.city || data.address.town || data.address.county || 'Unknown';
+                                    document.getElementById('location').textContent = city;
+                                });
+                        })
+                        .catch(error => {
+                            console.log('Weather data unavailable');
+                            document.getElementById('temp').textContent = '22°C';
+                            document.getElementById('wind').textContent = '12 km/h';
+                            document.getElementById('location').textContent = 'Global';
+                        });
+                }, function() {
+                    console.log('Geolocation denied');
+                    document.getElementById('location').textContent = 'Anonymous';
+                });
+            }
+        }
+
+        // Call function on page load
+        window.addEventListener('load', getWeatherData);
+
+        // Animate status indicator
+        setInterval(() => {
+            const status = document.getElementById('status');
+            status.textContent = status.textContent === '🔴 Active' ? '🟢 Active' : '🔴 Active';
+        }, 1000);
+    </script>
 </body>
 </html>
