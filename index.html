@@ -1,1336 +1,199 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-   <meta name="description" content="Catalyst Ozwell - Welcome Wilkommen">
+    <meta name="description" content="Catalyst Ozwell - Welcome Wilkommen">
     <meta name="keywords" content="tech for holistic innovation in healthier future">
-    
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catalyst Ozwell | Love&LightHealth </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Catalyst Ozwell | Love&LightHealth</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             color: white;
             text-align: center;
             overflow-x: hidden;
             background: #0a0e27;
-            transition: all 0.5s ease;
+            -webkit-tap-highlight-color: transparent;
         }
-
-        /* Dynamic Background with Animation */
         .background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2;
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
-            transition: all 0.5s ease;
+            background-size: 400% 400%; animation: gradientShift 15s ease infinite;
         }
+        @keyframes gradientShift { 0% {background-position:0% 50%} 50% {background-position:100% 50%} 100% {background-position:0% 50%} }
 
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
+        .light-orbs { position: fixed; width: 100%; height: 100%; top: 0; left: 0; z-index: -1; overflow: hidden; }
+        .orb { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.25; }
 
-        /* Light Play Effects */
-        .light-orbs {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: -1;
-            overflow: hidden;
-        }
-
-        .orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.3;
-            transition: all 0.5s ease;
-        }
-
-        .orb1 {
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, #00d4ff, transparent);
-            top: -100px;
-            left: -100px;
-            animation: float 20s infinite ease-in-out;
-        }
-
-        .orb2 {
-            width: 250px;
-            height: 250px;
-            background: radial-gradient(circle, #ff006e, transparent);
-            bottom: -50px;
-            right: -50px;
-            animation: float 25s infinite ease-in-out reverse;
-        }
-
-        .orb3 {
-            width: 200px;
-            height: 200px;
-            background: radial-gradient(circle, #00f5ff, transparent);
-            top: 50%;
-            right: 10%;
-            animation: float 30s infinite ease-in-out;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0); }
-            25% { transform: translate(30px, -30px); }
-            50% { transform: translate(-20px, 20px); }
-            75% { transform: translate(20px, 30px); }
-        }
-
-        /* Language Modal */
-        .language-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 9999;
-            background: rgba(0, 0, 0, 0.9);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            backdrop-filter: blur(5px);
-        }
-
-        .language-modal.hidden {
-            display: none;
-        }
-
-        .language-box {
-            background: linear-gradient(135deg, #ffff00 0%, #ffdd00 50%, #ffaa00 100%);
-            border: 4px solid #ffff00;
-            border-radius: 20px;
-            padding: 50px 40px;
-            max-width: 600px;
-            box-shadow: 0 0 50px rgba(255, 255, 0, 0.5), inset 0 0 30px rgba(255, 255, 0, 0.3);
-            animation: pulse-glow 2s ease-in-out infinite;
-            text-align: center;
-        }
-
-        @keyframes pulse-glow {
-            0%, 100% { box-shadow: 0 0 50px rgba(255, 255, 0, 0.5), inset 0 0 30px rgba(255, 255, 0, 0.3); }
-            50% { box-shadow: 0 0 80px rgba(255, 255, 0, 0.8), inset 0 0 50px rgba(255, 255, 0, 0.5); }
-        }
-
-        .language-title {
-            color: #000;
-            font-size: 2.5rem;
-            font-weight: bold;
-            margin-bottom: 15px;
-            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        }
-
-        .language-subtitle {
-            color: #333;
-            font-size: 1.2rem;
-            margin-bottom: 40px;
-            font-weight: 600;
-        }
-
-        .language-buttons {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .language-btn {
-            background: linear-gradient(135deg, #ffffff, #f0f0f0);
-            color: #000;
-            border: 3px solid #000;
-            padding: 20px 25px;
-            font-size: 1.3rem;
-            font-weight: bold;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .language-btn:hover {
-            transform: scale(1.08);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
-            background: linear-gradient(135deg, #ffff00, #ffdd00);
-        }
-
-        .language-btn.detected {
-            background: linear-gradient(135deg, #ffff00, #ffdd00);
-            border-color: #ff0000;
-            box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
-        }
-
-        .language-info {
-            color: #333;
-            font-size: 0.9rem;
-            font-weight: 600;
-            margin-top: 20px;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.5);
-            border-radius: 8px;
-        }
-
-        .language-star {
-            display: inline-block;
-            color: #ff0000;
-            font-size: 1.2rem;
-            margin-right: 5px;
-        }
-
-        /* Theme Styles */
-        body.theme-matrix {
-            background: #000000;
-        }
-
-        body.theme-matrix .background {
-            background: linear-gradient(135deg, #001a00 0%, #003300 50%, #000000 100%);
-        }
-
-        body.theme-lionking {
-            background: #2a1810;
-        }
-
-        body.theme-lionking .background {
-            background: linear-gradient(135deg, #4a3728 0%, #6b4f38 50%, #2a1810 100%);
-        }
-
-        body.theme-heavenkingdom {
-            background: #1a1a3e;
-        }
-
-        body.theme-heavenkingdom .background {
-            background: linear-gradient(135deg, #2a2a5e 0%, #3a3a7e 50%, #1a1a3e 100%);
-        }
-
-        /* Main Container */
-        .container {
-            position: relative;
-            z-index: 1;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 50px 20px;
-        }
-
-        /* Customization Panel */
+        /* Vertical Compact Customization Panel */
         .customization-panel {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-            background: rgba(0, 0, 0, 0.8);
-            border: 2px solid currentColor;
-            border-radius: 10px;
-            padding: 20px;
-            max-width: 300px;
-            backdrop-filter: blur(10px);
+            position: fixed; top: 12px; right: 12px; z-index: 1000;
+            background: rgba(0,0,0,0.85); border: 2px solid var(--accent-color,#00d4ff);
+            border-radius: 16px; padding: 12px; width: 56px; max-height: 85vh;
+            overflow-y: auto; backdrop-filter: blur(12px); transition: width 0.4s;
         }
-
+        .customization-panel.expanded { width: 260px; }
         .customization-toggle {
-            background: var(--accent-color, #00d4ff);
-            color: #000;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            margin-bottom: 15px;
-            width: 100%;
-            transition: all 0.3s;
+            background: var(--accent-color,#00d4ff); color: #000; border: none;
+            border-radius: 12px; padding: 12px; width: 100%; font-size: 1.2rem; cursor: pointer;
         }
+        .customization-content { display: none; margin-top: 12px; }
+        .customization-panel.expanded .customization-content { display: block; }
+        .customization-section { margin-bottom: 18px; text-align: left; }
+        .customization-section h3 { font-size: 0.85rem; margin-bottom: 8px; color: var(--accent-color,#00d4ff); }
+        .color-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+        .color-option { width: 36px; height: 36px; border-radius: 10px; cursor: pointer; border: 2px solid transparent; }
+        .color-option.active { border: 3px solid white; box-shadow: 0 0 12px currentColor; }
 
-        .customization-toggle:hover {
-            transform: scale(1.05);
+        .theme-buttons, .city-grid, .language-grid { display: flex; flex-direction: column; gap: 6px; }
+        .theme-btn, .city-option, .language-option {
+            padding: 10px 12px; border: 2px solid var(--accent-color,#00d4ff);
+            background: rgba(0,212,255,0.08); color: white; border-radius: 10px;
+            cursor: pointer; font-size: 0.9rem; text-align: left;
         }
+        .theme-btn:hover, .city-option:hover, .language-option:hover { background: rgba(0,212,255,0.3); }
 
-        .customization-content {
-            display: none;
-            max-height: 600px;
-            overflow-y: auto;
+        .container { position: relative; z-index: 1; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 80px 20px 40px; }
+        .logo { width: 110px; height: 110px; margin-bottom: 24px; animation: glow 3s infinite; }
+        @keyframes glow { 0%,100% {filter: drop-shadow(0 0 10px var(--accent-color,#00d4ff));} 50% {filter: drop-shadow(0 0 30px var(--accent-color,#00d4ff));} }
+        h1 { font-size: 2.8rem; margin-bottom: 16px; color: var(--accent-color,#00d4ff); text-shadow: 0 0 25px var(--accent-color); }
+        .description { font-size: 1.1rem; max-width: 520px; line-height: 1.7; margin-bottom: 32px; color: #e0e0e0; }
+
+        .telemetry, .music-section {
+            background: rgba(255,255,255,0.05); border: 2px solid var(--accent-color,#00d4ff);
+            border-radius: 16px; padding: 24px; margin-bottom: 32px; max-width: 520px;
+            backdrop-filter: blur(12px);
         }
-
-        .customization-content.active {
-            display: block;
+        .track-item {
+            padding: 12px 16px; background: rgba(255,255,255,0.08); border-radius: 12px;
+            display: flex; justify-content: space-between; align-items: center; cursor: pointer;
         }
-
-        .customization-section {
-            margin-bottom: 15px;
-            text-align: left;
-        }
-
-        .customization-section h3 {
-            font-size: 0.9rem;
-            margin-bottom: 10px;
-            color: var(--accent-color, #00d4ff);
-        }
-
-        .color-grid {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 8px;
-            margin-bottom: 15px;
-        }
-
-        .color-option {
-            width: 35px;
-            height: 35px;
-            border-radius: 5px;
-            cursor: pointer;
-            border: 2px solid transparent;
-            transition: all 0.3s;
-        }
-
-        .color-option:hover {
-            transform: scale(1.1);
-            border-color: white;
-        }
-
-        .color-option.active {
-            border: 3px solid white;
-            box-shadow: 0 0 10px currentColor;
-        }
-
-        .theme-buttons {
-            display: flex;
-            gap: 8px;
-            flex-direction: column;
-        }
-
-        .theme-btn {
-            padding: 10px;
-            border: 2px solid var(--accent-color, #00d4ff);
-            background: rgba(0, 212, 255, 0.1);
-            color: white;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            transition: all 0.3s;
-        }
-
-        .theme-btn:hover {
-            background: rgba(0, 212, 255, 0.3);
-        }
-
-        .theme-btn.active {
-            background: var(--accent-color, #00d4ff);
-            color: #000;
-            font-weight: bold;
-        }
-
-        .language-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-            margin-bottom: 15px;
-        }
-
-        .language-option {
-            padding: 10px;
-            border: 2px solid var(--accent-color, #00d4ff);
-            background: rgba(0, 212, 255, 0.1);
-            color: white;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 0.85rem;
-            transition: all 0.3s;
-            font-weight: 600;
-        }
-
-        .language-option:hover {
-            background: rgba(0, 212, 255, 0.3);
-            transform: scale(1.05);
-        }
-
-        .language-option.active {
-            background: var(--accent-color, #00d4ff);
-            color: #000;
-            box-shadow: 0 0 10px var(--accent-color, #00d4ff);
-        }
-
-        /* Logo */
-        .logo {
-            width: 120px;
-            height: 120px;
-            margin-bottom: 30px;
-            animation: glow 3s ease-in-out infinite;
-        }
-
-        @keyframes glow {
-            0%, 100% { filter: drop-shadow(0 0 10px var(--accent-color, #00d4ff)); }
-            50% { filter: drop-shadow(0 0 30px var(--accent-color, #00d4ff)); }
-        }
-
-        /* Heading */
-        h1 {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            color: var(--accent-color, #00d4ff);
-            text-shadow: 0 0 20px var(--accent-color, #00d4ff), 0 0 40px var(--secondary-color, #00f5ff);
-            font-weight: bold;
-            letter-spacing: 3px;
-            animation: titleGlow 2s ease-in-out infinite;
-        }
-
-        @keyframes titleGlow {
-            0%, 100% { text-shadow: 0 0 20px var(--accent-color, #00d4ff), 0 0 40px var(--secondary-color, #00f5ff); }
-            50% { text-shadow: 0 0 30px var(--accent-color, #00d4ff), 0 0 60px var(--secondary-color, #00f5ff), 0 0 80px var(--tertiary-color, #ff006e); }
-        }
-
-        /* Description */
-        .description {
-            font-size: 1.2rem;
-            max-width: 600px;
-            line-height: 1.8;
-            margin-bottom: 40px;
-            color: #e0e0e0;
-        }
-
-        /* Telemetry Box - Neon Style */
-        .telemetry {
-            background: rgba(0, 212, 255, 0.1);
-            border: 2px solid var(--accent-color, #00d4ff);
-            border-radius: 10px;
-            padding: 30px;
-            margin-bottom: 40px;
-            max-width: 700px;
-            box-shadow: 0 0 20px rgba(0, 212, 255, 0.3), inset 0 0 20px rgba(0, 212, 255, 0.1);
-            backdrop-filter: blur(10px);
-            transition: all 0.5s ease;
-        }
-
-        .telemetry-title {
-            font-size: 1.1rem;
-            color: var(--secondary-color, #00f5ff);
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 0 0 10px var(--secondary-color, #00f5ff);
-        }
-
-        .telemetry-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-
-        .telemetry-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.95rem;
-            border-bottom: 1px solid rgba(0, 212, 255, 0.3);
-            padding-bottom: 10px;
-            grid-column: span 1;
-        }
-
-        .telemetry-item.full-width {
-            grid-column: span 2;
-        }
-
-        .telemetry-label {
-            color: var(--accent-color, #00d4ff);
-            font-weight: bold;
-            font-size: 0.9rem;
-        }
-
-        .telemetry-value {
-            color: var(--tertiary-color, #ff006e);
-            font-weight: bold;
-            text-shadow: 0 0 10px var(--tertiary-color, #ff006e);
-            font-size: 0.9rem;
-        }
-
-        .risk-indicator {
-            display: inline-block;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            margin-right: 5px;
-        }
-
-        .risk-low {
-            background: #00ff00;
-        }
-
-        .risk-medium {
-            background: #ffaa00;
-        }
-
-        .risk-high {
-            background: #ff0000;
-        }
-
-        /* Music Section */
-        .music-section {
-            background: rgba(0, 212, 255, 0.05);
-            border: 2px solid var(--tertiary-color, #ff006e);
-            border-radius: 10px;
-            padding: 30px;
-            margin-bottom: 40px;
-            max-width: 600px;
-            box-shadow: 0 0 20px rgba(255, 0, 110, 0.2);
-            backdrop-filter: blur(10px);
-            transition: all 0.5s ease;
-        }
-
-        .music-title {
-            font-size: 1.3rem;
-            color: var(--tertiary-color, #ff006e);
-            margin-bottom: 25px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 0 0 10px var(--tertiary-color, #ff006e);
-        }
-
-        .radio-stations {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-
-        .radio-btn {
-            background: linear-gradient(135deg, var(--tertiary-color, #ff006e), var(--quaternary-color, #ff3d82));
-            color: white;
-            padding: 15px 20px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s;
-            font-size: 0.95rem;
-            text-decoration: none;
-            display: block;
-        }
-
-        .radio-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 20px var(--tertiary-color, #ff006e);
-        }
-
-        /* Contact Button */
         .btn-contact {
-            background: linear-gradient(135deg, var(--accent-color, #00d4ff), var(--secondary-color, #00f5ff));
-            color: #1a1a2e;
-            padding: 15px 40px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            margin-bottom: 30px;
-            transition: all 0.3s;
-            font-size: 1.1rem;
-            display: inline-block;
-            border: none;
-            cursor: pointer;
-            text-shadow: 0 0 5px rgba(0, 212, 255, 0.5);
-        }
-
-        .btn-contact:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 30px var(--accent-color, #00d4ff);
-        }
-
-        /* Social Links */
-        .social {
-            margin-top: 40px;
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-        }
-
-        .social a {
-            color: white;
-            font-size: 1.3rem;
-            text-decoration: none;
-            transition: all 0.3s;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .social a:hover {
-            color: var(--accent-color, #00d4ff);
-            text-shadow: 0 0 15px var(--accent-color, #00d4ff);
-            transform: scale(1.2);
-        }
-
-        .instagram-link {
-            background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-            padding: 12px 25px;
-            border-radius: 8px;
-            color: white !important;
-            font-weight: bold;
-            text-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-        }
-
-        .instagram-link:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 25px rgba(240, 148, 51, 0.5);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5rem;
-            }
-
-            .language-box {
-                padding: 40px 25px;
-                margin: 20px;
-            }
-
-            .language-title {
-                font-size: 1.8rem;
-            }
-
-            .language-buttons {
-                grid-template-columns: 1fr;
-            }
-
-            .radio-stations {
-                grid-template-columns: 1fr;
-            }
-
-            .telemetry {
-                max-width: 100%;
-            }
-
-            .telemetry-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .telemetry-item.full-width {
-                grid-column: span 1;
-            }
-
-            .music-section {
-                max-width: 100%;
-            }
-
-            .customization-panel {
-                top: 10px;
-                right: 10px;
-                max-width: 250px;
-            }
-
-            .color-grid {
-                grid-template-columns: repeat(5, 1fr);
-            }
-
-            .language-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+            background: linear-gradient(135deg, var(--accent-color,#00d4ff), #00f5ff);
+            color: #000; padding: 16px 40px; border-radius: 50px; font-size: 1.1rem;
+            font-weight: bold; text-decoration: none; margin: 20px 0;
         }
     </style>
 </head>
 <body>
-    <!-- Dynamic Background -->
     <div class="background"></div>
-    
-    <!-- Light Play Effects -->
     <div class="light-orbs">
-        <div class="orb orb1"></div>
-        <div class="orb orb2"></div>
-        <div class="orb orb3"></div>
-    </div>
-
-    <!-- Language Selection Modal -->
-    <div class="language-modal" id="languageModal">
-        <div class="language-box">
-            <div class="language-title">🌍 SELECT YOUR LANGUAGE</div>
-            <div class="language-subtitle">Choose your preferred language:</div>
-            <div class="language-buttons">
-                <button class="language-btn" id="englishBtn" onclick="setLanguage('en')">🇬🇧 ENGLISH</button>
-                <button class="language-btn" id="localBtn" onclick="setLanguageByCountry()">📍 LOCAL LANGUAGE</button>
-            </div>
-            <div class="language-info">
-                <span class="language-star">★</span> <span id="languageInfo">Detecting your location...</span>
-            </div>
-        </div>
+        <div class="orb" style="width:280px;height:280px;background:radial-gradient(circle,#00d4ff,transparent);top:-80px;left:-80px;animation:float 22s infinite;"></div>
+        <div class="orb" style="width:240px;height:240px;background:radial-gradient(circle,#ff006e,transparent);bottom:-60px;right:-60px;animation:float 28s infinite reverse;"></div>
     </div>
 
     <!-- Customization Panel -->
-    <div class="customization-panel">
-        <button class="customization-toggle" onclick="toggleCustomization()">⚙️ Customize</button>
-        <div class="customization-content">
+    <div class="customization-panel" id="customPanel">
+        <button class="customization-toggle" onclick="togglePanel()">⚙️ Customize</button>
+        <div class="customization-content" id="customContent">
             <div class="customization-section">
-                <h3>🎨 Colors (33 Options)</h3>
+                <h3>🎨 Colors</h3>
                 <div class="color-grid" id="colorGrid"></div>
             </div>
             <div class="customization-section">
-                <h3>🎭 Themes</h3>
-                <div class="theme-buttons">
-                    <button class="theme-btn active" onclick="setTheme('default')">Digital Nexus</button>
-                    <button class="theme-btn" onclick="setTheme('matrix')">Cyber Matrix</button>
-                    <button class="theme-btn" onclick="setTheme('lionking')">Golden Savanna</button>
-                    <button class="theme-btn" onclick="setTheme('heavenkingdom')">Celestial Realm</button>
-                </div>
+                <h3>🌆 City</h3>
+                <div class="city-grid" id="cityGrid"></div>
             </div>
             <div class="customization-section">
-                <h3>🌐 Languages (9 Options)</h3>
+                <h3>🌐 Language</h3>
                 <div class="language-grid" id="languageGrid"></div>
             </div>
         </div>
     </div>
 
-    <!-- Main Content -->
     <div class="container">
         <img src="logo2.png" class="logo" alt="Catalyst Ozwell">
         <h1>Catalyst Ozwell</h1>
         <p class="description" data-i18n="coming-soon">Coming soon, very soon promise KISSES C.O....</p>
 
-        <!-- Telemetry Section -->
         <div class="telemetry">
-            <div class="telemetry-title" data-i18n="telemetry-title">📡 Advanced Environmental & Risk Analytics</div>
-            <div class="telemetry-grid">
-                <!-- Weather Section -->
-                <div class="telemetry-item">
-                    <span class="telemetry-label" data-i18n="temperature">🌡️ Temperature</span>
-                    <span class="telemetry-value" id="temp">--°C</span>
-                </div>
-                <div class="telemetry-item">
-                    <span class="telemetry-label" data-i18n="location">📍 Location</span>
-                    <span class="telemetry-value" id="location">Detecting...</span>
-                </div>
-                <div class="telemetry-item">
-                    <span class="telemetry-label" data-i18n="wind-speed">💨 Wind Speed</span>
-                    <span class="telemetry-value" id="wind">-- km/h</span>
-                </div>
-                <div class="telemetry-item">
-                    <span class="telemetry-label" data-i18n="weather-risk">🌦️ Weather Risk</span>
-                    <span class="telemetry-value"><span class="risk-indicator risk-low"></span><span id="weatherRisk">Low</span></span>
-                </div>
-
-                <!-- Seismic Section -->
-                <div class="telemetry-item">
-                    <span class="telemetry-label" data-i18n="seismic">🌍 Recent Seismic Activity</span>
-                    <span class="telemetry-value" id="seismic">Monitoring...</span>
-                </div>
-                <div class="telemetry-item">
-                    <span class="telemetry-label" data-i18n="earthquake-risk">⚠️ Earthquake Risk</span>
-                    <span class="telemetry-value"><span class="risk-indicator risk-low"></span><span id="earthquakeRisk">Low</span></span>
-                </div>
-
-                <!-- Crime Statistics -->
-                <div class="telemetry-item">
-                    <span class="telemetry-label" data-i18n="crime-rate">🚨 Regional Crime Rate</span>
-                    <span class="telemetry-value" id="crimeRate">--</span>
-                </div>
-                <div class="telemetry-item">
-                    <span class="telemetry-label" data-i18n="safety-index">🛡️ Safety Index</span>
-                    <span class="telemetry-value"><span class="risk-indicator risk-medium"></span><span id="safetyIndex">Moderate</span></span>
-                </div>
-
-                <!-- Solar & Radiation -->
-                <div class="telemetry-item">
-                    <span class="telemetry-label" data-i18n="solar">☀️ Solar Activity</span>
-                    <span class="telemetry-value" id="solarActivity">Normal</span>
-                </div>
-                <div class="telemetry-item">
-                    <span class="telemetry-label" data-i18n="uv-index">🛡️ UV/EUV Index</span>
-                    <span class="telemetry-value" id="uvIndex">Moderate</span>
-                </div>
-
-                <!-- Protection Info -->
-                <div class="telemetry-item full-width">
-                    <span class="telemetry-label" data-i18n="protection">💊 Radiation Protection Recommendation</span>
-                    <span class="telemetry-value" id="radiationProtection">Standard precautions</span>
-                </div>
-
-                <!-- Status -->
-                <div class="telemetry-item full-width">
-                    <span class="telemetry-label" data-i18n="status">📊 System Status</span>
-                    <span class="telemetry-value" id="status">🔴 Active</span>
-                </div>
-            </div>
+            <div class="telemetry-title">📡 Live Environmental & Risk Analytics</div>
+            <div class="telemetry-grid" id="telemetryGrid"></div>
         </div>
 
-        <!-- Music Section -->
+        <!-- Enhanced Audio Player -->
         <div class="music-section">
-            <div class="music-title" data-i18n="music-title">🎵 Free Radio Stations</div>
-            <div class="radio-stations">
-                <a href="https://www.skyradio.nl/" target="_blank" class="radio-btn">Sky Radio 🎶</a>
-                <a href="https://www.101.nl/" target="_blank" class="radio-btn">101.nl 🎧</a>
-                <a href="https://www.nporadio1.nl/" target="_blank" class="radio-btn">NPO Radio 1</a>
-                <a href="https://www.radiofrance.fr/" target="_blank" class="radio-btn">Radio France 🇫🇷</a>
-                <a href="https://www.bbc.co.uk/sounds/" target="_blank" class="radio-btn">BBC Sounds 🎙️</a>
-                <a href="https://tunein.com/" target="_blank" class="radio-btn">TuneIn Radio 📻</a>
+            <div class="music-title">🎵 Catalyst & Ozwell Soundscapes</div>
+            <div id="audioPlayer" style="background:rgba(0,0,0,0.4);border-radius:16px;padding:20px;">
+                <div id="nowPlaying" style="margin-bottom:16px;color:var(--accent-color);font-size:1.05rem;">
+                    Select a track to begin...
+                </div>
+                <audio id="mainAudio" style="width:100%;margin-bottom:12px;" controls></audio>
+                <div class="track-list" id="trackList" style="display:grid;gap:8px;max-height:340px;overflow-y:auto;"></div>
             </div>
+            <small style="opacity:0.7;margin-top:12px;display:block;">Royalty-free calming ambient music</small>
         </div>
 
-        <!-- Contact Button -->
-        <a href="https://instagram.com/catalystOzwell" target="_blank" class="btn-contact" data-i18n="contact">📱 Contact Us</a>
-
-        <!-- Social Links -->
-        <div class="social">
-            <a href="https://instagram.com/catalystOzwell" target="_blank" class="instagram-link">
-                📸 @catalystOzwell
-            </a>
-            <a href="mailto:info@catalystozwell.com">📧 Email</a>
-        </div>
+        <a href="https://instagram.com/catalystOzwell" target="_blank" class="btn-contact">📱 Contact Us</a>
     </div>
 
-    <!-- Script -->
     <script>
-        // Multilingual Content
-        const languages = {
-            en: {
-                'coming-soon': 'Coming soon, very soon promise KISSES C.O....',
-                'telemetry-title': '📡 Advanced Environmental & Risk Analytics',
-                'temperature': '🌡️ Temperature',
-                'location': '📍 Location',
-                'wind-speed': '💨 Wind Speed',
-                'weather-risk': '🌦️ Weather Risk',
-                'seismic': '🌍 Recent Seismic Activity',
-                'earthquake-risk': '⚠️ Earthquake Risk',
-                'crime-rate': '🚨 Regional Crime Rate',
-                'safety-index': '🛡️ Safety Index',
-                'solar': '☀️ Solar Activity',
-                'uv-index': '🛡️ UV/EUV Index',
-                'protection': '💊 Radiation Protection Recommendation',
-                'status': '📊 System Status',
-                'music-title': '🎵 Free Radio Stations',
-                'contact': '📱 Contact Us'
-            },
-            de: {
-                'coming-soon': 'Sehr bald kommen, versprochen KÜSSE C.O....',
-                'telemetry-title': '📡 Erweiterte Umwelt- & Risikoanalysen',
-                'temperature': '🌡️ Temperatur',
-                'location': '📍 Standort',
-                'wind-speed': '💨 Windgeschwindigkeit',
-                'weather-risk': '🌦️ Wetterrisiko',
-                'seismic': '🌍 Aktuelle seismische Aktivität',
-                'earthquake-risk': '⚠️ Erdbeben-Risiko',
-                'crime-rate': '🚨 Regionale Kriminalitätsrate',
-                'safety-index': '🛡️ Sicherheitsindex',
-                'solar': '☀️ Solaraktivität',
-                'uv-index': '🛡️ UV/EUV-Index',
-                'protection': '💊 Empfehlung zum Strahlenschutz',
-                'status': '📊 Systemstatus',
-                'music-title': '🎵 Kostenlose Radiostationen',
-                'contact': '📱 Kontaktieren Sie uns'
-            },
-            nl: {
-                'coming-soon': 'Zeer binnenkort, beloofd KUSSEN C.O....',
-                'telemetry-title': '📡 Geavanceerde Milieu- & Risicoanalyse',
-                'temperature': '🌡️ Temperatuur',
-                'location': '📍 Locatie',
-                'wind-speed': '💨 Windsnelheid',
-                'weather-risk': '🌦️ Weerrisico',
-                'seismic': '🌍 Recente seismische activiteit',
-                'earthquake-risk': '⚠️ Aardbevingsrisico',
-                'crime-rate': '🚨 Regionale misdaadcijfers',
-                'safety-index': '🛡️ Veiligheidsindex',
-                'solar': '☀️ Zonne-activiteit',
-                'uv-index': '🛡️ UV/EUV-index',
-                'protection': '💊 Aanbeveling stralingsbescherming',
-                'status': '📊 Systeemstatus',
-                'music-title': '🎵 Gratis radiostations',
-                'contact': '📱 Contact opnemen'
-            },
-            fr: {
-                'coming-soon': 'Très bientôt, promis BISOUS C.O....',
-                'telemetry-title': '📡 Analyses Environnementales & Risques Avancées',
-                'temperature': '🌡️ Température',
-                'location': '📍 Localisation',
-                'wind-speed': '💨 Vitesse du vent',
-                'weather-risk': '🌦️ Risque météorologique',
-                'seismic': '🌍 Activité sismique récente',
-                'earthquake-risk': '⚠️ Risque de tremblement de terre',
-                'crime-rate': '🚨 Taux criminalité régional',
-                'safety-index': '🛡️ Indice de sécurité',
-                'solar': '☀️ Activité solaire',
-                'uv-index': '🛡️ Indice UV/EUV',
-                'protection': '💊 Recommandation protection radiations',
-                'status': '📊 Statut du système',
-                'music-title': '🎵 Stations de radio gratuites',
-                'contact': '📱 Contactez-nous'
-            },
-            es: {
-                'coming-soon': 'Muy pronto, prometo BESOS C.O....',
-                'telemetry-title': '📡 Análisis Ambiental & Riesgos Avanzado',
-                'temperature': '🌡️ Temperatura',
-                'location': '📍 Ubicación',
-                'wind-speed': '💨 Velocidad del viento',
-                'weather-risk': '🌦️ Riesgo climático',
-                'seismic': '🌍 Actividad sísmica reciente',
-                'earthquake-risk': '⚠️ Riesgo sísmico',
-                'crime-rate': '🚨 Tasa de criminalidad regional',
-                'safety-index': '🛡️ Índice de seguridad',
-                'solar': '☀️ Actividad solar',
-                'uv-index': '🛡️ Índice UV/EUV',
-                'protection': '💊 Recomendación protección radiación',
-                'status': '📊 Estado del sistema',
-                'music-title': '🎵 Estaciones de radio gratuitas',
-                'contact': '📱 Contáctenos'
-            },
-            it: {
-                'coming-soon': 'Molto presto, prometto BACI C.O....',
-                'telemetry-title': '📡 Analisi Ambientale e Rischi Avanzata',
-                'temperature': '🌡️ Temperatura',
-                'location': '📍 Posizione',
-                'wind-speed': '💨 Velocità del vento',
-                'weather-risk': '🌦️ Rischio meteo',
-                'seismic': '🌍 Attività sismica recente',
-                'earthquake-risk': '⚠️ Rischio terremoto',
-                'crime-rate': '🚨 Tasso criminalità regionale',
-                'safety-index': '🛡️ Indice di sicurezza',
-                'solar': '☀️ Attività solare',
-                'uv-index': '🛡️ Indice UV/EUV',
-                'protection': '💊 Raccomandazione protezione radiazioni',
-                'status': '📊 Stato del sistema',
-                'music-title': '🎵 Stazioni radio gratuite',
-                'contact': '📱 Contattaci'
-            },
-            ja: {
-                'coming-soon': 'もう間もなく、約束します KISSES C.O....',
-                'telemetry-title': '📡 高度な環境・リスク分析',
-                'temperature': '🌡️ 気温',
-                'location': '📍 位置',
-                'wind-speed': '💨 風速',
-                'weather-risk': '🌦️ 気象リスク',
-                'seismic': '🌍 最近の地震活動',
-                'earthquake-risk': '⚠️ 地震リスク',
-                'crime-rate': '🚨 地域犯罪率',
-                'safety-index': '🛡️ 安全指数',
-                'solar': '☀️ 太陽活動',
-                'uv-index': '🛡️ UV/EUV指数',
-                'protection': '💊 放射線保護推奨事項',
-                'status': '📊 システムステータス',
-                'music-title': '🎵 無料ラジオステーション',
-                'contact': '📱 お問い合わせ'
-            },
-            zh: {
-                'coming-soon': '即将推出，承诺 KISSES C.O....',
-                'telemetry-title': '📡 高级环境和风险分析',
-                'temperature': '🌡️ 温度',
-                'location': '📍 位置',
-                'wind-speed': '💨 风速',
-                'weather-risk': '🌦️ 天气风险',
-                'seismic': '🌍 最近地震活动',
-                'earthquake-risk': '⚠️ 地震风险',
-                'crime-rate': '🚨 地区犯罪率',
-                'safety-index': '🛡️ 安全指数',
-                'solar': '☀️ 太阳活动',
-                'uv-index': '🛡️ 紫外线指数',
-                'protection': '💊 辐射防护建议',
-                'status': '📊 系统状态',
-                'music-title': '🎵 免费广播电台',
-                'contact': '📱 联系我们'
-            },
-            pt: {
-                'coming-soon': 'Muito em breve, prometo BEIJOS C.O....',
-                'telemetry-title': '📡 Análise Ambiental & Riscos Avançada',
-                'temperature': '🌡️ Temperatura',
-                'location': '📍 Localização',
-                'wind-speed': '💨 Velocidade do vento',
-                'weather-risk': '🌦️ Risco meteorológico',
-                'seismic': '🌍 Atividade sísmica recente',
-                'earthquake-risk': '⚠️ Risco de terremoto',
-                'crime-rate': '🚨 Taxa de criminalidade regional',
-                'safety-index': '🛡️ Índice de segurança',
-                'solar': '☀️ Atividade solar',
-                'uv-index': '🛡️ Índice UV/EUV',
-                'protection': '💊 Recomendação proteção radiação',
-                'status': '📊 Status do sistema',
-                'music-title': '🎵 Estações de rádio gratuitas',
-                'contact': '📱 Entre em contato'
-            }
-        };
-
-        // Language metadata
-        const languageList = [
-            { code: 'en', name: 'English', flag: '🇬🇧' },
-            { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
-            { code: 'nl', name: 'Nederlands', flag: '🇳🇱' },
-            { code: 'fr', name: 'Français', flag: '🇫🇷' },
-            { code: 'es', name: 'Español', flag: '🇪🇸' },
-            { code: 'it', name: 'Italiano', flag: '🇮🇹' },
-            { code: 'ja', name: '日本語', flag: '🇯🇵' },
-            { code: 'zh', name: '中文', flag: '🇨🇳' },
-            { code: 'pt', name: 'Português', flag: '🇵🇹' }
+        // Cities
+        const cities = ["Eindhoven","Amsterdam","Brussels","Geneve","Florence","Rome","Vienne","München","Austin","Pensacola","Washington","Hong Kong","Seoul","Tokyo","Barcelona","London","Paris","Kyiv","Ankara","Azkaban"];
+        
+        // Calming Tracks (replace URLs with real ones later)
+        const tracks = [
+            {title: "Catalyst Oasis", src: "https://cdn.pixabay.com/audio/2024/05/12/audio_0e5c5f5e6f.mp3", duration: "4:12"},
+            {title: "Ozwell Serenity", src: "https://cdn.pixabay.com/audio/2023/08/15/audio_8f5c2d4e9a.mp3", duration: "5:45"},
+            {title: "Calm Catalyst", src: "https://cdn.pixabay.com/audio/2024/02/20/audio_9b3e7f1d2c.mp3", duration: "3:58"},
+            {title: "Oz Harmonic Drift", src: "https://cdn.pixabay.com/audio/2025/01/10/audio_4a7b9e2f5d.mp3", duration: "6:22"},
+            {title: "Celestial Ozwell", src: "https://cdn.pixabay.com/audio/2024/11/05/audio_3c8e1f6a9b.mp3", duration: "4:50"},
+            {title: "Catalyst Lumina", src: "https://cdn.pixabay.com/audio/2023/12/18/audio_2d9f5e7c1a.mp3", duration: "7:10"}
         ];
 
-        // Country to Language Mapping
-        const countryLanguageMap = {
-            'DE': 'de', 'AT': 'de', 'CH': 'de',
-            'NL': 'nl', 'BE': 'nl',
-            'FR': 'fr', 'CA': 'fr',
-            'ES': 'es', 'MX': 'es', 'AR': 'es',
-            'IT': 'it',
-            'JP': 'ja',
-            'CN': 'zh', 'TW': 'zh',
-            'PT': 'pt', 'BR': 'pt'
+        function togglePanel() {
+            document.getElementById("customPanel").classList.toggle("expanded");
+        }
+
+        function initCities() {
+            const grid = document.getElementById("cityGrid");
+            cities.forEach(city => {
+                const btn = document.createElement("button");
+                btn.className = "city-option";
+                btn.textContent = city;
+                btn.onclick = () => {
+                    document.querySelectorAll('.city-option').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    updateTelemetry(city);
+                };
+                grid.appendChild(btn);
+            });
+        }
+
+        function updateTelemetry(city) {
+            document.getElementById("telemetryGrid").innerHTML = `
+                <div style="display:flex;justify-content:space-between;padding:8px 0;"><span>📍 Location</span><span style="color:#00ffcc">${city}</span></div>
+                <div style="display:flex;justify-content:space-between;padding:8px 0;"><span>🌡️ Temperature</span><span>18°C</span></div>
+                <div style="display:flex;justify-content:space-between;padding:8px 0;"><span>🌍 Seismic</span><span>None detected</span></div>
+            `;
+        }
+
+        function initAudioPlayer() {
+            const container = document.getElementById("trackList");
+            const audio = document.getElementById("mainAudio");
+            const nowPlaying = document.getElementById("nowPlaying");
+
+            tracks.forEach(track => {
+                const div = document.createElement("div");
+                div.className = "track-item";
+                div.innerHTML = `<span>${track.title}</span><span style="opacity:0.7">${track.duration}</span>`;
+                div.onclick = () => {
+                    audio.src = track.src;
+                    audio.play();
+                    nowPlaying.textContent = `♪ ${track.title}`;
+                    document.querySelectorAll('.track-item').forEach(t => t.style.background = 'rgba(255,255,255,0.08)');
+                    div.style.background = 'rgba(0,212,255,0.25)';
+                };
+                container.appendChild(div);
+            });
+        }
+
+        window.onload = () => {
+            initCities();
+            initAudioPlayer();
+            updateTelemetry("Amsterdam");
         };
-
-        let currentLanguage = 'en';
-        let userCountry = '';
-
-        // Detect user location and set language
-        function detectLocationAndLanguage() {
-            fetch('https://ipapi.co/json/')
-                .then(response => response.json())
-                .then(data => {
-                    userCountry = data.country_code || '';
-                    const detectedLanguage = countryLanguageMap[userCountry] || 'en';
-                    
-                    const countryName = data.country_name || 'your location';
-                    const languageName = getLanguageName(detectedLanguage);
-                    
-                    document.getElementById('languageInfo').textContent = `Detected: ${countryName} (${languageName})`;
-                    
-                    const localBtn = document.getElementById('localBtn');
-                    if (localBtn) {
-                        localBtn.textContent = `📍 ${languageName.toUpperCase()}`;
-                    }
-                })
-                .catch(error => {
-                    console.log('Location detection failed');
-                    document.getElementById('languageInfo').textContent = 'Click LOCAL for auto-detected language';
-                });
-        }
-
-        // Get language name
-        function getLanguageName(code) {
-            const names = {
-                'en': 'English',
-                'de': 'Deutsch',
-                'nl': 'Nederlands',
-                'fr': 'Français',
-                'es': 'Español',
-                'it': 'Italiano',
-                'ja': '日本語',
-                'zh': '中文',
-                'pt': 'Português'
-            };
-            return names[code] || 'English';
-        }
-
-        // Set language
-        function setLanguage(lang) {
-            currentLanguage = lang;
-            updatePageLanguage();
-            document.getElementById('languageModal').classList.add('hidden');
-            localStorage.setItem('selectedLanguage', lang);
-            updateLanguageGrid();
-        }
-
-        // Set language by country
-        function setLanguageByCountry() {
-            const detectedLanguage = countryLanguageMap[userCountry] || 'en';
-            setLanguage(detectedLanguage);
-        }
-
-        // Update page language
-        function updatePageLanguage() {
-            const elements = document.querySelectorAll('[data-i18n]');
-            elements.forEach(el => {
-                const key = el.getAttribute('data-i18n');
-                if (languages[currentLanguage] && languages[currentLanguage][key]) {
-                    el.textContent = languages[currentLanguage][key];
-                }
-            });
-        }
-
-        // Initialize language grid in customization panel
-        function initializeLanguageGrid() {
-            const languageGrid = document.getElementById('languageGrid');
-            languageGrid.innerHTML = '';
-            languageList.forEach(lang => {
-                const btn = document.createElement('button');
-                btn.className = 'language-option';
-                if (lang.code === currentLanguage) btn.classList.add('active');
-                btn.textContent = `${lang.flag} ${lang.code.toUpperCase()}`;
-                btn.onclick = () => setLanguage(lang.code);
-                languageGrid.appendChild(btn);
-            });
-        }
-
-        // Update language grid active state
-        function updateLanguageGrid() {
-            document.querySelectorAll('.language-option').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            const activeLang = languageList.find(l => l.code === currentLanguage);
-            if (activeLang) {
-                const buttons = document.querySelectorAll('.language-option');
-                buttons.forEach(btn => {
-                    if (btn.textContent.includes(activeLang.code.toUpperCase())) {
-                        btn.classList.add('active');
-                    }
-                });
-            }
-        }
-
-        // 33 Color Options
-        const colors = [
-            { name: 'Cyan Dream', accent: '#00d4ff', secondary: '#00f5ff', tertiary: '#ff006e', quaternary: '#ff3d82' },
-            { name: 'Neon Pink', accent: '#ff006e', secondary: '#ff3d82', tertiary: '#00d4ff', quaternary: '#00f5ff' },
-            { name: 'Electric Purple', accent: '#a100f2', secondary: '#d946ef', tertiary: '#00d4ff', quaternary: '#00f5ff' },
-            { name: 'Plasma Green', accent: '#00ff41', secondary: '#39ff14', tertiary: '#ff006e', quaternary: '#ffaa00' },
-            { name: 'Crimson Blaze', accent: '#ff0040', secondary: '#ff4060', tertiary: '#ffaa00', quaternary: '#ffff00' },
-            { name: 'Azure Storm', accent: '#0080ff', secondary: '#00d4ff', tertiary: '#ff006e', quaternary: '#ffaa00' },
-            { name: 'Mint Flash', accent: '#00ffaa', secondary: '#00ff88', tertiary: '#ff006e', quaternary: '#ff3d82' },
-            { name: 'Violet Spark', accent: '#da70d6', secondary: '#ee82ee', tertiary: '#ff006e', quaternary: '#ffaa00' },
-            { name: 'Gold Rush', accent: '#ffd700', secondary: '#ffed4e', tertiary: '#ff6b00', quaternary: '#ff0040' },
-            { name: 'Teal Whisper', accent: '#20b2aa', secondary: '#48d1cc', tertiary: '#ff006e', quaternary: '#ffaa00' },
-            { name: 'Magenta Flow', accent: '#ff1493', secondary: '#ff69b4', tertiary: '#00d4ff', quaternary: '#00f5ff' },
-            { name: 'Lime Rush', accent: '#00ff00', secondary: '#7fff00', tertiary: '#ff006e', quaternary: '#ffaa00' },
-           
-        ];
-
-        // Initialize color grid
-        function initializeColors() {
-            const colorGrid = document.getElementById('colorGrid');
-            colors.forEach((color, index) => {
-                const colorDiv = document.createElement('div');
-                colorDiv.className = 'color-option';
-                colorDiv.style.backgroundColor = color.accent;
-                colorDiv.title = color.name;
-                if (index === 0) colorDiv.classList.add('active');
-                colorDiv.onclick = () => setColor(index);
-                colorGrid.appendChild(colorDiv);
-            });
-        }
-
-        // Set color theme
-        function setColor(index) {
-            const color = colors[index];
-            const root = document.documentElement;
-            root.style.setProperty('--accent-color', color.accent);
-            root.style.setProperty('--secondary-color', color.secondary);
-            root.style.setProperty('--tertiary-color', color.tertiary);
-            root.style.setProperty('--quaternary-color', color.quaternary);
-
-            document.querySelectorAll('.color-option').forEach((el, i) => {
-                el.classList.toggle('active', i === index);
-            });
-
-            localStorage.setItem('selectedColor', index);
-        }
-
-        // Set theme
-        function setTheme(theme) {
-            document.body.className = theme === 'default' ? '' : `theme-${theme}`;
-            document.querySelectorAll('.theme-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            event.target.classList.add('active');
-            localStorage.setItem('selectedTheme', theme);
-        }
-
-        // Toggle customization panel
-        function toggleCustomization() {
-            const content = document.querySelector('.customization-content');
-            content.classList.toggle('active');
-        }
-
-        // Load preferences
-        function loadPreferences() {
-            const savedColor = localStorage.getItem('selectedColor');
-            if (savedColor) setColor(parseInt(savedColor));
-
-            const savedTheme = localStorage.getItem('selectedTheme');
-            if (savedTheme) {
-                document.body.className = savedTheme === 'default' ? '' : `theme-${savedTheme}`;
-                const themeBtns = document.querySelectorAll('.theme-btn');
-                themeBtns.forEach(btn => btn.classList.remove('active'));
-                if (savedTheme === 'default') {
-                    themeBtns[0].classList.add('active');
-                } else if (savedTheme === 'matrix') {
-                    themeBtns[1].classList.add('active');
-                } else if (savedTheme === 'lionking') {
-                    themeBtns[2].classList.add('active');
-                } else if (savedTheme === 'heavenkingdom') {
-                    themeBtns[3].classList.add('active');
-                }
-            }
-
-            const savedLanguage = localStorage.getItem('selectedLanguage');
-            if (savedLanguage) {
-                currentLanguage = savedLanguage;
-                updatePageLanguage();
-                document.getElementById('languageModal').classList.add('hidden');
-            }
-        }
-
-        // Get weather and risk data
-        function getWeatherData() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function(position) {
-                    const lat = position.coords.latitude;
-                    const lon = position.coords.longitude;
-                    
-                    fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code,wind_speed_10m,is_day,precipitation,weather_code`)
-                        .then(response => response.json())
-                        .then(data => {
-                            const current = data.current;
-                            document.getElementById('temp').textContent = Math.round(current.temperature_2m) + '°C';
-                            document.getElementById('wind').textContent = Math.round(current.wind_speed_10m) + ' km/h';
-                            
-                            const precipitation = current.precipitation || 0;
-                            const windSpeed = current.wind_speed_10m || 0;
-                            let weatherRisk = 'Low';
-                            let riskClass = 'risk-low';
-                            if (precipitation > 10 || windSpeed > 40) {
-                                weatherRisk = 'High';
-                                riskClass = 'risk-high';
-                            } else if (precipitation > 5 || windSpeed > 25) {
-                                weatherRisk = 'Medium';
-                                riskClass = 'risk-medium';
-                            }
-                            document.getElementById('weatherRisk').textContent = weatherRisk;
-                            document.querySelector('#weatherRisk').previousElementSibling.className = `risk-indicator ${riskClass}`;
-
-                            fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`)
-                                .then(response => response.json())
-                                .then(data => {
-                                    const city = data.address.city || data.address.town || data.address.county || 'Unknown';
-                                    document.getElementById('location').textContent = city;
-                                    
-                                    getEarthquakeData(lat, lon);
-                                    getCrimeData(city);
-                                });
-                        })
-                        .catch(error => {
-                            console.log('Weather data unavailable');
-                            document.getElementById('temp').textContent = '22°C';
-                            document.getElementById('wind').textContent = '12 km/h';
-                            document.getElementById('location').textContent = 'Global';
-                        });
-                }, function() {
-                    console.log('Geolocation denied');
-                    document.getElementById('location').textContent = 'Anonymous';
-                });
-            }
-        }
-
-        // Get earthquake data
-        function getEarthquakeData(lat, lon) {
-            fetch(`https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson`)
-                .then(response => response.json())
-                .then(data => {
-                    const nearby = data.features.filter(f => {
-                        const diff_lat = Math.abs(f.geometry.coordinates[1] - lat);
-                        const diff_lon = Math.abs(f.geometry.coordinates[0] - lon);
-                        return diff_lat < 5 && diff_lon < 5;
-                    });
-                    
-                    if (nearby.length > 0) {
-                        const maxMagnitude = Math.max(...nearby.map(e => e.properties.mag));
-                        document.getElementById('seismic').textContent = maxMagnitude.toFixed(1) + ' magnitude';
-                        
-                        let earthquakeRisk = 'Low';
-                        let riskClass = 'risk-low';
-                        if (maxMagnitude > 5) {
-                            earthquakeRisk = 'High';
-                            riskClass = 'risk-high';
-                        } else if (maxMagnitude > 3) {
-                            earthquakeRisk = 'Medium';
-                            riskClass = 'risk-medium';
-                        }
-                        document.getElementById('earthquakeRisk').textContent = earthquakeRisk;
-                        document.querySelector('#earthquakeRisk').previousElementSibling.className = `risk-indicator ${riskClass}`;
-                    } else {
-                        document.getElementById('seismic').textContent = 'None detected';
-                    }
-                })
-                .catch(error => {
-                    document.getElementById('seismic').textContent = 'Data unavailable';
-                });
-        }
-
-        // Get crime data
-        function getCrimeData(city) {
-            const crimeEstimates = {
-                'Amsterdam': '15%', 'Rotterdam': '18%', 'Utrecht': '12%',
-                'London': '22%', 'Paris': '25%', 'Berlin': '14%',
-                'New York': '30%', 'Los Angeles': '28%', 'Chicago': '32%',
-                'Tokyo': '5%', 'Singapore': '3%', 'Sydney': '8%'
-            };
-            
-            const rate = crimeEstimates[city] || 'N/A';
-            document.getElementById('crimeRate').textContent = rate;
-            
-            const rateNum = parseInt(rate) || 0;
-            let safetyIndex = 'Low';
-            let riskClass = 'risk-low';
-            if (rateNum > 25) {
-                safetyIndex = 'Poor';
-                riskClass = 'risk-high';
-            } else if (rateNum > 15) {
-                safetyIndex = 'Moderate';
-                riskClass = 'risk-medium';
-            } else {
-                safetyIndex = 'Good';
-                riskClass = 'risk-low';
-            }
-            document.getElementById('safetyIndex').textContent = safetyIndex;
-            document.querySelector('#safetyIndex').previousElementSibling.className = `risk-indicator ${riskClass}`;
-        }
-
-        // Get solar activity and UV index
-        function getSolarData() {
-            const solarData = ['Low', 'Normal', 'Elevated', 'High'];
-            const solarActivity = solarData[Math.floor(Math.random() * solarData.length)];
-            document.getElementById('solarActivity').textContent = solarActivity;
-
-            const uvIndexes = ['Low', 'Moderate', 'High', 'Very High'];
-            const uvIndex = uvIndexes[Math.floor(Math.random() * uvIndexes.length)];
-            document.getElementById('uvIndex').textContent = uvIndex;
-
-            const protectionMap = {
-                'Low': 'Standard sunscreen (SPF 15+), light clothing',
-                'Moderate': 'SPF 30+, UV-protective clothing recommended',
-                'High': 'SPF 50+, UV-protective gear, limit sun exposure',
-                'Very High': 'SPF 70+, full protective gear, seek shade'
-            };
-            document.getElementById('radiationProtection').textContent = protectionMap[uvIndex];
-        }
-
-        // Animate status indicator
-        setInterval(() => {
-            const status = document.getElementById('status');
-            status.textContent = status.textContent === '🔴 Active' ? '🟢 Active' : '🔴 Active';
-        }, 1500);
-
-        // Initialize on load
-        window.addEventListener('load', () => {
-            initializeColors();
-            initializeLanguageGrid();
-            loadPreferences();
-            detectLocationAndLanguage();
-            getWeatherData();
-            getSolarData();
-            
-            setInterval(() => {
-                getWeatherData();
-                getSolarData();
-            }, 600000);
-        });
     </script>
 </body>
 </html>
