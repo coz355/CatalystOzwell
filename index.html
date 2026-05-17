@@ -1,67 +1,30 @@
-
-<!DOCTYPE html>
+l<!DOCTYPE html>
 <html lang="en">
-<head>
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4ZT8WTL4C5"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-4ZT8WTL4C5');
-    </script>
 
+<head>
+   <meta name="description" content="Catalyst Ozwell - Welcome Wilkommen">
+    <meta name="keywords" content="tech for holistic innovation in healthier future">
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Catalyst Ozwell - Advanced environmental monitoring and wellness analytics platform">
-    <meta name="keywords" content="environmental monitoring, health analytics, weather forecasting, real-time data">
-    <title>Catalyst Ozwell | Environmental Intelligence Platform</title>
-
-    <!-- Preload Fonts for Performance -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Times+New+Roman&display=swap" rel="stylesheet">
-
+    <title>Catalyst Ozwell | Love&LightHealth </title>
     <style>
-        :root {
-            --accent-primary: #d4af37;
-            --accent-secondary: #c9a961;
-            --neon-cyan: #00ffff;
-            --neon-magenta: #ff00ff;
-            --neon-lime: #00ff00;
-            --neon-pink: #ff1493;
-            --dark-bg: #0f1419;
-            --card-bg: rgba(20, 25, 35, 0.8);
-            --border-color: #3a4a5a;
-            --text-primary: #e8e8e8;
-            --text-secondary: #a8a8a8;
-            --success: #2ecc71;
-            --warning: #f39c12;
-            --danger: #e74c3c;
-            --info: #3498db;
-        }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        html, body {
-            width: 100%;
-            height: 100%;
-        }
-
         body {
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            color: var(--text-primary);
-            background: var(--dark-bg);
+            font-family: 'Arial', sans-serif;
+            color: white;
+            text-align: center;
             overflow-x: hidden;
-            transition: background 0.5s ease, color 0.5s ease;
-            letter-spacing: 0.3px;
+            background: #0a0e27;
+            transition: all 0.5s ease;
         }
 
-        /* Background & Ambient Effects */
+        /* Dynamic Background with Animation */
         .background {
             position: fixed;
             top: 0;
@@ -69,63 +32,69 @@
             width: 100%;
             height: 100%;
             z-index: -2;
-            background: linear-gradient(135deg, #0f1419 0%, #1a1f2e 50%, #0d1117 100%);
-            background-attachment: fixed;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            transition: all 0.5s ease;
         }
 
-        .ambient-light {
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Light Play Effects */
+        .light-orbs {
             position: fixed;
             width: 100%;
             height: 100%;
             top: 0;
             left: 0;
             z-index: -1;
-            pointer-events: none;
+            overflow: hidden;
         }
 
-        .light-accent {
+        .orb {
             position: absolute;
             border-radius: 50%;
-            filter: blur(100px);
-            opacity: 0.08;
-            mix-blend-mode: screen;
+            filter: blur(80px);
+            opacity: 0.3;
+            transition: all 0.5s ease;
         }
 
-        .light-accent-1 {
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, var(--neon-cyan), transparent);
-            top: 10%;
-            left: 5%;
-            animation: drift 25s ease-in-out infinite;
-        }
-
-        .light-accent-2 {
+        .orb1 {
             width: 300px;
             height: 300px;
-            background: radial-gradient(circle, var(--neon-magenta), transparent);
-            bottom: 15%;
+            background: radial-gradient(circle, #00d4ff, transparent);
+            top: -100px;
+            left: -100px;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .orb2 {
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, #ff006e, transparent);
+            bottom: -50px;
+            right: -50px;
+            animation: float 25s infinite ease-in-out reverse;
+        }
+
+        .orb3 {
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, #00f5ff, transparent);
+            top: 50%;
             right: 10%;
-            animation: drift 30s ease-in-out infinite reverse;
+            animation: float 30s infinite ease-in-out;
         }
 
-        @keyframes drift {
+        @keyframes float {
             0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(30px, -30px); }
-        }
-
-        @keyframes neon-glow {
-            0%, 100% {
-                text-shadow: 0 0 10px currentColor, 0 0 20px currentColor;
-            }
-            50% {
-                text-shadow: 0 0 20px currentColor, 0 0 40px currentColor, 0 0 60px currentColor;
-            }
-        }
-
-        @keyframes pulse-neon {
-            0%, 100% { box-shadow: 0 0 20px rgba(0, 255, 255, 0.4), inset 0 0 10px rgba(0, 255, 255, 0.2); }
-            50% { box-shadow: 0 0 50px rgba(0, 255, 255, 0.8), inset 0 0 20px rgba(0, 255, 255, 0.4); }
+            25% { transform: translate(30px, -30px); }
+            50% { transform: translate(-20px, 20px); }
+            75% { transform: translate(20px, 30px); }
         }
 
         /* Language Modal */
@@ -136,11 +105,11 @@
             width: 100%;
             height: 100%;
             z-index: 9999;
-            background: rgba(0, 0, 0, 0.95);
+            background: rgba(0, 0, 0, 0.9);
             display: flex;
             justify-content: center;
             align-items: center;
-            backdrop-filter: blur(8px);
+            backdrop-filter: blur(5px);
         }
 
         .language-modal.hidden {
@@ -148,89 +117,111 @@
         }
 
         .language-box {
-            background: linear-gradient(135deg, var(--card-bg), rgba(30, 40, 50, 0.9));
-            border: 2px solid var(--neon-cyan);
-            border-radius: 12px;
-            padding: 60px 50px;
-            max-width: 650px;
-            box-shadow: 0 0 30px rgba(0, 255, 255, 0.5), inset 0 1px 1px rgba(0, 255, 255, 0.2);
+            background: linear-gradient(135deg, #ffff00 0%, #ffdd00 50%, #ffaa00 100%);
+            border: 4px solid #ffff00;
+            border-radius: 20px;
+            padding: 50px 40px;
+            max-width: 600px;
+            box-shadow: 0 0 50px rgba(255, 255, 0, 0.5), inset 0 0 30px rgba(255, 255, 0, 0.3);
+            animation: pulse-glow 2s ease-in-out infinite;
             text-align: center;
-            backdrop-filter: blur(20px);
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 50px rgba(255, 255, 0, 0.5), inset 0 0 30px rgba(255, 255, 0, 0.3); }
+            50% { box-shadow: 0 0 80px rgba(255, 255, 0, 0.8), inset 0 0 50px rgba(255, 255, 0, 0.5); }
         }
 
         .language-title {
-            color: var(--neon-cyan);
-            font-size: 2.2rem;
-            font-weight: 700;
-            letter-spacing: 3px;
+            color: #000;
+            font-size: 2.5rem;
+            font-weight: bold;
             margin-bottom: 15px;
-            text-transform: uppercase;
-            font-family: 'Times New Roman', serif;
-            animation: neon-glow 2s ease-in-out infinite;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
 
         .language-subtitle {
-            color: var(--text-secondary);
-            font-size: 1rem;
-            margin-bottom: 45px;
-            font-weight: 400;
-            letter-spacing: 1px;
+            color: #333;
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            font-weight: 600;
         }
 
         .language-buttons {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 15px;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
             margin-bottom: 30px;
         }
 
         .language-btn {
-            background: transparent;
-            color: var(--neon-cyan);
-            border: 2px solid var(--neon-cyan);
-            padding: 16px 20px;
-            font-size: 0.95rem;
-            font-weight: 500;
-            border-radius: 6px;
+            background: linear-gradient(135deg, #ffffff, #f0f0f0);
+            color: #000;
+            border: 3px solid #000;
+            padding: 20px 25px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            border-radius: 10px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            letter-spacing: 1px;
-            font-family: Helvetica, sans-serif;
-            box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
         .language-btn:hover {
-            border-color: var(--neon-magenta);
-            background: rgba(255, 0, 255, 0.15);
-            transform: translateY(-2px);
-            box-shadow: 0 0 20px rgba(255, 0, 255, 0.6);
-            color: var(--neon-magenta);
+            transform: scale(1.08);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+            background: linear-gradient(135deg, #ffff00, #ffdd00);
         }
 
         .language-btn.detected {
-            background: rgba(0, 255, 255, 0.2);
-            border-color: var(--neon-cyan);
-            color: var(--neon-cyan);
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.7);
+            background: linear-gradient(135deg, #ffff00, #ffdd00);
+            border-color: #ff0000;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
         }
 
         .language-info {
-            color: var(--text-secondary);
+            color: #333;
             font-size: 0.9rem;
-            margin-top: 25px;
-            padding: 15px 25px;
-            background: rgba(0, 255, 255, 0.05);
-            border-left: 2px solid var(--neon-cyan);
-            text-align: left;
+            font-weight: 600;
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 8px;
         }
 
-        /* Theme System */
-        body.theme-dark { --accent-primary: #d4af37; --accent-secondary: #c9a961; }
-        body.theme-ocean { --accent-primary: var(--neon-cyan); --accent-secondary: #00aaff; }
-        body.theme-forest { --accent-primary: var(--neon-lime); --accent-secondary: #00ff44; }
-        body.theme-sunset { --accent-primary: #ff6b35; --accent-secondary: #ff8c42; }
-        body.theme-crimson { --accent-primary: var(--neon-magenta); --accent-secondary: #ff1493; }
-        body.theme-latin { --accent-primary: #8B4513; --accent-secondary: #CD853F; } /* Latin Theme */
+        .language-star {
+            display: inline-block;
+            color: #ff0000;
+            font-size: 1.2rem;
+            margin-right: 5px;
+        }
+
+        /* Theme Styles */
+        body.theme-matrix {
+            background: #000000;
+        }
+
+        body.theme-matrix .background {
+            background: linear-gradient(135deg, #001a00 0%, #003300 50%, #000000 100%);
+        }
+
+        body.theme-lionking {
+            background: #2a1810;
+        }
+
+        body.theme-lionking .background {
+            background: linear-gradient(135deg, #4a3728 0%, #6b4f38 50%, #2a1810 100%);
+        }
+
+        body.theme-heavenkingdom {
+            background: #1a1a3e;
+        }
+
+        body.theme-heavenkingdom .background {
+            background: linear-gradient(135deg, #2a2a5e 0%, #3a3a7e 50%, #1a1a3e 100%);
+        }
 
         /* Main Container */
         .container {
@@ -239,139 +230,45 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            padding: 80px 40px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        /* Header Section */
-        .header-section {
-            text-align: center;
-            margin-bottom: 80px;
-            border-bottom: 2px solid var(--neon-cyan);
-            padding-bottom: 50px;
-        }
-
-        .logo-container {
-            margin-bottom: 40px;
-        }
-
-        .logo {
-            width: 140px;
-            height: 140px;
-            border: 3px solid var(--neon-cyan);
-            border-radius: 8px;
-            padding: 10px;
-            display: flex;
-            align-items: center;
             justify-content: center;
-            margin: 0 auto;
-            background: rgba(0, 255, 255, 0.08);
-            animation: pulse-neon 2s ease-in-out infinite;
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--neon-cyan);
-            font-family: 'Times New Roman', serif;
-        }
-
-        h1 {
-            font-size: 3.5rem;
-            color: var(--neon-magenta);
-            font-weight: 700;
-            letter-spacing: 4px;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            font-family: 'Times New Roman', serif;
-            animation: neon-glow 2s ease-in-out infinite;
-        }
-
-        .subtitle {
-            font-size: 1.1rem;
-            color: var(--neon-cyan);
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-            font-family: Helvetica, sans-serif;
-        }
-
-        .tagline {
-            font-size: 0.95rem;
-            color: var(--text-secondary);
-            font-style: italic;
-            letter-spacing: 1px;
-            margin-bottom: 30px;
-        }
-
-        /* Quote Section */
-        .quote-section {
-            width: 100%;
-            background: rgba(0, 255, 255, 0.05);
-            border: 2px solid var(--neon-cyan);
-            border-radius: 8px;
-            padding: 30px 40px;
-            margin-bottom: 60px;
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
-        }
-
-        .quote {
-            font-size: 1.1rem;
-            color: var(--neon-cyan);
-            font-style: italic;
-            line-height: 1.8;
-            margin-bottom: 15px;
-            font-family: 'Times New Roman', serif;
-        }
-
-        .quote-attribution {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            text-align: right;
-            letter-spacing: 1px;
+            align-items: center;
+            padding: 50px 20px;
         }
 
         /* Customization Panel */
         .customization-panel {
             position: fixed;
-            top: 40px;
-            right: 40px;
+            top: 20px;
+            right: 20px;
             z-index: 1000;
-            background: rgba(20, 25, 35, 0.95);
-            border: 2px solid var(--neon-cyan);
-            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid currentColor;
+            border-radius: 10px;
             padding: 20px;
             max-width: 300px;
-            backdrop-filter: blur(20px);
-            box-shadow: 0 0 30px rgba(0, 255, 255, 0.4);
+            backdrop-filter: blur(10px);
         }
 
         .customization-toggle {
-            background: transparent;
-            color: var(--neon-cyan);
-            border: 2px solid var(--neon-cyan);
-            padding: 12px 20px;
-            border-radius: 6px;
+            background: var(--accent-color, #00d4ff);
+            color: #000;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
             cursor: pointer;
-            font-weight: 700;
+            font-weight: bold;
+            margin-bottom: 15px;
             width: 100%;
-            transition: all 0.3s ease;
-            letter-spacing: 1px;
-            font-size: 0.95rem;
-            font-family: Helvetica, sans-serif;
-            box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+            transition: all 0.3s;
         }
 
         .customization-toggle:hover {
-            background: rgba(0, 255, 255, 0.15);
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.7);
-            transform: translateY(-2px);
+            transform: scale(1.05);
         }
 
         .customization-content {
             display: none;
-            margin-top: 20px;
-            max-height: 500px;
+            max-height: 600px;
             overflow-y: auto;
         }
 
@@ -379,387 +276,325 @@
             display: block;
         }
 
-        .theme-buttons, .language-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-top: 15px;
+        .customization-section {
+            margin-bottom: 15px;
+            text-align: left;
         }
 
         .customization-section h3 {
-            color: var(--neon-cyan);
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 12px;
-            font-family: Helvetica, sans-serif;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            color: var(--accent-color, #00d4ff);
         }
 
-        .theme-btn, .language-option {
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .color-option {
+            width: 35px;
+            height: 35px;
+            border-radius: 5px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .color-option:hover {
+            transform: scale(1.1);
+            border-color: white;
+        }
+
+        .color-option.active {
+            border: 3px solid white;
+            box-shadow: 0 0 10px currentColor;
+        }
+
+        .theme-buttons {
+            display: flex;
+            gap: 8px;
+            flex-direction: column;
+        }
+
+        .theme-btn {
             padding: 10px;
-            border: 2px solid var(--neon-cyan);
-            background: transparent;
-            color: var(--neon-cyan);
+            border: 2px solid var(--accent-color, #00d4ff);
+            background: rgba(0, 212, 255, 0.1);
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .theme-btn:hover {
+            background: rgba(0, 212, 255, 0.3);
+        }
+
+        .theme-btn.active {
+            background: var(--accent-color, #00d4ff);
+            color: #000;
+            font-weight: bold;
+        }
+
+        .language-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .language-option {
+            padding: 10px;
+            border: 2px solid var(--accent-color, #00d4ff);
+            background: rgba(0, 212, 255, 0.1);
+            color: white;
             border-radius: 5px;
             cursor: pointer;
             font-size: 0.85rem;
-            transition: all 0.3s ease;
+            transition: all 0.3s;
             font-weight: 600;
-            font-family: Helvetica, sans-serif;
-            box-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
         }
 
-        .theme-btn:hover, .language-option:hover {
-            border-color: var(--neon-magenta);
-            background: rgba(255, 0, 255, 0.15);
-            color: var(--neon-magenta);
-            box-shadow: 0 0 15px rgba(255, 0, 255, 0.6);
+        .language-option:hover {
+            background: rgba(0, 212, 255, 0.3);
+            transform: scale(1.05);
         }
 
-        .theme-btn.active, .language-option.active {
-            background: rgba(0, 255, 255, 0.25);
-            border-color: var(--neon-cyan);
-            color: var(--neon-cyan);
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
+        .language-option.active {
+            background: var(--accent-color, #00d4ff);
+            color: #000;
+            box-shadow: 0 0 10px var(--accent-color, #00d4ff);
         }
 
-        /* Weather Forecast Section */
-        .weather-forecast {
-            width: 100%;
-            background: rgba(20, 25, 35, 0.8);
-            border: 2px solid var(--neon-cyan);
-            border-radius: 8px;
-            padding: 50px;
-            margin-bottom: 60px;
-            box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
-            backdrop-filter: blur(10px);
+        /* Logo */
+        .logo {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 30px;
+            animation: glow 3s ease-in-out infinite;
         }
 
-        .section-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 40px;
-            padding-bottom: 25px;
-            border-bottom: 2px solid var(--neon-cyan);
+        @keyframes glow {
+            0%, 100% { filter: drop-shadow(0 0 10px var(--accent-color, #00d4ff)); }
+            50% { filter: drop-shadow(0 0 30px var(--accent-color, #00d4ff)); }
         }
 
-        .section-title {
-            font-size: 1.4rem;
-            color: var(--neon-magenta);
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin: 0;
-            font-family: 'Times New Roman', serif;
-            animation: neon-glow 2s ease-in-out infinite;
-        }
-
-        .forecast-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-bottom: 0;
-        }
-
-        .forecast-card {
-            background: rgba(0, 255, 255, 0.05);
-            border: 2px solid var(--neon-cyan);
-            border-radius: 8px;
-            padding: 30px 25px;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
-        }
-
-        .forecast-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--neon-magenta), transparent);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
-        .forecast-card:hover {
-            border-color: var(--neon-magenta);
-            background: rgba(255, 0, 255, 0.1);
-            transform: translateY(-8px);
-            box-shadow: 0 0 30px rgba(255, 0, 255, 0.5);
-        }
-
-        .forecast-card:hover::before {
-            opacity: 1;
-        }
-
-        .forecast-time {
-            font-size: 1.2rem;
-            color: var(--neon-cyan);
-            font-weight: 700;
-            margin-bottom: 15px;
-            letter-spacing: 1px;
-            font-family: 'Times New Roman', serif;
-        }
-
-        .forecast-time-detail {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            margin-bottom: 20px;
-            letter-spacing: 0.5px;
-        }
-
-        .forecast-icon-container {
-            text-align: center;
-            margin: 20px 0;
-        }
-
-        .forecast-emoji {
+        /* Heading */
+        h1 {
             font-size: 4rem;
-            display: inline-block;
-            filter: drop-shadow(0 4px 8px rgba(0, 255, 255, 0.4));
+            margin-bottom: 20px;
+            color: var(--accent-color, #00d4ff);
+            text-shadow: 0 0 20px var(--accent-color, #00d4ff), 0 0 40px var(--secondary-color, #00f5ff);
+            font-weight: bold;
+            letter-spacing: 3px;
+            animation: titleGlow 2s ease-in-out infinite;
         }
 
-        .forecast-metrics {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-top: 25px;
+        @keyframes titleGlow {
+            0%, 100% { text-shadow: 0 0 20px var(--accent-color, #00d4ff), 0 0 40px var(--secondary-color, #00f5ff); }
+            50% { text-shadow: 0 0 30px var(--accent-color, #00d4ff), 0 0 60px var(--secondary-color, #00f5ff), 0 0 80px var(--tertiary-color, #ff006e); }
         }
 
-        .metric {
-            background: rgba(0, 255, 255, 0.08);
-            padding: 12px;
-            border-radius: 6px;
-            border: 1px solid rgba(0, 255, 255, 0.3);
+        /* Description */
+        .description {
+            font-size: 1.2rem;
+            max-width: 600px;
+            line-height: 1.8;
+            margin-bottom: 40px;
+            color: #e0e0e0;
         }
 
-        .metric-label {
-            font-size: 0.75rem;
-            color: var(--neon-cyan);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 5px;
-            font-family: Helvetica, sans-serif;
-        }
-
-        .metric-value {
-            font-size: 1.3rem;
-            color: var(--neon-magenta);
-            font-weight: 700;
-            letter-spacing: 0.5px;
-            font-family: 'Times New Roman', serif;
-        }
-
-        /* Telemetry Section */
+        /* Telemetry Box - Neon Style */
         .telemetry {
-            width: 100%;
-            background: rgba(20, 25, 35, 0.8);
-            border: 2px solid var(--neon-lime);
-            border-radius: 8px;
-            padding: 50px;
-            margin-bottom: 60px;
-            box-shadow: 0 0 30px rgba(0, 255, 0, 0.3);
+            background: rgba(0, 212, 255, 0.1);
+            border: 2px solid var(--accent-color, #00d4ff);
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 40px;
+            max-width: 700px;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.3), inset 0 0 20px rgba(0, 212, 255, 0.1);
             backdrop-filter: blur(10px);
+            transition: all 0.5s ease;
         }
 
-        .telemetry .section-title {
-            color: var(--neon-lime);
+        .telemetry-title {
+            font-size: 1.1rem;
+            color: var(--secondary-color, #00f5ff);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px var(--secondary-color, #00f5ff);
         }
 
         .telemetry-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
         }
 
         .telemetry-item {
-            background: rgba(0, 255, 0, 0.05);
-            border: 2px solid var(--neon-lime);
-            border-radius: 8px;
-            padding: 20px;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.95rem;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.3);
+            padding-bottom: 10px;
+            grid-column: span 1;
         }
 
-        .telemetry-item:hover {
-            border-color: var(--neon-cyan);
-            background: rgba(0, 255, 255, 0.1);
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+        .telemetry-item.full-width {
+            grid-column: span 2;
         }
 
         .telemetry-label {
-            font-size: 0.8rem;
-            color: var(--neon-lime);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 10px;
-            display: block;
-            font-family: Helvetica, sans-serif;
+            color: var(--accent-color, #00d4ff);
+            font-weight: bold;
+            font-size: 0.9rem;
         }
 
         .telemetry-value {
-            font-size: 1.8rem;
-            color: var(--neon-magenta);
-            font-weight: 700;
-            letter-spacing: 0.5px;
-            font-family: 'Times New Roman', serif;
+            color: var(--tertiary-color, #ff006e);
+            font-weight: bold;
+            text-shadow: 0 0 10px var(--tertiary-color, #ff006e);
+            font-size: 0.9rem;
         }
 
         .risk-indicator {
             display: inline-block;
-            width: 10px;
-            height: 10px;
+            width: 12px;
+            height: 12px;
             border-radius: 50%;
-            margin-right: 8px;
+            margin-right: 5px;
         }
 
-        .risk-low { background: var(--neon-lime); }
-        .risk-medium { background: #ffaa00; }
-        .risk-high { background: #ff0000; }
+        .risk-low {
+            background: #00ff00;
+        }
 
-        /* Wellbeing Section */
-        .wellbeing-suggestion {
-            width: 100%;
-            background: rgba(20, 25, 35, 0.8);
-            border: 2px solid var(--neon-magenta);
-            border-radius: 8px;
-            padding: 40px 50px;
-            margin-bottom: 60px;
-            box-shadow: 0 0 30px rgba(255, 0, 255, 0.3);
+        .risk-medium {
+            background: #ffaa00;
+        }
+
+        .risk-high {
+            background: #ff0000;
+        }
+
+        /* Music Section */
+        .music-section {
+            background: rgba(0, 212, 255, 0.05);
+            border: 2px solid var(--tertiary-color, #ff006e);
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 40px;
+            max-width: 600px;
+            box-shadow: 0 0 20px rgba(255, 0, 110, 0.2);
             backdrop-filter: blur(10px);
+            transition: all 0.5s ease;
         }
 
-        .wellbeing-title {
-            font-size: 1.4rem;
-            color: var(--neon-magenta);
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
+        .music-title {
+            font-size: 1.3rem;
+            color: var(--tertiary-color, #ff006e);
             margin-bottom: 25px;
-            font-family: 'Times New Roman', serif;
-            animation: neon-glow 2s ease-in-out infinite;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px var(--tertiary-color, #ff006e);
         }
 
-        .wellbeing-text {
-            font-size: 1.05rem;
-            color: var(--text-primary);
-            line-height: 1.8;
-            letter-spacing: 0.5px;
-            font-family: Helvetica, sans-serif;
+        .radio-stations {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .radio-btn {
+            background: linear-gradient(135deg, var(--tertiary-color, #ff006e), var(--quaternary-color, #ff3d82));
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+            text-decoration: none;
+            display: block;
+        }
+
+        .radio-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px var(--tertiary-color, #ff006e);
         }
 
         /* Contact Button */
         .btn-contact {
-            background: transparent;
-            color: var(--neon-cyan);
-            border: 3px solid var(--neon-cyan);
-            padding: 16px 50px;
-            border-radius: 6px;
-            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-color, #00d4ff), var(--secondary-color, #00f5ff));
+            color: #1a1a2e;
+            padding: 15px 40px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-bottom: 30px;
+            transition: all 0.3s;
+            font-size: 1.1rem;
+            display: inline-block;
+            border: none;
             cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 1rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 60px;
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
-            font-family: Helvetica, sans-serif;
+            text-shadow: 0 0 5px rgba(0, 212, 255, 0.5);
         }
 
         .btn-contact:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 0 40px rgba(0, 255, 255, 0.8);
-            border-color: var(--neon-magenta);
-            color: var(--neon-magenta);
-            background: rgba(255, 0, 255, 0.1);
+            transform: scale(1.1);
+            box-shadow: 0 0 30px var(--accent-color, #00d4ff);
         }
 
         /* Social Links */
         .social {
+            margin-top: 40px;
             display: flex;
             justify-content: center;
             gap: 30px;
             flex-wrap: wrap;
-            margin-top: 40px;
-            padding-top: 40px;
-            border-top: 2px solid var(--neon-cyan);
         }
 
         .social a {
-            color: var(--neon-cyan);
+            color: white;
+            font-size: 1.3rem;
             text-decoration: none;
-            transition: all 0.3s ease;
-            font-size: 1.1rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-            display: flex;
+            transition: all 0.3s;
+            display: inline-flex;
             align-items: center;
             gap: 8px;
-            font-family: Helvetica, sans-serif;
-            text-transform: uppercase;
-            border: 2px solid var(--neon-cyan);
-            padding: 10px 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
         }
 
         .social a:hover {
-            transform: translateY(-3px);
-            border-color: var(--neon-magenta);
-            color: var(--neon-magenta);
-            box-shadow: 0 0 25px rgba(255, 0, 255, 0.6);
-            background: rgba(255, 0, 255, 0.1);
+            color: var(--accent-color, #00d4ff);
+            text-shadow: 0 0 15px var(--accent-color, #00d4ff);
+            transform: scale(1.2);
+        }
+
+        .instagram-link {
+            background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            padding: 12px 25px;
+            border-radius: 8px;
+            color: white !important;
+            font-weight: bold;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .instagram-link:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 25px rgba(240, 148, 51, 0.5);
         }
 
         /* Responsive Design */
         @media (max-width: 768px) {
-            .container {
-                padding: 40px 20px;
-            }
-
             h1 {
-                font-size: 2.2rem;
-                letter-spacing: 2px;
-            }
-
-            .customization-panel {
-                top: 20px;
-                right: 20px;
-                max-width: 280px;
-            }
-
-            .weather-forecast, .telemetry, .wellbeing-suggestion {
-                padding: 30px 20px;
-            }
-
-            .forecast-grid, .telemetry-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .forecast-emoji {
-                font-size: 3rem;
-            }
-
-            .section-title {
-                font-size: 1.1rem;
-            }
-
-            .theme-buttons, .language-buttons {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 30px 15px;
-            }
-
-            h1 {
-                font-size: 1.8rem;
-                letter-spacing: 1px;
+                font-size: 2.5rem;
             }
 
             .language-box {
@@ -767,69 +602,95 @@
                 margin: 20px;
             }
 
-            .logo {
-                width: 100px;
-                height: 100px;
+            .language-title {
                 font-size: 1.8rem;
             }
 
-            .quote-section {
-                padding: 20px 25px;
+            .language-buttons {
+                grid-template-columns: 1fr;
             }
 
-            .quote {
-                font-size: 0.95rem;
+            .radio-stations {
+                grid-template-columns: 1fr;
             }
-        }
 
-        /* Loading States */
-        .loading {
-            color: var(--neon-cyan);
-            font-style: italic;
-            animation: pulse-text 1.5s ease-in-out infinite;
-            font-family: 'Times New Roman', serif;
-        }
+            .telemetry {
+                max-width: 100%;
+            }
 
-        @keyframes pulse-text {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.6; }
+            .telemetry-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .telemetry-item.full-width {
+                grid-column: span 1;
+            }
+
+            .music-section {
+                max-width: 100%;
+            }
+
+            .customization-panel {
+                top: 10px;
+                right: 10px;
+                max-width: 250px;
+            }
+
+            .color-grid {
+                grid-template-columns: repeat(5, 1fr);
+            }
+
+            .language-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Background Layer -->
+    <!-- Dynamic Background -->
     <div class="background"></div>
-
-    <!-- Ambient Light Effects -->
-    <div class="ambient-light">
-        <div class="light-accent light-accent-1"></div>
-        <div class="light-accent light-accent-2"></div>
+    
+    <!-- Light Play Effects -->
+    <div class="light-orbs">
+        <div class="orb orb1"></div>
+        <div class="orb orb2"></div>
+        <div class="orb orb3"></div>
     </div>
 
     <!-- Language Selection Modal -->
     <div class="language-modal" id="languageModal">
         <div class="language-box">
-            <div class="language-title" id="languageTitle">Lingua Selecta</div>
-            <div class="language-subtitle" id="languageSubtitle">Select your preferred language</div>
-            <div class="language-buttons" id="languageButtons">
-                <!-- Dynamically populated -->
+            <div class="language-title">🌍 SELECT YOUR LANGUAGE</div>
+            <div class="language-subtitle">Choose your preferred language:</div>
+            <div class="language-buttons">
+                <button class="language-btn" id="englishBtn" onclick="setLanguage('en')">🇬🇧 ENGLISH</button>
+                <button class="language-btn" id="localBtn" onclick="setLanguageByCountry()">📍 LOCAL LANGUAGE</button>
             </div>
-            <div class="language-info" id="languageInfo">
-                Status: Detecting your location...
+            <div class="language-info">
+                <span class="language-star">★</span> <span id="languageInfo">Detecting your location...</span>
             </div>
         </div>
     </div>
 
     <!-- Customization Panel -->
     <div class="customization-panel">
-        <button class="customization-toggle" onclick="toggleCustomization()">⚙ CUSTOMIZE</button>
-        <div class="customization-content" id="customizationContent">
+        <button class="customization-toggle" onclick="toggleCustomization()">⚙️ Customize</button>
+        <div class="customization-content">
             <div class="customization-section">
-                <h3 id="themeSectionTitle">Themata (5 Optiones)</h3>
-                <div class="theme-buttons" id="themeButtons"></div>
+                <h3>🎨 Colors (33 Options)</h3>
+                <div class="color-grid" id="colorGrid"></div>
             </div>
-            <div class="customization-section" style="margin-top: 20px;">
-                <h3 id="languageSectionTitle">Linguae (11 Optiones)</h3>
+            <div class="customization-section">
+                <h3>🎭 Themes</h3>
+                <div class="theme-buttons">
+                    <button class="theme-btn active" onclick="setTheme('default')">Digital Nexus</button>
+                    <button class="theme-btn" onclick="setTheme('matrix')">Cyber Matrix</button>
+                    <button class="theme-btn" onclick="setTheme('lionking')">Golden Savanna</button>
+                    <button class="theme-btn" onclick="setTheme('heavenkingdom')">Celestial Realm</button>
+                </div>
+            </div>
+            <div class="customization-section">
+                <h3>🌐 Languages (9 Options)</h3>
                 <div class="language-grid" id="languageGrid"></div>
             </div>
         </div>
@@ -837,514 +698,659 @@
 
     <!-- Main Content -->
     <div class="container">
-        <!-- Header -->
-        <div class="header-section">
-            <div class="logo-container">
-                <div class="logo">CO</div>
-            </div>
-            <h1 id="mainTitle">Catalyst Ozwell</h1>
-            <p class="subtitle" id="mainSubtitle">Monitio Ambientalis Intelligentia</p>
-            <p class="tagline" id="mainTagline">Observatio realis temporis pro salubritate holistica</p>
-        </div>
-
-        <!-- Quote Section -->
-        <div class="quote-section">
-            <div class="quote" id="quote1">
-                "Lux venit in tenebris, et tenebrae eam non comprehenderunt." - Ioannes 1:5
-            </div>
-            <div class="quote" id="quote2" style="margin-top: 20px;">
-                "Hwæt! We have heard of the glory of the Spear-Danes, of the folk-kings in former days, how the athelings showed forth their prowess." - Beowulf
-            </div>
-            <div class="quote-attribution" id="quoteAttribution">
-                Veritatem sequere - Truth Pursued
-            </div>
-        </div>
-
-        <!-- Weather Forecast Section -->
-        <div class="weather-forecast">
-            <div class="section-header">
-                <h2 class="section-title" id="weatherTitle">Prognosis Tempestatis 72 Horas</h2>
-            </div>
-            <div class="forecast-grid" id="forecastGrid">
-                <div style="grid-column: 1/-1; text-align: center; padding: 40px;">
-                    <p class="loading" id="weatherLoading">Loading weather data...</p>
-                </div>
-            </div>
-        </div>
+        <img src="logo2.png" class="logo" alt="Catalyst Ozwell">
+        <h1>Catalyst Ozwell</h1>
+        <p class="description" data-i18n="coming-soon">Coming soon, very soon promise KISSES C.O....</p>
 
         <!-- Telemetry Section -->
         <div class="telemetry">
-            <div class="section-header">
-                <h2 class="section-title" id="telemetryTitle">Analytica Ambientalis</h2>
-            </div>
-            <div class="telemetry-grid" id="telemetryGrid">
+            <div class="telemetry-title" data-i18n="telemetry-title">📡 Advanced Environmental & Risk Analytics</div>
+            <div class="telemetry-grid">
+                <!-- Weather Section -->
                 <div class="telemetry-item">
-                    <span class="telemetry-label" id="tempLabel">Temperatura</span>
+                    <span class="telemetry-label" data-i18n="temperature">🌡️ Temperature</span>
                     <span class="telemetry-value" id="temp">--°C</span>
                 </div>
                 <div class="telemetry-item">
-                    <span class="telemetry-label" id="locationLabel">Locatio</span>
+                    <span class="telemetry-label" data-i18n="location">📍 Location</span>
                     <span class="telemetry-value" id="location">Detecting...</span>
                 </div>
                 <div class="telemetry-item">
-                    <span class="telemetry-label" id="windLabel">Velocitas Venti</span>
+                    <span class="telemetry-label" data-i18n="wind-speed">💨 Wind Speed</span>
                     <span class="telemetry-value" id="wind">-- km/h</span>
                 </div>
                 <div class="telemetry-item">
-                    <span class="telemetry-label" id="riskLabel">Periculum Tempestatis</span>
+                    <span class="telemetry-label" data-i18n="weather-risk">🌦️ Weather Risk</span>
                     <span class="telemetry-value"><span class="risk-indicator risk-low"></span><span id="weatherRisk">Low</span></span>
                 </div>
+
+                <!-- Seismic Section -->
                 <div class="telemetry-item">
-                    <span class="telemetry-label" id="humidityLabel">Humiditas</span>
-                    <span class="telemetry-value" id="humidity">--%</span>
+                    <span class="telemetry-label" data-i18n="seismic">🌍 Recent Seismic Activity</span>
+                    <span class="telemetry-value" id="seismic">Monitoring...</span>
                 </div>
                 <div class="telemetry-item">
-                    <span class="telemetry-label" id="pressureLabel">Pressio</span>
-                    <span class="telemetry-value" id="pressure">-- hPa</span>
+                    <span class="telemetry-label" data-i18n="earthquake-risk">⚠️ Earthquake Risk</span>
+                    <span class="telemetry-value"><span class="risk-indicator risk-low"></span><span id="earthquakeRisk">Low</span></span>
+                </div>
+
+                <!-- Crime Statistics -->
+                <div class="telemetry-item">
+                    <span class="telemetry-label" data-i18n="crime-rate">🚨 Regional Crime Rate</span>
+                    <span class="telemetry-value" id="crimeRate">--</span>
+                </div>
+                <div class="telemetry-item">
+                    <span class="telemetry-label" data-i18n="safety-index">🛡️ Safety Index</span>
+                    <span class="telemetry-value"><span class="risk-indicator risk-medium"></span><span id="safetyIndex">Moderate</span></span>
+                </div>
+
+                <!-- Solar & Radiation -->
+                <div class="telemetry-item">
+                    <span class="telemetry-label" data-i18n="solar">☀️ Solar Activity</span>
+                    <span class="telemetry-value" id="solarActivity">Normal</span>
+                </div>
+                <div class="telemetry-item">
+                    <span class="telemetry-label" data-i18n="uv-index">🛡️ UV/EUV Index</span>
+                    <span class="telemetry-value" id="uvIndex">Moderate</span>
+                </div>
+
+                <!-- Protection Info -->
+                <div class="telemetry-item full-width">
+                    <span class="telemetry-label" data-i18n="protection">💊 Radiation Protection Recommendation</span>
+                    <span class="telemetry-value" id="radiationProtection">Standard precautions</span>
+                </div>
+
+                <!-- Status -->
+                <div class="telemetry-item full-width">
+                    <span class="telemetry-label" data-i18n="status">📊 System Status</span>
+                    <span class="telemetry-value" id="status">🔴 Active</span>
                 </div>
             </div>
         </div>
 
-        <!-- Wellbeing Section -->
-        <div class="wellbeing-suggestion">
-            <h2 class="wellbeing-title" id="wellbeingTitle">Prospectus Valetudinis Cotidianus</h2>
-            <p class="wellbeing-text" id="wellbeingText">
-                Loading personalized recommendation based on environmental conditions...
-            </p>
+        <!-- Music Section -->
+        <div class="music-section">
+            <div class="music-title" data-i18n="music-title">🎵 Free Radio Stations</div>
+            <div class="radio-stations">
+                <a href="https://www.skyradio.nl/" target="_blank" class="radio-btn">Sky Radio 🎶</a>
+                <a href="https://www.101.nl/" target="_blank" class="radio-btn">101.nl 🎧</a>
+                <a href="https://www.nporadio1.nl/" target="_blank" class="radio-btn">NPO Radio 1</a>
+                <a href="https://www.radiofrance.fr/" target="_blank" class="radio-btn">Radio France 🇫🇷</a>
+                <a href="https://www.bbc.co.uk/sounds/" target="_blank" class="radio-btn">BBC Sounds 🎙️</a>
+                <a href="https://tunein.com/" target="_blank" class="radio-btn">TuneIn Radio 📻</a>
+            </div>
         </div>
 
-        <!-- Call to Action -->
-        <button class="btn-contact" onclick="alert('Contact feature coming soon!')">CONTACTA NOS</button>
+        <!-- Contact Button -->
+        <a href="https://instagram.com/catalystOzwell" target="_blank" class="btn-contact" data-i18n="contact">📱 Contact Us</a>
 
         <!-- Social Links -->
         <div class="social">
-            <a href="#" title="LinkedIn">LinkedIn</a>
-            <a href="#" title="Twitter">Twitter</a>
-            <a href="#" title="Instagram">Instagram</a>
+            <a href="https://instagram.com/catalystOzwell" target="_blank" class="instagram-link">
+                📸 @catalystOzwell
+            </a>
+            <a href="mailto:info@catalystozwell.com">📧 Email</a>
         </div>
     </div>
 
+    <!-- Script -->
     <script>
-        // Configuration
-        const CONFIG = {
-            themes: [
-                { name: 'Dark Neon', class: 'theme-dark' },
-                { name: 'Ocean Cyan', class: 'theme-ocean' },
-                { name: 'Forest Lime', class: 'theme-forest' },
-                { name: 'Sunset Fire', class: 'theme-sunset' },
-                { name: 'Crimson Magenta', class: 'theme-crimson' },
-                { name: 'Latin', class: 'theme-latin' } // Added Latin theme
-            ],
-            languages: [
-                { code: 'en', name: 'English' },
-                { code: 'tr', name: 'Türkçe' },
-                { code: 'de', name: 'Deutsch' },
-                { code: 'fr', name: 'Français' },
-                { code: 'es', name: 'Español' },
-                { code: 'it', name: 'Italiano' },
-                { code: 'ja', name: '日本語' },
-                { code: 'zh', name: '中文' },
-                { code: 'pt', name: 'Português' },
-                { code: 'nl', name: 'Nederlands' },
-                { code: 'la', name: 'LATIN' } // Added Latin
-            ],
-            translations: {
-                en: {
-                    mainTitle: "Catalyst Ozwell",
-                    mainSubtitle: "Environmental Intelligence Platform",
-                    mainTagline: "Real-time monitoring for holistic wellness",
-                    weatherTitle: "72-Hour Weather Forecast",
-                    telemetryTitle: "Environmental Analytics",
-                    tempLabel: "Temperature",
-                    locationLabel: "Location",
-                    windLabel: "Wind Speed",
-                    riskLabel: "Weather Risk",
-                    humidityLabel: "Humidity",
-                    pressureLabel: "Pressure",
-                    wellbeingTitle: "Daily Wellness Outlook",
-                    weatherLoading: "Loading weather data...",
-                    languageTitle: "Select Language",
-                    languageSubtitle: "Choose your preferred language",
-                    themeSectionTitle: "Themes (6 Options)",
-                    languageSectionTitle: "Languages (11 Options)",
-                    quote1: '"The light shines in the darkness, and the darkness has not overcome it." - John 1:5',
-                    quote2: '"Hwæt! We have heard of the glory of the Spear-Danes, of the folk-kings in former days..." - Beowulf',
-                    quoteAttribution: "Veritatem sequere - Truth Pursued"
-                },
-                tr: {
-                    mainTitle: "Catalyst Ozwell",
-                    mainSubtitle: "Çevresel Zeka Platformu",
-                    mainTagline: "Bütünsel sağlık için gerçek zamanlı izleme",
-                    weatherTitle: "72 Saatlik Hava Durumu Tahmini",
-                    telemetryTitle: "Çevresel Analitikler",
-                    tempLabel: "Sıcaklık",
-                    locationLabel: "Konum",
-                    windLabel: "Rüzgar Hızı",
-                    riskLabel: "Hava Riski",
-                    humidityLabel: "Nem",
-                    pressureLabel: "Basınç",
-                    wellbeingTitle: "Günlük Sağlık Görünümü",
-                    weatherLoading: "Hava durumu verileri yükleniyor...",
-                    languageTitle: "Dil Seçin",
-                    languageSubtitle: "Tercih ettiğiniz dili seçin",
-                    themeSectionTitle: "Temalar (6 Seçenek)",
-                    languageSectionTitle: "Diller (11 Seçenek)",
-                    quote1: '"Işık karanlıkta parlar ve karanlık onu alt edememiştir." - Yuhanna 1:5',
-                    quote2: '"Dinleyin! Eski zamanlarda, mızrak-Danların şanını duymuşuzdur..." - Beowulf',
-                    quoteAttribution: "Gerçeği takip et - Hakikati Ara"
-                },
-                la: {
-                    mainTitle: "Catalyst Ozwell",
-                    mainSubtitle: "Monitio Ambientalis Intelligentia",
-                    mainTagline: "Observatio realis temporis pro salubritate holistica",
-                    weatherTitle: "Prognosis Tempestatis 72 Horas",
-                    telemetryTitle: "Analytica Ambientalis",
-                    tempLabel: "Temperatura",
-                    locationLabel: "Locatio",
-                    windLabel: "Velocitas Venti",
-                    riskLabel: "Periculum Tempestatis",
-                    humidityLabel: "Humiditas",
-                    pressureLabel: "Pressio",
-                    wellbeingTitle: "Prospectus Valetudinis Cotidianus",
-                    weatherLoading: "Carens data prognosis...",
-                    languageTitle: "Lingua Selecta",
-                    languageSubtitle: "Select your preferred language",
-                    themeSectionTitle: "Themata (6 Optiones)",
-                    languageSectionTitle: "Linguae (11 Optiones)",
-                    quote1: '"Lux venit in tenebris, et tenebrae eam non comprehenderunt." - Ioannes 1:5',
-                    quote2: '"Hwæt! We have heard of the glory of the Spear-Danes, of the folk-kings in former days..." - Beowulf',
-                    quoteAttribution: "Veritatem sequere - Truth Pursued"
-                }
-                // Add other languages as needed
+        // Multilingual Content
+        const languages = {
+            en: {
+                'coming-soon': 'Coming soon, very soon promise KISSES C.O....',
+                'telemetry-title': '📡 Advanced Environmental & Risk Analytics',
+                'temperature': '🌡️ Temperature',
+                'location': '📍 Location',
+                'wind-speed': '💨 Wind Speed',
+                'weather-risk': '🌦️ Weather Risk',
+                'seismic': '🌍 Recent Seismic Activity',
+                'earthquake-risk': '⚠️ Earthquake Risk',
+                'crime-rate': '🚨 Regional Crime Rate',
+                'safety-index': '🛡️ Safety Index',
+                'solar': '☀️ Solar Activity',
+                'uv-index': '🛡️ UV/EUV Index',
+                'protection': '💊 Radiation Protection Recommendation',
+                'status': '📊 System Status',
+                'music-title': '🎵 Free Radio Stations',
+                'contact': '📱 Contact Us'
+            },
+            de: {
+                'coming-soon': 'Sehr bald kommen, versprochen KÜSSE C.O....',
+                'telemetry-title': '📡 Erweiterte Umwelt- & Risikoanalysen',
+                'temperature': '🌡️ Temperatur',
+                'location': '📍 Standort',
+                'wind-speed': '💨 Windgeschwindigkeit',
+                'weather-risk': '🌦️ Wetterrisiko',
+                'seismic': '🌍 Aktuelle seismische Aktivität',
+                'earthquake-risk': '⚠️ Erdbeben-Risiko',
+                'crime-rate': '🚨 Regionale Kriminalitätsrate',
+                'safety-index': '🛡️ Sicherheitsindex',
+                'solar': '☀️ Solaraktivität',
+                'uv-index': '🛡️ UV/EUV-Index',
+                'protection': '💊 Empfehlung zum Strahlenschutz',
+                'status': '📊 Systemstatus',
+                'music-title': '🎵 Kostenlose Radiostationen',
+                'contact': '📱 Kontaktieren Sie uns'
+            },
+            nl: {
+                'coming-soon': 'Zeer binnenkort, beloofd KUSSEN C.O....',
+                'telemetry-title': '📡 Geavanceerde Milieu- & Risicoanalyse',
+                'temperature': '🌡️ Temperatuur',
+                'location': '📍 Locatie',
+                'wind-speed': '💨 Windsnelheid',
+                'weather-risk': '🌦️ Weerrisico',
+                'seismic': '🌍 Recente seismische activiteit',
+                'earthquake-risk': '⚠️ Aardbevingsrisico',
+                'crime-rate': '🚨 Regionale misdaadcijfers',
+                'safety-index': '🛡️ Veiligheidsindex',
+                'solar': '☀️ Zonne-activiteit',
+                'uv-index': '🛡️ UV/EUV-index',
+                'protection': '💊 Aanbeveling stralingsbescherming',
+                'status': '📊 Systeemstatus',
+                'music-title': '🎵 Gratis radiostations',
+                'contact': '📱 Contact opnemen'
+            },
+            fr: {
+                'coming-soon': 'Très bientôt, promis BISOUS C.O....',
+                'telemetry-title': '📡 Analyses Environnementales & Risques Avancées',
+                'temperature': '🌡️ Température',
+                'location': '📍 Localisation',
+                'wind-speed': '💨 Vitesse du vent',
+                'weather-risk': '🌦️ Risque météorologique',
+                'seismic': '🌍 Activité sismique récente',
+                'earthquake-risk': '⚠️ Risque de tremblement de terre',
+                'crime-rate': '🚨 Taux criminalité régional',
+                'safety-index': '🛡️ Indice de sécurité',
+                'solar': '☀️ Activité solaire',
+                'uv-index': '🛡️ Indice UV/EUV',
+                'protection': '💊 Recommandation protection radiations',
+                'status': '📊 Statut du système',
+                'music-title': '🎵 Stations de radio gratuites',
+                'contact': '📱 Contactez-nous'
+            },
+            es: {
+                'coming-soon': 'Muy pronto, prometo BESOS C.O....',
+                'telemetry-title': '📡 Análisis Ambiental & Riesgos Avanzado',
+                'temperature': '🌡️ Temperatura',
+                'location': '📍 Ubicación',
+                'wind-speed': '💨 Velocidad del viento',
+                'weather-risk': '🌦️ Riesgo climático',
+                'seismic': '🌍 Actividad sísmica reciente',
+                'earthquake-risk': '⚠️ Riesgo sísmico',
+                'crime-rate': '🚨 Tasa de criminalidad regional',
+                'safety-index': '🛡️ Índice de seguridad',
+                'solar': '☀️ Actividad solar',
+                'uv-index': '🛡️ Índice UV/EUV',
+                'protection': '💊 Recomendación protección radiación',
+                'status': '📊 Estado del sistema',
+                'music-title': '🎵 Estaciones de radio gratuitas',
+                'contact': '📱 Contáctenos'
+            },
+            it: {
+                'coming-soon': 'Molto presto, prometto BACI C.O....',
+                'telemetry-title': '📡 Analisi Ambientale e Rischi Avanzata',
+                'temperature': '🌡️ Temperatura',
+                'location': '📍 Posizione',
+                'wind-speed': '💨 Velocità del vento',
+                'weather-risk': '🌦️ Rischio meteo',
+                'seismic': '🌍 Attività sismica recente',
+                'earthquake-risk': '⚠️ Rischio terremoto',
+                'crime-rate': '🚨 Tasso criminalità regionale',
+                'safety-index': '🛡️ Indice di sicurezza',
+                'solar': '☀️ Attività solare',
+                'uv-index': '🛡️ Indice UV/EUV',
+                'protection': '💊 Raccomandazione protezione radiazioni',
+                'status': '📊 Stato del sistema',
+                'music-title': '🎵 Stazioni radio gratuite',
+                'contact': '📱 Contattaci'
+            },
+            ja: {
+                'coming-soon': 'もう間もなく、約束します KISSES C.O....',
+                'telemetry-title': '📡 高度な環境・リスク分析',
+                'temperature': '🌡️ 気温',
+                'location': '📍 位置',
+                'wind-speed': '💨 風速',
+                'weather-risk': '🌦️ 気象リスク',
+                'seismic': '🌍 最近の地震活動',
+                'earthquake-risk': '⚠️ 地震リスク',
+                'crime-rate': '🚨 地域犯罪率',
+                'safety-index': '🛡️ 安全指数',
+                'solar': '☀️ 太陽活動',
+                'uv-index': '🛡️ UV/EUV指数',
+                'protection': '💊 放射線保護推奨事項',
+                'status': '📊 システムステータス',
+                'music-title': '🎵 無料ラジオステーション',
+                'contact': '📱 お問い合わせ'
+            },
+            zh: {
+                'coming-soon': '即将推出，承诺 KISSES C.O....',
+                'telemetry-title': '📡 高级环境和风险分析',
+                'temperature': '🌡️ 温度',
+                'location': '📍 位置',
+                'wind-speed': '💨 风速',
+                'weather-risk': '🌦️ 天气风险',
+                'seismic': '🌍 最近地震活动',
+                'earthquake-risk': '⚠️ 地震风险',
+                'crime-rate': '🚨 地区犯罪率',
+                'safety-index': '🛡️ 安全指数',
+                'solar': '☀️ 太阳活动',
+                'uv-index': '🛡️ 紫外线指数',
+                'protection': '💊 辐射防护建议',
+                'status': '📊 系统状态',
+                'music-title': '🎵 免费广播电台',
+                'contact': '📱 联系我们'
+            },
+            pt: {
+                'coming-soon': 'Muito em breve, prometo BEIJOS C.O....',
+                'telemetry-title': '📡 Análise Ambiental & Riscos Avançada',
+                'temperature': '🌡️ Temperatura',
+                'location': '📍 Localização',
+                'wind-speed': '💨 Velocidade do vento',
+                'weather-risk': '🌦️ Risco meteorológico',
+                'seismic': '🌍 Atividade sísmica recente',
+                'earthquake-risk': '⚠️ Risco de terremoto',
+                'crime-rate': '🚨 Taxa de criminalidade regional',
+                'safety-index': '🛡️ Índice de segurança',
+                'solar': '☀️ Atividade solar',
+                'uv-index': '🛡️ Índice UV/EUV',
+                'protection': '💊 Recomendação proteção radiação',
+                'status': '📊 Status do sistema',
+                'music-title': '🎵 Estações de rádio gratuitas',
+                'contact': '📱 Entre em contato'
             }
         };
 
-        // State
+        // Language metadata
+        const languageList = [
+            { code: 'en', name: 'English', flag: '🇬🇧' },
+            { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
+            { code: 'nl', name: 'Nederlands', flag: '🇳🇱' },
+            { code: 'fr', name: 'Français', flag: '🇫🇷' },
+            { code: 'es', name: 'Español', flag: '🇪🇸' },
+            { code: 'it', name: 'Italiano', flag: '🇮🇹' },
+            { code: 'ja', name: '日本語', flag: '🇯🇵' },
+            { code: 'zh', name: '中文', flag: '🇨🇳' },
+            { code: 'pt', name: 'Português', flag: '🇵🇹' }
+        ];
+
+        // Country to Language Mapping
+        const countryLanguageMap = {
+            'DE': 'de', 'AT': 'de', 'CH': 'de',
+            'NL': 'nl', 'BE': 'nl',
+            'FR': 'fr', 'CA': 'fr',
+            'ES': 'es', 'MX': 'es', 'AR': 'es',
+            'IT': 'it',
+            'JP': 'ja',
+            'CN': 'zh', 'TW': 'zh',
+            'PT': 'pt', 'BR': 'pt'
+        };
+
         let currentLanguage = 'en';
-        let currentTheme = 'theme-dark';
-        let userLocation = { city: "Detecting...", country: "Unknown" };
+        let userCountry = '';
 
-        // Initialize
-        document.addEventListener('DOMContentLoaded', () => {
-            detectUserLocation();
-            initializeThemes();
-            initializeLanguage();
-            generateLanguageGrid();
-            generateWeatherForecast();
-            updateTelemetry();
-            generateWellnessTip();
-        });
-
-        // Location Detection
-        function detectUserLocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(
-                    (position) => {
-                        const { latitude, longitude } = position.coords;
-                        fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`)
-                            .then(response => response.json())
-                            .then(data => {
-                                userLocation = {
-                                    city: data.locality || "Unknown",
-                                    country: data.countryName || "Unknown"
-                                };
-                                document.getElementById('location').textContent = `${userLocation.city}, ${userLocation.country}`;
-                                updateLanguageModal();
-                                setLanguageByCountry();
-                            })
-                            .catch(() => {
-                                document.getElementById('location').textContent = "Location detection failed";
-                                updateLanguageModal();
-                            });
-                    },
-                    () => {
-                        // Fallback to IP-based detection
-                        fetch('https://ipapi.co/json/')
-                            .then(response => response.json())
-                            .then(data => {
-                                userLocation = {
-                                    city: data.city || "Unknown",
-                                    country: data.country_name || "Unknown"
-                                };
-                                document.getElementById('location').textContent = `${userLocation.city}, ${userLocation.country}`;
-                                updateLanguageModal();
-                                setLanguageByCountry();
-                            })
-                            .catch(() => {
-                                document.getElementById('location').textContent = "Location unavailable";
-                                updateLanguageModal();
-                            });
+        // Detect user location and set language
+        function detectLocationAndLanguage() {
+            fetch('https://ipapi.co/json/')
+                .then(response => response.json())
+                .then(data => {
+                    userCountry = data.country_code || '';
+                    const detectedLanguage = countryLanguageMap[userCountry] || 'en';
+                    
+                    const countryName = data.country_name || 'your location';
+                    const languageName = getLanguageName(detectedLanguage);
+                    
+                    document.getElementById('languageInfo').textContent = `Detected: ${countryName} (${languageName})`;
+                    
+                    const localBtn = document.getElementById('localBtn');
+                    if (localBtn) {
+                        localBtn.textContent = `📍 ${languageName.toUpperCase()}`;
                     }
-                );
-            } else {
-                document.getElementById('location').textContent = "Geolocation not supported";
-                updateLanguageModal();
-            }
+                })
+                .catch(error => {
+                    console.log('Location detection failed');
+                    document.getElementById('languageInfo').textContent = 'Click LOCAL for auto-detected language';
+                });
         }
 
-        function updateLanguageModal() {
-            const infoElement = document.getElementById('languageInfo');
-            if (userLocation.city && userLocation.country) {
-                infoElement.textContent = `Detected location: ${userLocation.city}, ${userLocation.country}`;
-            } else {
-                infoElement.textContent = "Unable to detect location. Using English as default.";
-            }
+        // Get language name
+        function getLanguageName(code) {
+            const names = {
+                'en': 'English',
+                'de': 'Deutsch',
+                'nl': 'Nederlands',
+                'fr': 'Français',
+                'es': 'Español',
+                'it': 'Italiano',
+                'ja': '日本語',
+                'zh': '中文',
+                'pt': 'Português'
+            };
+            return names[code] || 'English';
         }
 
-        // Theme Management
-        function initializeThemes() {
-            const themeButtons = document.getElementById('themeButtons');
-            CONFIG.themes.forEach((theme, index) => {
-                const btn = document.createElement('button');
-                btn.className = 'theme-btn' + (theme.class === currentTheme ? ' active' : '');
-                btn.textContent = theme.name;
-                btn.onclick = () => setTheme(theme.class, btn);
-                themeButtons.appendChild(btn);
+        // Set language
+        function setLanguage(lang) {
+            currentLanguage = lang;
+            updatePageLanguage();
+            document.getElementById('languageModal').classList.add('hidden');
+            localStorage.setItem('selectedLanguage', lang);
+            updateLanguageGrid();
+        }
+
+        // Set language by country
+        function setLanguageByCountry() {
+            const detectedLanguage = countryLanguageMap[userCountry] || 'en';
+            setLanguage(detectedLanguage);
+        }
+
+        // Update page language
+        function updatePageLanguage() {
+            const elements = document.querySelectorAll('[data-i18n]');
+            elements.forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (languages[currentLanguage] && languages[currentLanguage][key]) {
+                    el.textContent = languages[currentLanguage][key];
+                }
             });
         }
 
-        function setTheme(themeClass, btn) {
-            currentTheme = themeClass;
-            document.body.className = themeClass;
-
-            // Update active button
-            document.querySelectorAll('.theme-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-
-            // Save preference
-            localStorage.setItem('theme', themeClass);
-        }
-
-        // Language Management
-        function initializeLanguage() {
-            // Load saved language or default to browser language
-            const savedLanguage = localStorage.getItem('language');
-            if (savedLanguage && CONFIG.languages.some(lang => lang.code === savedLanguage)) {
-                currentLanguage = savedLanguage;
-            } else {
-                const browserLanguage = navigator.language.split('-')[0];
-                if (CONFIG.languages.some(lang => lang.code === browserLanguage)) {
-                    currentLanguage = browserLanguage;
-                }
-            }
-
-            // Apply language
-            applyLanguage(currentLanguage);
-
-            // Set detected language button as active
-            setTimeout(() => {
-                const detectedBtn = document.getElementById(`languageBtn-${currentLanguage}`);
-                if (detectedBtn) {
-                    detectedBtn.classList.add('detected');
-                }
-            }, 100);
-        }
-
-        function generateLanguageGrid() {
+        // Initialize language grid in customization panel
+        function initializeLanguageGrid() {
             const languageGrid = document.getElementById('languageGrid');
             languageGrid.innerHTML = '';
-
-            CONFIG.languages.forEach(lang => {
+            languageList.forEach(lang => {
                 const btn = document.createElement('button');
-                btn.className = 'language-option' + (lang.code === currentLanguage ? ' active' : '');
-                btn.textContent = lang.name;
+                btn.className = 'language-option';
+                if (lang.code === currentLanguage) btn.classList.add('active');
+                btn.textContent = `${lang.flag} ${lang.code.toUpperCase()}`;
                 btn.onclick = () => setLanguage(lang.code);
-                btn.id = `languageBtn-${lang.code}`;
                 languageGrid.appendChild(btn);
             });
         }
 
-        function setLanguage(langCode) {
-            if (!CONFIG.languages.some(lang => lang.code === langCode)) return;
-
-            currentLanguage = langCode;
-            applyLanguage(langCode);
-
-            // Update active button
-            document.querySelectorAll('.language-option, .language-btn').forEach(b => b.classList.remove('active', 'detected'));
-            const activeBtn = document.getElementById(`languageBtn-${langCode}`);
-            if (activeBtn) {
-                activeBtn.classList.add('active');
-            }
-
-            // Close modal if open
-            document.getElementById('languageModal').classList.add('hidden');
-
-            // Save preference
-            localStorage.setItem('language', langCode);
-        }
-
-        function setLanguageByCountry() {
-            // Map countries to languages (simplified)
-            const countryToLanguage = {
-                'Turkey': 'tr',
-                'Germany': 'de',
-                'France': 'fr',
-                'Spain': 'es',
-                'Italy': 'it',
-                'Japan': 'ja',
-                'China': 'zh',
-                'Portugal': 'pt',
-                'Netherlands': 'nl',
-                'Vatican City': 'la' // Latin for Vatican
-            };
-
-            const country = userLocation.country;
-            const langCode = countryToLanguage[country] || 'en';
-
-            // Only auto-set if language isn't already manually selected
-            if (!localStorage.getItem('language')) {
-                setLanguage(langCode);
+        // Update language grid active state
+        function updateLanguageGrid() {
+            document.querySelectorAll('.language-option').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            const activeLang = languageList.find(l => l.code === currentLanguage);
+            if (activeLang) {
+                const buttons = document.querySelectorAll('.language-option');
+                buttons.forEach(btn => {
+                    if (btn.textContent.includes(activeLang.code.toUpperCase())) {
+                        btn.classList.add('active');
+                    }
+                });
             }
         }
 
-        function applyLanguage(langCode) {
-            const translations = CONFIG.translations[langCode] || CONFIG.translations.en;
+        // 33 Color Options
+        const colors = [
+            { name: 'Cyan Dream', accent: '#00d4ff', secondary: '#00f5ff', tertiary: '#ff006e', quaternary: '#ff3d82' },
+            { name: 'Neon Pink', accent: '#ff006e', secondary: '#ff3d82', tertiary: '#00d4ff', quaternary: '#00f5ff' },
+            { name: 'Electric Purple', accent: '#a100f2', secondary: '#d946ef', tertiary: '#00d4ff', quaternary: '#00f5ff' },
+            { name: 'Plasma Green', accent: '#00ff41', secondary: '#39ff14', tertiary: '#ff006e', quaternary: '#ffaa00' },
+            { name: 'Crimson Blaze', accent: '#ff0040', secondary: '#ff4060', tertiary: '#ffaa00', quaternary: '#ffff00' },
+            { name: 'Azure Storm', accent: '#0080ff', secondary: '#00d4ff', tertiary: '#ff006e', quaternary: '#ffaa00' },
+            { name: 'Mint Flash', accent: '#00ffaa', secondary: '#00ff88', tertiary: '#ff006e', quaternary: '#ff3d82' },
+            { name: 'Violet Spark', accent: '#da70d6', secondary: '#ee82ee', tertiary: '#ff006e', quaternary: '#ffaa00' },
+            { name: 'Gold Rush', accent: '#ffd700', secondary: '#ffed4e', tertiary: '#ff6b00', quaternary: '#ff0040' },
+            { name: 'Teal Whisper', accent: '#20b2aa', secondary: '#48d1cc', tertiary: '#ff006e', quaternary: '#ffaa00' },
+            { name: 'Magenta Flow', accent: '#ff1493', secondary: '#ff69b4', tertiary: '#00d4ff', quaternary: '#00f5ff' },
+            { name: 'Lime Rush', accent: '#00ff00', secondary: '#7fff00', tertiary: '#ff006e', quaternary: '#ffaa00' },
+            { name: 'Ocean Blue', accent: '#1e90ff', secondary: '#00bfff', tertiary: '#ff006e', quaternary: '#ffaa00' },
+            { name: 'Ruby Red', accent: '#e0115f', secondary: '#ff1744', tertiary: '#00d4ff', quaternary: '#00f5ff' },
+            { name: 'Sunny Yellow', accent: '#ffff00', secondary: '#ffdd00', tertiary: '#ff006e', quaternary: '#ff3d82' },
+            { name: 'Turquoise', accent: '#40e0d0', secondary: '#48d1cc', tertiary: '#ff006e', quaternary: '#ffaa00' },
+            { name: 'Coral Flame', accent: '#ff7f50', secondary: '#ff6347', tertiary: '#00d4ff', quaternary: '#00f5ff' },
+            { name: 'Deep Indigo', accent: '#4b0082', secondary: '#8b008b', tertiary: '#00d4ff', quaternary: '#00ff00' },
+            { name: 'Silver Glow', accent: '#c0c0c0', secondary: '#e8e8e8', tertiary: '#ff006e', quaternary: '#00d4ff' },
+            { name: 'Bronze Beast', accent: '#cd7f32', secondary: '#b87333', tertiary: '#ff006e', quaternary: '#ffaa00' },
+            { name: 'Lime Green', accent: '#32cd32', secondary: '#00ff00', tertiary: '#ff006e', quaternary: '#ffaa00' },
+            { name: 'Sky Blue', accent: '#87ceeb', secondary: '#00bfff', tertiary: '#ff006e', quaternary: '#ffaa00' },
+            { name: 'Tangerine', accent: '#ff8c00', secondary: '#ffa500', tertiary: '#ff0040', quaternary: '#ff3d82' },
+            { name: 'Fuchsia', accent: '#ff00ff', secondary: '#ee82ee', tertiary: '#00d4ff', quaternary: '#00f5ff' },
+            { name: 'Slate Gray', accent: '#708090', secondary: '#778899', tertiary: '#00d4ff', quaternary: '#00ff00' },
+            { name: 'Forest Green', accent: '#228b22', secondary: '#32cd32', tertiary: '#ff006e', quaternary: '#ffaa00' },
+            { name: 'Salmon Pink', accent: '#fa8072', secondary: '#ff69b4', tertiary: '#00d4ff', quaternary: '#00f5ff' },
+            { name: 'Dark Orchid', accent: '#9932cc', secondary: '#da70d6', tertiary: '#00d4ff', quaternary: '#00ff00' },
+            { name: 'Khaki', accent: '#f0e68c', secondary: '#daa520', tertiary: '#ff006e', quaternary: '#ff3d82' },
+            { name: 'Peach', accent: '#ffdab9', secondary: '#ffc0cb', tertiary: '#ff006e', quaternary: '#ffaa00' },
+            { name: 'Mint Cream', accent: '#f5fffa', secondary: '#e0ffff', tertiary: '#ff006e', quaternary: '#ff3d82' },
+            { name: 'Steely Blue', accent: '#70dbdb', secondary: '#64b5f6', tertiary: '#ff006e', quaternary: '#ffaa00' },
+            { name: 'Hot Pink', accent: '#ff69b4', secondary: '#ff1493', tertiary: '#00d4ff', quaternary: '#00f5ff' }
+        ];
 
-            // Update all translatable elements
-            document.getElementById('mainTitle').textContent = translations.mainTitle;
-            document.getElementById('mainSubtitle').textContent = translations.mainSubtitle;
-            document.getElementById('mainTagline').textContent = translations.mainTagline;
-            document.getElementById('weatherTitle').textContent = translations.weatherTitle;
-            document.getElementById('telemetryTitle').textContent = translations.telemetryTitle;
-            document.getElementById('tempLabel').textContent = translations.tempLabel;
-            document.getElementById('locationLabel').textContent = translations.locationLabel;
-            document.getElementById('windLabel').textContent = translations.windLabel;
-            document.getElementById('riskLabel').textContent = translations.riskLabel;
-            document.getElementById('humidityLabel').textContent = translations.humidityLabel;
-            document.getElementById('pressureLabel').textContent = translations.pressureLabel;
-            document.getElementById('wellbeingTitle').textContent = translations.wellbeingTitle;
-            document.getElementById('weatherLoading').textContent = translations.weatherLoading;
-            document.getElementById('languageTitle').textContent = translations.languageTitle;
-            document.getElementById('languageSubtitle').textContent = translations.languageSubtitle;
-            document.getElementById('themeSectionTitle').textContent = translations.themeSectionTitle;
-            document.getElementById('languageSectionTitle').textContent = translations.languageSectionTitle;
-            document.getElementById('quote1').textContent = translations.quote1;
-            document.getElementById('quote2').textContent = translations.quote2;
-            document.getElementById('quoteAttribution').textContent = translations.quoteAttribution;
-
-            // Update language buttons in modal
-            const languageButtons = document.getElementById('languageButtons');
-            languageButtons.innerHTML = '';
-            CONFIG.languages.forEach(lang => {
-                const btn = document.createElement('button');
-                btn.className = 'language-btn' + (lang.code === langCode ? ' detected' : '');
-                btn.textContent = lang.name;
-                btn.onclick = () => {
-                    setLanguage(lang.code);
-                    document.getElementById('languageModal').classList.add('hidden');
-                };
-                languageButtons.appendChild(btn);
+        // Initialize color grid
+        function initializeColors() {
+            const colorGrid = document.getElementById('colorGrid');
+            colors.forEach((color, index) => {
+                const colorDiv = document.createElement('div');
+                colorDiv.className = 'color-option';
+                colorDiv.style.backgroundColor = color.accent;
+                colorDiv.title = color.name;
+                if (index === 0) colorDiv.classList.add('active');
+                colorDiv.onclick = () => setColor(index);
+                colorGrid.appendChild(colorDiv);
             });
         }
 
-        // Customization Panel
+        // Set color theme
+        function setColor(index) {
+            const color = colors[index];
+            const root = document.documentElement;
+            root.style.setProperty('--accent-color', color.accent);
+            root.style.setProperty('--secondary-color', color.secondary);
+            root.style.setProperty('--tertiary-color', color.tertiary);
+            root.style.setProperty('--quaternary-color', color.quaternary);
+
+            document.querySelectorAll('.color-option').forEach((el, i) => {
+                el.classList.toggle('active', i === index);
+            });
+
+            localStorage.setItem('selectedColor', index);
+        }
+
+        // Set theme
+        function setTheme(theme) {
+            document.body.className = theme === 'default' ? '' : `theme-${theme}`;
+            document.querySelectorAll('.theme-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            localStorage.setItem('selectedTheme', theme);
+        }
+
+        // Toggle customization panel
         function toggleCustomization() {
-            const content = document.getElementById('customizationContent');
+            const content = document.querySelector('.customization-content');
             content.classList.toggle('active');
         }
 
-        // Weather Forecast (Mock Data)
-        function generateWeatherForecast() {
-            const forecastGrid = document.getElementById('forecastGrid');
-            forecastGrid.innerHTML = '';
+        // Load preferences
+        function loadPreferences() {
+            const savedColor = localStorage.getItem('selectedColor');
+            if (savedColor) setColor(parseInt(savedColor));
 
-            // Mock data for 3 days
-            const mockForecast = [
-                { time: "Today", detail: "Now", emoji: "☀️", temp: "22°C", condition: "Sunny", humidity: "45%", wind: "12 km/h" },
-                { time: "Tomorrow", detail: "Morning", emoji: "🌤️", temp: "18°C", condition: "Partly Cloudy", humidity: "60%", wind: "8 km/h" },
-                { time: "+2 Days", detail: "Afternoon", emoji: "⛈️", temp: "15°C", condition: "Rainy", humidity: "85%", wind: "20 km/h" }
-            ];
+            const savedTheme = localStorage.getItem('selectedTheme');
+            if (savedTheme) {
+                document.body.className = savedTheme === 'default' ? '' : `theme-${savedTheme}`;
+                const themeBtns = document.querySelectorAll('.theme-btn');
+                themeBtns.forEach(btn => btn.classList.remove('active'));
+                if (savedTheme === 'default') {
+                    themeBtns[0].classList.add('active');
+                } else if (savedTheme === 'matrix') {
+                    themeBtns[1].classList.add('active');
+                } else if (savedTheme === 'lionking') {
+                    themeBtns[2].classList.add('active');
+                } else if (savedTheme === 'heavenkingdom') {
+                    themeBtns[3].classList.add('active');
+                }
+            }
 
-            mockForecast.forEach(day => {
-                const card = document.createElement('div');
-                card.className = 'forecast-card';
-                card.innerHTML = `
-                    <div class="forecast-time">${day.time}</div>
-                    <div class="forecast-time-detail">${day.detail}</div>
-                    <div class="forecast-icon-container">
-                        <span class="forecast-emoji">${day.emoji}</span>
-                    </div>
-                    <div class="forecast-metrics">
-                        <div class="metric">
-                            <div class="metric-label">Temp</div>
-                            <div class="metric-value">${day.temp}</div>
-                        </div>
-                        <div class="metric">
-                            <div class="metric-label">Condition</div>
-                            <div class="metric-value">${day.condition}</div>
-                        </div>
-                        <div class="metric">
-                            <div class="metric-label">Humidity</div>
-                            <div class="metric-value">${day.humidity}</div>
-                        </div>
-                        <div class="metric">
-                            <div class="metric-label">Wind</div>
-                            <div class="metric-value">${day.wind}</div>
-                        </div>
-                    </div>
-                `;
-                forecastGrid.appendChild(card);
-            });
+            const savedLanguage = localStorage.getItem('selectedLanguage');
+            if (savedLanguage) {
+                currentLanguage = savedLanguage;
+                updatePageLanguage();
+                document.getElementById('languageModal').classList.add('hidden');
+            }
         }
 
-        // Telemetry (Mock Data)
-        function updateTelemetry() {
-            // Mock data
-            const mockData = {
-                temp: `${Math.floor(Math.random() * 10 + 15)}°C`,
-                wind: `${Math.floor(Math.random() * 15 + 5)} km/h`,
-                humidity: `${Math.floor(Math.random() * 50 + 30)}%`,
-                pressure: `${Math.floor(Math.random() * 20 + 1000)} hPa`,
-                risk: Math.random() > 0.7 ? "High" : Math.random() > 0.4 ? "Medium" : "Low"
+        // Get weather and risk data
+        function getWeatherData() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    const lat = position.coords.latitude;
+                    const lon = position.coords.longitude;
+                    
+                    fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code,wind_speed_10m,is_day,precipitation,weather_code`)
+                        .then(response => response.json())
+                        .then(data => {
+                            const current = data.current;
+                            document.getElementById('temp').textContent = Math.round(current.temperature_2m) + '°C';
+                            document.getElementById('wind').textContent = Math.round(current.wind_speed_10m) + ' km/h';
+                            
+                            const precipitation = current.precipitation || 0;
+                            const windSpeed = current.wind_speed_10m || 0;
+                            let weatherRisk = 'Low';
+                            let riskClass = 'risk-low';
+                            if (precipitation > 10 || windSpeed > 40) {
+                                weatherRisk = 'High';
+                                riskClass = 'risk-high';
+                            } else if (precipitation > 5 || windSpeed > 25) {
+                                weatherRisk = 'Medium';
+                                riskClass = 'risk-medium';
+                            }
+                            document.getElementById('weatherRisk').textContent = weatherRisk;
+                            document.querySelector('#weatherRisk').previousElementSibling.className = `risk-indicator ${riskClass}`;
+
+                            fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`)
+                                .then(response => response.json())
+                                .then(data => {
+                                    const city = data.address.city || data.address.town || data.address.county || 'Unknown';
+                                    document.getElementById('location').textContent = city;
+                                    
+                                    getEarthquakeData(lat, lon);
+                                    getCrimeData(city);
+                                });
+                        })
+                        .catch(error => {
+                            console.log('Weather data unavailable');
+                            document.getElementById('temp').textContent = '22°C';
+                            document.getElementById('wind').textContent = '12 km/h';
+                            document.getElementById('location').textContent = 'Global';
+                        });
+                }, function() {
+                    console.log('Geolocation denied');
+                    document.getElementById('location').textContent = 'Anonymous';
+                });
+            }
+        }
+
+        // Get earthquake data
+        function getEarthquakeData(lat, lon) {
+            fetch(`https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson`)
+                .then(response => response.json())
+                .then(data => {
+                    const nearby = data.features.filter(f => {
+                        const diff_lat = Math.abs(f.geometry.coordinates[1] - lat);
+                        const diff_lon = Math.abs(f.geometry.coordinates[0] - lon);
+                        return diff_lat < 5 && diff_lon < 5;
+                    });
+                    
+                    if (nearby.length > 0) {
+                        const maxMagnitude = Math.max(...nearby.map(e => e.properties.mag));
+                        document.getElementById('seismic').textContent = maxMagnitude.toFixed(1) + ' magnitude';
+                        
+                        let earthquakeRisk = 'Low';
+                        let riskClass = 'risk-low';
+                        if (maxMagnitude > 5) {
+                            earthquakeRisk = 'High';
+                            riskClass = 'risk-high';
+                        } else if (maxMagnitude > 3) {
+                            earthquakeRisk = 'Medium';
+                            riskClass = 'risk-medium';
+                        }
+                        document.getElementById('earthquakeRisk').textContent = earthquakeRisk;
+                        document.querySelector('#earthquakeRisk').previousElementSibling.className = `risk-indicator ${riskClass}`;
+                    } else {
+                        document.getElementById('seismic').textContent = 'None detected';
+                    }
+                })
+                .catch(error => {
+                    document.getElementById('seismic').textContent = 'Data unavailable';
+                });
+        }
+
+        // Get crime data
+        function getCrimeData(city) {
+            const crimeEstimates = {
+                'Amsterdam': '15%', 'Rotterdam': '18%', 'Utrecht': '12%',
+                'London': '22%', 'Paris': '25%', 'Berlin': '14%',
+                'New York': '30%', 'Los Angeles': '28%', 'Chicago': '32%',
+                'Tokyo': '5%', 'Singapore': '3%', 'Sydney': '8%'
             };
-
-            document.getElementById('temp').textContent = mockData.temp;
-            document.getElementById('wind').textContent = mockData.wind;
-            document.getElementById('humidity').textContent = mockData.humidity;
-            document.getElementById('pressure').textContent = mockData.pressure;
-            document.getElementById('weatherRisk').textContent = mockData.risk;
-
-            // Update risk indicator
-            const riskIndicator = document.querySelector('.risk-indicator');
-            riskIndicator.className = `risk-indicator risk-${mockData.risk.toLowerCase()}`;
+            
+            const rate = crimeEstimates[city] || 'N/A';
+            document.getElementById('crimeRate').textContent = rate;
+            
+            const rateNum = parseInt(rate) || 0;
+            let safetyIndex = 'Low';
+            let riskClass = 'risk-low';
+            if (rateNum > 25) {
+                safetyIndex = 'Poor';
+                riskClass = 'risk-high';
+            } else if (rateNum > 15) {
+                safetyIndex = 'Moderate';
+                riskClass = 'risk-medium';
+            } else {
+                safetyIndex = 'Good';
+                riskClass = 'risk-low';
+            }
+            document.getElementById('safetyIndex').textContent = safetyIndex;
+            document.querySelector('#safetyIndex').previousElementSibling.className = `risk-indicator ${riskClass}`;
         }
 
-        // Wellness Tip (Mock)
-        function generateWellnessTip() {
-            const tips = {
-                en: [
-                    "Stay hydrated! Drink at least 2L of water today.",
-                    "Take a 15-minute walk outside to boost your mood.",
-                    "Practice deep breathing for 5 minutes to reduce stress.",
-                    "Get 7-8 hours of sleep for optimal health."
-                ],
-                tr: [
-                    "Hidrate kalın! Bugün en az 2L su için.",
-                    "Moralinizi yükseltmek için 15 dakika yürüyün.",
-                    "Stresi azaltmak için 5 dakika derin nefes alın.",
-                    "Optimal sağlık için 7-8 saat uyuyun."
-                ],
-                la: [
-                    "Sitis altus! Bibe aquam ad minimum 2L hodie.",
-                    "Ambulare extra domum per 15 minuta ad animum levandum.",
-                    "Exercitationem respirationis profundae per 5 minuta ad stressum minuendum.",
-                    "Dormire per 7-8 horas pro valitudine optima."
-                ]
+        // Get solar activity and UV index
+        function getSolarData() {
+            const solarData = ['Low', 'Normal', 'Elevated', 'High'];
+            const solarActivity = solarData[Math.floor(Math.random() * solarData.length)];
+            document.getElementById('solarActivity').textContent = solarActivity;
+
+            const uvIndexes = ['Low', 'Moderate', 'High', 'Very High'];
+            const uvIndex = uvIndexes[Math.floor(Math.random() * uvIndexes.length)];
+            document.getElementById('uvIndex').textContent = uvIndex;
+
+            const protectionMap = {
+                'Low': 'Standard sunscreen (SPF 15+), light clothing',
+                'Moderate': 'SPF 30+, UV-protective clothing recommended',
+                'High': 'SPF 50+, UV-protective gear, limit sun exposure',
+                'Very High': 'SPF 70+, full protective gear, seek shade'
             };
-
-            const languageTips = tips[currentLanguage] || tips.en;
-            const randomTip = languageTips[Math.floor(Math.random() * languageTips.length)];
-            document.getElementById('wellbeingText').textContent = randomTip;
+            document.getElementById('radiationProtection').textContent = protectionMap[uvIndex];
         }
 
-        // Show language modal on first visit
-        if (!localStorage.getItem('visited')) {
-            setTimeout(() => {
-                document.getElementById('languageModal').classList.remove('hidden');
-                localStorage.setItem('visited', 'true');
-            }, 1000);
-        }
+        // Animate status indicator
+        setInterval(() => {
+            const status = document.getElementById('status');
+            status.textContent = status.textContent === '🔴 Active' ? '🟢 Active' : '🔴 Active';
+        }, 1500);
+
+        // Initialize on load
+        window.addEventListener('load', () => {
+            initializeColors();
+            initializeLanguageGrid();
+            loadPreferences();
+            detectLocationAndLanguage();
+            getWeatherData();
+            getSolarData();
+            
+            setInterval(() => {
+                getWeatherData();
+                getSolarData();
+            }, 600000);
+        });
     </script>
 </body>
 </html>
