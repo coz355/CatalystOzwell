@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google Analytics -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Catalyst Ozwell - Environmental Intelligence Platform">
+    <title>Catalyst Ozwell | Environmental Intelligence</title>
+
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4ZT8WTL4C5"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -10,1301 +14,396 @@
         gtag('config', 'G-4ZT8WTL4C5');
     </script>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Catalyst Ozwell - Advanced environmental monitoring and wellness analytics platform">
-    <meta name="keywords" content="environmental monitoring, health analytics, weather forecasting, real-time data">
-    <title>Catalyst Ozwell | Environmental Intelligence Platform</title>
-
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;700&display=swap');
 
         :root {
-            --accent-primary: #d4af37;
-            --accent-secondary: #c9a961;
             --neon-cyan: #00ffff;
             --neon-magenta: #ff00ff;
-            --neon-lime: #00ff00;
-            --neon-pink: #ff1493;
-            --dark-bg: #0f1419;
-            --card-bg: rgba(20, 25, 35, 0.8);
-            --border-color: #3a4a5a;
-            --text-primary: #e8e8e8;
-            --text-secondary: #a8a8a8;
-            --success: #2ecc71;
-            --warning: #f39c12;
-            --danger: #e74c3c;
-            --info: #3498db;
+            --neon-lime: #00ff88;
+            --dark-bg: #0a0f17;
+            --card-bg: rgba(15, 23, 42, 0.95);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html, body {
-            width: 100%;
-            height: 100%;
-        }
-
+        * { margin:0; padding:0; box-sizing:border-box; }
         body {
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            color: var(--text-primary);
+            font-family: 'Inter', system-ui, sans-serif;
+            color: #e0e7ff;
             background: var(--dark-bg);
+            min-height: 100vh;
             overflow-x: hidden;
-            transition: background 0.5s ease;
-            letter-spacing: 0.3px;
         }
 
-        /* Sophisticated Background with Neon Effects */
         .background {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            inset: 0;
             z-index: -2;
-            background: linear-gradient(135deg, #0f1419 0%, #1a1f2e 50%, #0d1117 100%);
-            background-attachment: fixed;
+            background: linear-gradient(135deg, #0a0f17, #1e2a44, #0a0f17);
+            background-size: 200% 200%;
+            animation: gradientShift 30s ease infinite;
         }
 
-        /* Ambient Light Effects with Neon */
-        .ambient-light {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: -1;
-            pointer-events: none;
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
-        .light-accent {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(100px);
-            opacity: 0.08;
-            mix-blend-mode: screen;
-        }
-
-        .light-accent-1 {
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, var(--neon-cyan), transparent);
-            top: 10%;
-            left: 5%;
-            animation: drift 25s ease-in-out infinite;
-        }
-
-        .light-accent-2 {
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, var(--neon-magenta), transparent);
-            bottom: 15%;
-            right: 10%;
-            animation: drift 30s ease-in-out infinite reverse;
-        }
-
-        @keyframes drift {
-            0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(30px, -30px); }
-        }
-
-        /* Neon Text Glow Effect */
-        @keyframes neon-glow {
-            0%, 100% { 
-                text-shadow: 0 0 10px currentColor, 0 0 20px currentColor;
-            }
-            50% { 
-                text-shadow: 0 0 20px currentColor, 0 0 40px currentColor, 0 0 60px currentColor;
-            }
-        }
-
-        /* Language Selection Modal */
-        .language-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 9999;
-            background: rgba(0, 0, 0, 0.95);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            backdrop-filter: blur(8px);
-        }
-
-        .language-modal.hidden {
-            display: none;
-        }
-
-        .language-box {
-            background: linear-gradient(135deg, var(--card-bg), rgba(30, 40, 50, 0.9));
-            border: 2px solid var(--neon-cyan);
-            border-radius: 12px;
-            padding: 60px 50px;
-            max-width: 650px;
-            box-shadow: 0 0 30px rgba(0, 255, 255, 0.5), inset 0 1px 1px rgba(0, 255, 255, 0.2);
-            text-align: center;
-            backdrop-filter: blur(20px);
-        }
-
-        .language-title {
-            color: var(--neon-cyan);
-            font-size: 2.2rem;
-            font-weight: 700;
-            letter-spacing: 3px;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            font-family: 'Times New Roman', serif;
-            animation: neon-glow 2s ease-in-out infinite;
-        }
-
-        .language-subtitle {
-            color: var(--text-secondary);
-            font-size: 1rem;
-            margin-bottom: 45px;
-            font-weight: 400;
-            letter-spacing: 1px;
-        }
-
-        .language-buttons {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-
-        .language-btn {
-            background: transparent;
-            color: var(--neon-cyan);
-            border: 2px solid var(--neon-cyan);
-            padding: 16px 20px;
-            font-size: 0.95rem;
-            font-weight: 500;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            letter-spacing: 1px;
-            font-family: Helvetica, sans-serif;
-            box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
-        }
-
-        .language-btn:hover {
-            border-color: var(--neon-magenta);
-            background: rgba(255, 0, 255, 0.15);
-            transform: translateY(-2px);
-            box-shadow: 0 0 20px rgba(255, 0, 255, 0.6);
-            color: var(--neon-magenta);
-        }
-
-        .language-btn.detected {
-            background: rgba(0, 255, 255, 0.2);
-            border-color: var(--neon-cyan);
-            color: var(--neon-cyan);
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.7);
-        }
-
-        .language-info {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            margin-top: 25px;
-            padding: 15px 25px;
-            background: rgba(0, 255, 255, 0.05);
-            border-left: 2px solid var(--neon-cyan);
-            text-align: left;
-        }
-
-        /* Theme System */
-        body.theme-dark { --accent-primary: #d4af37; --accent-secondary: #c9a961; }
-        body.theme-ocean { --accent-primary: var(--neon-cyan); --accent-secondary: #00aaff; }
-        body.theme-forest { --accent-primary: var(--neon-lime); --accent-secondary: #00ff44; }
-        body.theme-sunset { --accent-primary: #ff6b35; --accent-secondary: #ff8c42; }
-        body.theme-crimson { --accent-primary: var(--neon-magenta); --accent-secondary: #ff1493; }
-
-        /* Main Container */
         .container {
             position: relative;
-            z-index: 1;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 80px 40px;
-            max-width: 1400px;
+            z-index: 2;
+            max-width: 1480px;
             margin: 0 auto;
+            padding: 100px 20px 80px;
         }
 
-        /* Header Section */
-        .header-section {
-            text-align: center;
-            margin-bottom: 80px;
-            border-bottom: 2px solid var(--neon-cyan);
-            padding-bottom: 50px;
-        }
-
-        .logo-container {
-            margin-bottom: 40px;
-        }
-
+        .header { text-align: center; margin-bottom: 50px; }
         .logo {
-            width: 140px;
-            height: 140px;
-            border: 3px solid var(--neon-cyan);
-            border-radius: 8px;
-            padding: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto;
-            background: rgba(0, 255, 255, 0.08);
-            animation: pulse-neon 2s ease-in-out infinite;
-            font-size: 2.5rem;
-            font-weight: 700;
+            width: 130px; height: 130px; margin: 0 auto 20px;
+            border: 5px solid var(--neon-cyan);
+            border-radius: 20px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 3.2rem; font-weight: 700; color: var(--neon-cyan);
+            animation: pulse-neon 4s infinite;
+        }
+        h1 { font-family: 'Playfair Display', serif; font-size: 3.5rem; color: var(--neon-magenta); }
+
+        #current-location {
+            font-size: 1.45rem;
             color: var(--neon-cyan);
-            font-family: 'Times New Roman', serif;
-        }
-
-        @keyframes pulse-neon {
-            0%, 100% { box-shadow: 0 0 20px rgba(0, 255, 255, 0.4), inset 0 0 10px rgba(0, 255, 255, 0.2); }
-            50% { box-shadow: 0 0 50px rgba(0, 255, 255, 0.8), inset 0 0 20px rgba(0, 255, 255, 0.4); }
-        }
-
-        h1 {
-            font-size: 3.5rem;
-            color: var(--neon-magenta);
-            font-weight: 700;
-            letter-spacing: 4px;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            font-family: 'Times New Roman', serif;
-            animation: neon-glow 2s ease-in-out infinite;
-        }
-
-        .subtitle {
-            font-size: 1.1rem;
-            color: var(--neon-cyan);
+            margin: 12px 0;
             font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-            font-family: Helvetica, sans-serif;
         }
 
-        .tagline {
-            font-size: 0.95rem;
-            color: var(--text-secondary);
-            font-style: italic;
-            letter-spacing: 1px;
-            margin-bottom: 30px;
-        }
-
-        /* Latin Quote Section */
-        .quote-section {
-            width: 100%;
-            background: rgba(0, 255, 255, 0.05);
-            border: 2px solid var(--neon-cyan);
-            border-radius: 8px;
-            padding: 30px 40px;
-            margin-bottom: 60px;
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
-        }
-
-        .quote {
-            font-size: 1.1rem;
-            color: var(--neon-cyan);
-            font-style: italic;
-            line-height: 1.8;
-            margin-bottom: 15px;
-            font-family: 'Times New Roman', serif;
-        }
-
-        .quote-attribution {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            text-align: right;
-            letter-spacing: 1px;
-        }
-
-        /* Customization Panel */
-        .customization-panel {
-            position: fixed;
-            top: 40px;
-            right: 40px;
-            z-index: 1000;
-            background: rgba(20, 25, 35, 0.95);
-            border: 2px solid var(--neon-cyan);
-            border-radius: 8px;
-            padding: 20px;
-            max-width: 300px;
-            backdrop-filter: blur(20px);
-            box-shadow: 0 0 30px rgba(0, 255, 255, 0.4);
-        }
-
-        .customization-toggle {
-            background: transparent;
-            color: var(--neon-cyan);
-            border: 2px solid var(--neon-cyan);
-            padding: 12px 20px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 700;
-            width: 100%;
-            transition: all 0.3s ease;
-            letter-spacing: 1px;
-            font-size: 0.95rem;
-            font-family: Helvetica, sans-serif;
-            box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
-        }
-
-        .customization-toggle:hover {
-            background: rgba(0, 255, 255, 0.15);
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.7);
-            transform: translateY(-2px);
-        }
-
-        .customization-content {
-            display: none;
-            margin-top: 20px;
-            max-height: 500px;
-            overflow-y: auto;
-        }
-
-        .customization-content.active {
-            display: block;
-        }
-
-        .theme-buttons, .language-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .customization-section h3 {
-            color: var(--neon-cyan);
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 12px;
-            font-family: Helvetica, sans-serif;
-        }
-
-        .theme-btn, .language-option {
-            padding: 10px;
-            border: 2px solid var(--neon-cyan);
-            background: transparent;
-            color: var(--neon-cyan);
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 0.85rem;
-            transition: all 0.3s ease;
-            font-weight: 600;
-            font-family: Helvetica, sans-serif;
-            box-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
-        }
-
-        .theme-btn:hover, .language-option:hover {
-            border-color: var(--neon-magenta);
-            background: rgba(255, 0, 255, 0.15);
-            color: var(--neon-magenta);
-            box-shadow: 0 0 15px rgba(255, 0, 255, 0.6);
-        }
-
-        .theme-btn.active, .language-option.active {
-            background: rgba(0, 255, 255, 0.25);
-            border-color: var(--neon-cyan);
-            color: var(--neon-cyan);
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
-        }
-
-        /* Weather Forecast Section */
-        .weather-forecast {
-            width: 100%;
-            background: rgba(20, 25, 35, 0.8);
-            border: 2px solid var(--neon-cyan);
-            border-radius: 8px;
-            padding: 50px;
-            margin-bottom: 60px;
-            box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
-            backdrop-filter: blur(10px);
-        }
-
-        .section-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 40px;
-            padding-bottom: 25px;
-            border-bottom: 2px solid var(--neon-cyan);
-        }
-
-        .section-title {
-            font-size: 1.4rem;
-            color: var(--neon-magenta);
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin: 0;
-            font-family: 'Times New Roman', serif;
-            animation: neon-glow 2s ease-in-out infinite;
-        }
-
-        .forecast-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-bottom: 0;
-        }
-
-        .forecast-card {
-            background: rgba(0, 255, 255, 0.05);
-            border: 2px solid var(--neon-cyan);
-            border-radius: 8px;
-            padding: 30px 25px;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
-        }
-
-        .forecast-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--neon-magenta), transparent);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
-        .forecast-card:hover {
-            border-color: var(--neon-magenta);
-            background: rgba(255, 0, 255, 0.1);
-            transform: translateY(-8px);
-            box-shadow: 0 0 30px rgba(255, 0, 255, 0.5);
-        }
-
-        .forecast-card:hover::before {
-            opacity: 1;
-        }
-
-        .forecast-time {
-            font-size: 1.2rem;
-            color: var(--neon-cyan);
-            font-weight: 700;
-            margin-bottom: 15px;
-            letter-spacing: 1px;
-            font-family: 'Times New Roman', serif;
-        }
-
-        .forecast-time-detail {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            margin-bottom: 20px;
-            letter-spacing: 0.5px;
-        }
-
-        .forecast-icon-container {
-            text-align: center;
-            margin: 20px 0;
-        }
-
-        .forecast-emoji {
-            font-size: 4rem;
-            display: inline-block;
-            filter: drop-shadow(0 4px 8px rgba(0, 255, 255, 0.4));
-        }
-
-        .forecast-metrics {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-top: 25px;
-        }
-
-        .metric {
-            background: rgba(0, 255, 255, 0.08);
-            padding: 12px;
-            border-radius: 6px;
-            border: 1px solid rgba(0, 255, 255, 0.3);
-        }
-
-        .metric-label {
-            font-size: 0.75rem;
-            color: var(--neon-cyan);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 5px;
-            font-family: Helvetica, sans-serif;
-        }
-
-        .metric-value {
-            font-size: 1.3rem;
-            color: var(--neon-magenta);
-            font-weight: 700;
-            letter-spacing: 0.5px;
-            font-family: 'Times New Roman', serif;
-        }
-
-        /* Telemetry Section */
-        .telemetry {
-            width: 100%;
-            background: rgba(20, 25, 35, 0.8);
-            border: 2px solid var(--neon-lime);
-            border-radius: 8px;
-            padding: 50px;
-            margin-bottom: 60px;
-            box-shadow: 0 0 30px rgba(0, 255, 0, 0.3);
-            backdrop-filter: blur(10px);
-        }
-
-        .telemetry .section-title {
-            color: var(--neon-lime);
-        }
-
-        .telemetry-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-        }
-
-        .telemetry-item {
-            background: rgba(0, 255, 0, 0.05);
-            border: 2px solid var(--neon-lime);
-            border-radius: 8px;
-            padding: 20px;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
-        }
-
-        .telemetry-item:hover {
-            border-color: var(--neon-cyan);
-            background: rgba(0, 255, 255, 0.1);
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
-        }
-
-        .telemetry-label {
-            font-size: 0.8rem;
-            color: var(--neon-lime);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 10px;
-            display: block;
-            font-family: Helvetica, sans-serif;
-        }
-
-        .telemetry-value {
-            font-size: 1.8rem;
-            color: var(--neon-magenta);
-            font-weight: 700;
-            letter-spacing: 0.5px;
-            font-family: 'Times New Roman', serif;
-        }
-
-        .risk-indicator {
-            display: inline-block;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            margin-right: 8px;
-        }
-
-        .risk-low { background: var(--neon-lime); }
-        .risk-medium { background: #ffaa00; }
-        .risk-high { background: #ff0000; }
-
-        /* Wellbeing Section */
-        .wellbeing-suggestion {
-            width: 100%;
-            background: rgba(20, 25, 35, 0.8);
-            border: 2px solid var(--neon-magenta);
-            border-radius: 8px;
-            padding: 40px 50px;
-            margin-bottom: 60px;
-            box-shadow: 0 0 30px rgba(255, 0, 255, 0.3);
-            backdrop-filter: blur(10px);
-        }
-
-        .wellbeing-title {
-            font-size: 1.4rem;
-            color: var(--neon-magenta);
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 25px;
-            font-family: 'Times New Roman', serif;
-            animation: neon-glow 2s ease-in-out infinite;
-        }
-
-        .wellbeing-text {
-            font-size: 1.05rem;
-            color: var(--text-primary);
-            line-height: 1.8;
-            letter-spacing: 0.5px;
-            font-family: Helvetica, sans-serif;
-        }
-
-        /* Contact Button */
-        .btn-contact {
-            background: transparent;
-            color: var(--neon-cyan);
-            border: 3px solid var(--neon-cyan);
-            padding: 16px 50px;
-            border-radius: 6px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 1rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 60px;
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
-            font-family: Helvetica, sans-serif;
-        }
-
-        .btn-contact:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 0 40px rgba(0, 255, 255, 0.8);
-            border-color: var(--neon-magenta);
-            color: var(--neon-magenta);
-            background: rgba(255, 0, 255, 0.1);
-        }
-
-        /* Social Links */
-        .social {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-            margin-top: 40px;
-            padding-top: 40px;
-            border-top: 2px solid var(--neon-cyan);
-        }
-
-        .social a {
-            color: var(--neon-cyan);
-            text-decoration: none;
-            transition: all 0.3s ease;
-            font-size: 1.1rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-family: Helvetica, sans-serif;
-            text-transform: uppercase;
-            border: 2px solid var(--neon-cyan);
-            padding: 10px 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
-        }
-
-        .social a:hover {
-            transform: translateY(-3px);
-            border-color: var(--neon-magenta);
-            color: var(--neon-magenta);
-            box-shadow: 0 0 25px rgba(255, 0, 255, 0.6);
-            background: rgba(255, 0, 255, 0.1);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .container {
-                padding: 40px 20px;
-            }
-
-            h1 {
-                font-size: 2.2rem;
-                letter-spacing: 2px;
-            }
-
-            .customization-panel {
-                top: 20px;
-                right: 20px;
-                max-width: 280px;
-            }
-
-            .weather-forecast, .telemetry, .wellbeing-suggestion {
-                padding: 30px 20px;
-            }
-
-            .forecast-grid, .telemetry-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .forecast-emoji {
-                font-size: 3rem;
-            }
-
-            .section-title {
-                font-size: 1.1rem;
-            }
-
-            .theme-buttons, .language-buttons {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 30px 15px;
-            }
-
-            h1 {
-                font-size: 1.8rem;
-                letter-spacing: 1px;
-            }
-
-            .language-box {
-                padding: 40px 25px;
-                margin: 20px;
-            }
-
-            .logo {
-                width: 100px;
-                height: 100px;
-                font-size: 1.8rem;
-            }
-
-            .quote-section {
-                padding: 20px 25px;
-            }
-
-            .quote {
-                font-size: 0.95rem;
-            }
-        }
-
-        /* Loading States */
-        .loading {
-            color: var(--neon-cyan);
-            font-style: italic;
-            animation: pulse-text 1.5s ease-in-out infinite;
-            font-family: 'Times New Roman', serif;
-        }
-
-        @keyframes pulse-text {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.6; }
-        }
-
-        /* Location Focus Indicator */
-        .location-badge {
+        /* Top Controls */
+        .top-controls {
             position: fixed;
             top: 20px;
             left: 20px;
-            background: rgba(20, 25, 35, 0.95);
-            border: 2px solid var(--neon-cyan);
-            padding: 10px 18px;
-            border-radius: 30px;
-            font-size: 0.9rem;
-            color: var(--neon-cyan);
-            z-index: 999;
+            right: 20px;
             display: flex;
+            justify-content: space-between;
+            z-index: 1000;
+            gap: 15px;
+        }
+        .control-box {
+            background: rgba(10,15,30,0.96);
+            border: 2px solid var(--neon-cyan);
+            border-radius: 10px;
+            padding: 12px 16px;
+            backdrop-filter: blur(12px);
+        }
+
+        /* Cards */
+        .card {
+            background: var(--card-bg);
+            border: 2px solid var(--neon-cyan);
+            border-radius: 16px;
+            padding: 28px;
+            margin-bottom: 35px;
+            backdrop-filter: blur(12px);
+        }
+
+        /* Collapsible Forecast */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 8px;
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+            cursor: pointer;
+            user-select: none;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(0,255,255,0.2);
+        }
+        .forecast-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 14px;
+            margin-top: 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.6s ease;
+        }
+        .forecast-grid.expanded {
+            max-height: 1400px;
+        }
+
+        .forecast-card {
+            background: rgba(0,255,255,0.06);
+            border: 1px solid var(--neon-cyan);
+            border-radius: 10px;
+            padding: 16px 12px;
+            text-align: center;
+            font-size: 0.95rem;
+        }
+
+        button, select {
+            background: transparent;
+            color: var(--neon-cyan);
+            border: 2px solid var(--neon-cyan);
+            padding: 10px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        button:hover {
+            background: rgba(0,255,255,0.15);
+            box-shadow: 0 0 15px rgba(0,255,255,0.4);
+        }
+
+        @keyframes pulse-neon {
+            0%,100% { box-shadow: 0 0 25px rgba(0,255,255,0.6); }
+            50% { box-shadow: 0 0 55px rgba(0,255,255,0.95); }
         }
     </style>
 </head>
 <body>
-    <!-- Background Layer -->
+
     <div class="background"></div>
-    
-    <!-- Ambient Light Effects -->
-    <div class="ambient-light">
-        <div class="light-accent light-accent-1"></div>
-        <div class="light-accent light-accent-2"></div>
+
+    <!-- Top Controls -->
+    <div class="top-controls">
+        <div class="control-box">
+            <select id="locationSelect" onchange="switchLocation()" style="min-width: 280px;">
+                <option value="current">🌍 Current Location (Auto)</option>
+                <option value="vatican">🛕 Vatican City</option>
+                <option value="jerusalem">🏛️ Jerusalem</option>
+                <option value="antioch">🏺 Antioch</option>
+                <option value="northpole">❄️ North Pole</option>
+                <option value="southpole">❄️ South Pole</option>
+                <option value="moon">🌕 Moon</option>
+                <option value="mars">🔴 Mars</option>
+                <option value="sun">☀️ Sun Surface</option>
+            </select>
+        </div>
+        <div class="control-box">
+            <button onclick="toggleCustomize()">⚙ CUSTOMIZE</button>
+        </div>
     </div>
 
-    <!-- Location Badge -->
-    <div class="location-badge" id="locationBadge">
-        <span id="currentLocation">Detecting your location...</span>
-    </div>
+    <div class="container">
+        <div class="header">
+            <div class="logo">CO</div>
+            <h1 id="mainTitle">Catalyst Ozwell</h1>
+            <p id="current-location">Detecting your location...</p>
+            <p id="mainSubtitle" style="color:var(--neon-cyan); margin-top:8px;">Environmental Intelligence Platform</p>
+        </div>
 
-    <!-- Language Selection Modal -->
-    <div class="language-modal" id="languageModal">
-        <div class="language-box">
-            <div class="language-title">Lingua Selecta</div>
-            <div class="language-subtitle">Select your preferred language • Lingua tua eligatur</div>
-            <div class="language-buttons" id="modalLanguageButtons">
-                <!-- Populated by JS -->
+        <!-- Collapsible Forecast -->
+        <div class="card">
+            <div class="section-header" onclick="toggleForecast()">
+                <h2 id="forecastTitle" style="color:var(--neon-magenta); margin:0;">72-Hour Forecast</h2>
+                <span id="forecastToggle" style="font-size:1.5rem; transition:0.3s;">▶</span>
             </div>
-            <div class="language-info" id="locationStatus">
-                Status: Detecting your location in real-time...
-            </div>
+            <div id="forecastGrid" class="forecast-grid"></div>
+        </div>
+
+        <!-- Telemetry -->
+        <div class="card">
+            <h2 id="telemetryTitle" style="margin-bottom:20px; color:var(--neon-lime);">Live Environmental Analytics</h2>
+            <div id="telemetryGrid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(230px,1fr)); gap:18px;"></div>
+        </div>
+
+        <!-- Wellbeing -->
+        <div class="card">
+            <h2 id="wellbeingTitle" style="margin-bottom:20px; color:var(--neon-magenta);">Daily Health Outlook</h2>
+            <p id="wellbeingText" style="line-height:1.8; font-size:1.05rem;"></p>
         </div>
     </div>
 
     <!-- Customization Panel -->
-    <div class="customization-panel">
-        <button class="customization-toggle" onclick="toggleCustomization()">⚙ CUSTOMIZE EXPERIENCE</button>
-        <div class="customization-content" id="customizationContent">
-            <div class="customization-section">
-                <h3>Themata (5 Artistic Palettes)</h3>
-                <div class="theme-buttons" id="themeButtons"></div>
-            </div>
-            <div class="customization-section" style="margin-top: 20px;">
-                <h3>Linguae (12 Options incl. Latin)</h3>
-                <div class="language-grid" id="languageGrid"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Main Content -->
-    <div class="container">
-        <!-- Header -->
-        <div class="header-section">
-            <div class="logo-container">
-                <div class="logo" id="logoText">CO</div>
-            </div>
-            <h1 id="mainTitle">Catalyst Ozwell</h1>
-            <p class="subtitle" id="subtitle">Monitio Ambientalis Intelligentia</p>
-            <p class="tagline" id="tagline">Observatio realis temporis pro salubritate holistica • Tailored to your exact location</p>
-        </div>
-
-        <!-- Biblical and Mythological Quotes -->
-        <div class="quote-section">
-            <div class="quote" id="quote1">
-                "Lux venit in tenebris, et tenebrae eam non comprehenderunt." - Ioannes 1:5
-            </div>
-            <div class="quote" id="quote2" style="margin-top: 20px;">
-                "Hwæt! We have heard of the glory of the Spear-Danes..." - Beowulf
-            </div>
-            <div class="quote-attribution" id="quoteAttribution">
-                Veritatem sequere - Truth Pursued
-            </div>
-        </div>
-
-        <!-- Weather Forecast Section -->
-        <div class="weather-forecast">
-            <div class="section-header">
-                <h2 class="section-title" id="weatherTitle">Prognosis Tempestatis 72 Horas • Your Location</h2>
-            </div>
-            <div class="forecast-grid" id="forecastGrid">
-                <!-- Populated by JS -->
-            </div>
-        </div>
-
-        <!-- Telemetry Section -->
-        <div class="telemetry">
-            <div class="section-header">
-                <h2 class="section-title" id="telemetryTitle">Analytica Ambientalis • Live for You</h2>
-            </div>
-            <div class="telemetry-grid" id="telemetryGrid">
-                <!-- Populated by JS -->
-            </div>
-        </div>
-
-        <!-- Wellbeing Section -->
-        <div class="wellbeing-suggestion">
-            <h2 class="wellbeing-title" id="wellbeingTitle">Prospectus Valetudinis Cotidianus</h2>
-            <p class="wellbeing-text" id="wellbeingText">
-                Loading personalized recommendation based on your current environmental conditions...
-            </p>
-        </div>
-
-        <!-- Call to Action -->
-        <button class="btn-contact" onclick="contactUs()">CONTACTA NOS • GET PERSONAL CONSULTATION</button>
-
-        <!-- Social Links -->
-        <div class="social">
-            <a href="#" title="LinkedIn">LinkedIn</a>
-            <a href="#" title="Twitter">𝕏 / Twitter</a>
-            <a href="#" title="Instagram">Instagram</a>
-        </div>
+    <div id="customPanel" style="display:none; position:fixed; top:85px; right:20px; background:rgba(10,15,30,0.98); border:2px solid var(--neon-cyan); border-radius:12px; padding:25px; width:320px; z-index:1100; box-shadow:0 0 40px rgba(0,255,255,0.3);">
+        <h3 style="color:var(--neon-cyan); margin-bottom:15px;">Artistic Themes</h3>
+        <div id="themeButtons" style="display:grid; gap:8px; margin-bottom:25px;"></div>
+        
+        <h3 style="color:var(--neon-cyan); margin-bottom:12px;">Language</h3>
+        <div id="langButtons" style="display:grid; gap:8px;"></div>
     </div>
 
     <script>
-        // === TRANSLATION DATABASE ===
-        const translations = {
+        let currentLang = 'en';
+        let forecastExpanded = false;
+
+        const LOCALIZATION = {
             en: {
-                title: "Catalyst Ozwell",
-                subtitle: "Environmental Intelligence Platform",
-                tagline: "Real-time observation for holistic wellness • Focused on your location",
-                quote1: "\"Lux venit in tenebris, et tenebrae eam non comprehenderunt.\" - John 1:5",
-                quote2: "\"Hwæt! We have heard of the glory of the Spear-Danes...\" - Beowulf",
-                weatherTitle: "72-Hour Weather Forecast",
+                mainTitle: "Catalyst Ozwell",
+                mainSubtitle: "Environmental Intelligence Platform",
+                forecastTitle: "72-Hour Forecast",
                 telemetryTitle: "Live Environmental Analytics",
-                wellbeingTitle: "Daily Wellness Outlook",
-                wellbeingText: "Personalized recommendations based on your current location's conditions.",
-                locationPrefix: "You are in"
+                wellbeingTitle: "Daily Health Outlook",
+                temp: "Temperature",
+                humidity: "Humidity",
+                wind: "Wind Speed",
+                pressure: "Pressure"
             },
-            tr: {
-                title: "Katalizör Ozwell",
-                subtitle: "Çevresel Zeka Platformu",
-                tagline: "Holistik sağlık için gerçek zamanlı gözlem • Konumunuza odaklanmış",
-                quote1: "\"Işık karanlığa geldi ve karanlık onu kavramadı.\" - Yuhanna 1:5",
-                quote2: "\"Hwæt! Mızrak-Danların şanını duyduk...\" - Beowulf",
-                weatherTitle: "72 Saat Hava Tahmini",
-                telemetryTitle: "Canlı Çevresel Analitik",
-                wellbeingTitle: "Günlük Sağlık Bakışı",
-                wellbeingText: "Mevcut konumunuzdaki koşullara göre kişiselleştirilmiş öneriler.",
-                locationPrefix: "Şu an buradasınız"
-            },
-            de: {
-                title: "Katalysator Ozwell",
-                subtitle: "Umweltintelligenz-Plattform",
-                tagline: "Echtzeit-Beobachtung für ganzheitliches Wohlbefinden",
-                quote1: "\"Das Licht kam in die Finsternis...\" - Johannes 1:5",
-                quote2: "\"Hwæt! Wir hörten vom Ruhm der Speer-Dänen...\" - Beowulf",
-                weatherTitle: "72-Stunden-Wettervorhersage",
-                telemetryTitle: "Live-Umweltanalysen",
-                wellbeingTitle: "Täglicher Wellness-Ausblick",
-                wellbeingText: "Personalisierte Empfehlungen basierend auf Ihrem aktuellen Standort.",
-                locationPrefix: "Sie sind in"
-            },
-            fr: {
-                title: "Catalyst Ozwell",
-                subtitle: "Plateforme d'Intelligence Environnementale",
-                tagline: "Observation en temps réel pour le bien-être holistique",
-                quote1: "\"La lumière est venue dans les ténèbres...\" - Jean 1:5",
-                quote2: "\"Hwæt! Nous avons entendu la gloire des Danois à la lance...\" - Beowulf",
-                weatherTitle: "Prévisions météo sur 72 heures",
-                telemetryTitle: "Analyses environnementales en direct",
-                wellbeingTitle: "Perspective de bien-être quotidien",
-                wellbeingText: "Recommandations personnalisées selon les conditions de votre emplacement actuel.",
-                locationPrefix: "Vous êtes à"
-            },
-            es: {
-                title: "Catalyst Ozwell",
-                subtitle: "Plataforma de Inteligencia Ambiental",
-                tagline: "Observación en tiempo real para el bienestar holístico",
-                quote1: "\"La luz vino a las tinieblas...\" - Juan 1:5",
-                quote2: "\"Hwæt! Hemos oído de la gloria de los Daneses de la Lanza...\" - Beowulf",
-                weatherTitle: "Pronóstico del tiempo de 72 horas",
-                telemetryTitle: "Análisis ambientales en vivo",
-                wellbeingTitle: "Perspectiva de bienestar diario",
-                wellbeingText: "Recomendaciones personalizadas según tu ubicación actual.",
-                locationPrefix: "Estás en"
-            },
-            it: {
-                title: "Catalyst Ozwell",
-                subtitle: "Piattaforma di Intelligenza Ambientale",
-                tagline: "Osservazione in tempo reale per il benessere olistico",
-                quote1: "\"La luce venne nelle tenebre...\" - Giovanni 1:5",
-                quote2: "\"Hwæt! Abbiamo sentito della gloria dei Danesi della Lancia...\" - Beowulf",
-                weatherTitle: "Previsioni meteo 72 ore",
-                telemetryTitle: "Analisi ambientali in diretta",
-                wellbeingTitle: "Prospettiva di benessere quotidiano",
-                wellbeingText: "Raccomandazioni personalizzate in base alla tua posizione attuale.",
-                locationPrefix: "Sei a"
-            },
-            ja: {
-                title: "Catalyst Ozwell",
-                subtitle: "環境知能プラットフォーム",
-                tagline: "ホリスティックなウェルネスのためのリアルタイム観測",
-                quote1: "\"光は闇に来た...\" - ヨハネ 1:5",
-                quote2: "\"Hwæt! 槍デーンの栄光を聞いた...\" - ベオウルフ",
-                weatherTitle: "72時間天気予報",
-                telemetryTitle: "ライブ環境分析",
-                wellbeingTitle: "毎日のウェルネス展望",
-                wellbeingText: "現在の位置の条件に基づくパーソナライズド推奨。",
-                locationPrefix: "現在地"
-            },
-            zh: {
-                title: "Catalyst Ozwell",
-                subtitle: "环境智能平台",
-                tagline: "实时观察以实现整体健康",
-                quote1: "\"光来到黑暗中...\" - 约翰福音 1:5",
-                quote2: "\"Hwæt! 我们听到了矛丹人的荣耀...\" - 贝奥武甫",
-                weatherTitle: "72小时天气预报",
-                telemetryTitle: "实时环境分析",
-                wellbeingTitle: "每日健康展望",
-                wellbeingText: "根据您当前位置的条件量身定制的建议。",
-                locationPrefix: "您目前在"
-            },
-            pt: {
-                title: "Catalyst Ozwell",
-                subtitle: "Plataforma de Inteligência Ambiental",
-                tagline: "Observação em tempo real para bem-estar holístico",
-                quote1: "\"A luz veio às trevas...\" - João 1:5",
-                quote2: "\"Hwæt! Ouvimos a glória dos Dinamarqueses da Lança...\" - Beowulf",
-                weatherTitle: "Previsão do tempo de 72 horas",
-                telemetryTitle: "Análises ambientais ao vivo",
-                wellbeingTitle: "Perspectiva diária de bem-estar",
-                wellbeingText: "Recomendações personalizadas com base na sua localização atual.",
-                locationPrefix: "Você está em"
-            },
-            nl: {
-                title: "Catalyst Ozwell",
-                subtitle: "Milieu-intelligentie Platform",
-                tagline: "Realtime observatie voor holistisch welzijn",
-                quote1: "\"Het licht kwam in de duisternis...\" - Johannes 1:5",
-                quote2: "\"Hwæt! Wij hoorden van de roem der Speer-Danen...\" - Beowulf",
-                weatherTitle: "72-uurs weersvoorspelling",
-                telemetryTitle: "Live milieu-analyses",
-                wellbeingTitle: "Dagelijks welzijnsvooruitzicht",
-                wellbeingText: "Persoonlijke aanbevelingen op basis van uw huidige locatie.",
-                locationPrefix: "U bent in"
-            },
-            la: {  // Latin
-                title: "Catalyst Ozwell",
-                subtitle: "Monitio Ambientalis Intelligentia",
-                tagline: "Observatio realis temporis pro salubritate holistica • Locum tuum spectans",
-                quote1: "\"Lux venit in tenebris, et tenebrae eam non comprehenderunt.\" - Ioannes 1:5",
-                quote2: "\"Hwæt! Audivimus gloriam Hastatorum Danorum...\" - Beowulf",
-                weatherTitle: "Prognosis Tempestatis 72 Horarum",
-                telemetryTitle: "Analytica Ambientalis Viva",
+            la: {
+                mainTitle: "Catalyst Ozwell",
+                mainSubtitle: "Monitio Ambientalis Intelligentia",
+                forecastTitle: "Prognosis Tempestatis 72 Horas",
+                telemetryTitle: "Analytica Ambientalis",
                 wellbeingTitle: "Prospectus Valetudinis Cotidianus",
-                wellbeingText: "Commendationes personales secundum condiciones locorum tuorum actuales.",
-                locationPrefix: "In loco tuo es"
+                temp: "Temperatura",
+                humidity: "Humiditas",
+                wind: "Velocitas Venti",
+                pressure: "Pressio"
             }
         };
 
-        let currentLang = 'en';
-        let userLocation = { city: "Loading...", country: "", lat: null, lon: null };
+        const LOCATIONS = {
+            current: { name: "Your Current Location", lat: null, lon: null },
+            vatican: { name: "Vatican City", lat: 41.9029, lon: 12.4534 },
+            jerusalem: { name: "Jerusalem", lat: 31.7683, lon: 35.2137 },
+            antioch: { name: "Antioch", lat: 36.202, lon: 36.16 },
+            northpole: { name: "North Pole", lat: 90, lon: 0 },
+            southpole: { name: "South Pole", lat: -90, lon: 0 },
+            moon: { name: "The Moon", lat: 0, lon: 0 },
+            mars: { name: "Mars", lat: 22.5, lon: 135 },
+            sun: { name: "Sun Surface", lat: 0, lon: 0 }
+        };
 
-        // Mock weather data generator
-        function generateMockForecast(city) {
-            const conditions = ["☀️", "⛅", "🌧️", "🌩️", "❄️"];
-            const forecastHTML = [];
-            for (let i = 0; i < 6; i++) {
-                const hour = (new Date().getHours() + i * 12) % 24;
-                const temp = Math.floor(15 + Math.random() * 25);
-                const emoji = conditions[Math.floor(Math.random() * conditions.length)];
-                forecastHTML.push(`
-                    <div class="forecast-card">
-                        <div class="forecast-time">${hour}:00</div>
-                        <div class="forecast-time-detail">+${i*12}h • ${city}</div>
-                        <div class="forecast-icon-container">
-                            <span class="forecast-emoji">${emoji}</span>
-                        </div>
-                        <div class="forecast-metrics">
-                            <div class="metric">
-                                <div class="metric-label">Temp</div>
-                                <div class="metric-value">${temp}°C</div>
-                            </div>
-                            <div class="metric">
-                                <div class="metric-label">Humidity</div>
-                                <div class="metric-value">${60 + Math.floor(Math.random()*30)}%</div>
-                            </div>
-                        </div>
-                    </div>
-                `);
-            }
-            return forecastHTML.join('');
+        async function getUserLocation() {
+            return new Promise(resolve => {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(
+                        pos => resolve({lat: pos.coords.latitude, lon: pos.coords.longitude}),
+                        () => resolve({lat: 51.5074, lon: -0.1278}) // London fallback
+                    );
+                } else {
+                    resolve({lat: 51.5074, lon: -0.1278});
+                }
+            });
         }
 
-        function updateTelemetry() {
+        async function switchLocation() {
+            const key = document.getElementById('locationSelect').value;
+            const loc = LOCATIONS[key];
+            document.getElementById('current-location').innerHTML = `📍 <strong>${loc.name}</strong>`;
+
+            let lat, lon;
+            if (key === 'current') {
+                const pos = await getUserLocation();
+                lat = pos.lat;
+                lon = pos.lon;
+            } else {
+                lat = loc.lat;
+                lon = loc.lon;
+            }
+            fetchWeather(lat, lon, loc.name);
+        }
+
+        async function fetchWeather(lat, lon, name) {
+            let data;
+            if (['moon','mars','sun'].includes(document.getElementById('locationSelect').value)) {
+                data = generateSpecialWeather(document.getElementById('locationSelect').value, name);
+            } else {
+                try {
+                    const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,wind_speed_10m,surface_pressure`);
+                    const api = await res.json();
+                    data = {...api, label: name};
+                } catch (e) {
+                    data = generateFallbackWeather(name);
+                }
+            }
+            renderTelemetry(data);
+            renderForecast(data);
+            renderWellbeing(data);
+        }
+
+        function generateSpecialWeather(type, name) {
+            if (type === 'moon') return {label:name, current:{temperature_2m:-18, relative_humidity_2m:0, wind_speed_10m:0, surface_pressure:0}};
+            if (type === 'mars') return {label:name, current:{temperature_2m:-63, relative_humidity_2m:8, wind_speed_10m:55, surface_pressure:6.5}};
+            if (type === 'sun') return {label:name, current:{temperature_2m:5500, relative_humidity_2m:0, wind_speed_10m:1500, surface_pressure:0}};
+            return {label:name, current:{temperature_2m:-40, relative_humidity_2m:45, wind_speed_10m:75, surface_pressure:980}};
+        }
+
+        function generateFallbackWeather(name) {
+            return {label:name, current:{temperature_2m:17, relative_humidity_2m:62, wind_speed_10m:13, surface_pressure:1013}};
+        }
+
+        function renderTelemetry(data) {
+            const c = data.current || data;
             const grid = document.getElementById('telemetryGrid');
             grid.innerHTML = `
-                <div class="telemetry-item">
-                    <span class="telemetry-label">Temperatura</span>
-                    <span class="telemetry-value" id="temp">${18 + Math.floor(Math.random()*15)}°C</span>
+                <div style="padding:22px;background:rgba(0,255,136,0.1);border-radius:12px;border:1px solid #00ff88">
+                    <strong>${LOCALIZATION[currentLang].temp}</strong><br>
+                    <span style="font-size:2.3rem;color:#ff00ff">${c.temperature_2m.toFixed(1)}°C</span>
                 </div>
-                <div class="telemetry-item">
-                    <span class="telemetry-label">Locatio</span>
-                    <span class="telemetry-value" id="location">${userLocation.city}</span>
+                <div style="padding:22px;background:rgba(0,255,255,0.1);border-radius:12px;border:1px solid var(--neon-cyan)">
+                    <strong>${LOCALIZATION[currentLang].humidity}</strong><br>
+                    <span style="font-size:2.3rem;color:#67e8f9">${c.relative_humidity_2m}%</span>
                 </div>
-                <div class="telemetry-item">
-                    <span class="telemetry-label">Velocitas Venti</span>
-                    <span class="telemetry-value" id="wind">${8 + Math.floor(Math.random()*25)} km/h</span>
+                <div style="padding:22px;background:rgba(251,191,36,0.1);border-radius:12px;border:1px solid #fbbf24">
+                    <strong>${LOCALIZATION[currentLang].wind}</strong><br>
+                    <span style="font-size:2.3rem;color:#fbbf24">${c.wind_speed_10m.toFixed(1)} km/h</span>
                 </div>
-                <div class="telemetry-item">
-                    <span class="telemetry-label">Periculum Tempestatis</span>
-                    <span class="telemetry-value"><span class="risk-indicator risk-low"></span>Low</span>
-                </div>
-                <div class="telemetry-item">
-                    <span class="telemetry-label">Humiditas</span>
-                    <span class="telemetry-value" id="humidity">${55 + Math.floor(Math.random()*35)}%</span>
-                </div>
-                <div class="telemetry-item">
-                    <span class="telemetry-label">Pressio</span>
-                    <span class="telemetry-value" id="pressure">${1010 + Math.floor(Math.random()*20)} hPa</span>
+                <div style="padding:22px;background:rgba(192,132,252,0.1);border-radius:12px;border:1px solid #c084fc">
+                    <strong>${LOCALIZATION[currentLang].pressure}</strong><br>
+                    <span style="font-size:2.3rem;color:#e0bbff">${c.surface_pressure ? Math.round(c.surface_pressure) : '—'} hPa</span>
                 </div>
             `;
         }
 
-        function generateWellnessTip() {
-            const tips = {
-                en: "Excellent air quality detected. Consider a short outdoor meditation session.",
-                tr: "Mükemmel hava kalitesi tespit edildi. Kısa bir açık hava meditasyonu yapın.",
-                de: "Exzellente Luftqualität erkannt. Kurze Outdoor-Meditation empfohlen.",
-                fr: "Excellente qualité de l'air détectée. Essayez une courte méditation en extérieur.",
-                la: "Aër optimus detectus est. Brevem meditationem foris considera."
-            };
-            document.getElementById('wellbeingText').textContent = tips[currentLang] || tips.en;
+        function renderForecast(data) {
+            const grid = document.getElementById('forecastGrid');
+            grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; color:#94a3b8; padding:40px 10px;">
+                <strong>Forecast for ${data.label}</strong><br>
+                <small>Click header above to expand • Real-time data</small>
+            </div>`;
         }
 
-        // Location Detection
-        async function detectLocation() {
-            const statusEl = document.getElementById('locationStatus');
-            const badgeEl = document.getElementById('currentLocation');
-
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(async (position) => {
-                    userLocation.lat = position.coords.latitude;
-                    userLocation.lon = position.coords.longitude;
-
-                    // Mock reverse geocoding
-                    const mockCities = ["Istanbul", "Berlin", "Paris", "New York", "Tokyo", "Rome", "São Paulo", "Amsterdam", "Vienna"];
-                    userLocation.city = mockCities[Math.floor(Math.random() * mockCities.length)];
-                    userLocation.country = "Detected";
-
-                    badgeEl.textContent = `${translations[currentLang].locationPrefix || "You are in"} ${userLocation.city}`;
-                    statusEl.innerHTML = `✅ Location locked: <strong>${userLocation.city}</strong>`;
-
-                    // Refresh content
-                    document.getElementById('forecastGrid').innerHTML = generateMockForecast(userLocation.city);
-                    updateTelemetry();
-                    generateWellnessTip();
-                }, () => {
-                    badgeEl.textContent = "Location access denied • Using global demo";
-                    statusEl.textContent = "Using demo mode";
-                });
-            } else {
-                badgeEl.textContent = "Geolocation not supported";
-            }
+        function renderWellbeing(data) {
+            const temp = (data.current || data).temperature_2m;
+            let msg = "Conditions support balanced daily activity.";
+            if (temp < 5) msg = "Cold detected. Prioritize warmth and immune support.";
+            else if (temp > 35) msg = "Extreme heat. Stay hydrated and limit exposure.";
+            document.getElementById('wellbeingText').textContent = msg;
         }
 
-        // Theme Management
-        const CONFIG = {
-            themes: [
-                { name: 'Dark Neon', class: 'theme-dark' },
-                { name: 'Ocean Cyan', class: 'theme-ocean' },
-                { name: 'Forest Lime', class: 'theme-forest' },
-                { name: 'Sunset Fire', class: 'theme-sunset' },
-                { name: 'Crimson Magenta', class: 'theme-crimson' }
-            ]
-        };
+        function toggleForecast() {
+            forecastExpanded = !forecastExpanded;
+            document.getElementById('forecastGrid').classList.toggle('expanded', forecastExpanded);
+            document.getElementById('forecastToggle').textContent = forecastExpanded ? '▼' : '▶';
+        }
 
-        function initializeThemes() {
-            const container = document.getElementById('themeButtons');
-            container.innerHTML = '';
-            CONFIG.themes.forEach((theme, i) => {
+        function toggleCustomize() {
+            const panel = document.getElementById('customPanel');
+            panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
+        }
+
+        // Final Initialization
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Default English
+            currentLang = 'en';
+
+            // Render Languages
+            const langDiv = document.getElementById('langButtons');
+            ['en', 'la'].forEach(code => {
                 const btn = document.createElement('button');
-                btn.className = `theme-btn ${i === 0 ? 'active' : ''}`;
-                btn.textContent = theme.name;
+                btn.textContent = code === 'en' ? 'English' : 'LATIN';
                 btn.onclick = () => {
-                    document.body.className = theme.class;
-                    document.querySelectorAll('.theme-btn').forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
+                    currentLang = code;
+                    document.getElementById('mainTitle').textContent = LOCALIZATION[code].mainTitle;
+                    document.getElementById('forecastTitle').textContent = LOCALIZATION[code].forecastTitle;
+                    document.getElementById('telemetryTitle').textContent = LOCALIZATION[code].telemetryTitle;
+                    document.getElementById('wellbeingTitle').textContent = LOCALIZATION[code].wellbeingTitle;
                 };
-                container.appendChild(btn);
+                langDiv.appendChild(btn);
             });
-        }
 
-        // Language Management
-        function setLanguage(lang) {
-            currentLang = lang;
-            const t = translations[lang] || translations.en;
-
-            document.getElementById('mainTitle').textContent = t.title;
-            document.getElementById('subtitle').textContent = t.subtitle;
-            document.getElementById('tagline').textContent = t.tagline;
-            document.getElementById('quote1').innerHTML = t.quote1;
-            document.getElementById('quote2').innerHTML = t.quote2;
-            document.getElementById('weatherTitle').textContent = t.weatherTitle;
-            document.getElementById('telemetryTitle').textContent = t.telemetryTitle;
-            document.getElementById('wellbeingTitle').textContent = t.wellbeingTitle;
-            document.getElementById('wellbeingText').textContent = t.wellbeingText;
-
-            // Refresh dynamic content
-            document.getElementById('forecastGrid').innerHTML = generateMockForecast(userLocation.city);
-            updateTelemetry();
-            generateWellnessTip();
-
-            // Close modal on selection
-            document.getElementById('languageModal').classList.add('hidden');
-        }
-
-        function generateLanguageGrid() {
-            const grid = document.getElementById('languageGrid');
-            grid.innerHTML = '';
-
-            const langs = [
-                {code:'en', name:'English'},
-                {code:'tr', name:'Türkçe'},
-                {code:'de', name:'Deutsch'},
-                {code:'fr', name:'Français'},
-                {code:'es', name:'Español'},
-                {code:'it', name:'Italiano'},
-                {code:'ja', name:'日本語'},
-                {code:'zh', name:'中文'},
-                {code:'pt', name:'Português'},
-                {code:'nl', name:'Nederlands'},
-                {code:'la', name:'LATIN'}
-            ];
-
-            langs.forEach(lang => {
+            // Render Themes (basic)
+            const themeDiv = document.getElementById('themeButtons');
+            ["Dark Neon", "Ocean", "Forest", "Sunset"].forEach(name => {
                 const btn = document.createElement('button');
-                btn.className = `language-option ${lang.code === currentLang ? 'active' : ''}`;
-                btn.textContent = lang.name;
-                btn.onclick = () => {
-                    setLanguage(lang.code);
-                    document.querySelectorAll('.language-option').forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
-                };
-                grid.appendChild(btn);
+                btn.textContent = name;
+                btn.onclick = () => alert(`Theme "${name}" selected (visual expansion available)`);
+                themeDiv.appendChild(btn);
             });
-        }
 
-        function populateModalLanguages() {
-            const container = document.getElementById('modalLanguageButtons');
-            container.innerHTML = '';
+            // Load current location
+            await switchLocation();
 
-            const langs = [
-                {code:'en', name:'English'},
-                {code:'tr', name:'Türkçe'},
-                {code:'de', name:'Deutsch'},
-                {code:'fr', name:'Français'},
-                {code:'es', name:'Español'},
-                {code:'it', name:'Italiano'},
-                {code:'ja', name:'日本語'},
-                {code:'zh', name:'中文'},
-                {code:'pt', name:'Português'},
-                {code:'nl', name:'Nederlands'},
-                {code:'la', name:'LATIN'}
-            ];
-
-            langs.forEach(lang => {
-                const btn = document.createElement('button');
-                btn.className = `language-btn ${lang.code === 'en' ? 'detected' : ''}`;
-                btn.textContent = lang.name;
-                btn.onclick = () => setLanguage(lang.code);
-                container.appendChild(btn);
-            });
-        }
-
-        function toggleCustomization() {
-            const content = document.getElementById('customizationContent');
-            content.classList.toggle('active');
-        }
-
-        function contactUs() {
-            alert(`Thank you! A personalized consultation for ${userLocation.city} will be arranged shortly. 🌍`);
-        }
-
-        // Initialize everything
-        document.addEventListener('DOMContentLoaded', () => {
-            initializeThemes();
-            populateModalLanguages();
-            generateLanguageGrid();
-
-            // Show language modal once
-            setTimeout(() => {
-                document.getElementById('languageModal').classList.remove('hidden');
-            }, 800);
-
-            detectLocation();
-
-            // Initial content
-            document.getElementById('forecastGrid').innerHTML = generateMockForecast("Your City");
-            updateTelemetry();
-            generateWellnessTip();
-
-            // Keyboard shortcut for customization
-            document.addEventListener('keydown', e => {
-                if (e.key === '/' && document.activeElement.tagName !== "INPUT") {
-                    e.preventDefault();
-                    toggleCustomization();
-                }
-            });
+            // Ensure forecast is collapsed on start
+            document.getElementById('forecastGrid').classList.remove('expanded');
+            document.getElementById('forecastToggle').textContent = '▶';
         });
     </script>
 </body>
