@@ -13,7 +13,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Catalyst Ozwell - Advanced environmental monitoring and wellness analytics platform">
-    <meta name="keywords" content="environmental monitoring, health analytics, weather forecasting, real-time data, space weather">
+    <meta name="keywords" content="environmental monitoring, space weather, UV index, real-time telemetry">
     <title>Catalyst Ozwell | Environmental Intelligence Platform</title>
 
     <style>
@@ -28,9 +28,6 @@
             --neon-pink: #ff1493;
             --dark-bg: #0f1419;
             --card-bg: rgba(20, 25, 35, 0.8);
-            --border-color: #3a4a5a;
-            --text-primary: #e8e8e8;
-            --text-secondary: #a8a8a8;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -38,12 +35,10 @@
         html, body {
             width: 100%; height: 100%;
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            color: var(--text-primary);
+            color: #e8e8e8;
             background: var(--dark-bg);
             overflow-x: hidden;
         }
-
-        body { transition: background 0.5s ease; letter-spacing: 0.3px; }
 
         .background {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2;
@@ -72,251 +67,71 @@
         .location-badge {
             position: fixed; top: 20px; left: 20px; background: rgba(20, 25, 35, 0.95);
             border: 2px solid var(--neon-cyan); padding: 12px 20px; border-radius: 30px;
-            font-size: 0.95rem; color: var(--neon-cyan); z-index: 999; display: flex; align-items: center; gap: 10px;
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5); backdrop-filter: blur(10px);
+            font-size: 0.95rem; color: var(--neon-cyan); z-index: 999; display: flex; align-items: center; gap: 12px;
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.5); backdrop-filter: blur(12px);
         }
 
-        .clock {
-            font-family: 'Times New Roman', serif; font-size: 1.1rem; font-weight: 700; letter-spacing: 2px;
-            color: var(--neon-lime);
+        .clock { font-family: 'Times New Roman', serif; font-size: 1.15rem; font-weight: 700; color: var(--neon-lime); letter-spacing: 1px; }
+
+        .customization-panel {
+            position: fixed; top: 40px; right: 40px; z-index: 1000;
+            background: rgba(20,25,35,0.95); border: 2px solid var(--neon-cyan);
+            border-radius: 8px; padding: 20px; max-width: 280px;
+            backdrop-filter: blur(20px); box-shadow: 0 0 30px rgba(0,255,255,0.4);
         }
 
-        /* Rest of existing styles (kept compact for brevity - all previous styles preserved) */
-        .language-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999; background: rgba(0,0,0,0.95); display: flex; justify-content: center; align-items: center; backdrop-filter: blur(8px); }
-        .language-modal.hidden { display: none; }
-        .language-box { background: linear-gradient(135deg, var(--card-bg), rgba(30,40,50,0.9)); border: 2px solid var(--neon-cyan); border-radius: 12px; padding: 60px 50px; max-width: 650px; box-shadow: 0 0 30px rgba(0,255,255,0.5); text-align: center; }
-        .language-title { color: var(--neon-cyan); font-size: 2.2rem; font-weight: 700; animation: neon-glow 2s infinite; }
+        .customization-toggle {
+            background: transparent; color: var(--neon-cyan); border: 2px solid var(--neon-cyan);
+            padding: 14px 24px; border-radius: 6px; cursor: pointer; font-weight: 700;
+            width: 100%; transition: all 0.3s; font-size: 1rem;
+        }
 
-        .customization-panel { position: fixed; top: 40px; right: 40px; z-index: 1000; background: rgba(20,25,35,0.95); border: 2px solid var(--neon-cyan); border-radius: 8px; padding: 20px; max-width: 300px; backdrop-filter: blur(20px); box-shadow: 0 0 30px rgba(0,255,255,0.4); }
-        .theme-buttons, .language-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
+        .customization-toggle:hover {
+            background: rgba(0,255,255,0.15); box-shadow: 0 0 25px rgba(0,255,255,0.7); transform: translateY(-2px);
+        }
+
+        .customization-content { display: none; margin-top: 20px; }
+        .customization-content.active { display: block; }
+
+        .theme-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
+
+        .theme-btn {
+            padding: 12px; border: 2px solid var(--neon-cyan); background: transparent;
+            color: var(--neon-cyan); border-radius: 6px; cursor: pointer; font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .theme-btn:hover, .theme-btn.active {
+            border-color: var(--neon-magenta); background: rgba(255,0,255,0.15);
+            color: var(--neon-magenta); box-shadow: 0 0 20px rgba(255,0,255,0.6);
+        }
 
         .weather-forecast, .telemetry, .sun-section, .wellbeing-suggestion {
-            width: 100%; background: rgba(20,25,35,0.8); border: 2px solid var(--neon-cyan); border-radius: 8px;
-            padding: 50px; margin-bottom: 60px; box-shadow: 0 0 30px rgba(0,255,255,0.3); backdrop-filter: blur(10px);
+            width: 100%; background: rgba(20,25,35,0.8); border: 2px solid var(--neon-cyan);
+            border-radius: 8px; padding: 50px; margin-bottom: 60px;
+            box-shadow: 0 0 30px rgba(0,255,255,0.3); backdrop-filter: blur(10px);
         }
 
-        .section-title { font-size: 1.4rem; color: var(--neon-magenta); font-weight: 700; letter-spacing: 2px; text-transform: uppercase; animation: neon-glow 2s infinite; font-family: 'Times New Roman', serif; }
-
-        .forecast-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
-        .forecast-card { background: rgba(0,255,255,0.05); border: 2px solid var(--neon-cyan); border-radius: 8px; padding: 25px; transition: all 0.4s; }
-        .forecast-card:hover { transform: translateY(-8px); border-color: var(--neon-magenta); box-shadow: 0 0 30px rgba(255,0,255,0.5); }
-
-        .telemetry-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; }
-        .telemetry-item { background: rgba(0,255,0,0.05); border: 2px solid var(--neon-lime); border-radius: 8px; padding: 18px; }
-
-        .sun-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-top: 30px; }
-        .sun-card { background: rgba(255,215,0,0.08); border: 2px solid #ffd700; padding: 25px; border-radius: 8px; }
-
-        .metric-value { font-size: 1.35rem; color: var(--neon-magenta); font-weight: 700; }
-    </style>
-</head>
-<body>
-    <div class="background"></div>
-    <div class="ambient-light">
-        <div class="light-accent light-accent-1"></div>
-        <div class="light-accent light-accent-2"></div>
-    </div>
-
-    <!-- Persistent Location & Clock -->
-    <div class="location-badge">
-        <span id="currentLocation">Detecting location...</span>
-        <span class="clock" id="liveClock"></span>
-    </div>
-
-    <!-- Language Modal -->
-    <div class="language-modal hidden" id="languageModal">
-        <div class="language-box">
-            <div class="language-title">Lingua Selecta</div>
-            <div class="language-buttons" id="modalLanguageButtons"></div>
-            <div class="language-info" id="locationStatus">Real-time location &amp; space weather detection active...</div>
-        </div>
-    </div>
-
-    <!-- Customization Panel -->
-    <div class="customization-panel">
-        <button class="customization-toggle" onclick="toggleCustomization()">⚙ CUSTOMIZE</button>
-        <div class="customization-content hidden" id="customizationContent">
-            <div class="customization-section"><h3>Themes</h3><div class="theme-buttons" id="themeButtons"></div></div>
-            <div class="customization-section"><h3>Languages (incl. Latin)</h3><div class="language-grid" id="languageGrid"></div></div>
-        </div>
-    </div>
-
-    <div class="container" style="position: relative; z-index: 1; min-height: 100vh; padding: 100px 40px; max-width: 1400px; margin: 0 auto;">
-        <!-- Header -->
-        <div class="header-section" style="text-align:center; margin-bottom:60px;">
-            <div class="logo" style="width:140px;height:140px;margin:0 auto 30px; border:3px solid var(--neon-cyan); border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:2.8rem; color:var(--neon-cyan);">CO</div>
-            <h1 id="mainTitle">Catalyst Ozwell</h1>
-            <p class="subtitle" id="subtitle">Environmental &amp; Space Intelligence</p>
-        </div>
-
-        <!-- 36-Hour Forecast -->
-        <div class="weather-forecast">
-            <div class="section-header"><h2 class="section-title" id="weatherTitle">36-Hour Localized Forecast</h2></div>
-            <div class="forecast-grid" id="forecastGrid"></div>
-        </div>
-
-        <!-- Expanded Telemetry (20+ metrics) -->
-        <div class="telemetry">
-            <div class="section-header"><h2 class="section-title" id="telemetryTitle">Live Telemetry &amp; Space Weather</h2></div>
-            <div class="telemetry-grid" id="telemetryGrid"></div>
-        </div>
-
-        <!-- Sun & UV Protection Section -->
-        <div class="sun-section">
-            <div class="section-header"><h2 class="section-title" style="color:#ffd700;">☀️ Solar &amp; UV Protection</h2></div>
-            <div class="sun-grid" id="sunGrid"></div>
-            <p id="sunSuggestion" style="margin-top:30px; font-size:1.1rem; line-height:1.7; color:var(--text-primary);"></p>
-        </div>
-
-        <!-- Wellbeing -->
-        <div class="wellbeing-suggestion">
-            <h2 class="wellbeing-title" id="wellbeingTitle">Personal Wellness Guidance</h2>
-            <p class="wellbeing-text" id="wellbeingText"></p>
-        </div>
-    </div>
-
-    <script>
-        // Translations (extended)
-        const translations = { /* ... same as previous version with Latin support ... */ 
-            en: { /* full translations */ },
-            // ... (abbreviated for space - all previous languages + la included)
-        };
-
-        let currentLang = 'en';
-        let userLocation = { city: "Global Demo", country: "", lat: 0, lon: 0 };
-
-        // Live Clock (millisecond precision)
-        function updateLiveClock() {
-            const clockEl = document.getElementById('liveClock');
-            setInterval(() => {
-                const now = new Date();
-                clockEl.textContent = now.toLocaleTimeString('en-US', { 
-                    hour12: false, 
-                    hour: '2-digit', 
-                    minute: '2-digit', 
-                    second: '2-digit',
-                    fractionalSecondDigits: 3 
-                }) + " UTC";
-            }, 10);
+        .section-title {
+            font-size: 1.45rem; color: var(--neon-magenta); font-weight: 700;
+            letter-spacing: 2px; text-transform: uppercase; animation: neon-glow 2s infinite;
+            font-family: 'Times New Roman', serif;
         }
 
-        // 36-Hour Forecast (intervals ~8-12h)
-        function generate36HourForecast(city) {
-            const grid = document.getElementById('forecastGrid');
-            grid.innerHTML = '';
-            const startHour = new Date().getHours();
-            const intervals = [0, 8, 16, 24, 32]; // ~8-16h steps covering 36h
-
-            intervals.forEach((offset, i) => {
-                const future = new Date(Date.now() + offset * 3600000);
-                const temp = 12 + Math.floor(Math.random() * 28);
-                const conds = ["☀️ Clear", "⛅ Partly Cloudy", "🌧️ Rain", "🌫️ Fog", "❄️ Light Snow"];
-                const cond = conds[Math.floor(Math.random()*conds.length)];
-
-                const card = document.createElement('div');
-                card.className = 'forecast-card';
-                card.innerHTML = `
-                    <div style="font-size:1.3rem; color:var(--neon-cyan);">${future.toLocaleDateString('en-US',{weekday:'short'})} ${future.getHours()}:00</div>
-                    <div style="font-size:3.5rem; margin:15px 0;">${cond.split(' ')[0]}</div>
-                    <div style="font-size:1.8rem; color:var(--neon-magenta);">${temp}°C</div>
-                    <div style="margin-top:10px; font-size:0.95rem; color:var(--text-secondary);">${cond} • ${city}</div>
-                `;
-                grid.appendChild(card);
-            });
+        .forecast-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 22px; }
+        .forecast-card {
+            background: rgba(0,255,255,0.05); border: 2px solid var(--neon-cyan);
+            border-radius: 8px; padding: 28px; transition: all 0.4s;
+        }
+        .forecast-card:hover {
+            transform: translateY(-10px); border-color: var(--neon-magenta);
+            box-shadow: 0 0 35px rgba(255,0,255,0.5);
         }
 
-        // Expanded Telemetry - 20+ metrics
-        function updateTelemetry() {
-            const grid = document.getElementById('telemetryGrid');
-            const metrics = [
-                {label:"Temperature", val:`${18+Math.floor(Math.random()*18)}°C`, color:"var(--neon-cyan)"},
-                {label:"Humidity", val:`${45+Math.floor(Math.random()*45)}%`, color:"var(--neon-lime)"},
-                {label:"Wind Speed", val:`${5+Math.floor(Math.random()*40)} km/h`, color:"var(--neon-cyan)"},
-                {label:"Wind Direction", val:"SW 210°", color:"var(--neon-magenta)"},
-                {label:"Pressure", val:`${1008+Math.floor(Math.random()*25)} hPa`, color:"var(--neon-cyan)"},
-                {label:"UV Index", val:"${Math.floor(Math.random()*11)}", color:"#ffd700"},
-                {label:"Solar Radiation", val:`${400+Math.floor(Math.random()*600)} W/m²`, color:"#ffd700"},
-                {label:"Solar Wind Speed", val:"${620+Math.floor(Math.random()*120)} km/s", color:"#ff8800"},
-                {label:"Solar Wind Density", val:`${1.2+Math.random()*3} p/cm³`, color:"#ff8800"},
-                {label:"IMF Bt", val:`${4+Math.floor(Math.random()*12)} nT`, color:"#ff00ff"},
-                {label:"IMF Bz", val:`${-8+Math.floor(Math.random()*16)} nT`, color:"#ff00ff"},
-                {label:"10.7cm Solar Flux", val:`${105+Math.floor(Math.random()*25)} sfu`, color:"#ffd700"},
-                {label:"Planetary Kp Index", val:`${2+Math.floor(Math.random()*5)}`, color:"#00ff88"},
-                {label:"Dst Index", val:`${-25-Math.floor(Math.random()*60)} nT`, color:"#ff4444"},
-                {label:"Electron Flux (>2MeV)", val:`${1200+Math.floor(Math.random()*800)} pfu`, color:"#ff00ff"},
-                {label:"Proton Flux", val:`${0.5+Math.random()*2} pfu`, color:"#ff8800"},
-                {label:"Geomagnetic Storm Risk", val:"Low", color:"var(--neon-lime)"},
-                {label:"Aurora Visibility", val:"Moderate (Kp≥4)", color:"#00ffff"},
-                {label:"Air Quality (AQI)", val:`${35+Math.floor(Math.random()*80)}`, color:"var(--neon-lime)"},
-                {label:"Ozone Level", val:`${280+Math.floor(Math.random()*60)} DU`, color:"#00ffcc"}
-            ];
-
-            grid.innerHTML = metrics.map(m => `
-                <div class="telemetry-item">
-                    <span style="color:#888; font-size:0.8rem;">${m.label}</span>
-                    <span style="display:block; margin-top:8px; font-size:1.6rem; color:${m.color}; font-weight:700;">${m.val}</span>
-                </div>
-            `).join('');
+        .telemetry-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 16px; }
+        .telemetry-item {
+            background: rgba(0,255,0,0.05); border: 2px solid var(--neon-lime);
+            border-radius: 8px; padding: 20px;
         }
 
-        // Sun & UV Section
-        function generateSunSection() {
-            const uv = Math.floor(Math.random() * 11);
-            const protection = uv >= 8 ? "High SPF 50+ • Seek shade 10am-4pm" : 
-                             uv >= 4 ? "SPF 30+ recommended" : "Minimal protection needed";
-
-            document.getElementById('sunGrid').innerHTML = `
-                <div class="sun-card">
-                    <h3 style="color:#ffd700;">UV Index</h3>
-                    <div style="font-size:4rem; font-weight:700; color:#ffd700;">${uv}</div>
-                    <div>${uv>=8?'Very High':uv>=6?'High':'Moderate'}</div>
-                </div>
-                <div class="sun-card">
-                    <h3>Solar CME Activity</h3>
-                    <div style="font-size:1.8rem; color:#ff8800;">M1.4-class (Moderate)</div>
-                </div>
-                <div class="sun-card">
-                    <h3>Earth Magnetic Flux</h3>
-                    <div style="font-size:1.6rem;">Kp ${2+Math.floor(Math.random()*4)}</div>
-                </div>
-            `;
-            document.getElementById('sunSuggestion').innerHTML = `
-                <strong>Sun Protection Advisory:</strong> ${protection}.<br>
-                Current solar wind impacting ionosphere. Limit outdoor exposure during peak UV hours.
-            `;
-        }
-
-        function setLanguage(lang) { /* same robust logic as before */ }
-
-        function toggleCustomization() {
-            document.getElementById('customizationContent').classList.toggle('hidden');
-        }
-
-        // Initialize
-        document.addEventListener('DOMContentLoaded', () => {
-            updateLiveClock();
-
-            // Location detection + mock city
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(pos => {
-                    userLocation.lat = pos.coords.latitude;
-                    userLocation.lon = pos.coords.longitude;
-                    const cities = ["Istanbul","Berlin","Paris","New York","Tokyo","Rome"];
-                    userLocation.city = cities[Math.floor(Math.random()*cities.length)];
-                    document.getElementById('currentLocation').innerHTML = `📍 ${userLocation.city}`;
-                });
-            }
-
-            generate36HourForecast(userLocation.city);
-            updateTelemetry();
-            generateSunSection();
-
-            // Show modal
-            setTimeout(() => document.getElementById('languageModal').classList.remove('hidden'), 1200);
-
-            // Keyboard support
-            document.addEventListener('keydown', e => { if (e.key === '/') toggleCustomization(); });
-        });
-    </script>
-</body>
-</html>
+        .sun-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap
