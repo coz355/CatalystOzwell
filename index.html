@@ -1,4 +1,4 @@
-l<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -12,649 +12,853 @@ l<!DOCTYPE html>
   gtag('config', 'G-4ZT8WTL4C5');
 </script>
    
-   <meta name="description" content="Catalyst Ozwell - Welcome Wilkommen">
-    <meta name="keywords" content="tech for holistic innovation in healthier future">
-    
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catalyst Ozwell | Love&LightHealth </title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Arial', sans-serif;
-            color: white;
-            text-align: center;
-            overflow-x: hidden;
-            background: #0a0e27;
-            transition: all 0.5s ease;
-        }
-
-        /* Dynamic Background with Animation */
-        .background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
-            transition: all 0.5s ease;
-        }
-
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* Light Play Effects */
-        .light-orbs {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: -1;
-            overflow: hidden;
-        }
-
-        .orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.3;
-            transition: all 0.5s ease;
-        }
-
-        .orb1 {
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, #00d4ff, transparent);
-            top: -100px;
-            left: -100px;
-            animation: float 20s infinite ease-in-out;
-        }
-
-        .orb2 {
-            width: 250px;
-            height: 250px;
-            background: radial-gradient(circle, #ff006e, transparent);
-            bottom: -50px;
-            right: -50px;
-            animation: float 25s infinite ease-in-out reverse;
-        }
-
-        .orb3 {
-            width: 200px;
-            height: 200px;
-            background: radial-gradient(circle, #00f5ff, transparent);
-            top: 50%;
-            right: 10%;
-            animation: float 30s infinite ease-in-out;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0); }
-            25% { transform: translate(30px, -30px); }
-            50% { transform: translate(-20px, 20px); }
-            75% { transform: translate(20px, 30px); }
-        }
-
-        /* Language Modal */
-        .language-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 9999;
-            background: rgba(0, 0, 0, 0.9);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            backdrop-filter: blur(5px);
-        }
-
-        .language-modal.hidden {
-            display: none;
-        }
-
-        .language-box {
-            background: linear-gradient(135deg, #ffff00 0%, #ffdd00 50%, #ffaa00 100%);
-            border: 4px solid #ffff00;
-            border-radius: 20px;
-            padding: 50px 40px;
-            max-width: 600px;
-            box-shadow: 0 0 50px rgba(255, 255, 0, 0.5), inset 0 0 30px rgba(255, 255, 0, 0.3);
-            animation: pulse-glow 2s ease-in-out infinite;
-            text-align: center;
-        }
-
-        @keyframes pulse-glow {
-            0%, 100% { box-shadow: 0 0 50px rgba(255, 255, 0, 0.5), inset 0 0 30px rgba(255, 255, 0, 0.3); }
-            50% { box-shadow: 0 0 80px rgba(255, 255, 0, 0.8), inset 0 0 50px rgba(255, 255, 0, 0.5); }
-        }
-
-        .language-title {
-            color: #000;
-            font-size: 2.5rem;
-            font-weight: bold;
-            margin-bottom: 15px;
-            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        }
-
-        .language-subtitle {
-            color: #333;
-            font-size: 1.2rem;
-            margin-bottom: 40px;
-            font-weight: 600;
-        }
-
-        .language-buttons {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .language-btn {
-            background: linear-gradient(135deg, #ffffff, #f0f0f0);
-            color: #000;
-            border: 3px solid #000;
-            padding: 20px 25px;
-            font-size: 1.3rem;
-            font-weight: bold;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .language-btn:hover {
-            transform: scale(1.08);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
-            background: linear-gradient(135deg, #ffff00, #ffdd00);
-        }
-
-        .language-btn.detected {
-            background: linear-gradient(135deg, #ffff00, #ffdd00);
-            border-color: #ff0000;
-            box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
-        }
-
-        .language-info {
-            color: #333;
-            font-size: 0.9rem;
-            font-weight: 600;
-            margin-top: 20px;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.5);
-            border-radius: 8px;
-        }
-
-        .language-star {
-            display: inline-block;
-            color: #ff0000;
-            font-size: 1.2rem;
-            margin-right: 5px;
-        }
-
-        /* Theme Styles */
-        body.theme-matrix {
-            background: #000000;
-        }
-
-        body.theme-matrix .background {
-            background: linear-gradient(135deg, #001a00 0%, #003300 50%, #000000 100%);
-        }
-
-        body.theme-lionking {
-            background: #2a1810;
-        }
-
-        body.theme-lionking .background {
-            background: linear-gradient(135deg, #4a3728 0%, #6b4f38 50%, #2a1810 100%);
-        }
-
-        body.theme-heavenkingdom {
-            background: #1a1a3e;
-        }
-
-        body.theme-heavenkingdom .background {
-            background: linear-gradient(135deg, #2a2a5e 0%, #3a3a7e 50%, #1a1a3e 100%);
-        }
-
-        /* Main Container */
-        .container {
-            position: relative;
-            z-index: 1;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 50px 20px;
-        }
-
-        /* Customization Panel */
-        .customization-panel {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-            background: rgba(0, 0, 0, 0.8);
-            border: 2px solid currentColor;
-            border-radius: 10px;
-            padding: 20px;
-            max-width: 300px;
-            backdrop-filter: blur(10px);
-        }
-
-        .customization-toggle {
-            background: var(--accent-color, #00d4ff);
-            color: #000;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            margin-bottom: 15px;
-            width: 100%;
-            transition: all 0.3s;
-        }
-
-        .customization-toggle:hover {
-            transform: scale(1.05);
-        }
-
-        .customization-content {
-            display: none;
-            max-height: 600px;
-            overflow-y: auto;
-        }
-
-        .customization-content.active {
-            display: block;
-        }
-
-        .customization-section {
-            margin-bottom: 15px;
-            text-align: left;
-        }
-
-        .customization-section h3 {
-            font-size: 0.9rem;
-            margin-bottom: 10px;
-            color: var(--accent-color, #00d4ff);
-        }
-
-        .color-grid {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 8px;
-            margin-bottom: 15px;
-        }
-
-        .color-option {
-            width: 35px;
-            height: 35px;
-            border-radius: 5px;
-            cursor: pointer;
-            border: 2px solid transparent;
-            transition: all 0.3s;
-        }
-
-        .color-option:hover {
-            transform: scale(1.1);
-            border-color: white;
-        }
-
-        .color-option.active {
-            border: 3px solid white;
-            box-shadow: 0 0 10px currentColor;
-        }
-
-        .theme-buttons {
-            display: flex;
-            gap: 8px;
-            flex-direction: column;
-        }
-
-        .theme-btn {
-            padding: 10px;
-            border: 2px solid var(--accent-color, #00d4ff);
-            background: rgba(0, 212, 255, 0.1);
-            color: white;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            transition: all 0.3s;
-        }
-
-        .theme-btn:hover {
-            background: rgba(0, 212, 255, 0.3);
-        }
-
-        .theme-btn.active {
-            background: var(--accent-color, #00d4ff);
-            color: #000;
-            font-weight: bold;
-        }
-
-        .language-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-            margin-bottom: 15px;
-        }
-
-        .language-option {
-            padding: 10px;
-            border: 2px solid var(--accent-color, #00d4ff);
-            background: rgba(0, 212, 255, 0.1);
-            color: white;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 0.85rem;
-            transition: all 0.3s;
-            font-weight: 600;
-        }
-
-        .language-option:hover {
-            background: rgba(0, 212, 255, 0.3);
-            transform: scale(1.05);
-        }
-
-        .language-option.active {
-            background: var(--accent-color, #00d4ff);
-            color: #000;
-            box-shadow: 0 0 10px var(--accent-color, #00d4ff);
-        }
-
-        /* Logo */
-        .logo {
-            width: 120px;
-            height: 120px;
-            margin-bottom: 30px;
-            animation: glow 3s ease-in-out infinite;
-        }
-
-        @keyframes glow {
-            0%, 100% { filter: drop-shadow(0 0 10px var(--accent-color, #00d4ff)); }
-            50% { filter: drop-shadow(0 0 30px var(--accent-color, #00d4ff)); }
-        }
-
-        /* Heading */
-        h1 {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            color: var(--accent-color, #00d4ff);
-            text-shadow: 0 0 20px var(--accent-color, #00d4ff), 0 0 40px var(--secondary-color, #00f5ff);
-            font-weight: bold;
-            letter-spacing: 3px;
-            animation: titleGlow 2s ease-in-out infinite;
-        }
-
-        @keyframes titleGlow {
-            0%, 100% { text-shadow: 0 0 20px var(--accent-color, #00d4ff), 0 0 40px var(--secondary-color, #00f5ff); }
-            50% { text-shadow: 0 0 30px var(--accent-color, #00d4ff), 0 0 60px var(--secondary-color, #00f5ff), 0 0 80px var(--tertiary-color, #ff006e); }
-        }
-
-        /* Description */
-        .description {
-            font-size: 1.2rem;
-            max-width: 600px;
-            line-height: 1.8;
-            margin-bottom: 40px;
-            color: #e0e0e0;
-        }
-
-        /* Telemetry Box - Neon Style */
-        .telemetry {
-            background: rgba(0, 212, 255, 0.1);
-            border: 2px solid var(--accent-color, #00d4ff);
-            border-radius: 10px;
-            padding: 30px;
-            margin-bottom: 40px;
-            max-width: 700px;
-            box-shadow: 0 0 20px rgba(0, 212, 255, 0.3), inset 0 0 20px rgba(0, 212, 255, 0.1);
-            backdrop-filter: blur(10px);
-            transition: all 0.5s ease;
-        }
-
-        .telemetry-title {
-            font-size: 1.1rem;
-            color: var(--secondary-color, #00f5ff);
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 0 0 10px var(--secondary-color, #00f5ff);
-        }
-
-        .telemetry-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-
-        .telemetry-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.95rem;
-            border-bottom: 1px solid rgba(0, 212, 255, 0.3);
-            padding-bottom: 10px;
-            grid-column: span 1;
-        }
-
-        .telemetry-item.full-width {
-            grid-column: span 2;
-        }
-
-        .telemetry-label {
-            color: var(--accent-color, #00d4ff);
-            font-weight: bold;
-            font-size: 0.9rem;
-        }
-
-        .telemetry-value {
-            color: var(--tertiary-color, #ff006e);
-            font-weight: bold;
-            text-shadow: 0 0 10px var(--tertiary-color, #ff006e);
-            font-size: 0.9rem;
-        }
-
-        .risk-indicator {
-            display: inline-block;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            margin-right: 5px;
-        }
-
-        .risk-low {
-            background: #00ff00;
-        }
-
-        .risk-medium {
-            background: #ffaa00;
-        }
-
-        .risk-high {
-            background: #ff0000;
-        }
-
-        /* Music Section */
-        .music-section {
-            background: rgba(0, 212, 255, 0.05);
-            border: 2px solid var(--tertiary-color, #ff006e);
-            border-radius: 10px;
-            padding: 30px;
-            margin-bottom: 40px;
-            max-width: 600px;
-            box-shadow: 0 0 20px rgba(255, 0, 110, 0.2);
-            backdrop-filter: blur(10px);
-            transition: all 0.5s ease;
-        }
-
-        .music-title {
-            font-size: 1.3rem;
-            color: var(--tertiary-color, #ff006e);
-            margin-bottom: 25px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 0 0 10px var(--tertiary-color, #ff006e);
-        }
-
-        .radio-stations {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-
-        .radio-btn {
-            background: linear-gradient(135deg, var(--tertiary-color, #ff006e), var(--quaternary-color, #ff3d82));
-            color: white;
-            padding: 15px 20px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s;
-            font-size: 0.95rem;
-            text-decoration: none;
-            display: block;
-        }
-
-        .radio-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 20px var(--tertiary-color, #ff006e);
-        }
-
-        /* Contact Button */
-        .btn-contact {
-            background: linear-gradient(135deg, var(--accent-color, #00d4ff), var(--secondary-color, #00f5ff));
-            color: #1a1a2e;
-            padding: 15px 40px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            margin-bottom: 30px;
-            transition: all 0.3s;
-            font-size: 1.1rem;
-            display: inline-block;
-            border: none;
-            cursor: pointer;
-            text-shadow: 0 0 5px rgba(0, 212, 255, 0.5);
-        }
-
-        .btn-contact:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 30px var(--accent-color, #00d4ff);
-        }
-
-        /* Social Links */
-        .social {
-            margin-top: 40px;
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-        }
-
-        .social a {
-            color: white;
-            font-size: 1.3rem;
-            text-decoration: none;
-            transition: all 0.3s;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .social a:hover {
-            color: var(--accent-color, #00d4ff);
-            text-shadow: 0 0 15px var(--accent-color, #00d4ff);
-            transform: scale(1.2);
-        }
-
-        .instagram-link {
-            background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-            padding: 12px 25px;
-            border-radius: 8px;
-            color: white !important;
-            font-weight: bold;
-            text-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-        }
-
-        .instagram-link:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 25px rgba(240, 148, 51, 0.5);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5rem;
-            }
-
-            .language-box {
-                padding: 40px 25px;
-                margin: 20px;
-            }
-
-            .language-title {
-                font-size: 1.8rem;
-            }
-
-            .language-buttons {
-                grid-template-columns: 1fr;
-            }
-
-            .radio-stations {
-                grid-template-columns: 1fr;
-            }
-
-            .telemetry {
-                max-width: 100%;
-            }
-
-            .telemetry-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .telemetry-item.full-width {
-                grid-column: span 1;
-            }
-
-            .music-section {
-                max-width: 100%;
-            }
-
-            .customization-panel {
-                top: 10px;
-                right: 10px;
-                max-width: 250px;
-            }
-
-            .color-grid {
-                grid-template-columns: repeat(5, 1fr);
-            }
-
-            .language-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-    </style>
+    <meta name="description" content="Catalyst Ozwell - Welcome Wilkommen">
+     <meta name="keywords" content="tech for holistic innovation in healthier future">
+     
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Catalyst Ozwell | Love&LightHealth </title>
+     <style>
+         * {
+             margin: 0;
+             padding: 0;
+             box-sizing: border-box;
+         }
+
+         body {
+             font-family: 'Arial', sans-serif;
+             color: white;
+             text-align: center;
+             overflow-x: hidden;
+             background: #0a0e27;
+             transition: all 0.5s ease;
+         }
+
+         /* Dynamic Background with Animation */
+         .background {
+             position: fixed;
+             top: 0;
+             left: 0;
+             width: 100%;
+             height: 100%;
+             z-index: -2;
+             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+             background-size: 400% 400%;
+             animation: gradientShift 15s ease infinite;
+             transition: all 0.5s ease;
+         }
+
+         @keyframes gradientShift {
+             0% { background-position: 0% 50%; }
+             50% { background-position: 100% 50%; }
+             100% { background-position: 0% 50%; }
+         }
+
+         /* Light Play Effects */
+         .light-orbs {
+             position: fixed;
+             width: 100%;
+             height: 100%;
+             top: 0;
+             left: 0;
+             z-index: -1;
+             overflow: hidden;
+         }
+
+         .orb {
+             position: absolute;
+             border-radius: 50%;
+             filter: blur(80px);
+             opacity: 0.3;
+             transition: all 0.5s ease;
+         }
+
+         .orb1 {
+             width: 300px;
+             height: 300px;
+             background: radial-gradient(circle, #00d4ff, transparent);
+             top: -100px;
+             left: -100px;
+             animation: float 20s infinite ease-in-out;
+         }
+
+         .orb2 {
+             width: 250px;
+             height: 250px;
+             background: radial-gradient(circle, #ff006e, transparent);
+             bottom: -50px;
+             right: -50px;
+             animation: float 25s infinite ease-in-out reverse;
+         }
+
+         .orb3 {
+             width: 200px;
+             height: 200px;
+             background: radial-gradient(circle, #00f5ff, transparent);
+             top: 50%;
+             right: 10%;
+             animation: float 30s infinite ease-in-out;
+         }
+
+         @keyframes float {
+             0%, 100% { transform: translate(0, 0); }
+             25% { transform: translate(30px, -30px); }
+             50% { transform: translate(-20px, 20px); }
+             75% { transform: translate(20px, 30px); }
+         }
+
+         /* Language Modal */
+         .language-modal {
+             position: fixed;
+             top: 0;
+             left: 0;
+             width: 100%;
+             height: 100%;
+             z-index: 9999;
+             background: rgba(0, 0, 0, 0.9);
+             display: flex;
+             justify-content: center;
+             align-items: center;
+             backdrop-filter: blur(5px);
+         }
+
+         .language-modal.hidden {
+             display: none;
+         }
+
+         .language-box {
+             background: linear-gradient(135deg, #ffff00 0%, #ffdd00 50%, #ffaa00 100%);
+             border: 4px solid #ffff00;
+             border-radius: 20px;
+             padding: 50px 40px;
+             max-width: 600px;
+             box-shadow: 0 0 50px rgba(255, 255, 0, 0.5), inset 0 0 30px rgba(255, 255, 0, 0.3);
+             animation: pulse-glow 2s ease-in-out infinite;
+             text-align: center;
+         }
+
+         @keyframes pulse-glow {
+             0%, 100% { box-shadow: 0 0 50px rgba(255, 255, 0, 0.5), inset 0 0 30px rgba(255, 255, 0, 0.3); }
+             50% { box-shadow: 0 0 80px rgba(255, 255, 0, 0.8), inset 0 0 50px rgba(255, 255, 0, 0.5); }
+         }
+
+         .language-title {
+             color: #000;
+             font-size: 2.5rem;
+             font-weight: bold;
+             margin-bottom: 15px;
+             text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+         }
+
+         .language-subtitle {
+             color: #333;
+             font-size: 1.2rem;
+             margin-bottom: 40px;
+             font-weight: 600;
+         }
+
+         .language-buttons {
+             display: grid;
+             grid-template-columns: 1fr 1fr 1fr;
+             gap: 20px;
+             margin-bottom: 30px;
+         }
+
+         .language-btn {
+             background: linear-gradient(135deg, #ffffff, #f0f0f0);
+             color: #000;
+             border: 3px solid #000;
+             padding: 20px 25px;
+             font-size: 1.1rem;
+             font-weight: bold;
+             border-radius: 10px;
+             cursor: pointer;
+             transition: all 0.3s;
+             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+             text-transform: uppercase;
+             letter-spacing: 2px;
+         }
+
+         .language-btn:hover {
+             transform: scale(1.08);
+             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+             background: linear-gradient(135deg, #ffff00, #ffdd00);
+         }
+
+         .language-btn.detected {
+             background: linear-gradient(135deg, #ffff00, #ffdd00);
+             border-color: #ff0000;
+             box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+         }
+
+         .language-info {
+             color: #333;
+             font-size: 0.9rem;
+             font-weight: 600;
+             margin-top: 20px;
+             padding: 15px;
+             background: rgba(255, 255, 255, 0.5);
+             border-radius: 8px;
+         }
+
+         .language-star {
+             display: inline-block;
+             color: #ff0000;
+             font-size: 1.2rem;
+             margin-right: 5px;
+         }
+
+         /* Theme Styles - 12 Themes */
+         /* 1. Digital Nexus (default) - handled by body styles */
+         
+         /* 2. Cyber Matrix */
+         body.theme-matrix {
+             background: #000000;
+         }
+         body.theme-matrix .background {
+             background: linear-gradient(135deg, #001a00 0%, #003300 50%, #000000 100%);
+         }
+         body.theme-matrix .telemetry,
+         body.theme-matrix .weather-forecast,
+         body.theme-matrix .wellbeing-suggestion {
+             border-color: #00ff00 !important;
+             box-shadow: 0 0 30px rgba(0, 255, 0, 0.5), inset 0 0 20px rgba(0, 255, 0, 0.1) !important;
+         }
+
+         /* 3. Golden Savanna */
+         body.theme-lionking {
+             background: #2a1810;
+         }
+         body.theme-lionking .background {
+             background: linear-gradient(135deg, #4a3728 0%, #6b4f38 50%, #2a1810 100%);
+         }
+         body.theme-lionking .telemetry,
+         body.theme-lionking .weather-forecast,
+         body.theme-lionking .wellbeing-suggestion {
+             border-color: #ffaa00 !important;
+             box-shadow: 0 0 30px rgba(255, 170, 0, 0.5), inset 0 0 20px rgba(255, 170, 0, 0.1) !important;
+         }
+
+         /* 4. Celestial Realm */
+         body.theme-heavenkingdom {
+             background: #1a1a3e;
+         }
+         body.theme-heavenkingdom .background {
+             background: linear-gradient(135deg, #2a2a5e 0%, #3a3a7e 50%, #1a1a3e 100%);
+         }
+         body.theme-heavenkingdom .telemetry,
+         body.theme-heavenkingdom .weather-forecast,
+         body.theme-heavenkingdom .wellbeing-suggestion {
+             border-color: #b19cd9 !important;
+             box-shadow: 0 0 30px rgba(177, 156, 217, 0.5), inset 0 0 20px rgba(177, 156, 217, 0.1) !important;
+         }
+
+         /* 5. Ocean Deep */
+         body.theme-ocean {
+             background: #0d1b2a;
+         }
+         body.theme-ocean .background {
+             background: linear-gradient(135deg, #0d2b45 0%, #1a4d6d 50%, #0d1b2a 100%);
+         }
+         body.theme-ocean .telemetry,
+         body.theme-ocean .weather-forecast,
+         body.theme-ocean .wellbeing-suggestion {
+             border-color: #00e5ff !important;
+             box-shadow: 0 0 30px rgba(0, 229, 255, 0.5), inset 0 0 20px rgba(0, 229, 255, 0.1) !important;
+         }
+
+         /* 6. Sunset Horizon */
+         body.theme-sunset {
+             background: #2a1a0f;
+         }
+         body.theme-sunset .background {
+             background: linear-gradient(135deg, #4a2a1f 0%, #8b4513 50%, #2a1a0f 100%);
+         }
+         body.theme-sunset .telemetry,
+         body.theme-sunset .weather-forecast,
+         body.theme-sunset .wellbeing-suggestion {
+             border-color: #ff6b35 !important;
+             box-shadow: 0 0 30px rgba(255, 107, 53, 0.5), inset 0 0 20px rgba(255, 107, 53, 0.1) !important;
+         }
+
+         /* 7. Forest Whisper */
+         body.theme-forest {
+             background: #1a2e1a;
+         }
+         body.theme-forest .background {
+             background: linear-gradient(135deg, #2a4a2a 0%, #3d5d3d 50%, #1a2e1a 100%);
+         }
+         body.theme-forest .telemetry,
+         body.theme-forest .weather-forecast,
+         body.theme-forest .wellbeing-suggestion {
+             border-color: #7cfc00 !important;
+             box-shadow: 0 0 30px rgba(124, 252, 0, 0.5), inset 0 0 20px rgba(124, 252, 0, 0.1) !important;
+         }
+
+         /* 8. Neon Nights */
+         body.theme-neon {
+             background: #0a0a1a;
+         }
+         body.theme-neon .background {
+             background: linear-gradient(135deg, #1a0a3a 0%, #2a1a5a 50%, #0a0a1a 100%);
+         }
+         body.theme-neon .telemetry,
+         body.theme-neon .weather-forecast,
+         body.theme-neon .wellbeing-suggestion {
+             border-color: #ff00ff !important;
+             box-shadow: 0 0 30px rgba(255, 0, 255, 0.7), inset 0 0 20px rgba(255, 0, 255, 0.2) !important;
+         }
+
+         /* 9. Arctic Aurora */
+         body.theme-arctic {
+             background: #0f1f3f;
+         }
+         body.theme-arctic .background {
+             background: linear-gradient(135deg, #1f3f5f 0%, #2f5f7f 50%, #0f1f3f 100%);
+         }
+         body.theme-arctic .telemetry,
+         body.theme-arctic .weather-forecast,
+         body.theme-arctic .wellbeing-suggestion {
+             border-color: #40e0d0 !important;
+             box-shadow: 0 0 30px rgba(64, 224, 208, 0.5), inset 0 0 20px rgba(64, 224, 208, 0.1) !important;
+         }
+
+         /* 10. Crimson Dawn */
+         body.theme-crimson {
+             background: #2a0a1a;
+         }
+         body.theme-crimson .background {
+             background: linear-gradient(135deg, #4a1a3a 0%, #6b2a4a 50%, #2a0a1a 100%);
+         }
+         body.theme-crimson .telemetry,
+         body.theme-crimson .weather-forecast,
+         body.theme-crimson .wellbeing-suggestion {
+             border-color: #ff1493 !important;
+             box-shadow: 0 0 30px rgba(255, 20, 147, 0.5), inset 0 0 20px rgba(255, 20, 147, 0.1) !important;
+         }
+
+         /* 11. Stellar Galaxy */
+         body.theme-stellar {
+             background: #0a0a2e;
+         }
+         body.theme-stellar .background {
+             background: linear-gradient(135deg, #1a1a4e 0%, #2a2a6e 50%, #0a0a2e 100%);
+         }
+         body.theme-stellar .telemetry,
+         body.theme-stellar .weather-forecast,
+         body.theme-stellar .wellbeing-suggestion {
+             border-color: #ffd700 !important;
+             box-shadow: 0 0 30px rgba(255, 215, 0, 0.5), inset 0 0 20px rgba(255, 215, 0, 0.1) !important;
+         }
+
+         /* 12. Cyber Punk */
+         body.theme-cyberpunk {
+             background: #0a0a0a;
+         }
+         body.theme-cyberpunk .background {
+             background: linear-gradient(135deg, #1a0a2a 0%, #2a1a3a 50%, #0a0a0a 100%);
+         }
+         body.theme-cyberpunk .telemetry,
+         body.theme-cyberpunk .weather-forecast,
+         body.theme-cyberpunk .wellbeing-suggestion {
+             border-color: #00ffff !important;
+             box-shadow: 0 0 30px rgba(0, 255, 255, 0.7), inset 0 0 20px rgba(0, 255, 255, 0.2) !important;
+         }
+
+         /* Main Container */
+         .container {
+             position: relative;
+             z-index: 1;
+             min-height: 100vh;
+             display: flex;
+             flex-direction: column;
+             justify-content: center;
+             align-items: center;
+             padding: 50px 20px;
+         }
+
+         /* Customization Panel - No Sliders */
+         .customization-panel {
+             position: fixed;
+             top: 20px;
+             right: 20px;
+             z-index: 1000;
+             background: rgba(0, 0, 0, 0.8);
+             border: 2px solid currentColor;
+             border-radius: 10px;
+             padding: 20px;
+             max-width: 320px;
+             backdrop-filter: blur(10px);
+         }
+
+         .customization-toggle {
+             background: var(--accent-color, #00d4ff);
+             color: #000;
+             padding: 10px 15px;
+             border: none;
+             border-radius: 5px;
+             cursor: pointer;
+             font-weight: bold;
+             margin-bottom: 15px;
+             width: 100%;
+             transition: all 0.3s;
+         }
+
+         .customization-toggle:hover {
+             transform: scale(1.05);
+         }
+
+         .customization-content {
+             display: none;
+             max-height: 600px;
+             overflow-y: auto;
+         }
+
+         .customization-content.active {
+             display: block;
+         }
+
+         .customization-section {
+             margin-bottom: 15px;
+             text-align: left;
+         }
+
+         .customization-section h3 {
+             font-size: 0.9rem;
+             margin-bottom: 10px;
+             color: var(--accent-color, #00d4ff);
+         }
+
+         .theme-buttons {
+             display: grid;
+             grid-template-columns: 1fr 1fr;
+             gap: 8px;
+             flex-direction: column;
+         }
+
+         .theme-btn {
+             padding: 8px;
+             border: 2px solid var(--accent-color, #00d4ff);
+             background: rgba(0, 212, 255, 0.1);
+             color: white;
+             border-radius: 5px;
+             cursor: pointer;
+             font-size: 0.8rem;
+             transition: all 0.3s;
+         }
+
+         .theme-btn:hover {
+             background: rgba(0, 212, 255, 0.3);
+         }
+
+         .theme-btn.active {
+             background: var(--accent-color, #00d4ff);
+             color: #000;
+             font-weight: bold;
+         }
+
+         .language-grid {
+             display: grid;
+             grid-template-columns: repeat(2, 1fr);
+             gap: 8px;
+             margin-bottom: 15px;
+         }
+
+         .language-option {
+             padding: 8px;
+             border: 2px solid var(--accent-color, #00d4ff);
+             background: rgba(0, 212, 255, 0.1);
+             color: white;
+             border-radius: 5px;
+             cursor: pointer;
+             font-size: 0.8rem;
+             transition: all 0.3s;
+             font-weight: 600;
+         }
+
+         .language-option:hover {
+             background: rgba(0, 212, 255, 0.3);
+             transform: scale(1.05);
+         }
+
+         .language-option.active {
+             background: var(--accent-color, #00d4ff);
+             color: #000;
+             box-shadow: 0 0 10px var(--accent-color, #00d4ff);
+         }
+
+         /* Logo */
+         .logo {
+             width: 120px;
+             height: 120px;
+             margin-bottom: 30px;
+             animation: glow 3s ease-in-out infinite;
+         }
+
+         @keyframes glow {
+             0%, 100% { filter: drop-shadow(0 0 10px var(--accent-color, #00d4ff)); }
+             50% { filter: drop-shadow(0 0 30px var(--accent-color, #00d4ff)); }
+         }
+
+         /* Heading */
+         h1 {
+             font-size: 4rem;
+             margin-bottom: 20px;
+             color: var(--accent-color, #00d4ff);
+             text-shadow: 0 0 20px var(--accent-color, #00d4ff), 0 0 40px var(--secondary-color, #00f5ff);
+             font-weight: bold;
+             letter-spacing: 3px;
+             animation: titleGlow 2s ease-in-out infinite;
+         }
+
+         @keyframes titleGlow {
+             0%, 100% { text-shadow: 0 0 20px var(--accent-color, #00d4ff), 0 0 40px var(--secondary-color, #00f5ff); }
+             50% { text-shadow: 0 0 30px var(--accent-color, #00d4ff), 0 0 60px var(--secondary-color, #00f5ff), 0 0 80px var(--tertiary-color, #ff006e); }
+         }
+
+         /* Description */
+         .description {
+             font-size: 1.2rem;
+             max-width: 600px;
+             line-height: 1.8;
+             margin-bottom: 40px;
+             color: #e0e0e0;
+         }
+
+         /* Weather Forecast Section */
+         .weather-forecast {
+             background: rgba(0, 212, 255, 0.1);
+             border: 2px solid var(--accent-color, #00d4ff);
+             border-radius: 10px;
+             padding: 30px;
+             margin-bottom: 30px;
+             max-width: 900px;
+             box-shadow: 0 0 20px rgba(0, 212, 255, 0.3), inset 0 0 20px rgba(0, 212, 255, 0.1);
+             backdrop-filter: blur(10px);
+             transition: all 0.5s ease;
+         }
+
+         .weather-title {
+             font-size: 1.1rem;
+             color: var(--secondary-color, #00f5ff);
+             margin-bottom: 20px;
+             text-transform: uppercase;
+             letter-spacing: 2px;
+             text-shadow: 0 0 10px var(--secondary-color, #00f5ff);
+         }
+
+         .forecast-grid {
+             display: grid;
+             grid-template-columns: repeat(3, 1fr);
+             gap: 20px;
+             margin-bottom: 20px;
+         }
+
+         .forecast-card {
+             background: rgba(0, 212, 255, 0.05);
+             border: 1px solid var(--accent-color, #00d4ff);
+             border-radius: 8px;
+             padding: 15px;
+             transition: all 0.3s;
+         }
+
+         .forecast-card:hover {
+             transform: translateY(-5px);
+             box-shadow: 0 5px 15px rgba(0, 212, 255, 0.3);
+         }
+
+         .forecast-time {
+             font-size: 0.9rem;
+             color: var(--accent-color, #00d4ff);
+             font-weight: bold;
+             margin-bottom: 10px;
+         }
+
+         .forecast-detail {
+             font-size: 0.85rem;
+             color: #e0e0e0;
+             margin: 5px 0;
+         }
+
+         .forecast-emoji {
+             font-size: 2rem;
+             margin: 10px 0;
+         }
+
+         /* Wellbeing Suggestion Section */
+         .wellbeing-suggestion {
+             background: rgba(255, 0, 110, 0.05);
+             border: 2px solid var(--tertiary-color, #ff006e);
+             border-radius: 10px;
+             padding: 30px;
+             margin-bottom: 40px;
+             max-width: 700px;
+             box-shadow: 0 0 20px rgba(255, 0, 110, 0.2);
+             backdrop-filter: blur(10px);
+             transition: all 0.5s ease;
+         }
+
+         .wellbeing-title {
+             font-size: 1.1rem;
+             color: var(--tertiary-color, #ff006e);
+             margin-bottom: 15px;
+             text-transform: uppercase;
+             letter-spacing: 2px;
+             text-shadow: 0 0 10px var(--tertiary-color, #ff006e);
+         }
+
+         .wellbeing-text {
+             font-size: 1rem;
+             color: #e0e0e0;
+             line-height: 1.6;
+             font-style: italic;
+         }
+
+         /* Telemetry Box - Neon Style */
+         .telemetry {
+             background: rgba(0, 212, 255, 0.1);
+             border: 2px solid var(--accent-color, #00d4ff);
+             border-radius: 10px;
+             padding: 30px;
+             margin-bottom: 40px;
+             max-width: 700px;
+             box-shadow: 0 0 20px rgba(0, 212, 255, 0.3), inset 0 0 20px rgba(0, 212, 255, 0.1);
+             backdrop-filter: blur(10px);
+             transition: all 0.5s ease;
+         }
+
+         .telemetry-title {
+             font-size: 1.1rem;
+             color: var(--secondary-color, #00f5ff);
+             margin-bottom: 20px;
+             text-transform: uppercase;
+             letter-spacing: 2px;
+             text-shadow: 0 0 10px var(--secondary-color, #00f5ff);
+         }
+
+         .telemetry-grid {
+             display: grid;
+             grid-template-columns: 1fr 1fr;
+             gap: 15px;
+         }
+
+         .telemetry-item {
+             display: flex;
+             justify-content: space-between;
+             align-items: center;
+             font-size: 0.95rem;
+             border-bottom: 1px solid rgba(0, 212, 255, 0.3);
+             padding-bottom: 10px;
+             grid-column: span 1;
+         }
+
+         .telemetry-item.full-width {
+             grid-column: span 2;
+         }
+
+         .telemetry-label {
+             color: var(--accent-color, #00d4ff);
+             font-weight: bold;
+             font-size: 0.9rem;
+         }
+
+         .telemetry-value {
+             color: var(--tertiary-color, #ff006e);
+             font-weight: bold;
+             text-shadow: 0 0 10px var(--tertiary-color, #ff006e);
+             font-size: 0.9rem;
+         }
+
+         .risk-indicator {
+             display: inline-block;
+             width: 12px;
+             height: 12px;
+             border-radius: 50%;
+             margin-right: 5px;
+         }
+
+         .risk-low {
+             background: #00ff00;
+         }
+
+         .risk-medium {
+             background: #ffaa00;
+         }
+
+         .risk-high {
+             background: #ff0000;
+         }
+
+         /* Music Section */
+         .music-section {
+             background: rgba(0, 212, 255, 0.05);
+             border: 2px solid var(--tertiary-color, #ff006e);
+             border-radius: 10px;
+             padding: 30px;
+             margin-bottom: 40px;
+             max-width: 600px;
+             box-shadow: 0 0 20px rgba(255, 0, 110, 0.2);
+             backdrop-filter: blur(10px);
+             transition: all 0.5s ease;
+         }
+
+         .music-title {
+             font-size: 1.3rem;
+             color: var(--tertiary-color, #ff006e);
+             margin-bottom: 25px;
+             text-transform: uppercase;
+             letter-spacing: 2px;
+             text-shadow: 0 0 10px var(--tertiary-color, #ff006e);
+         }
+
+         .radio-stations {
+             display: grid;
+             grid-template-columns: 1fr 1fr;
+             gap: 15px;
+         }
+
+         .radio-btn {
+             background: linear-gradient(135deg, var(--tertiary-color, #ff006e), var(--quaternary-color, #ff3d82));
+             color: white;
+             padding: 15px 20px;
+             border: none;
+             border-radius: 8px;
+             cursor: pointer;
+             font-weight: bold;
+             transition: all 0.3s;
+             font-size: 0.95rem;
+             text-decoration: none;
+             display: block;
+         }
+
+         .radio-btn:hover {
+             transform: scale(1.05);
+             box-shadow: 0 0 20px var(--tertiary-color, #ff006e);
+         }
+
+         /* Contact Button */
+         .btn-contact {
+             background: linear-gradient(135deg, var(--accent-color, #00d4ff), var(--secondary-color, #00f5ff));
+             color: #1a1a2e;
+             padding: 15px 40px;
+             border-radius: 8px;
+             text-decoration: none;
+             font-weight: bold;
+             margin-bottom: 30px;
+             transition: all 0.3s;
+             font-size: 1.1rem;
+             display: inline-block;
+             border: none;
+             cursor: pointer;
+             text-shadow: 0 0 5px rgba(0, 212, 255, 0.5);
+         }
+
+         .btn-contact:hover {
+             transform: scale(1.1);
+             box-shadow: 0 0 30px var(--accent-color, #00d4ff);
+         }
+
+         /* Social Links */
+         .social {
+             margin-top: 40px;
+             display: flex;
+             justify-content: center;
+             gap: 30px;
+             flex-wrap: wrap;
+         }
+
+         .social a {
+             color: white;
+             font-size: 1.3rem;
+             text-decoration: none;
+             transition: all 0.3s;
+             display: inline-flex;
+             align-items: center;
+             gap: 8px;
+         }
+
+         .social a:hover {
+             color: var(--accent-color, #00d4ff);
+             text-shadow: 0 0 15px var(--accent-color, #00d4ff);
+             transform: scale(1.2);
+         }
+
+         .instagram-link {
+             background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+             padding: 12px 25px;
+             border-radius: 8px;
+             color: white !important;
+             font-weight: bold;
+             text-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+         }
+
+         .instagram-link:hover {
+             transform: scale(1.1);
+             box-shadow: 0 0 25px rgba(240, 148, 51, 0.5);
+         }
+
+         /* Responsive Design */
+         @media (max-width: 768px) {
+             h1 {
+                 font-size: 2.5rem;
+             }
+
+             .language-box {
+                 padding: 40px 25px;
+                 margin: 20px;
+             }
+
+             .language-title {
+                 font-size: 1.8rem;
+             }
+
+             .language-buttons {
+                 grid-template-columns: 1fr;
+             }
+
+             .radio-stations {
+                 grid-template-columns: 1fr;
+             }
+
+             .telemetry {
+                 max-width: 100%;
+             }
+
+             .telemetry-grid {
+                 grid-template-columns: 1fr;
+             }
+
+             .telemetry-item.full-width {
+                 grid-column: span 1;
+             }
+
+             .weather-forecast {
+                 max-width: 100%;
+             }
+
+             .forecast-grid {
+                 grid-template-columns: 1fr;
+             }
+
+             .music-section {
+                 max-width: 100%;
+             }
+
+             .customization-panel {
+                 top: 10px;
+                 right: 10px;
+                 max-width: 250px;
+             }
+
+             .theme-buttons {
+                 grid-template-columns: 1fr;
+             }
+
+             .language-grid {
+                 grid-template-columns: 1fr;
+             }
+         }
+     </style>
 </head>
 <body>
     <!-- Dynamic Background -->
@@ -673,8 +877,18 @@ l<!DOCTYPE html>
             <div class="language-title">🌍 SELECT YOUR LANGUAGE</div>
             <div class="language-subtitle">Choose your preferred language:</div>
             <div class="language-buttons">
-                <button class="language-btn" id="englishBtn" onclick="setLanguage('en')">🇬🇧 ENGLISH</button>
-                <button class="language-btn" id="localBtn" onclick="setLanguageByCountry()">📍 LOCAL LANGUAGE</button>
+                <button class="language-btn" id="englishBtn" onclick="setLanguage('en')">🇬🇧 ENG</button>
+                <button class="language-btn" id="turkishBtn" onclick="setLanguage('tr')">🇹🇷 TUR</button>
+                <button class="language-btn" id="indianBtn" onclick="setLanguage('hi')">🇮🇳 HIN</button>
+                <button class="language-btn" id="germanBtn" onclick="setLanguage('de')">🇩🇪 DEU</button>
+                <button class="language-btn" id="frenchBtn" onclick="setLanguage('fr')">🇫🇷 FRA</button>
+                <button class="language-btn" id="spanishBtn" onclick="setLanguage('es')">🇪🇸 ESP</button>
+                <button class="language-btn" id="italianBtn" onclick="setLanguage('it')">🇮🇹 ITA</button>
+                <button class="language-btn" id="japaneseBtn" onclick="setLanguage('ja')">🇯🇵 JPN</button>
+                <button class="language-btn" id="chineseBtn" onclick="setLanguage('zh')">🇨🇳 CHN</button>
+                <button class="language-btn" id="portugueseBtn" onclick="setLanguage('pt')">🇵🇹 POR</button>
+                <button class="language-btn" id="dutchBtn" onclick="setLanguage('nl')">🇳🇱 DUT</button>
+                <button class="language-btn" id="localBtn" onclick="setLanguageByCountry()">📍 LOCAL</button>
             </div>
             <div class="language-info">
                 <span class="language-star">★</span> <span id="languageInfo">Detecting your location...</span>
@@ -687,20 +901,11 @@ l<!DOCTYPE html>
         <button class="customization-toggle" onclick="toggleCustomization()">⚙️ Customize</button>
         <div class="customization-content">
             <div class="customization-section">
-                <h3>🎨 Colors (33 Options)</h3>
-                <div class="color-grid" id="colorGrid"></div>
+                <h3>🎭 Themes (12 Options)</h3>
+                <div class="theme-buttons" id="themeButtons"></div>
             </div>
             <div class="customization-section">
-                <h3>🎭 Themes</h3>
-                <div class="theme-buttons">
-                    <button class="theme-btn active" onclick="setTheme('default')">Digital Nexus</button>
-                    <button class="theme-btn" onclick="setTheme('matrix')">Cyber Matrix</button>
-                    <button class="theme-btn" onclick="setTheme('lionking')">Golden Savanna</button>
-                    <button class="theme-btn" onclick="setTheme('heavenkingdom')">Celestial Realm</button>
-                </div>
-            </div>
-            <div class="customization-section">
-                <h3>🌐 Languages (9 Options)</h3>
+                <h3>🌐 Languages (11 Options)</h3>
                 <div class="language-grid" id="languageGrid"></div>
             </div>
         </div>
@@ -711,6 +916,22 @@ l<!DOCTYPE html>
         <img src="logo2.png" class="logo" alt="Catalyst Ozwell">
         <h1>Catalyst Ozwell</h1>
         <p class="description" data-i18n="coming-soon">Coming soon, very soon promise KISSES C.O....</p>
+
+        <!-- Weather Forecast Section (3 Day, 12 Hour Intervals) -->
+        <div class="weather-forecast">
+            <div class="weather-title" data-i18n="weather-forecast-title">🌤️ 3-Day Weather Forecast (12 Hour Intervals)</div>
+            <div class="forecast-grid" id="forecastGrid">
+                <!-- Generated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- AI Wellbeing Suggestion -->
+        <div class="wellbeing-suggestion">
+            <div class="wellbeing-title" data-i18n="wellbeing-title">🧘 AI Wellbeing Suggestion</div>
+            <div class="wellbeing-text" id="wellbeingText">
+                Loading personalized suggestion based on current conditions...
+            </div>
+        </div>
 
         <!-- Telemetry Section -->
         <div class="telemetry">
@@ -805,10 +1026,12 @@ l<!DOCTYPE html>
 
     <!-- Script -->
     <script>
-        // Multilingual Content
+        // Multilingual Content (Extended with Turkish & Hindi)
         const languages = {
             en: {
                 'coming-soon': 'Coming soon, very soon promise KISSES C.O....',
+                'weather-forecast-title': '🌤️ 3-Day Weather Forecast (12 Hour Intervals)',
+                'wellbeing-title': '🧘 AI Wellbeing Suggestion',
                 'telemetry-title': '📡 Advanced Environmental & Risk Analytics',
                 'temperature': '🌡️ Temperature',
                 'location': '📍 Location',
@@ -825,8 +1048,50 @@ l<!DOCTYPE html>
                 'music-title': '🎵 Free Radio Stations',
                 'contact': '📱 Contact Us'
             },
+            tr: {
+                'coming-soon': 'Çok yakında geliyor, söz veriyorum ÖPÜCÜKLER C.O....',
+                'weather-forecast-title': '🌤️ 3 Günlük Hava Durumu Tahmini (12 Saatlik Aralıklar)',
+                'wellbeing-title': '🧘 Yapay Zeka Wellness Önerisi',
+                'telemetry-title': '📡 Gelişmiş Çevresel & Risk Analitiği',
+                'temperature': '🌡️ Sıcaklık',
+                'location': '📍 Konum',
+                'wind-speed': '💨 Rüzgar Hızı',
+                'weather-risk': '🌦️ Hava Durumu Riski',
+                'seismic': '🌍 Son Deprem Aktivitesi',
+                'earthquake-risk': '⚠️ Deprem Riski',
+                'crime-rate': '🚨 Bölgesel Suç Oranı',
+                'safety-index': '🛡️ Güvenlik Endeksi',
+                'solar': '☀️ Güneş Aktivitesi',
+                'uv-index': '🛡️ UV/EUV Endeksi',
+                'protection': '💊 Radyasyon Koruma Önerisi',
+                'status': '📊 Sistem Durumu',
+                'music-title': '🎵 Ücretsiz Radyo İstasyonları',
+                'contact': '📱 Bize Ulaşın'
+            },
+            hi: {
+                'coming-soon': 'बहुत जल्द आ रहा है, वादा करता हूं KISSES C.O....',
+                'weather-forecast-title': '🌤️ 3 दिन का मौसम पूर्वानुमान (12 घंटे के अंतराल)',
+                'wellbeing-title': '🧘 कृत्रिम बुद्धिमत्ता स्वास्थ्य सुझाव',
+                'telemetry-title': '📡 उन्नत पर्यावरणीय और जोखिम विश्लेषण',
+                'temperature': '🌡️ तापमान',
+                'location': '📍 स्थान',
+                'wind-speed': '💨 हवा की गति',
+                'weather-risk': '🌦️ मौसम जोखिम',
+                'seismic': '🌍 हाल की भूकंपीय गतिविधि',
+                'earthquake-risk': '⚠️ भूकंप जोखिम',
+                'crime-rate': '🚨 क्षेत्रीय अपराध दर',
+                'safety-index': '🛡️ सुरक्षा सूचकांक',
+                'solar': '☀️ सौर गतिविधि',
+                'uv-index': '🛡️ यूवी/ईयूवी सूचकांक',
+                'protection': '💊 विकिरण सुरक्षा सिफारिश',
+                'status': '📊 सिस्टम स्थिति',
+                'music-title': '🎵 मुक्त रेडियो स्टेशन',
+                'contact': '📱 हमसे संपर्क करें'
+            },
             de: {
                 'coming-soon': 'Sehr bald kommen, versprochen KÜSSE C.O....',
+                'weather-forecast-title': '🌤️ 3-Tage-Wettervorhersage (12-Stunden-Intervalle)',
+                'wellbeing-title': '🧘 KI-Wohlbefindens-Vorschlag',
                 'telemetry-title': '📡 Erweiterte Umwelt- & Risikoanalysen',
                 'temperature': '🌡️ Temperatur',
                 'location': '📍 Standort',
@@ -843,26 +1108,10 @@ l<!DOCTYPE html>
                 'music-title': '🎵 Kostenlose Radiostationen',
                 'contact': '📱 Kontaktieren Sie uns'
             },
-            nl: {
-                'coming-soon': 'Zeer binnenkort, beloofd KUSSEN C.O....',
-                'telemetry-title': '📡 Geavanceerde Milieu- & Risicoanalyse',
-                'temperature': '🌡️ Temperatuur',
-                'location': '📍 Locatie',
-                'wind-speed': '💨 Windsnelheid',
-                'weather-risk': '🌦️ Weerrisico',
-                'seismic': '🌍 Recente seismische activiteit',
-                'earthquake-risk': '⚠️ Aardbevingsrisico',
-                'crime-rate': '🚨 Regionale misdaadcijfers',
-                'safety-index': '🛡️ Veiligheidsindex',
-                'solar': '☀️ Zonne-activiteit',
-                'uv-index': '🛡️ UV/EUV-index',
-                'protection': '💊 Aanbeveling stralingsbescherming',
-                'status': '📊 Systeemstatus',
-                'music-title': '🎵 Gratis radiostations',
-                'contact': '📱 Contact opnemen'
-            },
             fr: {
                 'coming-soon': 'Très bientôt, promis BISOUS C.O....',
+                'weather-forecast-title': '🌤️ Prévisions météorologiques 3 jours (intervalles de 12 heures)',
+                'wellbeing-title': '🧘 Suggestion de bien-être par IA',
                 'telemetry-title': '📡 Analyses Environnementales & Risques Avancées',
                 'temperature': '🌡️ Température',
                 'location': '📍 Localisation',
@@ -881,6 +1130,8 @@ l<!DOCTYPE html>
             },
             es: {
                 'coming-soon': 'Muy pronto, prometo BESOS C.O....',
+                'weather-forecast-title': '🌤️ Pronóstico meteorológico de 3 días (intervalos de 12 horas)',
+                'wellbeing-title': '🧘 Sugerencia de bienestar con IA',
                 'telemetry-title': '📡 Análisis Ambiental & Riesgos Avanzado',
                 'temperature': '🌡️ Temperatura',
                 'location': '📍 Ubicación',
@@ -899,6 +1150,8 @@ l<!DOCTYPE html>
             },
             it: {
                 'coming-soon': 'Molto presto, prometto BACI C.O....',
+                'weather-forecast-title': '🌤️ Previsioni meteo a 3 giorni (intervalli di 12 ore)',
+                'wellbeing-title': '🧘 Suggerimento di benessere AI',
                 'telemetry-title': '📡 Analisi Ambientale e Rischi Avanzata',
                 'temperature': '🌡️ Temperatura',
                 'location': '📍 Posizione',
@@ -917,6 +1170,8 @@ l<!DOCTYPE html>
             },
             ja: {
                 'coming-soon': 'もう間もなく、約束します KISSES C.O....',
+                'weather-forecast-title': '🌤️ 3日間の天気予報（12時間間隔）',
+                'wellbeing-title': '🧘 AI ウェルネス提案',
                 'telemetry-title': '📡 高度な環境・リスク分析',
                 'temperature': '🌡️ 気温',
                 'location': '📍 位置',
@@ -935,6 +1190,8 @@ l<!DOCTYPE html>
             },
             zh: {
                 'coming-soon': '即将推出，承诺 KISSES C.O....',
+                'weather-forecast-title': '🌤️ 3天天气预报（12小时间隔）',
+                'wellbeing-title': '🧘 人工智能健康建议',
                 'telemetry-title': '📡 高级环境和风险分析',
                 'temperature': '🌡️ 温度',
                 'location': '📍 位置',
@@ -953,6 +1210,8 @@ l<!DOCTYPE html>
             },
             pt: {
                 'coming-soon': 'Muito em breve, prometo BEIJOS C.O....',
+                'weather-forecast-title': '🌤️ Previsão meteorológica de 3 dias (intervalos de 12 horas)',
+                'wellbeing-title': '🧘 Sugestão de bem-estar por IA',
                 'telemetry-title': '📡 Análise Ambiental & Riscos Avançada',
                 'temperature': '🌡️ Temperatura',
                 'location': '📍 Localização',
@@ -968,24 +1227,64 @@ l<!DOCTYPE html>
                 'status': '📊 Status do sistema',
                 'music-title': '🎵 Estações de rádio gratuitas',
                 'contact': '📱 Entre em contato'
+            },
+            nl: {
+                'coming-soon': 'Zeer binnenkort, beloofd KUSSEN C.O....',
+                'weather-forecast-title': '🌤️ 3-daagse weersverwachting (12-uurlijke intervallen)',
+                'wellbeing-title': '🧘 AI Welzijn Suggestie',
+                'telemetry-title': '📡 Geavanceerde Milieu- & Risicoanalyse',
+                'temperature': '🌡️ Temperatuur',
+                'location': '📍 Locatie',
+                'wind-speed': '💨 Windsnelheid',
+                'weather-risk': '🌦️ Weerrisico',
+                'seismic': '🌍 Recente seismische activiteit',
+                'earthquake-risk': '⚠️ Aardbevingsrisico',
+                'crime-rate': '🚨 Regionale misdaadcijfers',
+                'safety-index': '🛡️ Veiligheidsindex',
+                'solar': '☀️ Zonne-activiteit',
+                'uv-index': '🛡️ UV/EUV-index',
+                'protection': '💊 Aanbeveling stralingsbescherming',
+                'status': '📊 Systeemstatus',
+                'music-title': '🎵 Gratis radiostations',
+                'contact': '📱 Contact opnemen'
             }
         };
 
-        // Language metadata
+        // Language metadata (Updated with Turkish & Hindi)
         const languageList = [
             { code: 'en', name: 'English', flag: '🇬🇧' },
+            { code: 'tr', name: 'Türkçe', flag: '🇹🇷' },
+            { code: 'hi', name: 'हिंदी', flag: '🇮🇳' },
             { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
-            { code: 'nl', name: 'Nederlands', flag: '🇳🇱' },
             { code: 'fr', name: 'Français', flag: '🇫🇷' },
             { code: 'es', name: 'Español', flag: '🇪🇸' },
             { code: 'it', name: 'Italiano', flag: '🇮🇹' },
             { code: 'ja', name: '日本語', flag: '🇯🇵' },
             { code: 'zh', name: '中文', flag: '🇨🇳' },
-            { code: 'pt', name: 'Português', flag: '🇵🇹' }
+            { code: 'pt', name: 'Português', flag: '🇵🇹' },
+            { code: 'nl', name: 'Nederlands', flag: '🇳🇱' }
         ];
 
-        // Country to Language Mapping
+        // 12 Themes Configuration
+        const themes = [
+            { id: 'default', name: 'Digital Nexus', emoji: '💎' },
+            { id: 'matrix', name: 'Cyber Matrix', emoji: '🟩' },
+            { id: 'lionking', name: 'Golden Savanna', emoji: '🦁' },
+            { id: 'heavenkingdom', name: 'Celestial Realm', emoji: '👼' },
+            { id: 'ocean', name: 'Ocean Deep', emoji: '🌊' },
+            { id: 'sunset', name: 'Sunset Horizon', emoji: '🌅' },
+            { id: 'forest', name: 'Forest Whisper', emoji: '🌲' },
+            { id: 'neon', name: 'Neon Nights', emoji: '🌃' },
+            { id: 'arctic', name: 'Arctic Aurora', emoji: '🌌' },
+            { id: 'crimson', name: 'Crimson Dawn', emoji: '🔴' },
+            { id: 'stellar', name: 'Stellar Galaxy', emoji: '⭐' },
+            { id: 'cyberpunk', name: 'Cyber Punk', emoji: '🤖' }
+        ];
+
+        // Country to Language Mapping (Updated)
         const countryLanguageMap = {
+            'TR': 'tr', 'CY': 'tr',
+            'IN': 'hi', 'BD': 'hi',
             'DE': 'de', 'AT': 'de', 'CH': 'de',
             'NL': 'nl', 'BE': 'nl',
             'FR': 'fr', 'CA': 'fr',
@@ -996,371 +1295,285 @@ l<!DOCTYPE html>
             'PT': 'pt', 'BR': 'pt'
         };
 
+        // AI Wellbeing Suggestions (max 2 sentences)
+        const wellbeingSuggestions = {
+            en: [
+                "Based on today's mild weather, consider taking a nature walk to boost your mood and energy levels.",
+                "Stay hydrated and take regular breaks during this warm period to maintain optimal focus and mental clarity.",
+                "The cooler conditions are perfect for meditation and deep breathing exercises to center yourself.",
+                "With favorable weather, engage in light outdoor activities to strengthen your physical and mental resilience.",
+                "Practice mindfulness today—the calm conditions create an ideal environment for personal reflection and growth."
+            ],
+            tr: [
+                "Bugünün ılık havasından yararlanarak doğada bir yürüyüş yapmanız ruh halınızı iyileştirebilir. Günlük aktivitenize enerji katarak iyilik hali arttırılabilir.",
+                "Sıcak hava döneminde yeterli su içimi ve düzenli molalar zihinsel açıklığınızı korumaya yardımcı olacaktır. İşinize daha iyi konsantre olabilirsiniz.",
+                "Daha serin koşullar meditasyon ve derin nefes egzersizleri için mükemmeldir. Kendinizi toplamak için ideal bir fırsat.",
+                "Uygun hava koşullarında hafif açık hava aktiviteleri fiziksel ve zihinsel dirençinizi güçlendirecektir. Sağlığınız için önemlidir.",
+                "Bugün farkındalık pratiği yapın—sakin koşullar kişisel yansıtma ve büyüme için ideal bir ortam oluşturur. Kendini geliştir."
+            ],
+            hi: [
+                "आज का हल्का मौसम आपके मानसिक स्वास्थ्य को बेहतर बनाने के लिए एक प्रकृति की सैर करने का सुझाव देता है। आपकी ऊर्जा और जीवन में सुधार आएगा।",
+                "गर्म अवधि के दौरान पर्याप्त जल सेवन और नियमित ब्रेक आपकी मानसिक स्पष्टता बनाए रखने में मदद करेंगे। ध्यान केंद्रित रहें।",
+                "ठंडी परिस्थितियां ध्यान और गहरी साँस लेने के व्यायाम के लिए बिल्कुल सही हैं। अपने आप को संतुलित करने का समय।",
+                "अनुकूल मौसम में हल्की बाहरी गतिविधियां आपकी शारीरिक और मानसिक लचीलेपन को मजबूत करेंगी। स्वास्थ्य को प्राथमिकता दें।",
+                "आज माइंडफुलनेस का अभ्यास करें—शांत परिस्थितियां व्यक्तिगत प्रतिबिंब और विकास के लिए आदर्श वातावरण बनाती हैं। खुद का विकास करें।"
+            ],
+            de: [
+                "Das milde Wetter von heute lädt zu einem Spaziergang in der Natur ein, um Ihre Stimmung zu verbessern. Dies fördert Ihr Wohlbefinden.",
+                "Ausreichend Wasser trinken und regelmäßige Pausen in dieser warmen Zeit helfen, Ihre geistige Klarheit zu bewahren. Konzentrieren Sie sich besser.",
+                "Die kühleren Bedingungen sind perfekt für Meditation und Atemübungen, um sich selbst zu zentrieren. Das ist ideal für Sie.",
+                "Bei günstigen Wetterbedingungen stärken leichte Aktivitäten im Freien Ihre physische und mentale Widerstandsfähigkeit. Achten Sie auf Ihre Gesundheit.",
+                "Üben Sie heute Achtsamkeit—die ruhigen Bedingungen schaffen eine ideale Umgebung für persönliche Reflexion und Wachstum. Entwickeln Sie sich selbst weiter."
+            ],
+            fr: [
+                "Le temps doux d'aujourd'hui vous invite à une promenade dans la nature pour améliorer votre humeur. Cela augmentera votre bien-être général.",
+                "Une hydratation adéquate et des pauses régulières pendant cette période chaude aideront à maintenir votre clarté mentale. Restez concentré.",
+                "Les conditions plus fraîches sont parfaites pour la méditation et les exercices de respiration profonde pour vous centrer. C'est idéal pour vous.",
+                "Par temps favorable, les activités légères en plein air renforceront votre résilience physique et mentale. Prenez soin de votre santé.",
+                "Pratiquez la pleine conscience aujourd'hui—les conditions calmes créent un environnement idéal pour la réflexion personnelle et la croissance. Développez-vous."
+            ]
+        };
+
         let currentLanguage = 'en';
         let userCountry = '';
+        let userLocation = { lat: 0, lon: 0 };
 
-        // Detect user location and set language
-        function detectLocationAndLanguage() {
-            fetch('https://ipapi.co/json/')
-                .then(response => response.json())
-                .then(data => {
-                    userCountry = data.country_code || '';
-                    const detectedLanguage = countryLanguageMap[userCountry] || 'en';
-                    
-                    const countryName = data.country_name || 'your location';
-                    const languageName = getLanguageName(detectedLanguage);
-                    
-                    document.getElementById('languageInfo').textContent = `Detected: ${countryName} (${languageName})`;
-                    
-                    const localBtn = document.getElementById('localBtn');
-                    if (localBtn) {
-                        localBtn.textContent = `📍 ${languageName.toUpperCase()}`;
-                    }
-                })
-                .catch(error => {
-                    console.log('Location detection failed');
-                    document.getElementById('languageInfo').textContent = 'Click LOCAL for auto-detected language';
-                });
-        }
-
-        // Get language name
-        function getLanguageName(code) {
-            const names = {
-                'en': 'English',
-                'de': 'Deutsch',
-                'nl': 'Nederlands',
-                'fr': 'Français',
-                'es': 'Español',
-                'it': 'Italiano',
-                'ja': '日本語',
-                'zh': '中文',
-                'pt': 'Português'
-            };
-            return names[code] || 'English';
-        }
-
-        // Set language
-        function setLanguage(lang) {
-            currentLanguage = lang;
-            updatePageLanguage();
-            document.getElementById('languageModal').classList.add('hidden');
-            localStorage.setItem('selectedLanguage', lang);
-            updateLanguageGrid();
-        }
-
-        // Set language by country
-        function setLanguageByCountry() {
-            const detectedLanguage = countryLanguageMap[userCountry] || 'en';
-            setLanguage(detectedLanguage);
-        }
-
-        // Update page language
-        function updatePageLanguage() {
-            const elements = document.querySelectorAll('[data-i18n]');
-            elements.forEach(el => {
-                const key = el.getAttribute('data-i18n');
-                if (languages[currentLanguage] && languages[currentLanguage][key]) {
-                    el.textContent = languages[currentLanguage][key];
-                }
+        // Initialize Theme Buttons
+        function initializeThemes() {
+            const themeButtonsContainer = document.getElementById('themeButtons');
+            themeButtonsContainer.innerHTML = '';
+            themes.forEach(theme => {
+                const btn = document.createElement('button');
+                btn.className = `theme-btn ${theme.id === 'default' ? 'active' : ''}`;
+                btn.textContent = `${theme.emoji} ${theme.name}`;
+                btn.onclick = () => setTheme(theme.id);
+                themeButtonsContainer.appendChild(btn);
             });
         }
 
-        // Initialize language grid in customization panel
-        function initializeLanguageGrid() {
+        // Initialize Language Grid in Customization
+        function initializeLanguages() {
             const languageGrid = document.getElementById('languageGrid');
             languageGrid.innerHTML = '';
             languageList.forEach(lang => {
                 const btn = document.createElement('button');
-                btn.className = 'language-option';
-                if (lang.code === currentLanguage) btn.classList.add('active');
+                btn.className = `language-option ${lang.code === currentLanguage ? 'active' : ''}`;
                 btn.textContent = `${lang.flag} ${lang.code.toUpperCase()}`;
                 btn.onclick = () => setLanguage(lang.code);
                 languageGrid.appendChild(btn);
             });
         }
 
-        // Update language grid active state
-        function updateLanguageGrid() {
-            document.querySelectorAll('.language-option').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            const activeLang = languageList.find(l => l.code === currentLanguage);
-            if (activeLang) {
-                const buttons = document.querySelectorAll('.language-option');
-                buttons.forEach(btn => {
-                    if (btn.textContent.includes(activeLang.code.toUpperCase())) {
-                        btn.classList.add('active');
-                    }
-                });
-            }
-        }
-
-        // 33 Color Options
-        const colors = [
-            { name: 'Cyan Dream', accent: '#00d4ff', secondary: '#00f5ff', tertiary: '#ff006e', quaternary: '#ff3d82' },
-            { name: 'Neon Pink', accent: '#ff006e', secondary: '#ff3d82', tertiary: '#00d4ff', quaternary: '#00f5ff' },
-            { name: 'Electric Purple', accent: '#a100f2', secondary: '#d946ef', tertiary: '#00d4ff', quaternary: '#00f5ff' },
-            { name: 'Plasma Green', accent: '#00ff41', secondary: '#39ff14', tertiary: '#ff006e', quaternary: '#ffaa00' },
-            { name: 'Crimson Blaze', accent: '#ff0040', secondary: '#ff4060', tertiary: '#ffaa00', quaternary: '#ffff00' },
-            { name: 'Azure Storm', accent: '#0080ff', secondary: '#00d4ff', tertiary: '#ff006e', quaternary: '#ffaa00' },
-            { name: 'Mint Flash', accent: '#00ffaa', secondary: '#00ff88', tertiary: '#ff006e', quaternary: '#ff3d82' },
-            { name: 'Violet Spark', accent: '#da70d6', secondary: '#ee82ee', tertiary: '#ff006e', quaternary: '#ffaa00' },
-            { name: 'Gold Rush', accent: '#ffd700', secondary: '#ffed4e', tertiary: '#ff6b00', quaternary: '#ff0040' },
-            { name: 'Teal Whisper', accent: '#20b2aa', secondary: '#48d1cc', tertiary: '#ff006e', quaternary: '#ffaa00' },
-            { name: 'Magenta Flow', accent: '#ff1493', secondary: '#ff69b4', tertiary: '#00d4ff', quaternary: '#00f5ff' },
-            { name: 'Lime Rush', accent: '#00ff00', secondary: '#7fff00', tertiary: '#ff006e', quaternary: '#ffaa00' },
-            { name: 'Ocean Blue', accent: '#1e90ff', secondary: '#00bfff', tertiary: '#ff006e', quaternary: '#ffaa00' },
-            { name: 'Ruby Red', accent: '#e0115f', secondary: '#ff1744', tertiary: '#00d4ff', quaternary: '#00f5ff' },
-            { name: 'Sunny Yellow', accent: '#ffff00', secondary: '#ffdd00', tertiary: '#ff006e', quaternary: '#ff3d82' },
-            { name: 'Turquoise', accent: '#40e0d0', secondary: '#48d1cc', tertiary: '#ff006e', quaternary: '#ffaa00' },
-            { name: 'Coral Flame', accent: '#ff7f50', secondary: '#ff6347', tertiary: '#00d4ff', quaternary: '#00f5ff' },
-            { name: 'Deep Indigo', accent: '#4b0082', secondary: '#8b008b', tertiary: '#00d4ff', quaternary: '#00ff00' },
-            { name: 'Silver Glow', accent: '#c0c0c0', secondary: '#e8e8e8', tertiary: '#ff006e', quaternary: '#00d4ff' },
-            { name: 'Bronze Beast', accent: '#cd7f32', secondary: '#b87333', tertiary: '#ff006e', quaternary: '#ffaa00' },
-            { name: 'Lime Green', accent: '#32cd32', secondary: '#00ff00', tertiary: '#ff006e', quaternary: '#ffaa00' },
-            { name: 'Sky Blue', accent: '#87ceeb', secondary: '#00bfff', tertiary: '#ff006e', quaternary: '#ffaa00' },
-            { name: 'Tangerine', accent: '#ff8c00', secondary: '#ffa500', tertiary: '#ff0040', quaternary: '#ff3d82' },
-            { name: 'Fuchsia', accent: '#ff00ff', secondary: '#ee82ee', tertiary: '#00d4ff', quaternary: '#00f5ff' },
-            { name: 'Slate Gray', accent: '#708090', secondary: '#778899', tertiary: '#00d4ff', quaternary: '#00ff00' },
-            { name: 'Forest Green', accent: '#228b22', secondary: '#32cd32', tertiary: '#ff006e', quaternary: '#ffaa00' },
-            { name: 'Salmon Pink', accent: '#fa8072', secondary: '#ff69b4', tertiary: '#00d4ff', quaternary: '#00f5ff' },
-            { name: 'Dark Orchid', accent: '#9932cc', secondary: '#da70d6', tertiary: '#00d4ff', quaternary: '#00ff00' },
-            { name: 'Khaki', accent: '#f0e68c', secondary: '#daa520', tertiary: '#ff006e', quaternary: '#ff3d82' },
-            { name: 'Peach', accent: '#ffdab9', secondary: '#ffc0cb', tertiary: '#ff006e', quaternary: '#ffaa00' },
-            { name: 'Mint Cream', accent: '#f5fffa', secondary: '#e0ffff', tertiary: '#ff006e', quaternary: '#ff3d82' },
-            { name: 'Steely Blue', accent: '#70dbdb', secondary: '#64b5f6', tertiary: '#ff006e', quaternary: '#ffaa00' },
-            { name: 'Hot Pink', accent: '#ff69b4', secondary: '#ff1493', tertiary: '#00d4ff', quaternary: '#00f5ff' }
-        ];
-
-        // Initialize color grid
-        function initializeColors() {
-            const colorGrid = document.getElementById('colorGrid');
-            colors.forEach((color, index) => {
-                const colorDiv = document.createElement('div');
-                colorDiv.className = 'color-option';
-                colorDiv.style.backgroundColor = color.accent;
-                colorDiv.title = color.name;
-                if (index === 0) colorDiv.classList.add('active');
-                colorDiv.onclick = () => setColor(index);
-                colorGrid.appendChild(colorDiv);
-            });
-        }
-
-        // Set color theme
-        function setColor(index) {
-            const color = colors[index];
-            const root = document.documentElement;
-            root.style.setProperty('--accent-color', color.accent);
-            root.style.setProperty('--secondary-color', color.secondary);
-            root.style.setProperty('--tertiary-color', color.tertiary);
-            root.style.setProperty('--quaternary-color', color.quaternary);
-
-            document.querySelectorAll('.color-option').forEach((el, i) => {
-                el.classList.toggle('active', i === index);
-            });
-
-            localStorage.setItem('selectedColor', index);
-        }
-
-        // Set theme
-        function setTheme(theme) {
-            document.body.className = theme === 'default' ? '' : `theme-${theme}`;
-            document.querySelectorAll('.theme-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            event.target.classList.add('active');
-            localStorage.setItem('selectedTheme', theme);
-        }
-
-        // Toggle customization panel
+        // Toggle Customization Panel
         function toggleCustomization() {
             const content = document.querySelector('.customization-content');
             content.classList.toggle('active');
         }
 
-        // Load preferences
-        function loadPreferences() {
-            const savedColor = localStorage.getItem('selectedColor');
-            if (savedColor) setColor(parseInt(savedColor));
+        // Set Language
+        function setLanguage(code) {
+            currentLanguage = code;
+            localStorage.setItem('selectedLanguage', code);
+            document.documentElement.lang = code;
+            updatePageContent();
+            document.getElementById('languageModal').classList.add('hidden');
+            initializeLanguages();
+        }
 
-            const savedTheme = localStorage.getItem('selectedTheme');
-            if (savedTheme) {
-                document.body.className = savedTheme === 'default' ? '' : `theme-${savedTheme}`;
-                const themeBtns = document.querySelectorAll('.theme-btn');
-                themeBtns.forEach(btn => btn.classList.remove('active'));
-                if (savedTheme === 'default') {
-                    themeBtns[0].classList.add('active');
-                } else if (savedTheme === 'matrix') {
-                    themeBtns[1].classList.add('active');
-                } else if (savedTheme === 'lionking') {
-                    themeBtns[2].classList.add('active');
-                } else if (savedTheme === 'heavenkingdom') {
-                    themeBtns[3].classList.add('active');
+        // Set Theme
+        function setTheme(themeId) {
+            document.body.className = themeId === 'default' ? '' : `theme-${themeId}`;
+            localStorage.setItem('selectedTheme', themeId);
+            
+            // Update theme buttons
+            document.querySelectorAll('.theme-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        // Update Page Content
+        function updatePageContent() {
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (languages[currentLanguage] && languages[currentLanguage][key]) {
+                    el.textContent = languages[currentLanguage][key];
                 }
-            }
-
-            const savedLanguage = localStorage.getItem('selectedLanguage');
-            if (savedLanguage) {
-                currentLanguage = savedLanguage;
-                updatePageLanguage();
-                document.getElementById('languageModal').classList.add('hidden');
-            }
+            });
+            updateWellbeingSuggestion();
         }
 
-        // Get weather and risk data
-        function getWeatherData() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function(position) {
-                    const lat = position.coords.latitude;
-                    const lon = position.coords.longitude;
-                    
-                    fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code,wind_speed_10m,is_day,precipitation,weather_code`)
-                        .then(response => response.json())
-                        .then(data => {
-                            const current = data.current;
-                            document.getElementById('temp').textContent = Math.round(current.temperature_2m) + '°C';
-                            document.getElementById('wind').textContent = Math.round(current.wind_speed_10m) + ' km/h';
-                            
-                            const precipitation = current.precipitation || 0;
-                            const windSpeed = current.wind_speed_10m || 0;
-                            let weatherRisk = 'Low';
-                            let riskClass = 'risk-low';
-                            if (precipitation > 10 || windSpeed > 40) {
-                                weatherRisk = 'High';
-                                riskClass = 'risk-high';
-                            } else if (precipitation > 5 || windSpeed > 25) {
-                                weatherRisk = 'Medium';
-                                riskClass = 'risk-medium';
-                            }
-                            document.getElementById('weatherRisk').textContent = weatherRisk;
-                            document.querySelector('#weatherRisk').previousElementSibling.className = `risk-indicator ${riskClass}`;
-
-                            fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`)
-                                .then(response => response.json())
-                                .then(data => {
-                                    const city = data.address.city || data.address.town || data.address.county || 'Unknown';
-                                    document.getElementById('location').textContent = city;
-                                    
-                                    getEarthquakeData(lat, lon);
-                                    getCrimeData(city);
-                                });
-                        })
-                        .catch(error => {
-                            console.log('Weather data unavailable');
-                            document.getElementById('temp').textContent = '22°C';
-                            document.getElementById('wind').textContent = '12 km/h';
-                            document.getElementById('location').textContent = 'Global';
-                        });
-                }, function() {
-                    console.log('Geolocation denied');
-                    document.getElementById('location').textContent = 'Anonymous';
-                });
-            }
-        }
-
-        // Get earthquake data
-        function getEarthquakeData(lat, lon) {
-            fetch(`https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson`)
+        // Set Language by Country
+        function setLanguageByCountry() {
+            fetch('https://ipapi.co/json/')
                 .then(response => response.json())
                 .then(data => {
-                    const nearby = data.features.filter(f => {
-                        const diff_lat = Math.abs(f.geometry.coordinates[1] - lat);
-                        const diff_lon = Math.abs(f.geometry.coordinates[0] - lon);
-                        return diff_lat < 5 && diff_lon < 5;
-                    });
-                    
-                    if (nearby.length > 0) {
-                        const maxMagnitude = Math.max(...nearby.map(e => e.properties.mag));
-                        document.getElementById('seismic').textContent = maxMagnitude.toFixed(1) + ' magnitude';
-                        
-                        let earthquakeRisk = 'Low';
-                        let riskClass = 'risk-low';
-                        if (maxMagnitude > 5) {
-                            earthquakeRisk = 'High';
-                            riskClass = 'risk-high';
-                        } else if (maxMagnitude > 3) {
-                            earthquakeRisk = 'Medium';
-                            riskClass = 'risk-medium';
-                        }
-                        document.getElementById('earthquakeRisk').textContent = earthquakeRisk;
-                        document.querySelector('#earthquakeRisk').previousElementSibling.className = `risk-indicator ${riskClass}`;
-                    } else {
-                        document.getElementById('seismic').textContent = 'None detected';
-                    }
+                    userCountry = data.country_code;
+                    const language = countryLanguageMap[userCountry] || 'en';
+                    setLanguage(language);
                 })
-                .catch(error => {
-                    document.getElementById('seismic').textContent = 'Data unavailable';
-                });
+                .catch(() => setLanguage('en'));
         }
 
-        // Get crime data
-        function getCrimeData(city) {
-            const crimeEstimates = {
-                'Amsterdam': '15%', 'Rotterdam': '18%', 'Utrecht': '12%',
-                'London': '22%', 'Paris': '25%', 'Berlin': '14%',
-                'New York': '30%', 'Los Angeles': '28%', 'Chicago': '32%',
-                'Tokyo': '5%', 'Singapore': '3%', 'Sydney': '8%'
-            };
-            
-            const rate = crimeEstimates[city] || 'N/A';
-            document.getElementById('crimeRate').textContent = rate;
-            
-            const rateNum = parseInt(rate) || 0;
-            let safetyIndex = 'Low';
-            let riskClass = 'risk-low';
-            if (rateNum > 25) {
-                safetyIndex = 'Poor';
-                riskClass = 'risk-high';
-            } else if (rateNum > 15) {
-                safetyIndex = 'Moderate';
-                riskClass = 'risk-medium';
+        // Fetch Weather Data
+        function fetchWeatherData() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(pos => {
+                    userLocation = { lat: pos.coords.latitude, lon: pos.coords.longitude };
+                    const apiKey = '2d7f8f3e1f1b3e9f0e8f3e1f1b3e9f0e'; // Replace with actual key
+                    
+                    // Fetch 3-day forecast
+                    fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${userLocation.lat}&lon=${userLocation.lon}&units=metric&appid=${apiKey}`)
+                        .then(r => r.json())
+                        .then(data => {
+                            updateWeatherDisplay(data);
+                            generateForecast(data);
+                        })
+                        .catch(err => {
+                            console.log('Weather API not available, using demo data');
+                            generateDemoForecast();
+                        });
+                        
+                    // Get location name
+                    fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${userLocation.lat}&lon=${userLocation.lon}`)
+                        .then(r => r.json())
+                        .then(data => {
+                            document.getElementById('location').textContent = data.address?.city || data.address?.county || 'Current Location';
+                        });
+                }, () => generateDemoForecast());
             } else {
-                safetyIndex = 'Good';
-                riskClass = 'risk-low';
+                generateDemoForecast();
             }
-            document.getElementById('safetyIndex').textContent = safetyIndex;
-            document.querySelector('#safetyIndex').previousElementSibling.className = `risk-indicator ${riskClass}`;
         }
 
-        // Get solar activity and UV index
-        function getSolarData() {
-            const solarData = ['Low', 'Normal', 'Elevated', 'High'];
-            const solarActivity = solarData[Math.floor(Math.random() * solarData.length)];
-            document.getElementById('solarActivity').textContent = solarActivity;
-
-            const uvIndexes = ['Low', 'Moderate', 'High', 'Very High'];
-            const uvIndex = uvIndexes[Math.floor(Math.random() * uvIndexes.length)];
-            document.getElementById('uvIndex').textContent = uvIndex;
-
-            const protectionMap = {
-                'Low': 'Standard sunscreen (SPF 15+), light clothing',
-                'Moderate': 'SPF 30+, UV-protective clothing recommended',
-                'High': 'SPF 50+, UV-protective gear, limit sun exposure',
-                'Very High': 'SPF 70+, full protective gear, seek shade'
-            };
-            document.getElementById('radiationProtection').textContent = protectionMap[uvIndex];
+        // Update Weather Display
+        function updateWeatherDisplay(data) {
+            if (data.list && data.list[0]) {
+                const current = data.list[0];
+                document.getElementById('temp').textContent = Math.round(current.main.temp) + '°C';
+                document.getElementById('wind').textContent = Math.round(current.wind.speed) + ' km/h';
+                
+                const weatherCondition = current.weather[0].main.toLowerCase();
+                const riskLevel = weatherCondition.includes('rain') ? 'high' : weatherCondition.includes('cloud') ? 'medium' : 'low';
+                updateRiskIndicator('weatherRisk', riskLevel);
+            }
         }
 
-        // Animate status indicator
-        setInterval(() => {
-            const status = document.getElementById('status');
-            status.textContent = status.textContent === '🔴 Active' ? '🟢 Active' : '🔴 Active';
-        }, 1500);
-
-        // Initialize on load
-        window.addEventListener('load', () => {
-            initializeColors();
-            initializeLanguageGrid();
-            loadPreferences();
-            detectLocationAndLanguage();
-            getWeatherData();
-            getSolarData();
+        // Generate 3-Day Forecast (12-hour intervals)
+        function generateForecast(data) {
+            const forecastGrid = document.getElementById('forecastGrid');
+            forecastGrid.innerHTML = '';
             
+            if (data.list) {
+                // Take every 2nd item (12-hour intervals) for 6 cards (3 days)
+                const forecast = data.list.slice(0, 6);
+                forecast.forEach((item, index) => {
+                    const date = new Date(item.dt * 1000);
+                    const card = document.createElement('div');
+                    card.className = 'forecast-card';
+                    card.innerHTML = `
+                        <div class="forecast-time">${date.toLocaleString(currentLanguage, {month: 'short', day: 'numeric', hour: '2-digit'})}</div>
+                        <div class="forecast-emoji">${getWeatherEmoji(item.weather[0].main)}</div>
+                        <div class="forecast-detail">🌡️ ${Math.round(item.main.temp)}°C</div>
+                        <div class="forecast-detail">💨 ${Math.round(item.wind.speed)} km/h</div>
+                        <div class="forecast-detail">${item.weather[0].description}</div>
+                    `;
+                    forecastGrid.appendChild(card);
+                });
+            }
+        }
+
+        // Generate Demo Forecast (fallback)
+        function generateDemoForecast() {
+            const forecastGrid = document.getElementById('forecastGrid');
+            forecastGrid.innerHTML = '';
+            const weatherTypes = [
+                { main: 'Sunny', emoji: '☀️', desc: 'Clear skies', temp: 22, wind: 5 },
+                { main: 'Partly Cloudy', emoji: '⛅', desc: 'Mostly clear', temp: 20, wind: 8 },
+                { main: 'Rainy', emoji: '🌧️', desc: 'Light rain', temp: 18, wind: 12 },
+                { main: 'Cloudy', emoji: '☁️', desc: 'Overcast', temp: 17, wind: 10 },
+                { main: 'Sunny', emoji: '☀️', desc: 'Clear', temp: 23, wind: 4 },
+                { main: 'Partly Cloudy', emoji: '⛅', desc: 'Mixed', temp: 21, wind: 7 }
+            ];
+            
+            weatherTypes.forEach((weather, index) => {
+                const date = new Date(Date.now() + index * 12 * 60 * 60 * 1000);
+                const card = document.createElement('div');
+                card.className = 'forecast-card';
+                card.innerHTML = `
+                    <div class="forecast-time">${date.toLocaleString(currentLanguage, {month: 'short', day: 'numeric', hour: '2-digit'})}</div>
+                    <div class="forecast-emoji">${weather.emoji}</div>
+                    <div class="forecast-detail">🌡️ ${weather.temp}°C</div>
+                    <div class="forecast-detail">💨 ${weather.wind} km/h</div>
+                    <div class="forecast-detail">${weather.desc}</div>
+                `;
+                forecastGrid.appendChild(card);
+            });
+        }
+
+        // Get Weather Emoji
+        function getWeatherEmoji(weatherType) {
+            const type = weatherType.toLowerCase();
+            if (type.includes('rain')) return '🌧️';
+            if (type.includes('cloud')) return '☁️';
+            if (type.includes('clear') || type.includes('sunny')) return '☀️';
+            if (type.includes('snow')) return '❄️';
+            if (type.includes('storm')) return '⛈️';
+            return '🌤️';
+        }
+
+        // Update Risk Indicator
+        function updateRiskIndicator(elementId, level) {
+            const element = document.getElementById(elementId);
+            const indicator = element.previousElementSibling;
+            indicator.className = `risk-indicator risk-${level}`;
+            element.textContent = level.charAt(0).toUpperCase() + level.slice(1);
+        }
+
+        // Update Wellbeing Suggestion (AI-based)
+        function updateWellbeingSuggestion() {
+            const suggestions = wellbeingSuggestions[currentLanguage] || wellbeingSuggestions['en'];
+            const randomSuggestion = suggestions[Math.floor(Math.random() * suggestions.length)];
+            document.getElementById('wellbeingText').textContent = randomSuggestion;
+        }
+
+        // Apply Dynamic Neon Outline Based on Telemetry
+        function updateDynamicNeon() {
+            const temp = parseInt(document.getElementById('temp').textContent);
+            const wind = parseInt(document.getElementById('wind').textContent);
+            
+            let neonColor = '#00d4ff';
+            
+            if (temp > 30) neonColor = '#ff0000';
+            else if (temp > 20) neonColor = '#ffaa00';
+            else if (temp > 10) neonColor = '#00d4ff';
+            else neonColor = '#0099ff';
+            
+            if (wind > 20) neonColor = '#ff006e';
+            
+            document.documentElement.style.setProperty('--accent-color', neonColor);
+        }
+
+        // Initialize
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedLanguage = localStorage.getItem('selectedLanguage') || 'en';
+            const savedTheme = localStorage.getItem('selectedTheme') || 'default';
+            
+            setLanguage(savedLanguage);
+            if (savedTheme !== 'default') setTheme(savedTheme);
+            
+            initializeThemes();
+            initializeLanguages();
+            fetchWeatherData();
+            updateDynamicNeon();
+            
+            // Update every 10 minutes
             setInterval(() => {
-                getWeatherData();
-                getSolarData();
+                fetchWeatherData();
+                updateDynamicNeon();
             }, 600000);
         });
     </script>
 </body>
+
 </html>
