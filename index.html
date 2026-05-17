@@ -17,9 +17,15 @@
     <title>Catalyst Ozwell | Environmental Intelligence Platform</title>
 
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
+
         :root {
             --accent-primary: #d4af37;
             --accent-secondary: #c9a961;
+            --neon-cyan: #00ffff;
+            --neon-magenta: #ff00ff;
+            --neon-lime: #00ff00;
+            --neon-pink: #ff1493;
             --dark-bg: #0f1419;
             --card-bg: rgba(20, 25, 35, 0.8);
             --border-color: #3a4a5a;
@@ -43,7 +49,7 @@
         }
 
         body {
-            font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             color: var(--text-primary);
             background: var(--dark-bg);
             overflow-x: hidden;
@@ -51,7 +57,7 @@
             letter-spacing: 0.3px;
         }
 
-        /* Sophisticated Background */
+        /* Sophisticated Background with Neon Effects */
         .background {
             position: fixed;
             top: 0;
@@ -63,7 +69,7 @@
             background-attachment: fixed;
         }
 
-        /* Ambient Light Effects */
+        /* Ambient Light Effects with Neon */
         .ambient-light {
             position: fixed;
             width: 100%;
@@ -85,7 +91,7 @@
         .light-accent-1 {
             width: 400px;
             height: 400px;
-            background: radial-gradient(circle, #d4af37, transparent);
+            background: radial-gradient(circle, var(--neon-cyan), transparent);
             top: 10%;
             left: 5%;
             animation: drift 25s ease-in-out infinite;
@@ -94,7 +100,7 @@
         .light-accent-2 {
             width: 300px;
             height: 300px;
-            background: radial-gradient(circle, #3498db, transparent);
+            background: radial-gradient(circle, var(--neon-magenta), transparent);
             bottom: 15%;
             right: 10%;
             animation: drift 30s ease-in-out infinite reverse;
@@ -103,6 +109,16 @@
         @keyframes drift {
             0%, 100% { transform: translate(0, 0); }
             50% { transform: translate(30px, -30px); }
+        }
+
+        /* Neon Text Glow Effect */
+        @keyframes neon-glow {
+            0%, 100% { 
+                text-shadow: 0 0 10px currentColor, 0 0 20px currentColor;
+            }
+            50% { 
+                text-shadow: 0 0 20px currentColor, 0 0 40px currentColor, 0 0 60px currentColor;
+            }
         }
 
         /* Language Selection Modal */
@@ -126,22 +142,24 @@
 
         .language-box {
             background: linear-gradient(135deg, var(--card-bg), rgba(30, 40, 50, 0.9));
-            border: 1px solid var(--accent-primary);
+            border: 2px solid var(--neon-cyan);
             border-radius: 12px;
             padding: 60px 50px;
             max-width: 650px;
-            box-shadow: 0 25px 80px rgba(212, 175, 55, 0.15), inset 0 1px 1px rgba(212, 175, 55, 0.1);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.5), inset 0 1px 1px rgba(0, 255, 255, 0.2);
             text-align: center;
             backdrop-filter: blur(20px);
         }
 
         .language-title {
-            color: var(--accent-primary);
+            color: var(--neon-cyan);
             font-size: 2.2rem;
-            font-weight: 300;
+            font-weight: 700;
             letter-spacing: 3px;
             margin-bottom: 15px;
             text-transform: uppercase;
+            font-family: 'Times New Roman', serif;
+            animation: neon-glow 2s ease-in-out infinite;
         }
 
         .language-subtitle {
@@ -161,8 +179,8 @@
 
         .language-btn {
             background: transparent;
-            color: var(--text-primary);
-            border: 1px solid var(--border-color);
+            color: var(--neon-cyan);
+            border: 2px solid var(--neon-cyan);
             padding: 16px 20px;
             font-size: 0.95rem;
             font-weight: 500;
@@ -170,18 +188,23 @@
             cursor: pointer;
             transition: all 0.3s ease;
             letter-spacing: 1px;
+            font-family: Helvetica, sans-serif;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
         }
 
         .language-btn:hover {
-            border-color: var(--accent-primary);
-            background: rgba(212, 175, 55, 0.08);
+            border-color: var(--neon-magenta);
+            background: rgba(255, 0, 255, 0.15);
             transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.6);
+            color: var(--neon-magenta);
         }
 
         .language-btn.detected {
-            background: rgba(212, 175, 55, 0.15);
-            border-color: var(--accent-primary);
-            color: var(--accent-primary);
+            background: rgba(0, 255, 255, 0.2);
+            border-color: var(--neon-cyan);
+            color: var(--neon-cyan);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.7);
         }
 
         .language-info {
@@ -189,17 +212,17 @@
             font-size: 0.9rem;
             margin-top: 25px;
             padding: 15px 25px;
-            background: rgba(212, 175, 55, 0.05);
-            border-left: 2px solid var(--accent-primary);
+            background: rgba(0, 255, 255, 0.05);
+            border-left: 2px solid var(--neon-cyan);
             text-align: left;
         }
 
         /* Theme System */
         body.theme-dark { --accent-primary: #d4af37; --accent-secondary: #c9a961; }
-        body.theme-ocean { --accent-primary: #00d4ff; --accent-secondary: #00f5ff; }
-        body.theme-forest { --accent-primary: #7cfc00; --accent-secondary: #9aff00; }
+        body.theme-ocean { --accent-primary: var(--neon-cyan); --accent-secondary: #00aaff; }
+        body.theme-forest { --accent-primary: var(--neon-lime); --accent-secondary: #00ff44; }
         body.theme-sunset { --accent-primary: #ff6b35; --accent-secondary: #ff8c42; }
-        body.theme-crimson { --accent-primary: #ff1493; --accent-secondary: #ff69b4; }
+        body.theme-crimson { --accent-primary: var(--neon-magenta); --accent-secondary: #ff1493; }
 
         /* Main Container */
         .container {
@@ -218,7 +241,7 @@
         .header-section {
             text-align: center;
             margin-bottom: 80px;
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 2px solid var(--neon-cyan);
             padding-bottom: 50px;
         }
 
@@ -229,44 +252,79 @@
         .logo {
             width: 140px;
             height: 140px;
-            border: 2px solid var(--accent-primary);
+            border: 3px solid var(--neon-cyan);
             border-radius: 8px;
             padding: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto;
-            background: rgba(212, 175, 55, 0.05);
-            animation: pulse-subtle 3s ease-in-out infinite;
+            background: rgba(0, 255, 255, 0.08);
+            animation: pulse-neon 2s ease-in-out infinite;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--neon-cyan);
+            font-family: 'Times New Roman', serif;
         }
 
-        @keyframes pulse-subtle {
-            0%, 100% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.2); }
-            50% { box-shadow: 0 0 40px rgba(212, 175, 55, 0.4); }
+        @keyframes pulse-neon {
+            0%, 100% { box-shadow: 0 0 20px rgba(0, 255, 255, 0.4), inset 0 0 10px rgba(0, 255, 255, 0.2); }
+            50% { box-shadow: 0 0 50px rgba(0, 255, 255, 0.8), inset 0 0 20px rgba(0, 255, 255, 0.4); }
         }
 
         h1 {
             font-size: 3.5rem;
-            color: var(--accent-primary);
-            font-weight: 300;
+            color: var(--neon-magenta);
+            font-weight: 700;
             letter-spacing: 4px;
             margin-bottom: 20px;
             text-transform: uppercase;
+            font-family: 'Times New Roman', serif;
+            animation: neon-glow 2s ease-in-out infinite;
         }
 
         .subtitle {
             font-size: 1.1rem;
-            color: var(--text-secondary);
-            font-weight: 400;
+            color: var(--neon-cyan);
+            font-weight: 600;
             letter-spacing: 2px;
             text-transform: uppercase;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
+            font-family: Helvetica, sans-serif;
         }
 
         .tagline {
             font-size: 0.95rem;
             color: var(--text-secondary);
             font-style: italic;
+            letter-spacing: 1px;
+            margin-bottom: 30px;
+        }
+
+        /* Latin Quote Section */
+        .quote-section {
+            width: 100%;
+            background: rgba(0, 255, 255, 0.05);
+            border: 2px solid var(--neon-cyan);
+            border-radius: 8px;
+            padding: 30px 40px;
+            margin-bottom: 60px;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+        }
+
+        .quote {
+            font-size: 1.1rem;
+            color: var(--neon-cyan);
+            font-style: italic;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            font-family: 'Times New Roman', serif;
+        }
+
+        .quote-attribution {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            text-align: right;
             letter-spacing: 1px;
         }
 
@@ -276,31 +334,35 @@
             top: 40px;
             right: 40px;
             z-index: 1000;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
+            background: rgba(20, 25, 35, 0.95);
+            border: 2px solid var(--neon-cyan);
             border-radius: 8px;
             padding: 20px;
             max-width: 300px;
             backdrop-filter: blur(20px);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.4);
         }
 
         .customization-toggle {
             background: transparent;
-            color: var(--accent-primary);
-            border: 1px solid var(--accent-primary);
+            color: var(--neon-cyan);
+            border: 2px solid var(--neon-cyan);
             padding: 12px 20px;
             border-radius: 6px;
             cursor: pointer;
-            font-weight: 600;
+            font-weight: 700;
             width: 100%;
             transition: all 0.3s ease;
             letter-spacing: 1px;
             font-size: 0.95rem;
+            font-family: Helvetica, sans-serif;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
         }
 
         .customization-toggle:hover {
-            background: rgba(212, 175, 55, 0.1);
+            background: rgba(0, 255, 255, 0.15);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.7);
+            transform: translateY(-2px);
         }
 
         .customization-content {
@@ -321,38 +383,52 @@
             margin-top: 15px;
         }
 
+        .customization-section h3 {
+            color: var(--neon-cyan);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+            font-family: Helvetica, sans-serif;
+        }
+
         .theme-btn, .language-option {
             padding: 10px;
-            border: 1px solid var(--border-color);
+            border: 2px solid var(--neon-cyan);
             background: transparent;
-            color: var(--text-secondary);
+            color: var(--neon-cyan);
             border-radius: 5px;
             cursor: pointer;
             font-size: 0.85rem;
             transition: all 0.3s ease;
-            font-weight: 500;
+            font-weight: 600;
+            font-family: Helvetica, sans-serif;
+            box-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
         }
 
         .theme-btn:hover, .language-option:hover {
-            border-color: var(--accent-primary);
-            background: rgba(212, 175, 55, 0.08);
+            border-color: var(--neon-magenta);
+            background: rgba(255, 0, 255, 0.15);
+            color: var(--neon-magenta);
+            box-shadow: 0 0 15px rgba(255, 0, 255, 0.6);
         }
 
         .theme-btn.active, .language-option.active {
-            background: rgba(212, 175, 55, 0.2);
-            border-color: var(--accent-primary);
-            color: var(--accent-primary);
+            background: rgba(0, 255, 255, 0.25);
+            border-color: var(--neon-cyan);
+            color: var(--neon-cyan);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
         }
 
-        /* Weather Forecast Section - Professional Grid */
+        /* Weather Forecast Section */
         .weather-forecast {
             width: 100%;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
+            background: rgba(20, 25, 35, 0.8);
+            border: 2px solid var(--neon-cyan);
             border-radius: 8px;
             padding: 50px;
             margin-bottom: 60px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
             backdrop-filter: blur(10px);
         }
 
@@ -361,16 +437,18 @@
             align-items: center;
             margin-bottom: 40px;
             padding-bottom: 25px;
-            border-bottom: 2px solid var(--border-color);
+            border-bottom: 2px solid var(--neon-cyan);
         }
 
         .section-title {
             font-size: 1.4rem;
-            color: var(--accent-primary);
-            font-weight: 600;
+            color: var(--neon-magenta);
+            font-weight: 700;
             letter-spacing: 2px;
             text-transform: uppercase;
             margin: 0;
+            font-family: 'Times New Roman', serif;
+            animation: neon-glow 2s ease-in-out infinite;
         }
 
         .forecast-grid {
@@ -381,13 +459,14 @@
         }
 
         .forecast-card {
-            background: rgba(212, 175, 55, 0.03);
-            border: 1px solid var(--border-color);
+            background: rgba(0, 255, 255, 0.05);
+            border: 2px solid var(--neon-cyan);
             border-radius: 8px;
             padding: 30px 25px;
             transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
         }
 
         .forecast-card::before {
@@ -397,16 +476,16 @@
             left: 0;
             width: 100%;
             height: 2px;
-            background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
+            background: linear-gradient(90deg, transparent, var(--neon-magenta), transparent);
             opacity: 0;
             transition: opacity 0.4s ease;
         }
 
         .forecast-card:hover {
-            border-color: var(--accent-primary);
-            background: rgba(212, 175, 55, 0.08);
+            border-color: var(--neon-magenta);
+            background: rgba(255, 0, 255, 0.1);
             transform: translateY(-8px);
-            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.15);
+            box-shadow: 0 0 30px rgba(255, 0, 255, 0.5);
         }
 
         .forecast-card:hover::before {
@@ -414,11 +493,12 @@
         }
 
         .forecast-time {
-            font-size: 1.1rem;
-            color: var(--accent-primary);
+            font-size: 1.2rem;
+            color: var(--neon-cyan);
             font-weight: 700;
             margin-bottom: 15px;
             letter-spacing: 1px;
+            font-family: 'Times New Roman', serif;
         }
 
         .forecast-time-detail {
@@ -436,7 +516,7 @@
         .forecast-emoji {
             font-size: 4rem;
             display: inline-block;
-            filter: drop-shadow(0 4px 8px rgba(212, 175, 55, 0.2));
+            filter: drop-shadow(0 4px 8px rgba(0, 255, 255, 0.4));
         }
 
         .forecast-metrics {
@@ -447,37 +527,43 @@
         }
 
         .metric {
-            background: rgba(20, 25, 35, 0.5);
+            background: rgba(0, 255, 255, 0.08);
             padding: 12px;
             border-radius: 6px;
-            border: 1px solid rgba(212, 175, 55, 0.2);
+            border: 1px solid rgba(0, 255, 255, 0.3);
         }
 
         .metric-label {
             font-size: 0.75rem;
-            color: var(--text-secondary);
+            color: var(--neon-cyan);
             text-transform: uppercase;
             letter-spacing: 1px;
             margin-bottom: 5px;
+            font-family: Helvetica, sans-serif;
         }
 
         .metric-value {
             font-size: 1.3rem;
-            color: var(--accent-primary);
+            color: var(--neon-magenta);
             font-weight: 700;
             letter-spacing: 0.5px;
+            font-family: 'Times New Roman', serif;
         }
 
         /* Telemetry Section */
         .telemetry {
             width: 100%;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
+            background: rgba(20, 25, 35, 0.8);
+            border: 2px solid var(--neon-lime);
             border-radius: 8px;
             padding: 50px;
             margin-bottom: 60px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.3);
             backdrop-filter: blur(10px);
+        }
+
+        .telemetry .section-title {
+            color: var(--neon-lime);
         }
 
         .telemetry-grid {
@@ -487,32 +573,36 @@
         }
 
         .telemetry-item {
-            background: rgba(212, 175, 55, 0.03);
-            border: 1px solid var(--border-color);
+            background: rgba(0, 255, 0, 0.05);
+            border: 2px solid var(--neon-lime);
             border-radius: 8px;
             padding: 20px;
             transition: all 0.3s ease;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
         }
 
         .telemetry-item:hover {
-            border-color: var(--accent-primary);
-            background: rgba(212, 175, 55, 0.08);
+            border-color: var(--neon-cyan);
+            background: rgba(0, 255, 255, 0.1);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
         }
 
         .telemetry-label {
             font-size: 0.8rem;
-            color: var(--text-secondary);
+            color: var(--neon-lime);
             text-transform: uppercase;
             letter-spacing: 1px;
             margin-bottom: 10px;
             display: block;
+            font-family: Helvetica, sans-serif;
         }
 
         .telemetry-value {
             font-size: 1.8rem;
-            color: var(--accent-primary);
+            color: var(--neon-magenta);
             font-weight: 700;
             letter-spacing: 0.5px;
+            font-family: 'Times New Roman', serif;
         }
 
         .risk-indicator {
@@ -523,29 +613,31 @@
             margin-right: 8px;
         }
 
-        .risk-low { background: var(--success); }
-        .risk-medium { background: var(--warning); }
-        .risk-high { background: var(--danger); }
+        .risk-low { background: var(--neon-lime); }
+        .risk-medium { background: #ffaa00; }
+        .risk-high { background: #ff0000; }
 
         /* Wellbeing Section */
         .wellbeing-suggestion {
             width: 100%;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
+            background: rgba(20, 25, 35, 0.8);
+            border: 2px solid var(--neon-magenta);
             border-radius: 8px;
             padding: 40px 50px;
             margin-bottom: 60px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 0 30px rgba(255, 0, 255, 0.3);
             backdrop-filter: blur(10px);
         }
 
         .wellbeing-title {
             font-size: 1.4rem;
-            color: var(--accent-primary);
-            font-weight: 600;
+            color: var(--neon-magenta);
+            font-weight: 700;
             letter-spacing: 2px;
             text-transform: uppercase;
             margin-bottom: 25px;
+            font-family: 'Times New Roman', serif;
+            animation: neon-glow 2s ease-in-out infinite;
         }
 
         .wellbeing-text {
@@ -553,15 +645,16 @@
             color: var(--text-primary);
             line-height: 1.8;
             letter-spacing: 0.5px;
+            font-family: Helvetica, sans-serif;
         }
 
         /* Contact Button */
         .btn-contact {
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-            color: var(--dark-bg);
+            background: transparent;
+            color: var(--neon-cyan);
+            border: 3px solid var(--neon-cyan);
             padding: 16px 50px;
             border-radius: 6px;
-            border: none;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -569,12 +662,16 @@
             letter-spacing: 2px;
             text-transform: uppercase;
             margin-bottom: 60px;
-            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+            font-family: Helvetica, sans-serif;
         }
 
         .btn-contact:hover {
             transform: translateY(-4px);
-            box-shadow: 0 15px 50px rgba(212, 175, 55, 0.5);
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.8);
+            border-color: var(--neon-magenta);
+            color: var(--neon-magenta);
+            background: rgba(255, 0, 255, 0.1);
         }
 
         /* Social Links */
@@ -585,24 +682,33 @@
             flex-wrap: wrap;
             margin-top: 40px;
             padding-top: 40px;
-            border-top: 1px solid var(--border-color);
+            border-top: 2px solid var(--neon-cyan);
         }
 
         .social a {
-            color: var(--accent-primary);
+            color: var(--neon-cyan);
             text-decoration: none;
             transition: all 0.3s ease;
             font-size: 1.1rem;
-            font-weight: 600;
+            font-weight: 700;
             letter-spacing: 1px;
             display: flex;
             align-items: center;
             gap: 8px;
+            font-family: Helvetica, sans-serif;
+            text-transform: uppercase;
+            border: 2px solid var(--neon-cyan);
+            padding: 10px 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
         }
 
         .social a:hover {
             transform: translateY(-3px);
-            filter: brightness(1.2);
+            border-color: var(--neon-magenta);
+            color: var(--neon-magenta);
+            box-shadow: 0 0 25px rgba(255, 0, 255, 0.6);
+            background: rgba(255, 0, 255, 0.1);
         }
 
         /* Responsive Design */
@@ -661,14 +767,24 @@
             .logo {
                 width: 100px;
                 height: 100px;
+                font-size: 1.8rem;
+            }
+
+            .quote-section {
+                padding: 20px 25px;
+            }
+
+            .quote {
+                font-size: 0.95rem;
             }
         }
 
         /* Loading States */
         .loading {
-            color: var(--text-secondary);
+            color: var(--neon-cyan);
             font-style: italic;
             animation: pulse-text 1.5s ease-in-out infinite;
+            font-family: 'Times New Roman', serif;
         }
 
         @keyframes pulse-text {
@@ -690,8 +806,8 @@
     <!-- Language Selection Modal -->
     <div class="language-modal" id="languageModal">
         <div class="language-box">
-            <div class="language-title">Select Language</div>
-            <div class="language-subtitle">Choose your preferred language</div>
+            <div class="language-title">Lingua Selecta</div>
+            <div class="language-subtitle">Select your preferred language</div>
             <div class="language-buttons">
                 <button class="language-btn" id="englishBtn" onclick="setLanguage('en')">English</button>
                 <button class="language-btn" id="turkishBtn" onclick="setLanguage('tr')">Türkçe</button>
@@ -706,18 +822,22 @@
                 <button class="language-btn" id="localBtn" onclick="setLanguageByCountry()">Auto-Detect</button>
             </div>
             <div class="language-info">
-                Detecting your location for language preferences...
+                Status: Detectio locatiohnis tuae in progressu...
             </div>
         </div>
     </div>
 
     <!-- Customization Panel -->
     <div class="customization-panel">
-        <button class="customization-toggle" onclick="toggleCustomization()">⚙ Customize</button>
+        <button class="customization-toggle" onclick="toggleCustomization()">⚙ CUSTOMIZE</button>
         <div class="customization-content">
             <div class="customization-section">
-                <h3 style="color: var(--accent-primary); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px;">Themes</h3>
+                <h3>Themata (5 Optiones)</h3>
                 <div class="theme-buttons" id="themeButtons"></div>
+            </div>
+            <div class="customization-section" style="margin-top: 20px;">
+                <h3>Linguae (11 Optiones)</h3>
+                <div class="language-grid" id="languageGrid"></div>
             </div>
         </div>
     </div>
@@ -730,18 +850,31 @@
                 <div class="logo">CO</div>
             </div>
             <h1>Catalyst Ozwell</h1>
-            <p class="subtitle">Environmental Intelligence Platform</p>
-            <p class="tagline">Real-time monitoring for holistic wellbeing</p>
+            <p class="subtitle">Monitio Ambientalis Intelligentia</p>
+            <p class="tagline">Observatio realis temporis pro salubritate holistica</p>
+        </div>
+
+        <!-- Biblical and Mythological Quotes -->
+        <div class="quote-section">
+            <div class="quote">
+                "Lux venit in tenebris, et tenebrae eam non comprehenderunt." - Ioannes 1:5
+            </div>
+            <div class="quote" style="margin-top: 20px;">
+                "Hwæt! We have heard of the glory of the Spear-Danes, of the folk-kings in former days, how the athelings showed forth their prowess." - Beowulf
+            </div>
+            <div class="quote-attribution">
+                Veritatem sequere - Truth Pursued
+            </div>
         </div>
 
         <!-- Weather Forecast Section -->
         <div class="weather-forecast">
             <div class="section-header">
-                <h2 class="section-title">72-Hour Weather Forecast</h2>
+                <h2 class="section-title">Prognosis Tempestatis 72 Horas</h2>
             </div>
             <div class="forecast-grid" id="forecastGrid">
                 <div style="grid-column: 1/-1; text-align: center; padding: 40px;">
-                    <p class="loading">Loading forecast data...</p>
+                    <p class="loading">Carens data prognosis...</p>
                 </div>
             </div>
         </div>
@@ -749,31 +882,31 @@
         <!-- Telemetry Section -->
         <div class="telemetry">
             <div class="section-header">
-                <h2 class="section-title">Environmental Analytics</h2>
+                <h2 class="section-title">Analytica Ambientalis</h2>
             </div>
             <div class="telemetry-grid" id="telemetryGrid">
                 <div class="telemetry-item">
-                    <span class="telemetry-label">Temperature</span>
+                    <span class="telemetry-label">Temperatura</span>
                     <span class="telemetry-value" id="temp">--°C</span>
                 </div>
                 <div class="telemetry-item">
-                    <span class="telemetry-label">Location</span>
-                    <span class="telemetry-value" id="location">Detecting...</span>
+                    <span class="telemetry-label">Locatio</span>
+                    <span class="telemetry-value" id="location">Detectio...</span>
                 </div>
                 <div class="telemetry-item">
-                    <span class="telemetry-label">Wind Speed</span>
+                    <span class="telemetry-label">Velocitas Venti</span>
                     <span class="telemetry-value" id="wind">-- km/h</span>
                 </div>
                 <div class="telemetry-item">
-                    <span class="telemetry-label">Weather Risk</span>
+                    <span class="telemetry-label">Periculum Tempestatis</span>
                     <span class="telemetry-value"><span class="risk-indicator risk-low"></span><span id="weatherRisk">Low</span></span>
                 </div>
                 <div class="telemetry-item">
-                    <span class="telemetry-label">Humidity</span>
+                    <span class="telemetry-label">Humiditas</span>
                     <span class="telemetry-value" id="humidity">--%</span>
                 </div>
                 <div class="telemetry-item">
-                    <span class="telemetry-label">Pressure</span>
+                    <span class="telemetry-label">Pressio</span>
                     <span class="telemetry-value" id="pressure">-- hPa</span>
                 </div>
             </div>
@@ -781,14 +914,14 @@
 
         <!-- Wellbeing Section -->
         <div class="wellbeing-suggestion">
-            <h2 class="wellbeing-title">Daily Wellness Insight</h2>
+            <h2 class="wellbeing-title">Prospectus Valetudinis Cotidianus</h2>
             <p class="wellbeing-text" id="wellbeingText">
-                Loading personalized wellness recommendation based on current environmental conditions...
+                Carens recommendatio personalis secundum condiciones ambientales...
             </p>
         </div>
 
         <!-- Call to Action -->
-        <button class="btn-contact" onclick="alert('Contact feature coming soon')">Get In Touch</button>
+        <button class="btn-contact" onclick="alert('Contacta nos - Feature veniet brevi')">CONTACTA NOS</button>
 
         <!-- Social Links -->
         <div class="social">
@@ -802,31 +935,20 @@
         // Configuration
         const CONFIG = {
             themes: [
-                { name: 'Dark', class: 'theme-dark' },
-                { name: 'Ocean', class: 'theme-ocean' },
-                { name: 'Forest', class: 'theme-forest' },
-                { name: 'Sunset', class: 'theme-sunset' },
-                { name: 'Crimson', class: 'theme-crimson' }
+                { name: 'Dark Neon', class: 'theme-dark' },
+                { name: 'Ocean Cyan', class: 'theme-ocean' },
+                { name: 'Forest Lime', class: 'theme-forest' },
+                { name: 'Sunset Fire', class: 'theme-sunset' },
+                { name: 'Crimson Magenta', class: 'theme-crimson' }
             ],
             languages: ['en', 'tr', 'de', 'fr', 'es', 'it', 'ja', 'zh', 'pt', 'nl']
-        };
-
-        // Translations
-        const translations = {
-            en: {
-                'weather-title': '72-Hour Weather Forecast',
-                'temp': '°C',
-                'wind': 'km/h',
-                'humidity': '%',
-                'time': 'at',
-                'wellness': 'Daily Wellness Insight'
-            }
         };
 
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
             initializeThemes();
             initializeLanguage();
+            generateLanguageGrid();
             generateWeatherForecast();
             updateTelemetry();
             generateWellnessTip();
@@ -854,8 +976,8 @@
         function loadTheme() {
             const savedTheme = localStorage.getItem('theme') || 'theme-dark';
             document.body.className = savedTheme;
-            const btn = document.querySelector(`.theme-btn`);
-            if (btn) btn.classList.add('active');
+            const activeBtn = document.querySelector('.theme-btn[onclick*="' + savedTheme + '"]');
+            if (activeBtn) activeBtn.classList.add('active');
         }
 
         // Language Management
@@ -864,6 +986,18 @@
             if (savedLang) {
                 document.getElementById('languageModal').classList.add('hidden');
             }
+        }
+
+        function generateLanguageGrid() {
+            const langGrid = document.getElementById('languageGrid');
+            const langs = ['EN', 'TR', 'DE', 'FR', 'ES', 'IT', 'JA', 'ZH', 'PT', 'NL'];
+            langs.forEach(lang => {
+                const btn = document.createElement('button');
+                btn.className = 'language-option';
+                btn.textContent = lang;
+                btn.onclick = () => setLanguage(lang.toLowerCase());
+                langGrid.appendChild(btn);
+            });
         }
 
         function setLanguage(lang) {
@@ -886,11 +1020,11 @@
             forecastGrid.innerHTML = '';
 
             const weatherConditions = [
-                { emoji: '☀️', condition: 'Clear' },
-                { emoji: '⛅', condition: 'Partly Cloudy' },
-                { emoji: '☁️', condition: 'Cloudy' },
-                { emoji: '🌧️', condition: 'Rainy' },
-                { emoji: '⛈️', condition: 'Stormy' }
+                { emoji: '☀️', condition: 'Clarus' },
+                { emoji: '⛅', condition: 'Partim Nubilous' },
+                { emoji: '☁️', condition: 'Nubilous' },
+                { emoji: '🌧️', condition: 'Pluvius' },
+                { emoji: '⛈️', condition: 'Procella' }
             ];
 
             const now = new Date();
@@ -919,15 +1053,15 @@
                     </div>
                     <div class="forecast-metrics">
                         <div class="metric">
-                            <div class="metric-label">Temperature</div>
+                            <div class="metric-label">Temperatura</div>
                             <div class="metric-value">${temp}°C</div>
                         </div>
                         <div class="metric">
-                            <div class="metric-label">Wind</div>
+                            <div class="metric-label">Ventus</div>
                             <div class="metric-value">${wind} km/h</div>
                         </div>
                         <div class="metric" style="grid-column: 1 / -1;">
-                            <div class="metric-label">Humidity</div>
+                            <div class="metric-label">Humiditas</div>
                             <div class="metric-value">${humidity}%</div>
                         </div>
                     </div>
@@ -942,17 +1076,17 @@
             document.getElementById('wind').textContent = Math.round(8 + Math.random() * 20) + ' km/h';
             document.getElementById('humidity').textContent = Math.round(45 + Math.random() * 40) + '%';
             document.getElementById('pressure').textContent = Math.round(1000 + Math.random() * 30) + ' hPa';
-            document.getElementById('location').textContent = 'Detecting location...';
+            document.getElementById('location').textContent = 'Detectio...';
         }
 
         // Wellness Recommendations
         function generateWellnessTip() {
             const tips = [
-                'Optimal conditions for outdoor activity. Maintain hydration and apply sunscreen protection.',
-                'Elevated humidity levels detected. Consider indoor exercise routines and temperature-controlled environments.',
-                'Moderate wind conditions present. Excellent for cardiovascular outdoor activities and mental clarity.',
-                'Clear atmospheric conditions support vitamin D synthesis. Morning or late afternoon outdoor time recommended.',
-                'Stable pressure patterns indicate ideal conditions for meditation and respiratory exercises.'
+                'Condiciones optimas ad activitatem externam. Aquam imbibe et defensionem solem applica.',
+                'Humiditas elevata detecta. Exercitia interiora et ambientes temperatura-controlatae considerantur.',
+                'Ventus moderatus praesens. Excellens ad activitates cardiovasculares et claritates mentales.',
+                'Claritas atmosdphaerica vitaminum D syntesim support. Matutina vel vespera tempus exterior recommendatur.',
+                'Patrones pressio stabiles condiciones ideales meditationen et respiratione exercitiis indicate.'
             ];
             const randomTip = tips[Math.floor(Math.random() * tips.length)];
             document.getElementById('wellbeingText').textContent = randomTip;
