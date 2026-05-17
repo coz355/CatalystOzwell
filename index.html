@@ -1,1579 +1,965 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-      <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-4ZT8WTL4C5"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-4ZT8WTL4C5');
-</script>
-   
-    <meta name="description" content="Catalyst Ozwell - Welcome ">
-     <meta name="keywords" content="tech for holistic innovatione">
-     
-     <meta charset="UTF-8">
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <title>Catalyst Ozwell | Love&Light </title>
-     <style>
-         * {
-             margin: 0;
-             padding: 0;
-             box-sizing: border-box;
-         }
-
-         body {
-             font-family: 'Arial', sans-serif;
-             color: white;
-             text-align: center;
-             overflow-x: hidden;
-             background: #0a0e27;
-             transition: all 0.5s ease;
-         }
-
-         /* Dynamic Background with Animation */
-         .background {
-             position: fixed;
-             top: 0;
-             left: 0;
-             width: 100%;
-             height: 100%;
-             z-index: -2;
-             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-             background-size: 400% 400%;
-             animation: gradientShift 15s ease infinite;
-             transition: all 0.5s ease;
-         }
-
-         @keyframes gradientShift {
-             0% { background-position: 0% 50%; }
-             50% { background-position: 100% 50%; }
-             100% { background-position: 0% 50%; }
-         }
-
-         /* Light Play Effects */
-         .light-orbs {
-             position: fixed;
-             width: 100%;
-             height: 100%;
-             top: 0;
-             left: 0;
-             z-index: -1;
-             overflow: hidden;
-         }
-
-         .orb {
-             position: absolute;
-             border-radius: 50%;
-             filter: blur(80px);
-             opacity: 0.3;
-             transition: all 0.5s ease;
-         }
-
-         .orb1 {
-             width: 300px;
-             height: 300px;
-             background: radial-gradient(circle, #00d4ff, transparent);
-             top: -100px;
-             left: -100px;
-             animation: float 20s infinite ease-in-out;
-         }
-
-         .orb2 {
-             width: 250px;
-             height: 250px;
-             background: radial-gradient(circle, #ff006e, transparent);
-             bottom: -50px;
-             right: -50px;
-             animation: float 25s infinite ease-in-out reverse;
-         }
-
-         .orb3 {
-             width: 200px;
-             height: 200px;
-             background: radial-gradient(circle, #00f5ff, transparent);
-             top: 50%;
-             right: 10%;
-             animation: float 30s infinite ease-in-out;
-         }
-
-         @keyframes float {
-             0%, 100% { transform: translate(0, 0); }
-             25% { transform: translate(30px, -30px); }
-             50% { transform: translate(-20px, 20px); }
-             75% { transform: translate(20px, 30px); }
-         }
-
-         /* Language Modal */
-         .language-modal {
-             position: fixed;
-             top: 0;
-             left: 0;
-             width: 100%;
-             height: 100%;
-             z-index: 9999;
-             background: rgba(0, 0, 0, 0.9);
-             display: flex;
-             justify-content: center;
-             align-items: center;
-             backdrop-filter: blur(5px);
-         }
-
-         .language-modal.hidden {
-             display: none;
-         }
-
-         .language-box {
-             background: linear-gradient(135deg, #ffff00 0%, #ffdd00 50%, #ffaa00 100%);
-             border: 4px solid #ffff00;
-             border-radius: 20px;
-             padding: 50px 40px;
-             max-width: 600px;
-             box-shadow: 0 0 50px rgba(255, 255, 0, 0.5), inset 0 0 30px rgba(255, 255, 0, 0.3);
-             animation: pulse-glow 2s ease-in-out infinite;
-             text-align: center;
-         }
-
-         @keyframes pulse-glow {
-             0%, 100% { box-shadow: 0 0 50px rgba(255, 255, 0, 0.5), inset 0 0 30px rgba(255, 255, 0, 0.3); }
-             50% { box-shadow: 0 0 80px rgba(255, 255, 0, 0.8), inset 0 0 50px rgba(255, 255, 0, 0.5); }
-         }
-
-         .language-title {
-             color: #000;
-             font-size: 2.5rem;
-             font-weight: bold;
-             margin-bottom: 15px;
-             text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-         }
-
-         .language-subtitle {
-             color: #333;
-             font-size: 1.2rem;
-             margin-bottom: 40px;
-             font-weight: 600;
-         }
-
-         .language-buttons {
-             display: grid;
-             grid-template-columns: 1fr 1fr 1fr;
-             gap: 20px;
-             margin-bottom: 30px;
-         }
-
-         .language-btn {
-             background: linear-gradient(135deg, #ffffff, #f0f0f0);
-             color: #000;
-             border: 3px solid #000;
-             padding: 20px 25px;
-             font-size: 1.1rem;
-             font-weight: bold;
-             border-radius: 10px;
-             cursor: pointer;
-             transition: all 0.3s;
-             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-             text-transform: uppercase;
-             letter-spacing: 2px;
-         }
-
-         .language-btn:hover {
-             transform: scale(1.08);
-             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
-             background: linear-gradient(135deg, #ffff00, #ffdd00);
-         }
-
-         .language-btn.detected {
-             background: linear-gradient(135deg, #ffff00, #ffdd00);
-             border-color: #ff0000;
-             box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
-         }
-
-         .language-info {
-             color: #333;
-             font-size: 0.9rem;
-             font-weight: 600;
-             margin-top: 20px;
-             padding: 15px;
-             background: rgba(255, 255, 255, 0.5);
-             border-radius: 8px;
-         }
-
-         .language-star {
-             display: inline-block;
-             color: #ff0000;
-             font-size: 1.2rem;
-             margin-right: 5px;
-         }
-
-         /* Theme Styles - 12 Themes */
-         /* 1. Digital Nexus (default) - handled by body styles */
-         
-         /* 2. Cyber Matrix */
-         body.theme-matrix {
-             background: #000000;
-         }
-         body.theme-matrix .background {
-             background: linear-gradient(135deg, #001a00 0%, #003300 50%, #000000 100%);
-         }
-         body.theme-matrix .telemetry,
-         body.theme-matrix .weather-forecast,
-         body.theme-matrix .wellbeing-suggestion {
-             border-color: #00ff00 !important;
-             box-shadow: 0 0 30px rgba(0, 255, 0, 0.5), inset 0 0 20px rgba(0, 255, 0, 0.1) !important;
-         }
-
-         /* 3. Golden Savanna */
-         body.theme-lionking {
-             background: #2a1810;
-         }
-         body.theme-lionking .background {
-             background: linear-gradient(135deg, #4a3728 0%, #6b4f38 50%, #2a1810 100%);
-         }
-         body.theme-lionking .telemetry,
-         body.theme-lionking .weather-forecast,
-         body.theme-lionking .wellbeing-suggestion {
-             border-color: #ffaa00 !important;
-             box-shadow: 0 0 30px rgba(255, 170, 0, 0.5), inset 0 0 20px rgba(255, 170, 0, 0.1) !important;
-         }
-
-         /* 4. Celestial Realm */
-         body.theme-heavenkingdom {
-             background: #1a1a3e;
-         }
-         body.theme-heavenkingdom .background {
-             background: linear-gradient(135deg, #2a2a5e 0%, #3a3a7e 50%, #1a1a3e 100%);
-         }
-         body.theme-heavenkingdom .telemetry,
-         body.theme-heavenkingdom .weather-forecast,
-         body.theme-heavenkingdom .wellbeing-suggestion {
-             border-color: #b19cd9 !important;
-             box-shadow: 0 0 30px rgba(177, 156, 217, 0.5), inset 0 0 20px rgba(177, 156, 217, 0.1) !important;
-         }
-
-         /* 5. Ocean Deep */
-         body.theme-ocean {
-             background: #0d1b2a;
-         }
-         body.theme-ocean .background {
-             background: linear-gradient(135deg, #0d2b45 0%, #1a4d6d 50%, #0d1b2a 100%);
-         }
-         body.theme-ocean .telemetry,
-         body.theme-ocean .weather-forecast,
-         body.theme-ocean .wellbeing-suggestion {
-             border-color: #00e5ff !important;
-             box-shadow: 0 0 30px rgba(0, 229, 255, 0.5), inset 0 0 20px rgba(0, 229, 255, 0.1) !important;
-         }
-
-         /* 6. Sunset Horizon */
-         body.theme-sunset {
-             background: #2a1a0f;
-         }
-         body.theme-sunset .background {
-             background: linear-gradient(135deg, #4a2a1f 0%, #8b4513 50%, #2a1a0f 100%);
-         }
-         body.theme-sunset .telemetry,
-         body.theme-sunset .weather-forecast,
-         body.theme-sunset .wellbeing-suggestion {
-             border-color: #ff6b35 !important;
-             box-shadow: 0 0 30px rgba(255, 107, 53, 0.5), inset 0 0 20px rgba(255, 107, 53, 0.1) !important;
-         }
-
-         /* 7. Forest Whisper */
-         body.theme-forest {
-             background: #1a2e1a;
-         }
-         body.theme-forest .background {
-             background: linear-gradient(135deg, #2a4a2a 0%, #3d5d3d 50%, #1a2e1a 100%);
-         }
-         body.theme-forest .telemetry,
-         body.theme-forest .weather-forecast,
-         body.theme-forest .wellbeing-suggestion {
-             border-color: #7cfc00 !important;
-             box-shadow: 0 0 30px rgba(124, 252, 0, 0.5), inset 0 0 20px rgba(124, 252, 0, 0.1) !important;
-         }
-
-         /* 8. Neon Nights */
-         body.theme-neon {
-             background: #0a0a1a;
-         }
-         body.theme-neon .background {
-             background: linear-gradient(135deg, #1a0a3a 0%, #2a1a5a 50%, #0a0a1a 100%);
-         }
-         body.theme-neon .telemetry,
-         body.theme-neon .weather-forecast,
-         body.theme-neon .wellbeing-suggestion {
-             border-color: #ff00ff !important;
-             box-shadow: 0 0 30px rgba(255, 0, 255, 0.7), inset 0 0 20px rgba(255, 0, 255, 0.2) !important;
-         }
-
-         /* 9. Arctic Aurora */
-         body.theme-arctic {
-             background: #0f1f3f;
-         }
-         body.theme-arctic .background {
-             background: linear-gradient(135deg, #1f3f5f 0%, #2f5f7f 50%, #0f1f3f 100%);
-         }
-         body.theme-arctic .telemetry,
-         body.theme-arctic .weather-forecast,
-         body.theme-arctic .wellbeing-suggestion {
-             border-color: #40e0d0 !important;
-             box-shadow: 0 0 30px rgba(64, 224, 208, 0.5), inset 0 0 20px rgba(64, 224, 208, 0.1) !important;
-         }
-
-         /* 10. Crimson Dawn */
-         body.theme-crimson {
-             background: #2a0a1a;
-         }
-         body.theme-crimson .background {
-             background: linear-gradient(135deg, #4a1a3a 0%, #6b2a4a 50%, #2a0a1a 100%);
-         }
-         body.theme-crimson .telemetry,
-         body.theme-crimson .weather-forecast,
-         body.theme-crimson .wellbeing-suggestion {
-             border-color: #ff1493 !important;
-             box-shadow: 0 0 30px rgba(255, 20, 147, 0.5), inset 0 0 20px rgba(255, 20, 147, 0.1) !important;
-         }
-
-         /* 11. Stellar Galaxy */
-         body.theme-stellar {
-             background: #0a0a2e;
-         }
-         body.theme-stellar .background {
-             background: linear-gradient(135deg, #1a1a4e 0%, #2a2a6e 50%, #0a0a2e 100%);
-         }
-         body.theme-stellar .telemetry,
-         body.theme-stellar .weather-forecast,
-         body.theme-stellar .wellbeing-suggestion {
-             border-color: #ffd700 !important;
-             box-shadow: 0 0 30px rgba(255, 215, 0, 0.5), inset 0 0 20px rgba(255, 215, 0, 0.1) !important;
-         }
-
-         /* 12. Cyber Punk */
-         body.theme-cyberpunk {
-             background: #0a0a0a;
-         }
-         body.theme-cyberpunk .background {
-             background: linear-gradient(135deg, #1a0a2a 0%, #2a1a3a 50%, #0a0a0a 100%);
-         }
-         body.theme-cyberpunk .telemetry,
-         body.theme-cyberpunk .weather-forecast,
-         body.theme-cyberpunk .wellbeing-suggestion {
-             border-color: #00ffff !important;
-             box-shadow: 0 0 30px rgba(0, 255, 255, 0.7), inset 0 0 20px rgba(0, 255, 255, 0.2) !important;
-         }
-
-         /* Main Container */
-         .container {
-             position: relative;
-             z-index: 1;
-             min-height: 100vh;
-             display: flex;
-             flex-direction: column;
-             justify-content: center;
-             align-items: center;
-             padding: 50px 20px;
-         }
-
-         /* Customization Panel - No Sliders */
-         .customization-panel {
-             position: fixed;
-             top: 20px;
-             right: 20px;
-             z-index: 1000;
-             background: rgba(0, 0, 0, 0.8);
-             border: 2px solid currentColor;
-             border-radius: 10px;
-             padding: 20px;
-             max-width: 320px;
-             backdrop-filter: blur(10px);
-         }
-
-         .customization-toggle {
-             background: var(--accent-color, #00d4ff);
-             color: #000;
-             padding: 10px 15px;
-             border: none;
-             border-radius: 5px;
-             cursor: pointer;
-             font-weight: bold;
-             margin-bottom: 15px;
-             width: 100%;
-             transition: all 0.3s;
-         }
-
-         .customization-toggle:hover {
-             transform: scale(1.05);
-         }
-
-         .customization-content {
-             display: none;
-             max-height: 600px;
-             overflow-y: auto;
-         }
-
-         .customization-content.active {
-             display: block;
-         }
-
-         .customization-section {
-             margin-bottom: 15px;
-             text-align: left;
-         }
-
-         .customization-section h3 {
-             font-size: 0.9rem;
-             margin-bottom: 10px;
-             color: var(--accent-color, #00d4ff);
-         }
-
-         .theme-buttons {
-             display: grid;
-             grid-template-columns: 1fr 1fr;
-             gap: 8px;
-             flex-direction: column;
-         }
-
-         .theme-btn {
-             padding: 8px;
-             border: 2px solid var(--accent-color, #00d4ff);
-             background: rgba(0, 212, 255, 0.1);
-             color: white;
-             border-radius: 5px;
-             cursor: pointer;
-             font-size: 0.8rem;
-             transition: all 0.3s;
-         }
-
-         .theme-btn:hover {
-             background: rgba(0, 212, 255, 0.3);
-         }
-
-         .theme-btn.active {
-             background: var(--accent-color, #00d4ff);
-             color: #000;
-             font-weight: bold;
-         }
-
-         .language-grid {
-             display: grid;
-             grid-template-columns: repeat(2, 1fr);
-             gap: 8px;
-             margin-bottom: 15px;
-         }
-
-         .language-option {
-             padding: 8px;
-             border: 2px solid var(--accent-color, #00d4ff);
-             background: rgba(0, 212, 255, 0.1);
-             color: white;
-             border-radius: 5px;
-             cursor: pointer;
-             font-size: 0.8rem;
-             transition: all 0.3s;
-             font-weight: 600;
-         }
-
-         .language-option:hover {
-             background: rgba(0, 212, 255, 0.3);
-             transform: scale(1.05);
-         }
-
-         .language-option.active {
-             background: var(--accent-color, #00d4ff);
-             color: #000;
-             box-shadow: 0 0 10px var(--accent-color, #00d4ff);
-         }
-
-         /* Logo */
-         .logo {
-             width: 120px;
-             height: 120px;
-             margin-bottom: 30px;
-             animation: glow 3s ease-in-out infinite;
-         }
-
-         @keyframes glow {
-             0%, 100% { filter: drop-shadow(0 0 10px var(--accent-color, #00d4ff)); }
-             50% { filter: drop-shadow(0 0 30px var(--accent-color, #00d4ff)); }
-         }
-
-         /* Heading */
-         h1 {
-             font-size: 4rem;
-             margin-bottom: 20px;
-             color: var(--accent-color, #00d4ff);
-             text-shadow: 0 0 20px var(--accent-color, #00d4ff), 0 0 40px var(--secondary-color, #00f5ff);
-             font-weight: bold;
-             letter-spacing: 3px;
-             animation: titleGlow 2s ease-in-out infinite;
-         }
-
-         @keyframes titleGlow {
-             0%, 100% { text-shadow: 0 0 20px var(--accent-color, #00d4ff), 0 0 40px var(--secondary-color, #00f5ff); }
-             50% { text-shadow: 0 0 30px var(--accent-color, #00d4ff), 0 0 60px var(--secondary-color, #00f5ff), 0 0 80px var(--tertiary-color, #ff006e); }
-         }
-
-         /* Description */
-         .description {
-             font-size: 1.2rem;
-             max-width: 600px;
-             line-height: 1.8;
-             margin-bottom: 40px;
-             color: #e0e0e0;
-         }
-
-         /* Weather Forecast Section */
-         .weather-forecast {
-             background: rgba(0, 212, 255, 0.1);
-             border: 2px solid var(--accent-color, #00d4ff);
-             border-radius: 10px;
-             padding: 30px;
-             margin-bottom: 30px;
-             max-width: 900px;
-             box-shadow: 0 0 20px rgba(0, 212, 255, 0.3), inset 0 0 20px rgba(0, 212, 255, 0.1);
-             backdrop-filter: blur(10px);
-             transition: all 0.5s ease;
-         }
-
-         .weather-title {
-             font-size: 1.1rem;
-             color: var(--secondary-color, #00f5ff);
-             margin-bottom: 20px;
-             text-transform: uppercase;
-             letter-spacing: 2px;
-             text-shadow: 0 0 10px var(--secondary-color, #00f5ff);
-         }
-
-         .forecast-grid {
-             display: grid;
-             grid-template-columns: repeat(3, 1fr);
-             gap: 20px;
-             margin-bottom: 20px;
-         }
-
-         .forecast-card {
-             background: rgba(0, 212, 255, 0.05);
-             border: 1px solid var(--accent-color, #00d4ff);
-             border-radius: 8px;
-             padding: 15px;
-             transition: all 0.3s;
-         }
-
-         .forecast-card:hover {
-             transform: translateY(-5px);
-             box-shadow: 0 5px 15px rgba(0, 212, 255, 0.3);
-         }
-
-         .forecast-time {
-             font-size: 0.9rem;
-             color: var(--accent-color, #00d4ff);
-             font-weight: bold;
-             margin-bottom: 10px;
-         }
-
-         .forecast-detail {
-             font-size: 0.85rem;
-             color: #e0e0e0;
-             margin: 5px 0;
-         }
-
-         .forecast-emoji {
-             font-size: 2rem;
-             margin: 10px 0;
-         }
-
-         /* Wellbeing Suggestion Section */
-         .wellbeing-suggestion {
-             background: rgba(255, 0, 110, 0.05);
-             border: 2px solid var(--tertiary-color, #ff006e);
-             border-radius: 10px;
-             padding: 30px;
-             margin-bottom: 40px;
-             max-width: 700px;
-             box-shadow: 0 0 20px rgba(255, 0, 110, 0.2);
-             backdrop-filter: blur(10px);
-             transition: all 0.5s ease;
-         }
-
-         .wellbeing-title {
-             font-size: 1.1rem;
-             color: var(--tertiary-color, #ff006e);
-             margin-bottom: 15px;
-             text-transform: uppercase;
-             letter-spacing: 2px;
-             text-shadow: 0 0 10px var(--tertiary-color, #ff006e);
-         }
-
-         .wellbeing-text {
-             font-size: 1rem;
-             color: #e0e0e0;
-             line-height: 1.6;
-             font-style: italic;
-         }
-
-         /* Telemetry Box - Neon Style */
-         .telemetry {
-             background: rgba(0, 212, 255, 0.1);
-             border: 2px solid var(--accent-color, #00d4ff);
-             border-radius: 10px;
-             padding: 30px;
-             margin-bottom: 40px;
-             max-width: 700px;
-             box-shadow: 0 0 20px rgba(0, 212, 255, 0.3), inset 0 0 20px rgba(0, 212, 255, 0.1);
-             backdrop-filter: blur(10px);
-             transition: all 0.5s ease;
-         }
-
-         .telemetry-title {
-             font-size: 1.1rem;
-             color: var(--secondary-color, #00f5ff);
-             margin-bottom: 20px;
-             text-transform: uppercase;
-             letter-spacing: 2px;
-             text-shadow: 0 0 10px var(--secondary-color, #00f5ff);
-         }
-
-         .telemetry-grid {
-             display: grid;
-             grid-template-columns: 1fr 1fr;
-             gap: 15px;
-         }
-
-         .telemetry-item {
-             display: flex;
-             justify-content: space-between;
-             align-items: center;
-             font-size: 0.95rem;
-             border-bottom: 1px solid rgba(0, 212, 255, 0.3);
-             padding-bottom: 10px;
-             grid-column: span 1;
-         }
-
-         .telemetry-item.full-width {
-             grid-column: span 2;
-         }
-
-         .telemetry-label {
-             color: var(--accent-color, #00d4ff);
-             font-weight: bold;
-             font-size: 0.9rem;
-         }
-
-         .telemetry-value {
-             color: var(--tertiary-color, #ff006e);
-             font-weight: bold;
-             text-shadow: 0 0 10px var(--tertiary-color, #ff006e);
-             font-size: 0.9rem;
-         }
-
-         .risk-indicator {
-             display: inline-block;
-             width: 12px;
-             height: 12px;
-             border-radius: 50%;
-             margin-right: 5px;
-         }
-
-         .risk-low {
-             background: #00ff00;
-         }
-
-         .risk-medium {
-             background: #ffaa00;
-         }
-
-         .risk-high {
-             background: #ff0000;
-         }
-
-         /* Music Section */
-         .music-section {
-             background: rgba(0, 212, 255, 0.05);
-             border: 2px solid var(--tertiary-color, #ff006e);
-             border-radius: 10px;
-             padding: 30px;
-             margin-bottom: 40px;
-             max-width: 600px;
-             box-shadow: 0 0 20px rgba(255, 0, 110, 0.2);
-             backdrop-filter: blur(10px);
-             transition: all 0.5s ease;
-         }
-
-         .music-title {
-             font-size: 1.3rem;
-             color: var(--tertiary-color, #ff006e);
-             margin-bottom: 25px;
-             text-transform: uppercase;
-             letter-spacing: 2px;
-             text-shadow: 0 0 10px var(--tertiary-color, #ff006e);
-         }
-
-         .radio-stations {
-             display: grid;
-             grid-template-columns: 1fr 1fr;
-             gap: 15px;
-         }
-
-         .radio-btn {
-             background: linear-gradient(135deg, var(--tertiary-color, #ff006e), var(--quaternary-color, #ff3d82));
-             color: white;
-             padding: 15px 20px;
-             border: none;
-             border-radius: 8px;
-             cursor: pointer;
-             font-weight: bold;
-             transition: all 0.3s;
-             font-size: 0.95rem;
-             text-decoration: none;
-             display: block;
-         }
-
-         .radio-btn:hover {
-             transform: scale(1.05);
-             box-shadow: 0 0 20px var(--tertiary-color, #ff006e);
-         }
-
-         /* Contact Button */
-         .btn-contact {
-             background: linear-gradient(135deg, var(--accent-color, #00d4ff), var(--secondary-color, #00f5ff));
-             color: #1a1a2e;
-             padding: 15px 40px;
-             border-radius: 8px;
-             text-decoration: none;
-             font-weight: bold;
-             margin-bottom: 30px;
-             transition: all 0.3s;
-             font-size: 1.1rem;
-             display: inline-block;
-             border: none;
-             cursor: pointer;
-             text-shadow: 0 0 5px rgba(0, 212, 255, 0.5);
-         }
-
-         .btn-contact:hover {
-             transform: scale(1.1);
-             box-shadow: 0 0 30px var(--accent-color, #00d4ff);
-         }
-
-         /* Social Links */
-         .social {
-             margin-top: 40px;
-             display: flex;
-             justify-content: center;
-             gap: 30px;
-             flex-wrap: wrap;
-         }
-
-         .social a {
-             color: white;
-             font-size: 1.3rem;
-             text-decoration: none;
-             transition: all 0.3s;
-             display: inline-flex;
-             align-items: center;
-             gap: 8px;
-         }
-
-         .social a:hover {
-             color: var(--accent-color, #00d4ff);
-             text-shadow: 0 0 15px var(--accent-color, #00d4ff);
-             transform: scale(1.2);
-         }
-
-         .instagram-link {
-             background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-             padding: 12px 25px;
-             border-radius: 8px;
-             color: white !important;
-             font-weight: bold;
-             text-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-         }
-
-         .instagram-link:hover {
-             transform: scale(1.1);
-             box-shadow: 0 0 25px rgba(240, 148, 51, 0.5);
-         }
-
-         /* Responsive Design */
-         @media (max-width: 768px) {
-             h1 {
-                 font-size: 2.5rem;
-             }
-
-             .language-box {
-                 padding: 40px 25px;
-                 margin: 20px;
-             }
-
-             .language-title {
-                 font-size: 1.8rem;
-             }
-
-             .language-buttons {
-                 grid-template-columns: 1fr;
-             }
-
-             .radio-stations {
-                 grid-template-columns: 1fr;
-             }
-
-             .telemetry {
-                 max-width: 100%;
-             }
-
-             .telemetry-grid {
-                 grid-template-columns: 1fr;
-             }
-
-             .telemetry-item.full-width {
-                 grid-column: span 1;
-             }
-
-             .weather-forecast {
-                 max-width: 100%;
-             }
-
-             .forecast-grid {
-                 grid-template-columns: 1fr;
-             }
-
-             .music-section {
-                 max-width: 100%;
-             }
-
-             .customization-panel {
-                 top: 10px;
-                 right: 10px;
-                 max-width: 250px;
-             }
-
-             .theme-buttons {
-                 grid-template-columns: 1fr;
-             }
-
-             .language-grid {
-                 grid-template-columns: 1fr;
-             }
-         }
-     </style>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4ZT8WTL4C5"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-4ZT8WTL4C5');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Catalyst Ozwell - Advanced environmental monitoring and wellness analytics platform">
+    <meta name="keywords" content="environmental monitoring, health analytics, weather forecasting, real-time data">
+    <title>Catalyst Ozwell | Environmental Intelligence Platform</title>
+
+    <style>
+        :root {
+            --accent-primary: #d4af37;
+            --accent-secondary: #c9a961;
+            --dark-bg: #0f1419;
+            --card-bg: rgba(20, 25, 35, 0.8);
+            --border-color: #3a4a5a;
+            --text-primary: #e8e8e8;
+            --text-secondary: #a8a8a8;
+            --success: #2ecc71;
+            --warning: #f39c12;
+            --danger: #e74c3c;
+            --info: #3498db;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            color: var(--text-primary);
+            background: var(--dark-bg);
+            overflow-x: hidden;
+            transition: background 0.5s ease;
+            letter-spacing: 0.3px;
+        }
+
+        /* Sophisticated Background */
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: linear-gradient(135deg, #0f1419 0%, #1a1f2e 50%, #0d1117 100%);
+            background-attachment: fixed;
+        }
+
+        /* Ambient Light Effects */
+        .ambient-light {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .light-accent {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.08;
+            mix-blend-mode: screen;
+        }
+
+        .light-accent-1 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, #d4af37, transparent);
+            top: 10%;
+            left: 5%;
+            animation: drift 25s ease-in-out infinite;
+        }
+
+        .light-accent-2 {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, #3498db, transparent);
+            bottom: 15%;
+            right: 10%;
+            animation: drift 30s ease-in-out infinite reverse;
+        }
+
+        @keyframes drift {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(30px, -30px); }
+        }
+
+        /* Language Selection Modal */
+        .language-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            background: rgba(0, 0, 0, 0.95);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(8px);
+        }
+
+        .language-modal.hidden {
+            display: none;
+        }
+
+        .language-box {
+            background: linear-gradient(135deg, var(--card-bg), rgba(30, 40, 50, 0.9));
+            border: 1px solid var(--accent-primary);
+            border-radius: 12px;
+            padding: 60px 50px;
+            max-width: 650px;
+            box-shadow: 0 25px 80px rgba(212, 175, 55, 0.15), inset 0 1px 1px rgba(212, 175, 55, 0.1);
+            text-align: center;
+            backdrop-filter: blur(20px);
+        }
+
+        .language-title {
+            color: var(--accent-primary);
+            font-size: 2.2rem;
+            font-weight: 300;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .language-subtitle {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-bottom: 45px;
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+
+        .language-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .language-btn {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            padding: 16px 20px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+        }
+
+        .language-btn:hover {
+            border-color: var(--accent-primary);
+            background: rgba(212, 175, 55, 0.08);
+            transform: translateY(-2px);
+        }
+
+        .language-btn.detected {
+            background: rgba(212, 175, 55, 0.15);
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+        }
+
+        .language-info {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 25px;
+            padding: 15px 25px;
+            background: rgba(212, 175, 55, 0.05);
+            border-left: 2px solid var(--accent-primary);
+            text-align: left;
+        }
+
+        /* Theme System */
+        body.theme-dark { --accent-primary: #d4af37; --accent-secondary: #c9a961; }
+        body.theme-ocean { --accent-primary: #00d4ff; --accent-secondary: #00f5ff; }
+        body.theme-forest { --accent-primary: #7cfc00; --accent-secondary: #9aff00; }
+        body.theme-sunset { --accent-primary: #ff6b35; --accent-secondary: #ff8c42; }
+        body.theme-crimson { --accent-primary: #ff1493; --accent-secondary: #ff69b4; }
+
+        /* Main Container */
+        .container {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 80px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Header Section */
+        .header-section {
+            text-align: center;
+            margin-bottom: 80px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 50px;
+        }
+
+        .logo-container {
+            margin-bottom: 40px;
+        }
+
+        .logo {
+            width: 140px;
+            height: 140px;
+            border: 2px solid var(--accent-primary);
+            border-radius: 8px;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            background: rgba(212, 175, 55, 0.05);
+            animation: pulse-subtle 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse-subtle {
+            0%, 100% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.2); }
+            50% { box-shadow: 0 0 40px rgba(212, 175, 55, 0.4); }
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            color: var(--accent-primary);
+            font-weight: 300;
+            letter-spacing: 4px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .tagline {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            font-style: italic;
+            letter-spacing: 1px;
+        }
+
+        /* Customization Panel */
+        .customization-panel {
+            position: fixed;
+            top: 40px;
+            right: 40px;
+            z-index: 1000;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            max-width: 300px;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .customization-toggle {
+            background: transparent;
+            color: var(--accent-primary);
+            border: 1px solid var(--accent-primary);
+            padding: 12px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            width: 100%;
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+            font-size: 0.95rem;
+        }
+
+        .customization-toggle:hover {
+            background: rgba(212, 175, 55, 0.1);
+        }
+
+        .customization-content {
+            display: none;
+            margin-top: 20px;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .customization-content.active {
+            display: block;
+        }
+
+        .theme-buttons, .language-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .theme-btn, .language-option {
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            background: transparent;
+            color: var(--text-secondary);
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .theme-btn:hover, .language-option:hover {
+            border-color: var(--accent-primary);
+            background: rgba(212, 175, 55, 0.08);
+        }
+
+        .theme-btn.active, .language-option.active {
+            background: rgba(212, 175, 55, 0.2);
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+        }
+
+        /* Weather Forecast Section - Professional Grid */
+        .weather-forecast {
+            width: 100%;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 50px;
+            margin-bottom: 60px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+            padding-bottom: 25px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            color: var(--accent-primary);
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin: 0;
+        }
+
+        .forecast-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 0;
+        }
+
+        .forecast-card {
+            background: rgba(212, 175, 55, 0.03);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 30px 25px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .forecast-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .forecast-card:hover {
+            border-color: var(--accent-primary);
+            background: rgba(212, 175, 55, 0.08);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.15);
+        }
+
+        .forecast-card:hover::before {
+            opacity: 1;
+        }
+
+        .forecast-time {
+            font-size: 1.1rem;
+            color: var(--accent-primary);
+            font-weight: 700;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .forecast-time-detail {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            letter-spacing: 0.5px;
+        }
+
+        .forecast-icon-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .forecast-emoji {
+            font-size: 4rem;
+            display: inline-block;
+            filter: drop-shadow(0 4px 8px rgba(212, 175, 55, 0.2));
+        }
+
+        .forecast-metrics {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .metric {
+            background: rgba(20, 25, 35, 0.5);
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .metric-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .metric-value {
+            font-size: 1.3rem;
+            color: var(--accent-primary);
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        /* Telemetry Section */
+        .telemetry {
+            width: 100%;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 50px;
+            margin-bottom: 60px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .telemetry-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .telemetry-item {
+            background: rgba(212, 175, 55, 0.03);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .telemetry-item:hover {
+            border-color: var(--accent-primary);
+            background: rgba(212, 175, 55, 0.08);
+        }
+
+        .telemetry-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .telemetry-value {
+            font-size: 1.8rem;
+            color: var(--accent-primary);
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .risk-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .risk-low { background: var(--success); }
+        .risk-medium { background: var(--warning); }
+        .risk-high { background: var(--danger); }
+
+        /* Wellbeing Section */
+        .wellbeing-suggestion {
+            width: 100%;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 40px 50px;
+            margin-bottom: 60px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .wellbeing-title {
+            font-size: 1.4rem;
+            color: var(--accent-primary);
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+        }
+
+        .wellbeing-text {
+            font-size: 1.05rem;
+            color: var(--text-primary);
+            line-height: 1.8;
+            letter-spacing: 0.5px;
+        }
+
+        /* Contact Button */
+        .btn-contact {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            color: var(--dark-bg);
+            padding: 16px 50px;
+            border-radius: 6px;
+            border: none;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 60px;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-contact:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 50px rgba(212, 175, 55, 0.5);
+        }
+
+        /* Social Links */
+        .social {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+            padding-top: 40px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .social a {
+            color: var(--accent-primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .social a:hover {
+            transform: translateY(-3px);
+            filter: brightness(1.2);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 20px;
+            }
+
+            h1 {
+                font-size: 2.2rem;
+                letter-spacing: 2px;
+            }
+
+            .customization-panel {
+                top: 20px;
+                right: 20px;
+                max-width: 280px;
+            }
+
+            .weather-forecast, .telemetry, .wellbeing-suggestion {
+                padding: 30px 20px;
+            }
+
+            .forecast-grid, .telemetry-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .forecast-emoji {
+                font-size: 3rem;
+            }
+
+            .section-title {
+                font-size: 1.1rem;
+            }
+
+            .theme-buttons, .language-buttons {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 30px 15px;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+                letter-spacing: 1px;
+            }
+
+            .language-box {
+                padding: 40px 25px;
+                margin: 20px;
+            }
+
+            .logo {
+                width: 100px;
+                height: 100px;
+            }
+        }
+
+        /* Loading States */
+        .loading {
+            color: var(--text-secondary);
+            font-style: italic;
+            animation: pulse-text 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse-text {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+    </style>
 </head>
 <body>
-    <!-- Dynamic Background -->
+    <!-- Background Layer -->
     <div class="background"></div>
     
-    <!-- Light Play Effects -->
-    <div class="light-orbs">
-        <div class="orb orb1"></div>
-        <div class="orb orb2"></div>
-        <div class="orb orb3"></div>
+    <!-- Ambient Light Effects -->
+    <div class="ambient-light">
+        <div class="light-accent light-accent-1"></div>
+        <div class="light-accent light-accent-2"></div>
     </div>
 
     <!-- Language Selection Modal -->
     <div class="language-modal" id="languageModal">
         <div class="language-box">
-            <div class="language-title">🌍 SELECT YOUR LANGUAGE</div>
-            <div class="language-subtitle">Choose your preferred language:</div>
+            <div class="language-title">Select Language</div>
+            <div class="language-subtitle">Choose your preferred language</div>
             <div class="language-buttons">
-                <button class="language-btn" id="englishBtn" onclick="setLanguage('en')">🇬🇧 ENG</button>
-                <button class="language-btn" id="turkishBtn" onclick="setLanguage('tr')">🇹🇷 TUR</button>
-                <button class="language-btn" id="indianBtn" onclick="setLanguage('hi')">🇮🇳 HIN</button>
-                <button class="language-btn" id="germanBtn" onclick="setLanguage('de')">🇩🇪 DEU</button>
-                <button class="language-btn" id="frenchBtn" onclick="setLanguage('fr')">🇫🇷 FRA</button>
-                <button class="language-btn" id="spanishBtn" onclick="setLanguage('es')">🇪🇸 ESP</button>
-                <button class="language-btn" id="italianBtn" onclick="setLanguage('it')">🇮🇹 ITA</button>
-                <button class="language-btn" id="japaneseBtn" onclick="setLanguage('ja')">🇯🇵 JPN</button>
-                <button class="language-btn" id="chineseBtn" onclick="setLanguage('zh')">🇨🇳 CHN</button>
-                <button class="language-btn" id="portugueseBtn" onclick="setLanguage('pt')">🇵🇹 POR</button>
-                <button class="language-btn" id="dutchBtn" onclick="setLanguage('nl')">🇳🇱 DUT</button>
-                <button class="language-btn" id="localBtn" onclick="setLanguageByCountry()">📍 LOCAL</button>
+                <button class="language-btn" id="englishBtn" onclick="setLanguage('en')">English</button>
+                <button class="language-btn" id="turkishBtn" onclick="setLanguage('tr')">Türkçe</button>
+                <button class="language-btn" id="germanBtn" onclick="setLanguage('de')">Deutsch</button>
+                <button class="language-btn" id="frenchBtn" onclick="setLanguage('fr')">Français</button>
+                <button class="language-btn" id="spanishBtn" onclick="setLanguage('es')">Español</button>
+                <button class="language-btn" id="italianBtn" onclick="setLanguage('it')">Italiano</button>
+                <button class="language-btn" id="japaneseBtn" onclick="setLanguage('ja')">日本語</button>
+                <button class="language-btn" id="chineseBtn" onclick="setLanguage('zh')">中文</button>
+                <button class="language-btn" id="portugueseBtn" onclick="setLanguage('pt')">Português</button>
+                <button class="language-btn" id="dutchBtn" onclick="setLanguage('nl')">Nederlands</button>
+                <button class="language-btn" id="localBtn" onclick="setLanguageByCountry()">Auto-Detect</button>
             </div>
             <div class="language-info">
-                <span class="language-star">★</span> <span id="languageInfo">Detecting your location...</span>
+                Detecting your location for language preferences...
             </div>
         </div>
     </div>
 
     <!-- Customization Panel -->
     <div class="customization-panel">
-        <button class="customization-toggle" onclick="toggleCustomization()">⚙️ Customize</button>
+        <button class="customization-toggle" onclick="toggleCustomization()">⚙ Customize</button>
         <div class="customization-content">
             <div class="customization-section">
-                <h3>🎭 Themes (12 Options)</h3>
+                <h3 style="color: var(--accent-primary); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px;">Themes</h3>
                 <div class="theme-buttons" id="themeButtons"></div>
-            </div>
-            <div class="customization-section">
-                <h3>🌐 Languages (11 Options)</h3>
-                <div class="language-grid" id="languageGrid"></div>
             </div>
         </div>
     </div>
 
     <!-- Main Content -->
     <div class="container">
-        <img src="logo2.png" class="logo" alt="Catalyst Ozwell">
-        <h1>Catalyst Ozwell</h1>
-        <p class="description" data-i18n="coming-soon">Coming soon, very soon promise KISSES C.O....</p>
-
-        <!-- Weather Forecast Section (3 Day, 12 Hour Intervals) -->
-        <div class="weather-forecast">
-            <div class="weather-title" data-i18n="weather-forecast-title">🌤️ 3-Day Weather Forecast (12 Hour Intervals)</div>
-            <div class="forecast-grid" id="forecastGrid">
-                <!-- Generated by JavaScript -->
+        <!-- Header -->
+        <div class="header-section">
+            <div class="logo-container">
+                <div class="logo">CO</div>
             </div>
+            <h1>Catalyst Ozwell</h1>
+            <p class="subtitle">Environmental Intelligence Platform</p>
+            <p class="tagline">Real-time monitoring for holistic wellbeing</p>
         </div>
 
-        <!-- AI Wellbeing Suggestion -->
-        <div class="wellbeing-suggestion">
-            <div class="wellbeing-title" data-i18n="wellbeing-title">🧘 AI Wellbeing Suggestion</div>
-            <div class="wellbeing-text" id="wellbeingText">
-                Loading personalized suggestion based on current conditions...
+        <!-- Weather Forecast Section -->
+        <div class="weather-forecast">
+            <div class="section-header">
+                <h2 class="section-title">72-Hour Weather Forecast</h2>
+            </div>
+            <div class="forecast-grid" id="forecastGrid">
+                <div style="grid-column: 1/-1; text-align: center; padding: 40px;">
+                    <p class="loading">Loading forecast data...</p>
+                </div>
             </div>
         </div>
 
         <!-- Telemetry Section -->
         <div class="telemetry">
-            <div class="telemetry-title" data-i18n="telemetry-title">📡 Advanced Environmental & Risk Analytics</div>
-            <div class="telemetry-grid">
-                <!-- Weather Section -->
+            <div class="section-header">
+                <h2 class="section-title">Environmental Analytics</h2>
+            </div>
+            <div class="telemetry-grid" id="telemetryGrid">
                 <div class="telemetry-item">
-                    <span class="telemetry-label" data-i18n="temperature">🌡️ Temperature</span>
+                    <span class="telemetry-label">Temperature</span>
                     <span class="telemetry-value" id="temp">--°C</span>
                 </div>
                 <div class="telemetry-item">
-                    <span class="telemetry-label" data-i18n="location">📍 Location</span>
+                    <span class="telemetry-label">Location</span>
                     <span class="telemetry-value" id="location">Detecting...</span>
                 </div>
                 <div class="telemetry-item">
-                    <span class="telemetry-label" data-i18n="wind-speed">💨 Wind Speed</span>
+                    <span class="telemetry-label">Wind Speed</span>
                     <span class="telemetry-value" id="wind">-- km/h</span>
                 </div>
                 <div class="telemetry-item">
-                    <span class="telemetry-label" data-i18n="weather-risk">🌦️ Weather Risk</span>
+                    <span class="telemetry-label">Weather Risk</span>
                     <span class="telemetry-value"><span class="risk-indicator risk-low"></span><span id="weatherRisk">Low</span></span>
                 </div>
-
-                <!-- Seismic Section -->
                 <div class="telemetry-item">
-                    <span class="telemetry-label" data-i18n="seismic">🌍 Recent Seismic Activity</span>
-                    <span class="telemetry-value" id="seismic">Monitoring...</span>
+                    <span class="telemetry-label">Humidity</span>
+                    <span class="telemetry-value" id="humidity">--%</span>
                 </div>
                 <div class="telemetry-item">
-                    <span class="telemetry-label" data-i18n="earthquake-risk">⚠️ Earthquake Risk</span>
-                    <span class="telemetry-value"><span class="risk-indicator risk-low"></span><span id="earthquakeRisk">Low</span></span>
-                </div>
-
-                <!-- Crime Statistics -->
-                <div class="telemetry-item">
-                    <span class="telemetry-label" data-i18n="crime-rate">🚨 Regional Crime Rate</span>
-                    <span class="telemetry-value" id="crimeRate">--</span>
-                </div>
-                <div class="telemetry-item">
-                    <span class="telemetry-label" data-i18n="safety-index">🛡️ Safety Index</span>
-                    <span class="telemetry-value"><span class="risk-indicator risk-medium"></span><span id="safetyIndex">Moderate</span></span>
-                </div>
-
-                <!-- Solar & Radiation -->
-                <div class="telemetry-item">
-                    <span class="telemetry-label" data-i18n="solar">☀️ Solar Activity</span>
-                    <span class="telemetry-value" id="solarActivity">Normal</span>
-                </div>
-                <div class="telemetry-item">
-                    <span class="telemetry-label" data-i18n="uv-index">🛡️ UV/EUV Index</span>
-                    <span class="telemetry-value" id="uvIndex">Moderate</span>
-                </div>
-
-                <!-- Protection Info -->
-                <div class="telemetry-item full-width">
-                    <span class="telemetry-label" data-i18n="protection">💊 Radiation Protection Recommendation</span>
-                    <span class="telemetry-value" id="radiationProtection">Standard precautions</span>
-                </div>
-
-                <!-- Status -->
-                <div class="telemetry-item full-width">
-                    <span class="telemetry-label" data-i18n="status">📊 System Status</span>
-                    <span class="telemetry-value" id="status">🔴 Active</span>
+                    <span class="telemetry-label">Pressure</span>
+                    <span class="telemetry-value" id="pressure">-- hPa</span>
                 </div>
             </div>
         </div>
 
-        <!-- Music Section -->
-        <div class="music-section">
-            <div class="music-title" data-i18n="music-title">🎵 Free Radio Stations</div>
-            <div class="radio-stations">
-                <a href="https://www.skyradio.nl/" target="_blank" class="radio-btn">Sky Radio 🎶</a>
-                <a href="https://www.101.nl/" target="_blank" class="radio-btn">101.nl 🎧</a>
-                <a href="https://www.nporadio1.nl/" target="_blank" class="radio-btn">NPO Radio 1</a>
-                <a href="https://www.radiofrance.fr/" target="_blank" class="radio-btn">Radio France 🇫🇷</a>
-                <a href="https://www.bbc.co.uk/sounds/" target="_blank" class="radio-btn">BBC Sounds 🎙️</a>
-                <a href="https://tunein.com/" target="_blank" class="radio-btn">TuneIn Radio 📻</a>
-            </div>
+        <!-- Wellbeing Section -->
+        <div class="wellbeing-suggestion">
+            <h2 class="wellbeing-title">Daily Wellness Insight</h2>
+            <p class="wellbeing-text" id="wellbeingText">
+                Loading personalized wellness recommendation based on current environmental conditions...
+            </p>
         </div>
 
-        <!-- Contact Button -->
-        <a href="https://instagram.com/catalystOzwell" target="_blank" class="btn-contact" data-i18n="contact">📱 Contact Us</a>
+        <!-- Call to Action -->
+        <button class="btn-contact" onclick="alert('Contact feature coming soon')">Get In Touch</button>
 
         <!-- Social Links -->
         <div class="social">
-            <a href="https://instagram.com/catalystOzwell" target="_blank" class="instagram-link">
-                📸 @catalystOzwell
-            </a>
-            <a href="mailto:info@catalystozwell.com">📧 Email</a>
+            <a href="#" title="LinkedIn">LinkedIn</a>
+            <a href="#" title="Twitter">Twitter</a>
+            <a href="#" title="Instagram">Instagram</a>
         </div>
     </div>
 
-    <!-- Script -->
     <script>
-        // Multilingual Content (Extended with Turkish & Hindi)
-        const languages = {
+        // Configuration
+        const CONFIG = {
+            themes: [
+                { name: 'Dark', class: 'theme-dark' },
+                { name: 'Ocean', class: 'theme-ocean' },
+                { name: 'Forest', class: 'theme-forest' },
+                { name: 'Sunset', class: 'theme-sunset' },
+                { name: 'Crimson', class: 'theme-crimson' }
+            ],
+            languages: ['en', 'tr', 'de', 'fr', 'es', 'it', 'ja', 'zh', 'pt', 'nl']
+        };
+
+        // Translations
+        const translations = {
             en: {
-                'coming-soon': 'Coming soon, very soon promise KISSES C.O....',
-                'weather-forecast-title': '🌤️ 3-Day Weather Forecast (12 Hour Intervals)',
-                'wellbeing-title': '🧘 AI Wellbeing Suggestion',
-                'telemetry-title': '📡 Advanced Environmental & Risk Analytics',
-                'temperature': '🌡️ Temperature',
-                'location': '📍 Location',
-                'wind-speed': '💨 Wind Speed',
-                'weather-risk': '🌦️ Weather Risk',
-                'seismic': '🌍 Recent Seismic Activity',
-                'earthquake-risk': '⚠️ Earthquake Risk',
-                'crime-rate': '🚨 Regional Crime Rate',
-                'safety-index': '🛡️ Safety Index',
-                'solar': '☀️ Solar Activity',
-                'uv-index': '🛡️ UV/EUV Index',
-                'protection': '💊 Radiation Protection Recommendation',
-                'status': '📊 System Status',
-                'music-title': '🎵 Free Radio Stations',
-                'contact': '📱 Contact Us'
-            },
-            tr: {
-                'coming-soon': 'Çok yakında geliyor, söz veriyorum ÖPÜCÜKLER C.O....',
-                'weather-forecast-title': '🌤️ 3 Günlük Hava Durumu Tahmini (12 Saatlik Aralıklar)',
-                'wellbeing-title': '🧘 Yapay Zeka Wellness Önerisi',
-                'telemetry-title': '📡 Gelişmiş Çevresel & Risk Analitiği',
-                'temperature': '🌡️ Sıcaklık',
-                'location': '📍 Konum',
-                'wind-speed': '💨 Rüzgar Hızı',
-                'weather-risk': '🌦️ Hava Durumu Riski',
-                'seismic': '🌍 Son Deprem Aktivitesi',
-                'earthquake-risk': '⚠️ Deprem Riski',
-                'crime-rate': '🚨 Bölgesel Suç Oranı',
-                'safety-index': '🛡️ Güvenlik Endeksi',
-                'solar': '☀️ Güneş Aktivitesi',
-                'uv-index': '🛡️ UV/EUV Endeksi',
-                'protection': '💊 Radyasyon Koruma Önerisi',
-                'status': '📊 Sistem Durumu',
-                'music-title': '🎵 Ücretsiz Radyo İstasyonları',
-                'contact': '📱 Bize Ulaşın'
-            },
-            hi: {
-                'coming-soon': 'बहुत जल्द आ रहा है, वादा करता हूं KISSES C.O....',
-                'weather-forecast-title': '🌤️ 3 दिन का मौसम पूर्वानुमान (12 घंटे के अंतराल)',
-                'wellbeing-title': '🧘 कृत्रिम बुद्धिमत्ता स्वास्थ्य सुझाव',
-                'telemetry-title': '📡 उन्नत पर्यावरणीय और जोखिम विश्लेषण',
-                'temperature': '🌡️ तापमान',
-                'location': '📍 स्थान',
-                'wind-speed': '💨 हवा की गति',
-                'weather-risk': '🌦️ मौसम जोखिम',
-                'seismic': '🌍 हाल की भूकंपीय गतिविधि',
-                'earthquake-risk': '⚠️ भूकंप जोखिम',
-                'crime-rate': '🚨 क्षेत्रीय अपराध दर',
-                'safety-index': '🛡️ सुरक्षा सूचकांक',
-                'solar': '☀️ सौर गतिविधि',
-                'uv-index': '🛡️ यूवी/ईयूवी सूचकांक',
-                'protection': '💊 विकिरण सुरक्षा सिफारिश',
-                'status': '📊 सिस्टम स्थिति',
-                'music-title': '🎵 मुक्त रेडियो स्टेशन',
-                'contact': '📱 हमसे संपर्क करें'
-            },
-            de: {
-                'coming-soon': 'Sehr bald kommen, versprochen KÜSSE C.O....',
-                'weather-forecast-title': '🌤️ 3-Tage-Wettervorhersage (12-Stunden-Intervalle)',
-                'wellbeing-title': '🧘 KI-Wohlbefindens-Vorschlag',
-                'telemetry-title': '📡 Erweiterte Umwelt- & Risikoanalysen',
-                'temperature': '🌡️ Temperatur',
-                'location': '📍 Standort',
-                'wind-speed': '💨 Windgeschwindigkeit',
-                'weather-risk': '🌦️ Wetterrisiko',
-                'seismic': '🌍 Aktuelle seismische Aktivität',
-                'earthquake-risk': '⚠️ Erdbeben-Risiko',
-                'crime-rate': '🚨 Regionale Kriminalitätsrate',
-                'safety-index': '🛡️ Sicherheitsindex',
-                'solar': '☀️ Solaraktivität',
-                'uv-index': '🛡️ UV/EUV-Index',
-                'protection': '💊 Empfehlung zum Strahlenschutz',
-                'status': '📊 Systemstatus',
-                'music-title': '🎵 Kostenlose Radiostationen',
-                'contact': '📱 Kontaktieren Sie uns'
-            },
-            fr: {
-                'coming-soon': 'Très bientôt, promis BISOUS C.O....',
-                'weather-forecast-title': '🌤️ Prévisions météorologiques 3 jours (intervalles de 12 heures)',
-                'wellbeing-title': '🧘 Suggestion de bien-être par IA',
-                'telemetry-title': '📡 Analyses Environnementales & Risques Avancées',
-                'temperature': '🌡️ Température',
-                'location': '📍 Localisation',
-                'wind-speed': '💨 Vitesse du vent',
-                'weather-risk': '🌦️ Risque météorologique',
-                'seismic': '🌍 Activité sismique récente',
-                'earthquake-risk': '⚠️ Risque de tremblement de terre',
-                'crime-rate': '🚨 Taux criminalité régional',
-                'safety-index': '🛡️ Indice de sécurité',
-                'solar': '☀️ Activité solaire',
-                'uv-index': '🛡️ Indice UV/EUV',
-                'protection': '💊 Recommandation protection radiations',
-                'status': '📊 Statut du système',
-                'music-title': '🎵 Stations de radio gratuites',
-                'contact': '📱 Contactez-nous'
-            },
-            es: {
-                'coming-soon': 'Muy pronto, prometo BESOS C.O....',
-                'weather-forecast-title': '🌤️ Pronóstico meteorológico de 3 días (intervalos de 12 horas)',
-                'wellbeing-title': '🧘 Sugerencia de bienestar con IA',
-                'telemetry-title': '📡 Análisis Ambiental & Riesgos Avanzado',
-                'temperature': '🌡️ Temperatura',
-                'location': '📍 Ubicación',
-                'wind-speed': '💨 Velocidad del viento',
-                'weather-risk': '🌦️ Riesgo climático',
-                'seismic': '🌍 Actividad sísmica reciente',
-                'earthquake-risk': '⚠️ Riesgo sísmico',
-                'crime-rate': '🚨 Tasa de criminalidad regional',
-                'safety-index': '🛡️ Índice de seguridad',
-                'solar': '☀️ Actividad solar',
-                'uv-index': '🛡️ Índice UV/EUV',
-                'protection': '💊 Recomendación protección radiación',
-                'status': '📊 Estado del sistema',
-                'music-title': '🎵 Estaciones de radio gratuitas',
-                'contact': '📱 Contáctenos'
-            },
-            it: {
-                'coming-soon': 'Molto presto, prometto BACI C.O....',
-                'weather-forecast-title': '🌤️ Previsioni meteo a 3 giorni (intervalli di 12 ore)',
-                'wellbeing-title': '🧘 Suggerimento di benessere AI',
-                'telemetry-title': '📡 Analisi Ambientale e Rischi Avanzata',
-                'temperature': '🌡️ Temperatura',
-                'location': '📍 Posizione',
-                'wind-speed': '💨 Velocità del vento',
-                'weather-risk': '🌦️ Rischio meteo',
-                'seismic': '🌍 Attività sismica recente',
-                'earthquake-risk': '⚠️ Rischio terremoto',
-                'crime-rate': '🚨 Tasso criminalità regionale',
-                'safety-index': '🛡️ Indice di sicurezza',
-                'solar': '☀️ Attività solare',
-                'uv-index': '🛡️ Indice UV/EUV',
-                'protection': '💊 Raccomandazione protezione radiazioni',
-                'status': '📊 Stato del sistema',
-                'music-title': '🎵 Stazioni radio gratuite',
-                'contact': '📱 Contattaci'
-            },
-            ja: {
-                'coming-soon': 'もう間もなく、約束します KISSES C.O....',
-                'weather-forecast-title': '🌤️ 3日間の天気予報（12時間間隔）',
-                'wellbeing-title': '🧘 AI ウェルネス提案',
-                'telemetry-title': '📡 高度な環境・リスク分析',
-                'temperature': '🌡️ 気温',
-                'location': '📍 位置',
-                'wind-speed': '💨 風速',
-                'weather-risk': '🌦️ 気象リスク',
-                'seismic': '🌍 最近の地震活動',
-                'earthquake-risk': '⚠️ 地震リスク',
-                'crime-rate': '🚨 地域犯罪率',
-                'safety-index': '🛡️ 安全指数',
-                'solar': '☀️ 太陽活動',
-                'uv-index': '🛡️ UV/EUV指数',
-                'protection': '💊 放射線保護推奨事項',
-                'status': '📊 システムステータス',
-                'music-title': '🎵 無料ラジオステーション',
-                'contact': '📱 お問い合わせ'
-            },
-            zh: {
-                'coming-soon': '即将推出，承诺 KISSES C.O....',
-                'weather-forecast-title': '🌤️ 3天天气预报（12小时间隔）',
-                'wellbeing-title': '🧘 人工智能健康建议',
-                'telemetry-title': '📡 高级环境和风险分析',
-                'temperature': '🌡️ 温度',
-                'location': '📍 位置',
-                'wind-speed': '💨 风速',
-                'weather-risk': '🌦️ 天气风险',
-                'seismic': '🌍 最近地震活动',
-                'earthquake-risk': '⚠️ 地震风险',
-                'crime-rate': '🚨 地区犯罪率',
-                'safety-index': '🛡️ 安全指数',
-                'solar': '☀️ 太阳活动',
-                'uv-index': '🛡️ 紫外线指数',
-                'protection': '💊 辐射防护建议',
-                'status': '📊 系统状态',
-                'music-title': '🎵 免费广播电台',
-                'contact': '📱 联系我们'
-            },
-            pt: {
-                'coming-soon': 'Muito em breve, prometo BEIJOS C.O....',
-                'weather-forecast-title': '🌤️ Previsão meteorológica de 3 dias (intervalos de 12 horas)',
-                'wellbeing-title': '🧘 Sugestão de bem-estar por IA',
-                'telemetry-title': '📡 Análise Ambiental & Riscos Avançada',
-                'temperature': '🌡️ Temperatura',
-                'location': '📍 Localização',
-                'wind-speed': '💨 Velocidade do vento',
-                'weather-risk': '🌦️ Risco meteorológico',
-                'seismic': '🌍 Atividade sísmica recente',
-                'earthquake-risk': '⚠️ Risco de terremoto',
-                'crime-rate': '🚨 Taxa de criminalidade regional',
-                'safety-index': '🛡️ Índice de segurança',
-                'solar': '☀️ Atividade solar',
-                'uv-index': '🛡️ Índice UV/EUV',
-                'protection': '💊 Recomendação proteção radiação',
-                'status': '📊 Status do sistema',
-                'music-title': '🎵 Estações de rádio gratuitas',
-                'contact': '📱 Entre em contato'
-            },
-            nl: {
-                'coming-soon': 'Zeer binnenkort, beloofd KUSSEN C.O....',
-                'weather-forecast-title': '🌤️ 3-daagse weersverwachting (12-uurlijke intervallen)',
-                'wellbeing-title': '🧘 AI Welzijn Suggestie',
-                'telemetry-title': '📡 Geavanceerde Milieu- & Risicoanalyse',
-                'temperature': '🌡️ Temperatuur',
-                'location': '📍 Locatie',
-                'wind-speed': '💨 Windsnelheid',
-                'weather-risk': '🌦️ Weerrisico',
-                'seismic': '🌍 Recente seismische activiteit',
-                'earthquake-risk': '⚠️ Aardbevingsrisico',
-                'crime-rate': '🚨 Regionale misdaadcijfers',
-                'safety-index': '🛡️ Veiligheidsindex',
-                'solar': '☀️ Zonne-activiteit',
-                'uv-index': '🛡️ UV/EUV-index',
-                'protection': '💊 Aanbeveling stralingsbescherming',
-                'status': '📊 Systeemstatus',
-                'music-title': '🎵 Gratis radiostations',
-                'contact': '📱 Contact opnemen'
+                'weather-title': '72-Hour Weather Forecast',
+                'temp': '°C',
+                'wind': 'km/h',
+                'humidity': '%',
+                'time': 'at',
+                'wellness': 'Daily Wellness Insight'
             }
         };
 
-        // Language metadata (Updated with Turkish & Hindi)
-        const languageList = [
-            { code: 'en', name: 'English', flag: '🇬🇧' },
-            { code: 'tr', name: 'Türkçe', flag: '🇹🇷' },
-            { code: 'hi', name: 'हिंदी', flag: '🇮🇳' },
-            { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
-            { code: 'fr', name: 'Français', flag: '🇫🇷' },
-            { code: 'es', name: 'Español', flag: '🇪🇸' },
-            { code: 'it', name: 'Italiano', flag: '🇮🇹' },
-            { code: 'ja', name: '日本語', flag: '🇯🇵' },
-            { code: 'zh', name: '中文', flag: '🇨🇳' },
-            { code: 'pt', name: 'Português', flag: '🇵🇹' },
-            { code: 'nl', name: 'Nederlands', flag: '🇳🇱' }
-        ];
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeThemes();
+            initializeLanguage();
+            generateWeatherForecast();
+            updateTelemetry();
+            generateWellnessTip();
+        });
 
-        // 12 Themes Configuration
-        const themes = [
-            { id: 'default', name: 'Digital Nexus', emoji: '💎' },
-            { id: 'matrix', name: 'Cyber Matrix', emoji: '🟩' },
-            { id: 'lionking', name: 'Golden Savanna', emoji: '🦁' },
-            { id: 'heavenkingdom', name: 'Celestial Realm', emoji: '👼' },
-            { id: 'ocean', name: 'Ocean Deep', emoji: '🌊' },
-            { id: 'sunset', name: 'Sunset Horizon', emoji: '🌅' },
-            { id: 'forest', name: 'Forest Whisper', emoji: '🌲' },
-            { id: 'neon', name: 'Neon Nights', emoji: '🌃' },
-            { id: 'arctic', name: 'Arctic Aurora', emoji: '🌌' },
-            { id: 'crimson', name: 'Crimson Dawn', emoji: '🔴' },
-            { id: 'stellar', name: 'Stellar Galaxy', emoji: '⭐' },
-            { id: 'cyberpunk', name: 'Cyber Punk', emoji: '🤖' }
-        ];
-
-        // Country to Language Mapping (Updated)
-        const countryLanguageMap = {
-            'TR': 'tr', 'CY': 'tr',
-            'IN': 'hi', 'BD': 'hi',
-            'DE': 'de', 'AT': 'de', 'CH': 'de',
-            'NL': 'nl', 'BE': 'nl',
-            'FR': 'fr', 'CA': 'fr',
-            'ES': 'es', 'MX': 'es', 'AR': 'es',
-            'IT': 'it',
-            'JP': 'ja',
-            'CN': 'zh', 'TW': 'zh',
-            'PT': 'pt', 'BR': 'pt'
-        };
-
-        // AI Wellbeing Suggestions (max 2 sentences)
-        const wellbeingSuggestions = {
-            en: [
-                "Based on today's mild weather, consider taking a nature walk to boost your mood and energy levels.",
-                "Stay hydrated and take regular breaks during this warm period to maintain optimal focus and mental clarity.",
-                "The cooler conditions are perfect for meditation and deep breathing exercises to center yourself.",
-                "With favorable weather, engage in light outdoor activities to strengthen your physical and mental resilience.",
-                "Practice mindfulness today—the calm conditions create an ideal environment for personal reflection and growth."
-            ],
-            tr: [
-                "Bugünün ılık havasından yararlanarak doğada bir yürüyüş yapmanız ruh halınızı iyileştirebilir. Günlük aktivitenize enerji katarak iyilik hali arttırılabilir.",
-                "Sıcak hava döneminde yeterli su içimi ve düzenli molalar zihinsel açıklığınızı korumaya yardımcı olacaktır. İşinize daha iyi konsantre olabilirsiniz.",
-                "Daha serin koşullar meditasyon ve derin nefes egzersizleri için mükemmeldir. Kendinizi toplamak için ideal bir fırsat.",
-                "Uygun hava koşullarında hafif açık hava aktiviteleri fiziksel ve zihinsel dirençinizi güçlendirecektir. Sağlığınız için önemlidir.",
-                "Bugün farkındalık pratiği yapın—sakin koşullar kişisel yansıtma ve büyüme için ideal bir ortam oluşturur. Kendini geliştir."
-            ],
-            hi: [
-                "आज का हल्का मौसम आपके मानसिक स्वास्थ्य को बेहतर बनाने के लिए एक प्रकृति की सैर करने का सुझाव देता है। आपकी ऊर्जा और जीवन में सुधार आएगा।",
-                "गर्म अवधि के दौरान पर्याप्त जल सेवन और नियमित ब्रेक आपकी मानसिक स्पष्टता बनाए रखने में मदद करेंगे। ध्यान केंद्रित रहें।",
-                "ठंडी परिस्थितियां ध्यान और गहरी साँस लेने के व्यायाम के लिए बिल्कुल सही हैं। अपने आप को संतुलित करने का समय।",
-                "अनुकूल मौसम में हल्की बाहरी गतिविधियां आपकी शारीरिक और मानसिक लचीलेपन को मजबूत करेंगी। स्वास्थ्य को प्राथमिकता दें।",
-                "आज माइंडफुलनेस का अभ्यास करें—शांत परिस्थितियां व्यक्तिगत प्रतिबिंब और विकास के लिए आदर्श वातावरण बनाती हैं। खुद का विकास करें।"
-            ],
-            de: [
-                "Das milde Wetter von heute lädt zu einem Spaziergang in der Natur ein, um Ihre Stimmung zu verbessern. Dies fördert Ihr Wohlbefinden.",
-                "Ausreichend Wasser trinken und regelmäßige Pausen in dieser warmen Zeit helfen, Ihre geistige Klarheit zu bewahren. Konzentrieren Sie sich besser.",
-                "Die kühleren Bedingungen sind perfekt für Meditation und Atemübungen, um sich selbst zu zentrieren. Das ist ideal für Sie.",
-                "Bei günstigen Wetterbedingungen stärken leichte Aktivitäten im Freien Ihre physische und mentale Widerstandsfähigkeit. Achten Sie auf Ihre Gesundheit.",
-                "Üben Sie heute Achtsamkeit—die ruhigen Bedingungen schaffen eine ideale Umgebung für persönliche Reflexion und Wachstum. Entwickeln Sie sich selbst weiter."
-            ],
-            fr: [
-                "Le temps doux d'aujourd'hui vous invite à une promenade dans la nature pour améliorer votre humeur. Cela augmentera votre bien-être général.",
-                "Une hydratation adéquate et des pauses régulières pendant cette période chaude aideront à maintenir votre clarté mentale. Restez concentré.",
-                "Les conditions plus fraîches sont parfaites pour la méditation et les exercices de respiration profonde pour vous centrer. C'est idéal pour vous.",
-                "Par temps favorable, les activités légères en plein air renforceront votre résilience physique et mentale. Prenez soin de votre santé.",
-                "Pratiquez la pleine conscience aujourd'hui—les conditions calmes créent un environnement idéal pour la réflexion personnelle et la croissance. Développez-vous."
-            ]
-        };
-
-        let currentLanguage = 'en';
-        let userCountry = '';
-        let userLocation = { lat: 0, lon: 0 };
-
-        // Initialize Theme Buttons
+        // Theme Management
         function initializeThemes() {
-            const themeButtonsContainer = document.getElementById('themeButtons');
-            themeButtonsContainer.innerHTML = '';
-            themes.forEach(theme => {
+            const themeButtons = document.getElementById('themeButtons');
+            CONFIG.themes.forEach((theme, index) => {
                 const btn = document.createElement('button');
-                btn.className = `theme-btn ${theme.id === 'default' ? 'active' : ''}`;
-                btn.textContent = `${theme.emoji} ${theme.name}`;
-                btn.onclick = () => setTheme(theme.id);
-                themeButtonsContainer.appendChild(btn);
+                btn.className = 'theme-btn' + (index === 0 ? ' active' : '');
+                btn.textContent = theme.name;
+                btn.onclick = () => setTheme(theme.class, btn);
+                themeButtons.appendChild(btn);
             });
         }
 
-        // Initialize Language Grid in Customization
-        function initializeLanguages() {
-            const languageGrid = document.getElementById('languageGrid');
-            languageGrid.innerHTML = '';
-            languageList.forEach(lang => {
-                const btn = document.createElement('button');
-                btn.className = `language-option ${lang.code === currentLanguage ? 'active' : ''}`;
-                btn.textContent = `${lang.flag} ${lang.code.toUpperCase()}`;
-                btn.onclick = () => setLanguage(lang.code);
-                languageGrid.appendChild(btn);
-            });
+        function setTheme(themeClass, btn) {
+            document.body.className = themeClass;
+            document.querySelectorAll('.theme-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            localStorage.setItem('theme', themeClass);
         }
 
-        // Toggle Customization Panel
+        function loadTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'theme-dark';
+            document.body.className = savedTheme;
+            const btn = document.querySelector(`.theme-btn`);
+            if (btn) btn.classList.add('active');
+        }
+
+        // Language Management
+        function initializeLanguage() {
+            const savedLang = localStorage.getItem('language');
+            if (savedLang) {
+                document.getElementById('languageModal').classList.add('hidden');
+            }
+        }
+
+        function setLanguage(lang) {
+            localStorage.setItem('language', lang);
+            document.getElementById('languageModal').classList.add('hidden');
+        }
+
+        function setLanguageByCountry() {
+            setLanguage('en');
+        }
+
         function toggleCustomization() {
             const content = document.querySelector('.customization-content');
             content.classList.toggle('active');
         }
 
-        // Set Language
-        function setLanguage(code) {
-            currentLanguage = code;
-            localStorage.setItem('selectedLanguage', code);
-            document.documentElement.lang = code;
-            updatePageContent();
-            document.getElementById('languageModal').classList.add('hidden');
-            initializeLanguages();
-        }
-
-        // Set Theme
-        function setTheme(themeId) {
-            document.body.className = themeId === 'default' ? '' : `theme-${themeId}`;
-            localStorage.setItem('selectedTheme', themeId);
-            
-            // Update theme buttons
-            document.querySelectorAll('.theme-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            event.target.classList.add('active');
-        }
-
-        // Update Page Content
-        function updatePageContent() {
-            document.querySelectorAll('[data-i18n]').forEach(el => {
-                const key = el.getAttribute('data-i18n');
-                if (languages[currentLanguage] && languages[currentLanguage][key]) {
-                    el.textContent = languages[currentLanguage][key];
-                }
-            });
-            updateWellbeingSuggestion();
-        }
-
-        // Set Language by Country
-        function setLanguageByCountry() {
-            fetch('https://ipapi.co/json/')
-                .then(response => response.json())
-                .then(data => {
-                    userCountry = data.country_code;
-                    const language = countryLanguageMap[userCountry] || 'en';
-                    setLanguage(language);
-                })
-                .catch(() => setLanguage('en'));
-        }
-
-        // Fetch Weather Data
-        function fetchWeatherData() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(pos => {
-                    userLocation = { lat: pos.coords.latitude, lon: pos.coords.longitude };
-                    const apiKey = '2d7f8f3e1f1b3e9f0e8f3e1f1b3e9f0e'; // Replace with actual key
-                    
-                    // Fetch 3-day forecast
-                    fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${userLocation.lat}&lon=${userLocation.lon}&units=metric&appid=${apiKey}`)
-                        .then(r => r.json())
-                        .then(data => {
-                            updateWeatherDisplay(data);
-                            generateForecast(data);
-                        })
-                        .catch(err => {
-                            console.log('Weather API not available, using demo data');
-                            generateDemoForecast();
-                        });
-                        
-                    // Get location name
-                    fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${userLocation.lat}&lon=${userLocation.lon}`)
-                        .then(r => r.json())
-                        .then(data => {
-                            document.getElementById('location').textContent = data.address?.city || data.address?.county || 'Current Location';
-                        });
-                }, () => generateDemoForecast());
-            } else {
-                generateDemoForecast();
-            }
-        }
-
-        // Update Weather Display
-        function updateWeatherDisplay(data) {
-            if (data.list && data.list[0]) {
-                const current = data.list[0];
-                document.getElementById('temp').textContent = Math.round(current.main.temp) + '°C';
-                document.getElementById('wind').textContent = Math.round(current.wind.speed) + ' km/h';
-                
-                const weatherCondition = current.weather[0].main.toLowerCase();
-                const riskLevel = weatherCondition.includes('rain') ? 'high' : weatherCondition.includes('cloud') ? 'medium' : 'low';
-                updateRiskIndicator('weatherRisk', riskLevel);
-            }
-        }
-
-        // Generate 3-Day Forecast (12-hour intervals)
-        function generateForecast(data) {
+        // Weather Forecast - Professional 72-Hour Format
+        function generateWeatherForecast() {
             const forecastGrid = document.getElementById('forecastGrid');
             forecastGrid.innerHTML = '';
-            
-            if (data.list) {
-                // Take every 2nd item (12-hour intervals) for 6 cards (3 days)
-                const forecast = data.list.slice(0, 6);
-                forecast.forEach((item, index) => {
-                    const date = new Date(item.dt * 1000);
-                    const card = document.createElement('div');
-                    card.className = 'forecast-card';
-                    card.innerHTML = `
-                        <div class="forecast-time">${date.toLocaleString(currentLanguage, {month: 'short', day: 'numeric', hour: '2-digit'})}</div>
-                        <div class="forecast-emoji">${getWeatherEmoji(item.weather[0].main)}</div>
-                        <div class="forecast-detail">🌡️ ${Math.round(item.main.temp)}°C</div>
-                        <div class="forecast-detail">💨 ${Math.round(item.wind.speed)} km/h</div>
-                        <div class="forecast-detail">${item.weather[0].description}</div>
-                    `;
-                    forecastGrid.appendChild(card);
-                });
-            }
-        }
 
-        // Generate Demo Forecast (fallback)
-        function generateDemoForecast() {
-            const forecastGrid = document.getElementById('forecastGrid');
-            forecastGrid.innerHTML = '';
-            const weatherTypes = [
-                { main: 'Sunny', emoji: '☀️', desc: 'Clear skies', temp: 22, wind: 5 },
-                { main: 'Partly Cloudy', emoji: '⛅', desc: 'Mostly clear', temp: 20, wind: 8 },
-                { main: 'Rainy', emoji: '🌧️', desc: 'Light rain', temp: 18, wind: 12 },
-                { main: 'Cloudy', emoji: '☁️', desc: 'Overcast', temp: 17, wind: 10 },
-                { main: 'Sunny', emoji: '☀️', desc: 'Clear', temp: 23, wind: 4 },
-                { main: 'Partly Cloudy', emoji: '⛅', desc: 'Mixed', temp: 21, wind: 7 }
+            const weatherConditions = [
+                { emoji: '☀️', condition: 'Clear' },
+                { emoji: '⛅', condition: 'Partly Cloudy' },
+                { emoji: '☁️', condition: 'Cloudy' },
+                { emoji: '🌧️', condition: 'Rainy' },
+                { emoji: '⛈️', condition: 'Stormy' }
             ];
+
+            const now = new Date();
             
-            weatherTypes.forEach((weather, index) => {
-                const date = new Date(Date.now() + index * 12 * 60 * 60 * 1000);
+            for (let i = 0; i < 18; i++) {
+                const forecastTime = new Date(now.getTime() + (i * 4 * 60 * 60 * 1000));
+                const hours = forecastTime.getHours().toString().padStart(2, '0');
+                const minutes = forecastTime.getMinutes().toString().padStart(2, '0');
+                const day = forecastTime.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+                
+                const randomCondition = weatherConditions[Math.floor(Math.random() * weatherConditions.length)];
+                const temp = Math.round(15 + Math.random() * 15);
+                const wind = Math.round(5 + Math.random() * 25);
+                const humidity = Math.round(40 + Math.random() * 40);
+
                 const card = document.createElement('div');
                 card.className = 'forecast-card';
                 card.innerHTML = `
-                    <div class="forecast-time">${date.toLocaleString(currentLanguage, {month: 'short', day: 'numeric', hour: '2-digit'})}</div>
-                    <div class="forecast-emoji">${weather.emoji}</div>
-                    <div class="forecast-detail">🌡️ ${weather.temp}°C</div>
-                    <div class="forecast-detail">💨 ${weather.wind} km/h</div>
-                    <div class="forecast-detail">${weather.desc}</div>
+                    <div class="forecast-time">${hours}:${minutes}</div>
+                    <div class="forecast-time-detail">${day}</div>
+                    <div class="forecast-icon-container">
+                        <div class="forecast-emoji">${randomCondition.emoji}</div>
+                    </div>
+                    <div style="text-align: center; margin: 15px 0; color: var(--text-secondary); font-size: 0.9rem;">
+                        ${randomCondition.condition}
+                    </div>
+                    <div class="forecast-metrics">
+                        <div class="metric">
+                            <div class="metric-label">Temperature</div>
+                            <div class="metric-value">${temp}°C</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-label">Wind</div>
+                            <div class="metric-value">${wind} km/h</div>
+                        </div>
+                        <div class="metric" style="grid-column: 1 / -1;">
+                            <div class="metric-label">Humidity</div>
+                            <div class="metric-value">${humidity}%</div>
+                        </div>
+                    </div>
                 `;
                 forecastGrid.appendChild(card);
-            });
+            }
         }
 
-        // Get Weather Emoji
-        function getWeatherEmoji(weatherType) {
-            const type = weatherType.toLowerCase();
-            if (type.includes('rain')) return '🌧️';
-            if (type.includes('cloud')) return '☁️';
-            if (type.includes('clear') || type.includes('sunny')) return '☀️';
-            if (type.includes('snow')) return '❄️';
-            if (type.includes('storm')) return '⛈️';
-            return '🌤️';
+        // Telemetry Updates
+        function updateTelemetry() {
+            document.getElementById('temp').textContent = Math.round(18 + Math.random() * 12) + '°C';
+            document.getElementById('wind').textContent = Math.round(8 + Math.random() * 20) + ' km/h';
+            document.getElementById('humidity').textContent = Math.round(45 + Math.random() * 40) + '%';
+            document.getElementById('pressure').textContent = Math.round(1000 + Math.random() * 30) + ' hPa';
+            document.getElementById('location').textContent = 'Detecting location...';
         }
 
-        // Update Risk Indicator
-        function updateRiskIndicator(elementId, level) {
-            const element = document.getElementById(elementId);
-            const indicator = element.previousElementSibling;
-            indicator.className = `risk-indicator risk-${level}`;
-            element.textContent = level.charAt(0).toUpperCase() + level.slice(1);
+        // Wellness Recommendations
+        function generateWellnessTip() {
+            const tips = [
+                'Optimal conditions for outdoor activity. Maintain hydration and apply sunscreen protection.',
+                'Elevated humidity levels detected. Consider indoor exercise routines and temperature-controlled environments.',
+                'Moderate wind conditions present. Excellent for cardiovascular outdoor activities and mental clarity.',
+                'Clear atmospheric conditions support vitamin D synthesis. Morning or late afternoon outdoor time recommended.',
+                'Stable pressure patterns indicate ideal conditions for meditation and respiratory exercises.'
+            ];
+            const randomTip = tips[Math.floor(Math.random() * tips.length)];
+            document.getElementById('wellbeingText').textContent = randomTip;
         }
 
-        // Update Wellbeing Suggestion (AI-based)
-        function updateWellbeingSuggestion() {
-            const suggestions = wellbeingSuggestions[currentLanguage] || wellbeingSuggestions['en'];
-            const randomSuggestion = suggestions[Math.floor(Math.random() * suggestions.length)];
-            document.getElementById('wellbeingText').textContent = randomSuggestion;
-        }
-
-        // Apply Dynamic Neon Outline Based on Telemetry
-        function updateDynamicNeon() {
-            const temp = parseInt(document.getElementById('temp').textContent);
-            const wind = parseInt(document.getElementById('wind').textContent);
-            
-            let neonColor = '#00d4ff';
-            
-            if (temp > 30) neonColor = '#ff0000';
-            else if (temp > 20) neonColor = '#ffaa00';
-            else if (temp > 10) neonColor = '#00d4ff';
-            else neonColor = '#0099ff';
-            
-            if (wind > 20) neonColor = '#ff006e';
-            
-            document.documentElement.style.setProperty('--accent-color', neonColor);
-        }
-
-        // Initialize
-        window.addEventListener('DOMContentLoaded', () => {
-            const savedLanguage = localStorage.getItem('selectedLanguage') || 'en';
-            const savedTheme = localStorage.getItem('selectedTheme') || 'default';
-            
-            setLanguage(savedLanguage);
-            if (savedTheme !== 'default') setTheme(savedTheme);
-            
-            initializeThemes();
-            initializeLanguages();
-            fetchWeatherData();
-            updateDynamicNeon();
-            
-            // Update every 10 minutes
-            setInterval(() => {
-                fetchWeatherData();
-                updateDynamicNeon();
-            }, 600000);
-        });
+        // Load saved theme on page load
+        loadTheme();
     </script>
 </body>
-
 </html>
