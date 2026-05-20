@@ -73,6 +73,43 @@
             75% { transform: translate(20px, 30px); }
         }
 
+        /* Auth Modal */
+        .auth-modal {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 9998; background: rgba(0, 0, 0, 0.95);
+            display: flex; justify-content: center; align-items: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .auth-modal.hidden { display: none; }
+
+        .auth-box {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border: 2px solid #00d4ff; border-radius: 15px; padding: 40px;
+            max-width: 400px; width: 90%;
+            box-shadow: 0 0 50px rgba(0, 212, 255, 0.3);
+            text-align: center;
+        }
+
+        .auth-title { color: #00d4ff; font-size: 1.8rem; margin-bottom: 30px; }
+        .auth-form { display: flex; flex-direction: column; gap: 15px; }
+        .auth-input {
+            background: rgba(0, 212, 255, 0.1); border: 1px solid #00d4ff;
+            color: #00d4ff; padding: 12px 15px; border-radius: 8px;
+            font-size: 0.95rem; outline: none; transition: all 0.3s;
+        }
+        .auth-input:focus { box-shadow: 0 0 20px rgba(0, 212, 255, 0.3); }
+        .auth-input::placeholder { color: rgba(0, 212, 255, 0.5); }
+        .auth-btn {
+            background: linear-gradient(135deg, #00d4ff, #00f5ff); color: #000;
+            border: none; padding: 12px; border-radius: 8px;
+            font-weight: bold; cursor: pointer; transition: all 0.3s;
+        }
+        .auth-btn:hover { transform: scale(1.05); }
+        .auth-toggle { color: #00f5ff; margin-top: 15px; cursor: pointer; font-size: 0.9rem; }
+        .auth-error { color: #ff006e; font-size: 0.85rem; margin-top: 10px; }
+
         /* Language Modal */
         .language-modal {
             position: fixed;
@@ -122,25 +159,44 @@
         .customization-section { margin-bottom: 15px; text-align: left; }
         .customization-section h3 { font-size: 0.9rem; margin-bottom: 10px; color: var(--accent-color, #00d4ff); }
         .color-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
-        .color-option { width: 35px; height: 35px; border-radius: 5px; cursor: pointer; border: 2px solid transparent; }
+        .color-option { width: 35px; height: 35px; border-radius: 5px; cursor: pointer; border: 2px solid transparent; transition: all 0.3s; }
         .color-option.active { border: 3px solid white; box-shadow: 0 0 10px currentColor; }
         .theme-buttons { display: flex; gap: 8px; flex-direction: column; }
-        .theme-btn { padding: 10px; border: 2px solid var(--accent-color, #00d4ff); background: rgba(0, 212, 255, 0.1); color: white; border-radius: 5px; cursor: pointer; }
+        .theme-btn { padding: 10px; border: 2px solid var(--accent-color, #00d4ff); background: rgba(0, 212, 255, 0.1); color: white; border-radius: 5px; cursor: pointer; transition: all 0.3s; }
         .theme-btn.active { background: var(--accent-color, #00d4ff); color: #000; font-weight: bold; }
         .language-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-        .language-option { padding: 8px; border: 1px solid var(--accent-color, #00d4ff); background: rgba(0, 212, 255, 0.1); color: white; border-radius: 5px; cursor: pointer; font-size: 0.8rem; }
+        .language-option { padding: 8px; border: 1px solid var(--accent-color, #00d4ff); background: rgba(0, 212, 255, 0.1); color: white; border-radius: 5px; cursor: pointer; font-size: 0.8rem; transition: all 0.3s; }
         .language-option.active { background: var(--accent-color, #00d4ff); color: #000; }
+
+        /* Theme Styles */
+        body.theme-matrix { --accent-color: #00ff00; --secondary-color: #00aa00; --tertiary-color: #00ff00; }
+        body.theme-matrix .background { background: linear-gradient(135deg, #000000 0%, #001100 50%, #003300 100%); }
+
+        body.theme-lionking { --accent-color: #ffd700; --secondary-color: #ff8c00; --tertiary-color: #ff4500; }
+        body.theme-lionking .background { background: linear-gradient(135deg, #8b4513 0%, #a0522d 50%, #cd853f 100%); }
+
+        body.theme-heavenkingdom { --accent-color: #87ceeb; --secondary-color: #dda0dd; --tertiary-color: #ffd700; }
+        body.theme-heavenkingdom .background { background: linear-gradient(135deg, #191970 0%, #4b0082 50%, #9370db 100%); }
 
         /* Container & Main Layout */
         .container { position: relative; z-index: 1; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 50px 20px; transition: margin-left 0.3s ease; }
-        .container.shifted { margin-left: 300px; }
+        .container.shifted { margin-left: 320px; }
         .logo { width: 120px; height: 120px; margin-bottom: 30px; animation: glow 3s ease-in-out infinite; }
         @keyframes glow { 0%, 100% { filter: drop-shadow(0 0 10px var(--accent-color, #00d4ff)); } 50% { filter: drop-shadow(0 0 30px var(--accent-color, #00d4ff)); } }
         h1 { font-size: 4rem; margin-bottom: 20px; color: var(--accent-color, #00d4ff); text-shadow: 0 0 20px var(--accent-color, #00d4ff); font-weight: bold; }
         .description { font-size: 1.2rem; max-width: 600px; line-height: 1.8; margin-bottom: 40px; color: #e0e0e0; }
 
+        /* Bible Quote Section */
+        .bible-quote {
+            background: rgba(0, 212, 255, 0.05); border: 2px solid var(--tertiary-color, #ff006e);
+            border-radius: 10px; padding: 30px; margin-bottom: 40px; max-width: 700px; width: 100%;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+        }
+        .bible-text { font-size: 1.1rem; font-style: italic; color: #e0e0e0; line-height: 1.8; margin-bottom: 15px; }
+        .bible-ref { font-size: 0.95rem; color: var(--secondary-color, #00f5ff); font-weight: bold; }
+
         /* Telemetry Box & Forecast Cards */
-        .telemetry { background: rgba(0, 212, 255, 0.1); border: 2px solid var(--accent-color, #00d4ff); border-radius: 10px; padding: 30px; margin-bottom: 40px; max-width: 700px; width: 100%; box-shadow: 0 0 20px rgba(0, 212, 255, 0.3); backdrop-filter: blur(10px); }
+        .telemetry { background: rgba(0, 212, 255, 0.1); border: 2px solid var(--accent-color, #00d4ff); border-radius: 10px; padding: 30px; margin-bottom: 40px; max-width: 700px; width: 100%; box-shadow: 0 0 20px rgba(0, 212, 255, 0.2); }
         .telemetry-title { font-size: 1.1rem; color: var(--secondary-color, #00f5ff); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; }
         .telemetry-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
         .telemetry-item { display: flex; justify-content: space-between; align-items: center; font-size: 0.95rem; border-bottom: 1px solid rgba(0, 212, 255, 0.3); padding-bottom: 10px; }
@@ -155,6 +211,31 @@
         .forecast-temp { font-size: 1.1rem; font-weight: bold; margin: 5px 0; }
         .forecast-desc { font-size: 0.75rem; color: #bbb; }
 
+        /* Volcanic Activity Section */
+        .volcanic-section {
+            background: rgba(255, 107, 53, 0.1); border: 2px solid #ff6b35;
+            border-radius: 10px; padding: 30px; margin-bottom: 40px; max-width: 700px; width: 100%;
+            box-shadow: 0 0 20px rgba(255, 107, 53, 0.2);
+        }
+        .volcanic-title { font-size: 1.1rem; color: #ff6b35; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; }
+        .volcanic-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .volcanic-item { background: rgba(255, 107, 53, 0.05); border: 1px solid #ff6b35; border-radius: 8px; padding: 12px; text-align: left; }
+        .volcanic-name { font-weight: bold; color: #ff6b35; margin-bottom: 5px; }
+        .volcanic-info { font-size: 0.85rem; color: #ddd; }
+
+        /* News Section */
+        .news-section {
+            background: rgba(0, 212, 255, 0.05); border: 2px solid #00f5ff;
+            border-radius: 10px; padding: 30px; margin-bottom: 40px; max-width: 700px; width: 100%;
+            box-shadow: 0 0 20px rgba(0, 245, 255, 0.2);
+        }
+        .news-title { font-size: 1.1rem; color: #00f5ff; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; }
+        .news-grid { display: grid; grid-template-columns: 1fr; gap: 15px; }
+        .news-item { background: rgba(0, 212, 255, 0.05); border: 1px solid #00f5ff; border-radius: 8px; padding: 15px; text-align: left; }
+        .news-headline { font-weight: bold; color: #00f5ff; margin-bottom: 5px; }
+        .news-source { font-size: 0.8rem; color: #888; margin-bottom: 8px; }
+        .news-desc { font-size: 0.9rem; color: #ddd; line-height: 1.5; }
+
         /* Suggestions Row */
         .suggestions-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; margin-top: 10px; text-align: left; }
         .suggest-box { background: rgba(255, 0, 110, 0.05); border: 1px solid var(--tertiary-color, #ff006e); border-radius: 8px; padding: 12px; }
@@ -162,16 +243,21 @@
         .suggest-val { font-size: 0.9rem; color: #fff; }
 
         /* Music & Buttons */
-        .music-section { background: rgba(0, 212, 255, 0.05); border: 2px solid var(--tertiary-color, #ff006e); border-radius: 10px; padding: 30px; margin-bottom: 40px; max-width: 600px; width: 100%; }
+        .music-section { background: rgba(0, 212, 255, 0.05); border: 2px solid var(--tertiary-color, #ff006e); border-radius: 10px; padding: 30px; margin-bottom: 40px; max-width: 600px; width: 100%; box-shadow: 0 0 20px rgba(0, 212, 255, 0.1); }
         .music-title { font-size: 1.3rem; color: var(--tertiary-color, #ff006e); margin-bottom: 25px; text-transform: uppercase; }
         .radio-stations { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .radio-btn { background: linear-gradient(135deg, var(--tertiary-color, #ff006e), var(--quaternary-color, #ff3d82)); color: white; padding: 15px 20px; border: none; border-radius: 8px; cursor: pointer; text-decoration: none; font-weight: bold; display: block; }
-        .btn-contact { background: linear-gradient(135deg, var(--accent-color, #00d4ff), var(--secondary-color, #00f5ff)); color: #1a1a2e; padding: 15px 40px; border-radius: 8px; text-decoration: none; font-weight: bold; margin-bottom: 30px; display: inline-block; cursor: pointer; }
+        .radio-btn { background: linear-gradient(135deg, var(--tertiary-color, #ff006e), var(--quaternary-color, #ff3d82)); color: white; padding: 15px 20px; border: none; border-radius: 8px; cursor: pointer; transition: all 0.3s; text-decoration: none; font-weight: bold; }
+        .radio-btn:hover { transform: scale(1.05); }
+        .btn-contact { background: linear-gradient(135deg, var(--accent-color, #00d4ff), var(--secondary-color, #00f5ff)); color: #1a1a2e; padding: 15px 40px; border-radius: 8px; text-decoration: none; font-weight: bold; transition: all 0.3s; }
+        .btn-contact:hover { transform: scale(1.05); }
+        .user-profile { background: linear-gradient(135deg, var(--accent-color, #00d4ff), var(--secondary-color, #00f5ff)); color: #1a1a2e; padding: 12px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: all 0.3s; }
+        .user-profile:hover { transform: scale(1.05); }
         .social { margin-top: 40px; display: flex; justify-content: center; gap: 30px; }
-        .social a { color: white; text-decoration: none; }
+        .social a { color: white; text-decoration: none; transition: all 0.3s; }
+        .social a:hover { transform: scale(1.1); }
         .instagram-link { background: linear-gradient(135deg, #f09433, #bc1888); padding: 12px 25px; border-radius: 8px; font-weight: bold; }
 
-        /* Anonymous Neon Chat Box Style */
+        /* Improved Chat Sidebar */
         .chat-sidebar {
             position: fixed; top: 0; left: -320px; width: 320px; height: 100%;
             background: #05050b; border-right: 3px solid #ff0033; z-index: 2000;
@@ -191,8 +277,9 @@
             display: flex; justify-content: space-between; align-items: center;
         }
         .chat-users-count { font-size: 0.75rem; color: #ff8899; border: 1px solid #ff0033; padding: 2px 6px; border-radius: 4px; }
+        .chat-username { font-size: 0.85rem; color: #ff0033; margin-top: 5px; }
         .chat-messages {
-            flex-top: 1; overflow-y: auto; padding: 15px; flex-grow: 1;
+            flex: 1; overflow-y: auto; padding: 15px;
             font-family: 'Courier New', Courier, monospace; color: #ff0033;
             text-shadow: 0 0 3px rgba(255, 0, 51, 0.6); font-size: 0.9rem;
         }
@@ -208,18 +295,24 @@
         }
         .chat-send-btn {
             background: #ff0033; color: #000; border: none; padding: 10px 15px;
-            font-weight: bold; border-radius: 4px; cursor: pointer;
+            font-weight: bold; border-radius: 4px; cursor: pointer; transition: all 0.3s;
         }
+        .chat-send-btn:hover { background: #ff5577; transform: scale(1.05); }
 
         /* Responsive Design */
         @media (max-width: 768px) {
             h1 { font-size: 2.5rem; }
             .telemetry-grid { grid-template-columns: 1fr; }
+            .volcanic-grid { grid-template-columns: 1fr; }
             .radio-stations { grid-template-columns: 1fr; }
             .forecast-container { grid-template-columns: 1fr; }
             .suggestions-row { grid-template-columns: 1fr; }
             .container.shifted { margin-left: 0; }
+            .customization-panel { max-width: 250px; }
         }
+
+        .loading { display: inline-block; animation: spin 1s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
     </style>
 </head>
 
@@ -231,41 +324,61 @@
         <div class="orb orb3"></div>
     </div>
 
+    <!-- Authentication Modal -->
+    <div class="auth-modal" id="authModal">
+        <div class="auth-box">
+            <div class="auth-title" id="authTitle">Sign In</div>
+            <form class="auth-form" id="authForm" onsubmit="handleAuth(event)">
+                <input type="email" class="auth-input" id="authEmail" placeholder="Email" required>
+                <input type="text" class="auth-input" id="authUsername" placeholder="Username" required>
+                <input type="password" class="auth-input" id="authPassword" placeholder="Password" required>
+                <button type="submit" class="auth-btn" id="authSubmitBtn">Sign In</button>
+            </form>
+            <div class="auth-error" id="authError"></div>
+            <div class="auth-toggle" onclick="toggleAuthMode()">Don't have account? Sign Up</div>
+        </div>
+    </div>
+
+    <!-- Chat Sidebar -->
     <div class="chat-sidebar" id="chatSidebar">
         <button class="chat-toggle-btn" onclick="toggleChat()">💬</button>
         <div class="chat-header">
-            <span>🔴 ANON CHAT ROOM</span>
-            <span class="chat-users-count" id="chatUsersCount">Active: 1/6</span>
-        </div>
-        <div class="chat-messages" id="chatMessages">
+            <div>
+                <span>🔴 ANON CHAT</span>
+                <div class="chat-username" id="chatUsername">Guest User</div>
             </div>
+            <span class="chat-users-count" id="chatUsersCount">Active: 1/50</span>
+        </div>
+        <div class="chat-messages" id="chatMessages"></div>
         <div class="chat-input-area">
             <form class="chat-form" onsubmit="sendChatMessage(event)">
-                <input type="text" class="chat-input" id="chatInputField" placeholder="Type here..." maxlength="120" autocomplete="off">
-                <button type="submit" class="chat-send-btn">SEND</button>
+                <input type="text" class="chat-input" id="chatInputField" placeholder="Max 120 chars..." maxlength="120" autocomplete="off">
+                <button type="submit" class="chat-send-btn">→</button>
             </form>
         </div>
     </div>
 
+    <!-- Language Modal -->
     <div class="language-modal hidden" id="languageModal">
         <div class="language-box">
             <div class="language-title">🌍 SELECT YOUR LANGUAGE / DİL SEÇİN</div>
             <div class="language-subtitle">Choose your preferred language:</div>
             <div class="language-buttons">
                 <button class="language-btn" id="englishBtn" onclick="setLanguage('en')">🇬🇧 ENGLISH</button>
-                <button class="language-btn" id="localBtn" onclick="setLanguage('tr')">🇹🇷 TÜRKÇE (VARSAYILAN)</button>
+                <button class="language-btn" id="localBtn" onclick="setLanguage('tr')">🇹🇷 TÜRKÇE (DEFAULT)</button>
             </div>
             <div class="language-info">
-                <span class="language-star">★</span> <span id="languageInfo">Detecting your location...</span>
+                <span>★ Detecting your location...</span>
             </div>
         </div>
     </div>
 
+    <!-- Customization Panel -->
     <div class="customization-panel">
         <button class="customization-toggle" onclick="toggleCustomization()">⚙️ Customize</button>
         <div class="customization-content">
             <div class="customization-section">
-                <h3>🎨 Colors (33 Options)</h3>
+                <h3>🎨 Colors (15 Options)</h3>
                 <div class="color-grid" id="colorGrid"></div>
             </div>
             <div class="customization-section">
@@ -278,110 +391,95 @@
                 </div>
             </div>
             <div class="customization-section">
-                <h3>🌐 Languages (10 Options)</h3>
+                <h3>🌐 Languages</h3>
                 <div class="language-grid" id="languageGrid"></div>
+            </div>
+            <div class="customization-section">
+                <button class="auth-btn" onclick="showAuthModal()" style="width: 100%;">👤 Profile</button>
             </div>
         </div>
     </div>
 
+    <!-- Main Container -->
     <div class="container" id="mainContainer">
-        <img src="logo2.png" class="logo" alt="Catalyst Ozwell">
+        <img src="logo2.png" class="logo" alt="Catalyst Ozwell" onerror="this.style.display='none'">
         <h1>Catalyst Ozwell</h1>
         <p class="description" data-i18n="coming-soon">Yakında burada, çok yakında söz... ÖPÜCÜKLER C.O....</p>
 
+        <!-- Bible Quote Section -->
+        <div class="bible-quote">
+            <div class="bible-text" id="bibleQuote">Loading daily inspiration...</div>
+            <div class="bible-ref" id="bibleRef">Bible Quote</div>
+        </div>
+
+        <!-- Telemetry Box -->
         <div class="telemetry">
-            <div class="telemetry-title" data-i18n="telemetry-title">📡 Gelişmiş Çevre ve Risk Analitiği</div>
+            <div class="telemetry-title" data-i18n="telemetry-title">📡 Advanced Environmental & Risk Analytics</div>
             <div class="telemetry-grid">
-                
                 <div class="telemetry-item">
-                    <span class="telemetry-label" data-i18n="temperature">🌡️ Sıcaklık</span>
-                    <span class="telemetry-value" id="temp">22°C</span>
+                    <span class="telemetry-label" data-i18n="temperature">🌡️ Temperature</span>
+                    <span class="telemetry-value" id="temp">-- °C</span>
                 </div>
                 <div class="telemetry-item">
-                    <span class="telemetry-label" data-i18n="location">📍 Konum</span>
-                    <span class="telemetry-value" id="location">İstanbul, TR</span>
+                    <span class="telemetry-label" data-i18n="location">📍 Location</span>
+                    <span class="telemetry-value" id="location">Loading...</span>
                 </div>
 
                 <div class="telemetry-item full-width">
-                    <span class="telemetry-label" data-i18n="weather-forecast">📊 2 Günlük Hava Durumu Tahmini (Google Stili)</span>
-                    <div class="forecast-container">
+                    <span class="telemetry-label" data-i18n="weather-forecast">📊 3-Day Weather Forecast</span>
+                    <div class="forecast-container" id="forecastContainer">
                         <div class="forecast-card">
-                            <div class="forecast-day" id="fDay0">Bugün</div>
-                            <div class="forecast-temp" id="fTemp0">22°C / 14°C</div>
-                            <div class="forecast-desc" id="fDesc0">Güneşli</div>
-                        </div>
-                        <div class="forecast-card">
-                            <div class="forecast-day" id="fDay1">Yarın</div>
-                            <div class="forecast-temp" id="fTemp1">24°C / 15°C</div>
-                            <div class="forecast-desc" id="fDesc1">Parçalı Bulutlu</div>
-                        </div>
-                        <div class="forecast-card">
-                            <div class="forecast-day" id="fDay2">Sonraki Gün</div>
-                            <div class="forecast-temp" id="fTemp2">21°C / 13°C</div>
-                            <div class="forecast-desc" id="fDesc2">Hafif Yağmurlu</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="telemetry-item full-width">
-                    <span class="telemetry-label" data-i18n="discover-around">🗺️ Çevrenizdekileri Keşfedin</span>
-                    <div class="suggestions-row">
-                        <div class="suggest-box">
-                            <div class="suggest-title" data-i18n="food-suggest">🍽️ Popüler Lezzet Önerisi</div>
-                            <div class="suggest-val" id="foodSuggestion">Tarihi Sultanahmet Köftecisi</div>
-                        </div>
-                        <div class="suggest-box">
-                            <div class="suggest-title" data-i18n="sight-suggest">🏛️ Tarihi Mekan Önerisi</div>
-                            <div class="suggest-val" id="sightSuggestion">Ayasofya-i Kebir Cami-i Şerifi</div>
+                            <div class="forecast-day">Loading...</div>
+                            <div class="forecast-temp">-- °C</div>
+                            <div class="forecast-desc">--</div>
                         </div>
                     </div>
                 </div>
 
                 <div class="telemetry-item">
-                    <span class="telemetry-label" data-i18n="wind-speed">💨 Rüzgar Hızı</span>
-                    <span class="telemetry-value" id="wind">14 km/s</span>
+                    <span class="telemetry-label" data-i18n="humidity">💧 Humidity</span>
+                    <span class="telemetry-value" id="humidity">--%</span>
                 </div>
                 <div class="telemetry-item">
-                    <span class="telemetry-label" data-i18n="weather-risk">🌦️ Hava Riski</span>
-                    <span class="telemetry-value"><span class="risk-indicator risk-low"></span><span id="weatherRisk">Düşük</span></span>
+                    <span class="telemetry-label" data-i18n="wind-speed">💨 Wind Speed</span>
+                    <span class="telemetry-value" id="wind">-- km/h</span>
                 </div>
                 <div class="telemetry-item">
-                    <span class="telemetry-label" data-i18n="seismic">🌍 Son Sismik Aktivite</span>
-                    <span class="telemetry-value" id="seismic">4.1 Mw - Ege Denizi</span>
+                    <span class="telemetry-label" data-i18n="pressure">🔽 Pressure</span>
+                    <span class="telemetry-value" id="pressure">-- hPa</span>
                 </div>
                 <div class="telemetry-item">
-                    <span class="telemetry-label" data-i18n="earthquake-risk">⚠️ Deprem Riski</span>
-                    <span class="telemetry-value"><span class="risk-indicator risk-low"></span><span id="earthquakeRisk">Düşük</span></span>
-                </div>
-                <div class="telemetry-item">
-                    <span class="telemetry-label" data-i18n="crime-rate">🚨 Bölgesel Suç Oranı</span>
-                    <span class="telemetry-value" id="crimeRate">Çok Düşük</span>
-                </div>
-                <div class="telemetry-item">
-                    <span class="telemetry-label" data-i18n="safety-index">🛡️ Güvenlik Endeksi</span>
-                    <span class="telemetry-value"><span class="risk-indicator risk-low"></span><span id="safetyIndex">Yüksek</span></span>
-                </div>
-                <div class="telemetry-item">
-                    <span class="telemetry-label" data-i18n="solar">☀️ Güneş Aktivitesi</span>
-                    <span class="telemetry-value" id="solarActivity">Normal</span>
-                </div>
-                <div class="telemetry-item">
-                    <span class="telemetry-label" data-i18n="uv-index">🛡️ UV/EUV Endeksi</span>
-                    <span class="telemetry-value" id="uvIndex">Orta</span>
-                </div>
-                <div class="telemetry-item full-width">
-                    <span class="telemetry-label" data-i18n="protection">💊 Radyasyondan Korunma Önerisi</span>
-                    <span class="telemetry-value" id="radiationProtection">Standart önlemler yeterlidir.</span>
-                </div>
-                <div class="telemetry-item full-width">
-                    <span class="telemetry-label" data-i18n="status">📊 Sistem Durumu</span>
-                    <span class="telemetry-value" id="status">🔴 Aktif</span>
+                    <span class="telemetry-label" data-i18n="uv-index">☀️ UV Index</span>
+                    <span class="telemetry-value" id="uvIndex">--</span>
                 </div>
             </div>
         </div>
 
+        <!-- Volcanic Activity Section -->
+        <div class="volcanic-section">
+            <div class="volcanic-title">🌋 Recent Volcanic Activity</div>
+            <div class="volcanic-grid" id="volcanicGrid">
+                <div class="volcanic-item">
+                    <div class="volcanic-name">Loading volcanic data...</div>
+                    <div class="volcanic-info">Please wait</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- News Section -->
+        <div class="news-section">
+            <div class="news-title">📰 Latest News</div>
+            <div class="news-grid" id="newsGrid">
+                <div class="news-item">
+                    <div class="news-headline">Loading news...</div>
+                    <div class="news-source">Please wait</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Music Section -->
         <div class="music-section">
-            <div class="music-title" data-i18n="music-title">🎵 Ücretsiz Radyo İstasyonları</div>
+            <div class="music-title" data-i18n="music-title">🎵 Free Radio Stations</div>
             <div class="radio-stations">
                 <a href="https://www.skyradio.nl/" target="_blank" class="radio-btn">Sky Radio 🎶</a>
                 <a href="https://www.101.nl/" target="_blank" class="radio-btn">101.nl 🎧</a>
@@ -392,7 +490,7 @@
             </div>
         </div>
 
-        <a href="https://instagram.com/catalystOzwell" target="_blank" class="btn-contact" data-i18n="contact">📱 İletişime Geçin</a>
+        <button class="user-profile" id="userProfileBtn" onclick="showAuthModal()">👤 Sign In / Profile</button>
 
         <div class="social">
             <a href="https://instagram.com/catalystOzwell" target="_blank" class="instagram-link">📸 @catalystOzwell</a>
@@ -401,51 +499,31 @@
     </div>
 
     <script>
-        // Multilingual Content with Turkish Included as fallback and baseline
+        // ===== MULTILINGUAL CONTENT =====
         const languages = {
             tr: {
                 'coming-soon': 'Yakında burada, çok yakında söz... ÖPÜCÜKLER C.O....',
                 'telemetry-title': '📡 Gelişmiş Çevre ve Risk Analitiği',
                 'temperature': '🌡️ Sıcaklık',
                 'location': '📍 Konum',
+                'humidity': '💧 Nem Oranı',
                 'wind-speed': '💨 Rüzgar Hızı',
-                'weather-risk': '🌦️ Hava Riski',
-                'seismic': '🌍 Son Sismik Aktivite',
-                'earthquake-risk': '⚠️ Deprem Riski',
-                'crime-rate': '🚨 Bölgesel Suç Oranı',
-                'safety-index': '🛡️ Güvenlik Endeksi',
-                'solar': '☀️ Güneş Aktivitesi',
-                'uv-index': '🛡️ UV/EUV Endeksi',
-                'protection': '💊 Radyasyondan Korunma Önerisi',
-                'status': '📊 Sistem Durumu',
-                'music-title': '🎵 Ücretsiz Radyo İstasyonları',
-                'contact': '📱 İletişime Geçin',
-                'weather-forecast': '📊 2 Günlük Hava Durumu Tahmini (Google Stili)',
-                'discover-around': '🗺️ Çevrenizdekileri Keşfedin',
-                'food-suggest': '🍽️ Popüler Lezzet Önerisi',
-                'sight-suggest': '🏛️ Tarihi Mekan Önerisi'
+                'pressure': '🔽 Basınç',
+                'uv-index': '☀️ UV Endeksi',
+                'weather-forecast': '📊 3 Günlük Hava Durumu',
+                'music-title': '🎵 Ücretsiz Radyo İstasyonları'
             },
             en: {
                 'coming-soon': 'Coming soon, very soon promise KISSES C.O....',
                 'telemetry-title': '📡 Advanced Environmental & Risk Analytics',
                 'temperature': '🌡️ Temperature',
                 'location': '📍 Location',
+                'humidity': '💧 Humidity',
                 'wind-speed': '💨 Wind Speed',
-                'weather-risk': '🌦️ Weather Risk',
-                'seismic': '🌍 Recent Seismic Activity',
-                'earthquake-risk': '⚠️ Earthquake Risk',
-                'crime-rate': '🚨 Regional Crime Rate',
-                'safety-index': '🛡️ Safety Index',
-                'solar': '☀️ Solar Activity',
-                'uv-index': '🛡️ UV/EUV Index',
-                'protection': '💊 Radiation Protection Recommendation',
-                'status': '📊 System Status',
-                'music-title': '🎵 Free Radio Stations',
-                'contact': '📱 Contact Us',
-                'weather-forecast': '📊 2-Day Weather Forecast (Google Style)',
-                'discover-around': '🗺️ Discover Around You',
-                'food-suggest': '🍽️ Food Recommendation',
-                'sight-suggest': '🏛️ Historical Sight Recommendation'
+                'pressure': '🔽 Pressure',
+                'uv-index': '☀️ UV Index',
+                'weather-forecast': '📊 3-Day Weather Forecast',
+                'music-title': '🎵 Free Radio Stations'
             }
         };
 
@@ -454,27 +532,233 @@
             { code: 'en', name: 'English', flag: '🇬🇧' }
         ];
 
-        // Default setting Turkish language explicitly
-        let currentLanguage = 'tr'; 
-        let userCountry = '';
-        let initialChatMessages = [
-            { user: "Anon204", text: "System look completely online." },
-            { user: "CyberTurk", text: "Selam! Neon theme is beautiful." },
-            { user: "Anon911", text: "Testing max 120 character length rules logic." }
-        ];
+        // ===== GLOBAL STATE =====
+        let currentLanguage = localStorage.getItem('selectedLanguage') || 'tr';
+        let currentUser = JSON.parse(localStorage.getItem('currentUser')) || null;
+        let isSignUp = false;
+        let authMode = 'signin';
+        let initialChatMessages = [];
+        let userLocation = { lat: 41.0082, lon: 28.9784, city: 'Istanbul', country: 'TR' };
 
-        // 33 Color Options Array setup
+        // ===== COLOR PALETTE =====
         const colors = [
             { name: 'Cyan Dream', accent: '#00d4ff', secondary: '#00f5ff', tertiary: '#ff006e', quaternary: '#ff3d82' },
             { name: 'Neon Pink', accent: '#ff006e', secondary: '#ff3d82', tertiary: '#00d4ff', quaternary: '#00f5ff' },
-            { name: 'Electric Red', accent: '#ff0033', secondary: '#ff3355', tertiary: '#00ff41', quaternary: '#39ff14' }
+            { name: 'Electric Red', accent: '#ff0033', secondary: '#ff3355', tertiary: '#00ff41', quaternary: '#39ff14' },
+            { name: 'Purple Haze', accent: '#9d00ff', secondary: '#c200ff', tertiary: '#ff006e', quaternary: '#ff3d82' },
+            { name: 'Ocean Blue', accent: '#0066ff', secondary: '#0088ff', tertiary: '#00d4ff', quaternary: '#00f5ff' },
+            { name: 'Lime Green', accent: '#39ff14', secondary: '#00ff41', tertiary: '#ff006e', quaternary: '#ff3d82' },
+            { name: 'Gold Rush', accent: '#ffd700', secondary: '#ffed4e', tertiary: '#ff6b35', quaternary: '#ff8c42' },
+            { name: 'Coral Reef', accent: '#ff6b6b', secondary: '#ff8c8c', tertiary: '#00d4ff', quaternary: '#00f5ff' },
+            { name: 'Mint Fresh', accent: '#00d9a3', secondary: '#00f5b8', tertiary: '#ff006e', quaternary: '#ff3d82' },
+            { name: 'Sunset', accent: '#ff6b35', secondary: '#f7931e', tertiary: '#ffc914', quaternary: '#ffed4e' },
+            { name: 'Deep Space', accent: '#1a237e', secondary: '#311b92', tertiary: '#512da8', quaternary: '#673ab7' },
+            { name: 'Forest', accent: '#1b5e20', secondary: '#2e7d32', tertiary: '#388e3c', quaternary: '#43a047' },
+            { name: 'Cherry', accent: '#b71c1c', secondary: '#d32f2f', tertiary: '#ff006e', quaternary: '#ff3d82' },
+            { name: 'Lavender', accent: '#7c4dff', secondary: '#9575cd', tertiary: '#ce93d8', quaternary: '#e1bee7' },
+            { name: 'Teal', accent: '#00897b', secondary: '#00acc1', tertiary: '#00d4ff', quaternary: '#00f5ff' }
         ];
 
-        function toggleCustomization() {
-            const content = document.querySelector('.customization-content');
-            content.classList.toggle('active');
+        // ===== BIBLE QUOTES =====
+        async function fetchBibleQuote() {
+            try {
+                const quotes = [
+                    { text: 'For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life.', ref: 'John 3:16' },
+                    { text: 'I have told you these things, so that in me you may have peace. In this world you will have trouble. But take heart! I have overcome the world.', ref: 'John 16:33' },
+                    { text: 'For I know the plans I have for you, declares the Lord, plans for welfare and not for evil, to give you a future and a hope.', ref: 'Jeremiah 29:11' },
+                    { text: 'Trust in the Lord with all your heart and lean not on your own understanding.', ref: 'Proverbs 3:5' },
+                    { text: 'Love is patient, love is kind. It does not envy, it does not boast, it is not proud.', ref: '1 Corinthians 13:4' },
+                    { text: 'And we know that in all things God works for the good of those who love him.', ref: 'Romans 8:28' },
+                    { text: 'Jesus answered, I am the way and the truth and the life. No one comes to the Father except through me.', ref: 'John 14:6' },
+                    { text: 'Therefore do not worry about tomorrow, for tomorrow will worry about itself.', ref: 'Matthew 6:34' },
+                    { text: 'I can do all things through Christ who strengthens me.', ref: 'Philippians 4:13' },
+                    { text: 'The Lord is my light and my salvation, whom shall I fear?', ref: 'Psalm 27:1' }
+                ];
+
+                const quote = quotes[Math.floor(Math.random() * quotes.length)];
+                document.getElementById('bibleQuote').textContent = `"${quote.text}"`;
+                document.getElementById('bibleRef').textContent = quote.ref;
+            } catch (error) {
+                console.log('Bible quote error');
+            }
         }
 
+        // ===== WEATHER API =====
+        async function fetchWeather() {
+            try {
+                const response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${userLocation.lat}&longitude=${userLocation.lon}&current=temperature_2m,humidity,weather_code,pressure_msl,uv_index,wind_speed_10m&daily=temperature_2m_max,temperature_2m_min,weather_code,uv_index_max&timezone=auto`);
+                const data = await response.json();
+
+                const current = data.current;
+                const daily = data.daily;
+
+                document.getElementById('temp').textContent = `${Math.round(current.temperature_2m)}°C`;
+                document.getElementById('humidity').textContent = `${current.humidity}%`;
+                document.getElementById('wind').textContent = `${Math.round(current.wind_speed_10m)} km/h`;
+                document.getElementById('pressure').textContent = `${Math.round(current.pressure_msl)} hPa`;
+                document.getElementById('uvIndex').textContent = `${Math.round(current.uv_index)}`;
+
+                const forecastContainer = document.getElementById('forecastContainer');
+                forecastContainer.innerHTML = '';
+
+                for (let i = 0; i < 3; i++) {
+                    const date = new Date(daily.time[i]);
+                    const card = document.createElement('div');
+                    card.className = 'forecast-card';
+                    card.innerHTML = `
+                        <div class="forecast-day">${date.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}</div>
+                        <div class="forecast-temp">${Math.round(daily.temperature_2m_max[i])}°C / ${Math.round(daily.temperature_2m_min[i])}°C</div>
+                        <div class="forecast-desc">${getWeatherDescription(daily.weather_code[i])}</div>
+                    `;
+                    forecastContainer.appendChild(card);
+                }
+            } catch (error) {
+                console.log('Weather fetch error');
+                document.getElementById('temp').textContent = '22°C';
+            }
+        }
+
+        function getWeatherDescription(code) {
+            const descriptions = {
+                0: 'Clear sky', 1: 'Mainly clear', 2: 'Partly cloudy', 3: 'Overcast', 45: 'Foggy', 48: 'Foggy',
+                51: 'Light drizzle', 53: 'Moderate drizzle', 55: 'Dense drizzle', 61: 'Slight rain', 63: 'Moderate rain',
+                65: 'Heavy rain', 71: 'Slight snow', 73: 'Moderate snow', 75: 'Heavy snow', 80: 'Slight rain showers',
+                81: 'Moderate rain showers', 82: 'Violent rain showers', 85: 'Slight snow showers', 86: 'Heavy snow showers',
+                95: 'Thunderstorm', 96: 'Thunderstorm with hail', 99: 'Thunderstorm with hail'
+            };
+            return descriptions[code] || 'Unknown';
+        }
+
+        // ===== VOLCANIC ACTIVITY =====
+        function fetchVolcanicActivity() {
+            const mockVolcanoes = [
+                { name: 'Mount Etna', location: 'Sicily, Italy', lastActive: '2 days ago', status: 'Active' },
+                { name: 'Sakurajima', location: 'Japan', lastActive: '12 hours ago', status: 'Active' },
+                { name: 'Stromboli', location: 'Italy', lastActive: '5 hours ago', status: 'Moderate' },
+                { name: 'Popocatépetl', location: 'Mexico', lastActive: '1 day ago', status: 'Moderate' },
+                { name: 'Mount Yasur', location: 'Vanuatu', lastActive: '3 hours ago', status: 'Active' },
+                { name: 'Kilauea', location: 'Hawaii, USA', lastActive: '6 hours ago', status: 'Active' }
+            ];
+            updateVolcanicGrid(mockVolcanoes);
+        }
+
+        function updateVolcanicGrid(volcanoes) {
+            const grid = document.getElementById('volcanicGrid');
+            grid.innerHTML = '';
+            
+            volcanoes.slice(0, 6).forEach(volcano => {
+                const item = document.createElement('div');
+                item.className = 'volcanic-item';
+                item.innerHTML = `
+                    <div class="volcanic-name">🌋 ${volcano.name || 'Unknown'}</div>
+                    <div class="volcanic-info">📍 ${volcano.location || 'Unknown location'}</div>
+                    <div class="volcanic-info">⏱️ ${volcano.lastActive || 'Unknown'}</div>
+                    <div class="volcanic-info">Status: ${volcano.status || 'Unknown'}</div>
+                `;
+                grid.appendChild(item);
+            });
+        }
+
+        // ===== NEWS =====
+        function fetchNews() {
+            const mockNews = [
+                { title: 'Global Climate Initiatives Show Progress', description: 'New renewable energy projects launched worldwide', source: { name: 'Tech Daily' } },
+                { title: 'Health Tech Breakthroughs Announced', description: 'AI improves disease detection accuracy by 40%', source: { name: 'Health News' } },
+                { title: 'Space Exploration Milestones Reached', description: 'New telescopes reveal ancient galaxies', source: { name: 'Space Weekly' } },
+                { title: 'Educational Innovation Transforms Learning', description: 'Virtual reality in classrooms expands globally', source: { name: 'Education Today' } },
+                { title: 'Sustainable Living Trends Accelerate', description: 'Communities embrace eco-friendly practices', source: { name: 'Green World' } }
+            ];
+            updateNewsGrid(mockNews);
+        }
+
+        function updateNewsGrid(articles) {
+            const grid = document.getElementById('newsGrid');
+            grid.innerHTML = '';
+
+            articles.slice(0, 5).forEach(article => {
+                const item = document.createElement('div');
+                item.className = 'news-item';
+                item.innerHTML = `
+                    <div class="news-headline">${article.title || 'No title'}</div>
+                    <div class="news-source">📰 ${article.source?.name || 'Unknown Source'}</div>
+                    <div class="news-desc">${article.description || 'No description available'}</div>
+                `;
+                grid.appendChild(item);
+            });
+        }
+
+        // ===== AUTHENTICATION =====
+        let users = JSON.parse(localStorage.getItem('users')) || {};
+
+        function toggleAuthMode() {
+            authMode = authMode === 'signin' ? 'signup' : 'signin';
+            document.getElementById('authTitle').textContent = authMode === 'signin' ? 'Sign In' : 'Sign Up';
+            document.getElementById('authSubmitBtn').textContent = authMode === 'signin' ? 'Sign In' : 'Create Account';
+            document.getElementById('authError').textContent = '';
+        }
+
+        function handleAuth(e) {
+            e.preventDefault();
+            const email = document.getElementById('authEmail').value.trim();
+            const username = document.getElementById('authUsername').value.trim();
+            const password = document.getElementById('authPassword').value;
+            const errorEl = document.getElementById('authError');
+
+            if (!email || !username || password.length < 6) {
+                errorEl.textContent = 'All fields required. Password min 6 chars.';
+                return;
+            }
+
+            if (authMode === 'signup') {
+                if (users[username]) {
+                    errorEl.textContent = 'Username already exists!';
+                    return;
+                }
+                users[username] = {
+                    email: email,
+                    password: btoa(password),
+                    created: new Date().toISOString()
+                };
+                localStorage.setItem('users', JSON.stringify(users));
+                errorEl.style.color = '#00f5ff';
+                errorEl.textContent = 'Account created! Signing in...';
+                setTimeout(() => loginUser(username, email), 1000);
+            } else {
+                if (!users[username] || btoa(password) !== users[username].password) {
+                    errorEl.textContent = 'Invalid username or password!';
+                    return;
+                }
+                loginUser(username, users[username].email);
+            }
+        }
+
+        function loginUser(username, email) {
+            currentUser = { username, email, loginTime: new Date().toISOString() };
+            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            document.getElementById('authModal').classList.add('hidden');
+            updateUserUI();
+            renderChat();
+        }
+
+        function showAuthModal() {
+            document.getElementById('authModal').classList.remove('hidden');
+            document.getElementById('authForm').reset();
+        }
+
+        function updateUserUI() {
+            const btn = document.getElementById('userProfileBtn');
+            const chatUsername = document.getElementById('chatUsername');
+            
+            if (currentUser) {
+                btn.textContent = `👤 ${currentUser.username}`;
+                chatUsername.textContent = `@${currentUser.username}`;
+            } else {
+                btn.textContent = '👤 Sign In / Profile';
+                chatUsername.textContent = 'Guest User';
+            }
+        }
+
+        // ===== CHAT =====
         function toggleChat() {
             const sidebar = document.getElementById('chatSidebar');
             const main = document.getElementById('mainContainer');
@@ -486,11 +770,14 @@
             e.preventDefault();
             const input = document.getElementById('chatInputField');
             const txt = input.value.trim();
-            if(!txt) return;
+            if (!txt) return;
 
-            initialChatMessages.push({ user: "Me (Anon)", text: txt });
-            if(initialChatMessages.length > 12) {
-                initialChatMessages.shift(); // Keep only last 12 messages max
+            const user = currentUser ? currentUser.username : `Anon${Math.floor(Math.random() * 999)}`;
+            const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            
+            initialChatMessages.push({ user, text: txt, time });
+            if (initialChatMessages.length > 50) {
+                initialChatMessages.shift();
             }
             input.value = '';
             renderChat();
@@ -502,14 +789,61 @@
             initialChatMessages.forEach(msg => {
                 const div = document.createElement('div');
                 div.className = 'chat-msg-row';
-                div.innerHTML = `<span class="chat-msg-author">[${msg.user}]:</span> ${msg.text}`;
+                div.innerHTML = `<span class="chat-msg-time">[${msg.time || 'now'}]</span> <span class="chat-msg-author">@${msg.user}:</span> ${msg.text}`;
                 box.appendChild(div);
             });
             box.scrollTop = box.scrollHeight;
 
-            // Generate temporary simultaneous dynamic active users counter maxed to 6
-            const concurrentCount = Math.floor(Math.random() * 3) + 4; 
-            document.getElementById('chatUsersCount').textContent = `Active: ${concurrentCount}/6`;
+            const concurrentCount = Math.floor(Math.random() * 20) + 10;
+            document.getElementById('chatUsersCount').textContent = `Active: ${concurrentCount}/50`;
+        }
+
+        // ===== CUSTOMIZATION =====
+        function toggleCustomization() {
+            const content = document.querySelector('.customization-content');
+            content.classList.toggle('active');
+        }
+
+        function initializeColors() {
+            const colorGrid = document.getElementById('colorGrid');
+            colors.forEach((color, index) => {
+                const opt = document.createElement('div');
+                opt.className = 'color-option';
+                opt.style.backgroundColor = color.accent;
+                if (index === 0) opt.classList.add('active');
+                opt.onclick = () => {
+                    document.querySelectorAll('.color-option').forEach(o => o.classList.remove('active'));
+                    opt.classList.add('active');
+                    document.documentElement.style.setProperty('--accent-color', color.accent);
+                    document.documentElement.style.setProperty('--secondary-color', color.secondary);
+                    document.documentElement.style.setProperty('--tertiary-color', color.tertiary);
+                    document.documentElement.style.setProperty('--quaternary-color', color.quaternary);
+                    localStorage.setItem('selectedColor', JSON.stringify(color));
+                };
+                colorGrid.appendChild(opt);
+            });
+
+            const saved = localStorage.getItem('selectedColor');
+            if (saved) {
+                const color = JSON.parse(saved);
+                document.documentElement.style.setProperty('--accent-color', color.accent);
+                document.documentElement.style.setProperty('--secondary-color', color.secondary);
+                document.documentElement.style.setProperty('--tertiary-color', color.tertiary);
+                document.documentElement.style.setProperty('--quaternary-color', color.quaternary);
+            }
+        }
+
+        function initializeLanguageGrid() {
+            const languageGrid = document.getElementById('languageGrid');
+            languageGrid.innerHTML = '';
+            languageList.forEach(lang => {
+                const btn = document.createElement('button');
+                btn.className = 'language-option';
+                if (lang.code === currentLanguage) btn.classList.add('active');
+                btn.textContent = `${lang.flag} ${lang.code.toUpperCase()}`;
+                btn.onclick = () => setLanguage(lang.code);
+                languageGrid.appendChild(btn);
+            });
         }
 
         function setLanguage(lang) {
@@ -530,89 +864,71 @@
             });
         }
 
-        function updateLanguageGrid() {
-            document.querySelectorAll('.language-option').forEach(btn => {
-                btn.classList.remove('active');
-                if (btn.textContent.includes(currentLanguage.toUpperCase())) {
-                    btn.classList.add('active');
-                }
-            });
-        }
-
-        function initializeLanguageGrid() {
-            const languageGrid = document.getElementById('languageGrid');
-            languageGrid.innerHTML = '';
-            languageList.forEach(lang => {
-                const btn = document.createElement('button');
-                btn.className = 'language-option';
-                if (lang.code === currentLanguage) btn.classList.add('active');
-                btn.textContent = `${lang.flag} ${lang.code.toUpperCase()}`;
-                btn.onclick = () => setLanguage(lang.code);
-                languageGrid.appendChild(btn);
-            });
-        }
-
-        function initializeColors() {
-            const colorGrid = document.getElementById('colorGrid');
-            colors.forEach((color, index) => {
-                const opt = document.createElement('div');
-                opt.className = 'color-option';
-                opt.style.backgroundColor = color.accent;
-                if(index === 0) opt.classList.add('active');
-                opt.onclick = () => {
-                    document.querySelectorAll('.color-option').forEach(o => o.classList.remove('active'));
-                    opt.classList.add('active');
-                    document.documentElement.style.setProperty('--accent-color', color.accent);
-                    document.documentElement.style.setProperty('--secondary-color', color.secondary);
-                    document.documentElement.style.setProperty('--tertiary-color', color.tertiary);
-                };
-                colorGrid.appendChild(opt);
-            });
-        }
-
         function setTheme(type) {
             document.body.className = '';
-            if(type !== 'default') {
+            if (type !== 'default') {
                 document.body.classList.add('theme-' + type);
             }
             document.querySelectorAll('.theme-btn').forEach(b => b.classList.remove('active'));
             event.target.classList.add('active');
+            localStorage.setItem('selectedTheme', type);
         }
 
-        // Live location exploration logic simulation based on IP lookup or fallbacks
-        function detectLocationAndLanguage() {
-            fetch('https://ipapi.co/json/')
-                .then(response => response.json())
-                .then(data => {
-                    if (data.country_code === 'TR') {
-                        document.getElementById('location').textContent = `${data.city || 'İstanbul'}, TR`;
-                        document.getElementById('foodSuggestion').textContent = "Meşhur Kebap & Lahmacun Salonu";
-                        document.getElementById('sightSuggestion').textContent = "Tarihi Saat Kulesi / Kültür Mirası";
-                    } else {
-                        document.getElementById('location').textContent = `${data.city || 'Amsterdam'}, ${data.country_code || 'NL'}`;
-                        document.getElementById('foodSuggestion').textContent = "Local Waffles & Fine Bistro Dine";
-                        document.getElementById('sightSuggestion').textContent = "Centennial City Square & Museum Palace";
-                    }
-                })
-                .catch(() => {
-                    console.log('Using integrated default fallback location coordinates.');
-                });
+        // ===== LOCATION DETECTION =====
+        async function detectLocation() {
+            try {
+                const response = await fetch('https://ipapi.co/json/');
+                const data = await response.json();
+                userLocation = {
+                    lat: data.latitude,
+                    lon: data.longitude,
+                    city: data.city || 'Unknown',
+                    country: data.country_code || 'US'
+                };
+                document.getElementById('location').textContent = `${userLocation.city}, ${userLocation.country}`;
+            } catch (error) {
+                console.log('Location detection error');
+                document.getElementById('location').textContent = `${userLocation.city}, ${userLocation.country}`;
+            }
         }
 
-        // Initialize elements on load
+        // ===== INITIALIZATION =====
         window.addEventListener('load', () => {
+            document.documentElement.style.setProperty('--accent-color', '#00d4ff');
+            document.documentElement.style.setProperty('--secondary-color', '#00f5ff');
+            document.documentElement.style.setProperty('--tertiary-color', '#ff006e');
+            document.documentElement.style.setProperty('--quaternary-color', '#ff3d82');
+
             initializeColors();
             initializeLanguageGrid();
-            detectLocationAndLanguage();
             updatePageLanguage();
+            updateUserUI();
+            
+            initialChatMessages = [
+                { user: 'System', text: 'Welcome to Catalyst Ozwell Chat!', time: '00:00' },
+                { user: 'Admin', text: 'Feel free to share your thoughts and ideas.', time: '00:01' }
+            ];
             renderChat();
-        });
 
-        // Animate dynamic pulse items
-        setInterval(() => {
-            const status = document.getElementById('status');
-            status.textContent = status.textContent.includes('🔴') ? '🟢 Aktif / Active' : '🔴 Aktif / Active';
-        }, 1500);
+            const savedTheme = localStorage.getItem('selectedTheme');
+            if (savedTheme && savedTheme !== 'default') {
+                document.body.classList.add('theme-' + savedTheme);
+            }
+
+            detectLocation();
+            fetchWeather();
+            fetchBibleQuote();
+            fetchVolcanicActivity();
+            fetchNews();
+
+            setInterval(() => {
+                fetchWeather();
+                fetchBibleQuote();
+                fetchVolcanicActivity();
+                fetchNews();
+            }, 600000);
+        });
     </script>
 </body>
+
 </html>
