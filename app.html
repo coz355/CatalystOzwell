@@ -1,0 +1,1529 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalyst Ozwell - Global Intelligence Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom CSS for Neon Post-Modern Theme */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Space+Mono:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Parallax Background */
+        .parallax-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=2000&q=80') center/cover;
+            background-attachment: fixed;
+            z-index: -2;
+            filter: brightness(0.3) saturate(1.2);
+        }
+
+        .parallax-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            backdrop-filter: blur(2px);
+            pointer-events: none;
+        }
+
+        /* Neon Glow Effects */
+        .neon-glow {
+            text-shadow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 30px currentColor;
+        }
+
+        .glow-box {
+            box-shadow: 0 0 20px rgba(34, 211, 238, 0.5), inset 0 0 20px rgba(34, 211, 238, 0.1);
+            border: 1px solid rgba(34, 211, 238, 0.3);
+        }
+
+        .glow-box-pink {
+            box-shadow: 0 0 20px rgba(236, 72, 153, 0.5), inset 0 0 20px rgba(236, 72, 153, 0.1);
+            border: 1px solid rgba(236, 72, 153, 0.3);
+        }
+
+        .glow-box-violet {
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.5), inset 0 0 20px rgba(139, 92, 246, 0.1);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+        }
+
+        .glow-box-emerald {
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.5), inset 0 0 20px rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        /* Hover Glow Animation */
+        .hover-glow {
+            transition: all 0.3s ease;
+        }
+
+        .hover-glow:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px rgba(34, 211, 238, 0.8) !important;
+        }
+
+        /* Smooth Transitions */
+        .transition-smooth {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Pulsing Indicator */
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
+        .pulse-glow {
+            animation: pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        /* Theme Transitions */
+        body.theme-cyan {
+            --accent: #06b6d4;
+            --accent-light: #22d3ee;
+            --accent-dark: #0891b2;
+        }
+
+        body.theme-magenta {
+            --accent: #ec4899;
+            --accent-light: #f472b6;
+            --accent-dark: #be185d;
+        }
+
+        body.theme-violet {
+            --accent: #8b5cf6;
+            --accent-light: #a78bfa;
+            --accent-dark: #6d28d9;
+        }
+
+        body.theme-emerald {
+            --accent: #10b981;
+            --accent-light: #34d399;
+            --accent-dark: #047857;
+        }
+
+        body.theme-amber {
+            --accent: #f59e0b;
+            --accent-light: #fbbf24;
+            --accent-dark: #d97706;
+        }
+
+        body.theme-rose {
+            --accent: #f43f5e;
+            --accent-light: #fb7185;
+            --accent-dark: #be123c;
+        }
+
+        /* Glassmorphism */
+        .glass {
+            background: rgba(15, 23, 42, 0.7) !important;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(51, 65, 85, 0.3);
+        }
+
+        /* Sidebar Active State */
+        .sidebar-item.active {
+            background: rgba(34, 211, 238, 0.2);
+            border-left: 3px solid #22d3ee;
+        }
+
+        /* Chat Scrollbar */
+        .chat-messages::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .chat-messages::-webkit-scrollbar-track {
+            background: rgba(15, 23, 42, 0.5);
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb {
+            background: rgba(34, 211, 238, 0.5);
+            border-radius: 3px;
+        }
+
+        /* Star Rating */
+        .star-rating {
+            display: inline-flex;
+            gap: 2px;
+        }
+
+        .star {
+            color: #fbbf24;
+            font-size: 0.875rem;
+        }
+
+        /* Typing Indicator */
+        @keyframes typing {
+            0%, 60%, 100% { opacity: 0.3; }
+            30% { opacity: 1; }
+        }
+
+        .typing-dot {
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        /* Collapsible Section */
+        .collapse-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .collapse-content.open {
+            max-height: 1000px;
+            transition: max-height 0.5s ease-in;
+        }
+
+        /* Status Indicator */
+        .status-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 4px;
+            animation: pulse-glow 2s infinite;
+        }
+
+        .status-green {
+            background-color: #10b981;
+        }
+
+        .status-yellow {
+            background-color: #f59e0b;
+        }
+
+        .status-red {
+            background-color: #ef4444;
+        }
+
+        /* Comment Card */
+        .comment-card {
+            border-left: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .comment-card:hover {
+            border-left-color: #22d3ee;
+            transform: translateX(4px);
+        }
+
+        /* Loading State */
+        @keyframes shimmer {
+            0% { background-position: -1000px 0; }
+            100% { background-position: 1000px 0; }
+        }
+
+        .shimmer {
+            animation: shimmer 2s infinite;
+            background: linear-gradient(to right, rgba(34, 211, 238, 0.1) 0%, rgba(34, 211, 238, 0.3) 50%, rgba(34, 211, 238, 0.1) 100%);
+            background-size: 1000px 100%;
+        }
+
+        /* Weather Card Animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .float-animation {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Modal Backdrop */
+        .modal-backdrop {
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(15, 23, 42, 0.5);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(34, 211, 238, 0.5);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(34, 211, 238, 0.8);
+        }
+    </style>
+</head>
+
+<body class="bg-slate-900 text-white theme-cyan">
+    <!-- Parallax Background -->
+    <div class="parallax-bg"></div>
+    <div class="parallax-overlay"></div>
+
+    <!-- Main Layout -->
+    <div class="flex h-screen bg-slate-900 overflow-hidden">
+        <!-- Sidebar Navigation -->
+        <aside id="sidebar" class="w-64 glass overflow-y-auto hidden md:flex flex-col border-r border-slate-700">
+            <div class="p-6 border-b border-slate-700">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-gradient-to-br from-cyan-400 to-violet-600 rounded-lg flex items-center justify-center font-bold text-sm">
+                        CO
+                    </div>
+                    <h1 class="text-lg font-bold neon-glow" style="color: var(--accent-light)">Catalyst</h1>
+                </div>
+            </div>
+
+            <nav class="flex-1 p-4 space-y-2">
+                <button class="sidebar-item active nav-btn w-full text-left px-4 py-3 rounded-lg transition-smooth hover:bg-slate-800" data-section="travel">
+                    <span class="text-lg mr-3">✈️</span> Travel & Discoveries
+                </button>
+                <button class="sidebar-item nav-btn w-full text-left px-4 py-3 rounded-lg transition-smooth hover:bg-slate-800" data-section="weather">
+                    <span class="text-lg mr-3">🌤️</span> Weather Forecast
+                </button>
+                <button class="sidebar-item nav-btn w-full text-left px-4 py-3 rounded-lg transition-smooth hover:bg-slate-800" data-section="telemetry">
+                    <span class="text-lg mr-3">☀️</span> Solar Telemetry
+                </button>
+                <button class="sidebar-item nav-btn w-full text-left px-4 py-3 rounded-lg transition-smooth hover:bg-slate-800" data-section="quotes">
+                    <span class="text-lg mr-3">💡</span> Wisdom & Strategy
+                </button>
+                <button class="sidebar-item nav-btn w-full text-left px-4 py-3 rounded-lg transition-smooth hover:bg-slate-800" data-section="chat">
+                    <span class="text-lg mr-3">💬</span> Live Chat Room
+                </button>
+                <button class="sidebar-item nav-btn w-full text-left px-4 py-3 rounded-lg transition-smooth hover:bg-slate-800" data-section="comments">
+                    <span class="text-lg mr-3">📝</span> Comments Section
+                </button>
+            </nav>
+
+            <div class="p-4 border-t border-slate-700 space-y-2">
+                <button id="themeBtn" class="w-full px-4 py-3 rounded-lg glass hover-glow text-left">
+                    <span class="text-lg mr-3">🎨</span> Themes
+                </button>
+                <button id="settingsBtn" class="w-full px-4 py-3 rounded-lg glass hover-glow text-left">
+                    <span class="text-lg mr-3">⚙️</span> Settings
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 flex flex-col overflow-hidden">
+            <!-- Header -->
+            <header class="glass border-b border-slate-700 px-6 py-4 flex items-center justify-between">
+                <div class="flex items-center gap-4 flex-1">
+                    <button id="menuToggle" class="md:hidden p-2 hover:bg-slate-800 rounded-lg">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                    <input type="text" id="cityInput" placeholder="Search city..." class="px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg focus:outline-none focus:border-cyan-500 transition-smooth w-48">
+                </div>
+
+                <div class="flex items-center gap-4">
+                    <select id="languageSelect" class="px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg focus:outline-none focus:border-cyan-500 cursor-pointer transition-smooth">
+                        <!-- Populated by JS -->
+                    </select>
+                    <div id="currentTemp" class="text-sm font-semibold">--°C</div>
+                </div>
+            </header>
+
+            <!-- Content Area -->
+            <div class="flex-1 overflow-y-auto">
+                <!-- Travel Section -->
+                <section id="travel" class="content-section p-6 max-w-7xl mx-auto">
+                    <h2 class="text-3xl font-bold mb-6 neon-glow" style="color: var(--accent-light)">✈️ Travel & Nearby Discoveries</h2>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                        <!-- Museums -->
+                        <div>
+                            <h3 class="text-xl font-bold mb-4" style="color: var(--accent-light)">🏛️ Museums</h3>
+                            <div id="museumsList" class="space-y-4">
+                                <!-- Populated by JS -->
+                            </div>
+                        </div>
+
+                        <!-- Map/Info -->
+                        <div class="glow-box glass rounded-xl p-6 hover-glow">
+                            <h3 class="text-xl font-bold mb-4" style="color: var(--accent-light)">📍 Current Location</h3>
+                            <div id="locationInfo" class="space-y-3">
+                                <div>
+                                    <p class="text-sm text-gray-400">City</p>
+                                    <p id="cityName" class="text-lg font-bold">New York</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-400">Population</p>
+                                    <p id="population" class="text-lg font-bold">8.3M</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-400">Timezone</p>
+                                    <p id="timezone" class="text-lg font-bold">EST</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Restaurants -->
+                        <div>
+                            <h3 class="text-xl font-bold mb-4" style="color: var(--accent-light)">🍽️ Restaurants</h3>
+                            <div id="restaurantsList" class="space-y-4">
+                                <!-- Populated by JS -->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Weather Section -->
+                <section id="weather" class="content-section hidden p-6 max-w-7xl mx-auto">
+                    <h2 class="text-3xl font-bold mb-6 neon-glow" style="color: var(--accent-light)">🌤️ 5-Day Weather Forecast</h2>
+
+                    <div class="glow-box glass rounded-xl p-6 mb-8 hover-glow">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="text-center">
+                                <p class="text-gray-400 mb-2">Current Temp</p>
+                                <p id="weatherTemp" class="text-4xl font-bold">--°C</p>
+                                <p id="weatherCondition" class="text-sm text-gray-400 mt-2">--</p>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-gray-400 mb-2">Humidity</p>
+                                <p id="weatherHumidity" class="text-4xl font-bold">--%</p>
+                                <p class="text-sm text-gray-400 mt-2">💧</p>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-gray-400 mb-2">Wind Speed</p>
+                                <p id="weatherWind" class="text-4xl font-bold">-- m/s</p>
+                                <p class="text-sm text-gray-400 mt-2">💨</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+                        <div id="forecastList">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Telemetry Section -->
+                <section id="telemetry" class="content-section hidden p-6 max-w-7xl mx-auto">
+                    <h2 class="text-3xl font-bold mb-6 neon-glow" style="color: var(--accent-light)">☀️ Solar Telemetry</h2>
+
+                    <div class="glow-box-violet glass rounded-xl overflow-hidden">
+                        <!-- Telemetry Header -->
+                        <div class="bg-gradient-to-r from-violet-900/30 to-purple-900/30 px-6 py-4 flex items-center justify-between cursor-pointer hover:bg-violet-900/40 transition-smooth" id="telemetryToggle">
+                            <div class="flex items-center gap-4">
+                                <span class="text-2xl">☀️</span>
+                                <div>
+                                    <h3 class="text-xl font-bold" style="color: var(--accent-light)">SUN TELEMETRY</h3>
+                                    <p class="text-xs text-gray-400">Real-time Solar Activity Monitoring</p>
+                                </div>
+                            </div>
+                            <svg class="w-6 h-6 transition-transform" id="telemetryArrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                            </svg>
+                        </div>
+
+                        <!-- Telemetry Content -->
+                        <div class="collapse-content open p-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+                                <!-- Solar Wind Speed -->
+                                <div class="bg-slate-800/50 rounded-lg p-4 border border-violet-500/30">
+                                    <div class="flex items-center justify-between mb-3">
+                                        <span class="text-sm font-semibold text-gray-300">Solar Wind Speed</span>
+                                        <span class="status-indicator status-green"></span>
+                                    </div>
+                                    <p id="solarWindSpeed" class="text-2xl font-bold text-emerald-400">350 km/s</p>
+                                    <p class="text-xs text-gray-400 mt-2">Normal Range: 300-400 km/s</p>
+                                </div>
+
+                                <!-- CME Activity -->
+                                <div class="bg-slate-800/50 rounded-lg p-4 border border-violet-500/30">
+                                    <div class="flex items-center justify-between mb-3">
+                                        <span class="text-sm font-semibold text-gray-300">CME Activity</span>
+                                        <span class="status-indicator status-yellow"></span>
+                                    </div>
+                                    <p id="cmeActivity" class="text-2xl font-bold text-amber-400">Moderate</p>
+                                    <p class="text-xs text-gray-400 mt-2">Coronal Mass Ejections Detected</p>
+                                </div>
+
+                                <!-- X-Ray Flux -->
+                                <div class="bg-slate-800/50 rounded-lg p-4 border border-violet-500/30">
+                                    <div class="flex items-center justify-between mb-3">
+                                        <span class="text-sm font-semibold text-gray-300">X-Ray Flux (0.1-0.8 nm)</span>
+                                        <span class="status-indicator status-green"></span>
+                                    </div>
+                                    <p id="xrayFlux" class="text-2xl font-bold text-emerald-400">1.2E-05</p>
+                                    <p class="text-xs text-gray-400 mt-2">Watts/m² - Quiet</p>
+                                </div>
+
+                                <!-- Kp Index -->
+                                <div class="bg-slate-800/50 rounded-lg p-4 border border-violet-500/30">
+                                    <div class="flex items-center justify-between mb-3">
+                                        <span class="text-sm font-semibold text-gray-300">Kp Index</span>
+                                        <span class="status-indicator status-green"></span>
+                                    </div>
+                                    <p id="kpIndex" class="text-2xl font-bold text-emerald-400">3</p>
+                                    <p class="text-xs text-gray-400 mt-2">Scale 0-9 | Minor Geomagnetic Activity</p>
+                                </div>
+
+                                <!-- Solar Flux 10.7cm -->
+                                <div class="bg-slate-800/50 rounded-lg p-4 border border-violet-500/30">
+                                    <div class="flex items-center justify-between mb-3">
+                                        <span class="text-sm font-semibold text-gray-300">Solar Flux (10.7cm)</span>
+                                        <span class="status-indicator status-yellow"></span>
+                                    </div>
+                                    <p id="solarFlux" class="text-2xl font-bold text-amber-400">145 SFU</p>
+                                    <p class="text-xs text-gray-400 mt-2">Solar Flux Units - Elevated</p>
+                                </div>
+
+                                <!-- Radiation Risk -->
+                                <div class="bg-slate-800/50 rounded-lg p-4 border border-violet-500/30">
+                                    <div class="flex items-center justify-between mb-3">
+                                        <span class="text-sm font-semibold text-gray-300">Radiation Risk</span>
+                                        <span class="status-indicator status-green"></span>
+                                    </div>
+                                    <p id="radiationRisk" class="text-2xl font-bold text-emerald-400">Low</p>
+                                    <p class="text-xs text-gray-400 mt-2">Astronaut Safety Level</p>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-3">
+                                <button id="refreshTelemetry" class="px-6 py-2 bg-violet-600 hover:bg-violet-500 rounded-lg font-semibold transition-smooth hover-glow">
+                                    🔄 Refresh Data
+                                </button>
+                                <button id="telemetryInfo" class="px-6 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg font-semibold transition-smooth">
+                                    ℹ️ Learn More
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Quotes Section -->
+                <section id="quotes" class="content-section hidden p-6 max-w-7xl mx-auto">
+                    <h2 class="text-3xl font-bold mb-6 neon-glow" style="color: var(--accent-light)">💡 Wisdom & Strategy</h2>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- Bible Quote -->
+                        <div class="glow-box glass rounded-xl p-6 hover-glow flex flex-col">
+                            <div class="flex-1">
+                                <p class="text-lg font-semibold mb-4 italic" id="bibleQuote">"For the Lord is my light and my salvation..."</p>
+                            </div>
+                            <div class="border-t border-slate-700 pt-4">
+                                <p class="text-sm text-gray-400">📖 The Holy Bible</p>
+                                <p class="text-xs text-gray-500">Psalm 27:1</p>
+                            </div>
+                        </div>
+
+                        <!-- Sun Tzu Quote -->
+                        <div class="glow-box-pink glass rounded-xl p-6 hover-glow flex flex-col">
+                            <div class="flex-1">
+                                <p class="text-lg font-semibold mb-4 italic" id="sunTzuQuote">"The supreme art of war is to subdue the enemy without fighting..."</p>
+                            </div>
+                            <div class="border-t border-slate-700 pt-4">
+                                <p class="text-sm text-gray-400">⚔️ Sun Tzu - The Art of War</p>
+                                <p class="text-xs text-gray-500">Chapter III</p>
+                            </div>
+                        </div>
+
+                        <!-- Roman Commander Quote -->
+                        <div class="glow-box-emerald glass rounded-xl p-6 hover-glow flex flex-col">
+                            <div class="flex-1">
+                                <p class="text-lg font-semibold mb-4 italic" id="romanQuote">"It is not the strength of the body that counts, but the strength of the spirit..."</p>
+                            </div>
+                            <div class="border-t border-slate-700 pt-4">
+                                <p class="text-sm text-gray-400">🏛️ Marcus Aurelius</p>
+                                <p class="text-xs text-gray-500">Roman Emperor & Philosopher</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-8">
+                        <button id="newQuoteBtn" class="px-8 py-3 bg-gradient-to-r from-cyan-500 to-violet-600 hover:from-cyan-400 hover:to-violet-500 rounded-lg font-bold transition-smooth hover-glow">
+                            ✨ Generate New Quotes
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Chat Section -->
+                <section id="chat" class="content-section hidden p-6 max-w-7xl mx-auto">
+                    <h2 class="text-3xl font-bold mb-6 neon-glow" style="color: var(--accent-light)">💬 Live Chat Room</h2>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+                        <!-- Chat Messages -->
+                        <div class="lg:col-span-3">
+                            <div class="glow-box glass rounded-xl overflow-hidden flex flex-col h-96">
+                                <div class="bg-gradient-to-r from-cyan-900/30 to-slate-800/30 px-6 py-4 border-b border-slate-700">
+                                    <h3 class="font-bold">Global Channel</h3>
+                                    <p class="text-xs text-gray-400">12 members online</p>
+                                </div>
+
+                                <div id="chatMessages" class="chat-messages flex-1 overflow-y-auto p-4 space-y-4">
+                                    <!-- Messages populated by JS -->
+                                </div>
+
+                                <div class="border-t border-slate-700 p-4">
+                                    <div class="flex gap-2">
+                                        <input type="text" id="chatInput" placeholder="Type a message..." class="flex-1 px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg focus:outline-none focus:border-cyan-500 transition-smooth">
+                                        <button id="sendChatBtn" class="px-4 py-2 bg-cyan-600 hover:bg-cyan-500 rounded-lg font-semibold transition-smooth">
+                                            Send
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Online Users -->
+                        <div class="glow-box glass rounded-xl p-6 h-96 overflow-y-auto">
+                            <h3 class="font-bold mb-4" style="color: var(--accent-light)">👥 Online Users</h3>
+                            <div id="onlineUsers" class="space-y-3">
+                                <!-- Populated by JS -->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Comments Section -->
+                <section id="comments" class="content-section hidden p-6 max-w-7xl mx-auto">
+                    <h2 class="text-3xl font-bold mb-6 neon-glow" style="color: var(--accent-light)">📝 Comments Section</h2>
+
+                    <div class="glow-box glass rounded-xl p-6 mb-8 hover-glow">
+                        <h3 class="font-bold mb-4">Leave a Comment</h3>
+                        <div class="space-y-3">
+                            <input type="text" id="commentName" placeholder="Your name..." class="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg focus:outline-none focus:border-cyan-500 transition-smooth">
+                            <textarea id="commentText" placeholder="Your comment..." class="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg focus:outline-none focus:border-cyan-500 transition-smooth resize-none h-24"></textarea>
+                            <button id="submitCommentBtn" class="px-6 py-2 bg-cyan-600 hover:bg-cyan-500 rounded-lg font-semibold transition-smooth hover-glow">
+                                Post Comment
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="commentsList" class="space-y-4">
+                        <!-- Comments populated by JS -->
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Theme Modal -->
+    <div id="themeModal" class="fixed inset-0 modal-backdrop z-40 hidden flex items-center justify-center p-4">
+        <div class="glass rounded-xl p-8 max-w-sm w-full glow-box">
+            <h2 class="text-2xl font-bold mb-6" style="color: var(--accent-light)">Choose Theme</h2>
+            <div class="grid grid-cols-3 gap-3">
+                <button class="theme-option p-3 rounded-lg font-semibold border-2 border-cyan-400 bg-cyan-900/20 transition-smooth" data-theme="cyan">
+                    Cyan Nexus
+                </button>
+                <button class="theme-option p-3 rounded-lg font-semibold border-2 border-slate-600 hover:border-pink-400 transition-smooth" data-theme="magenta">
+                    Magenta Pulse
+                </button>
+                <button class="theme-option p-3 rounded-lg font-semibold border-2 border-slate-600 hover:border-violet-400 transition-smooth" data-theme="violet">
+                    Violet Dream
+                </button>
+                <button class="theme-option p-3 rounded-lg font-semibold border-2 border-slate-600 hover:border-emerald-400 transition-smooth" data-theme="emerald">
+                    Emerald Glow
+                </button>
+                <button class="theme-option p-3 rounded-lg font-semibold border-2 border-slate-600 hover:border-amber-400 transition-smooth" data-theme="amber">
+                    Amber Fire
+                </button>
+                <button class="theme-option p-3 rounded-lg font-semibold border-2 border-slate-600 hover:border-rose-400 transition-smooth" data-theme="rose">
+                    Rose Blaze
+                </button>
+            </div>
+            <button id="closeThemeModal" class="w-full mt-6 px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg transition-smooth">
+                Close
+            </button>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settingsModal" class="fixed inset-0 modal-backdrop z-40 hidden flex items-center justify-center p-4">
+        <div class="glass rounded-xl p-8 max-w-sm w-full glow-box overflow-y-auto max-h-96">
+            <h2 class="text-2xl font-bold mb-6" style="color: var(--accent-light)">Settings</h2>
+
+            <div class="space-y-6">
+                <div>
+                    <label class="block text-sm font-semibold mb-2">Language</label>
+                    <select id="settingsLanguage" class="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg focus:outline-none focus:border-cyan-500 cursor-pointer">
+                        <!-- Populated by JS -->
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold mb-2">Temperature Unit</label>
+                    <div class="flex gap-2">
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="radio" name="tempUnit" value="C" checked class="cursor-pointer">
+                            <span>Celsius (°C)</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="radio" name="tempUnit" value="F" class="cursor-pointer">
+                            <span>Fahrenheit (°F)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold mb-2">Theme</label>
+                    <select id="settingsTheme" class="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg focus:outline-none focus:border-cyan-500 cursor-pointer">
+                        <option value="cyan">Cyan Nexus</option>
+                        <option value="magenta">Magenta Pulse</option>
+                        <option value="violet">Violet Dream</option>
+                        <option value="emerald">Emerald Glow</option>
+                        <option value="amber">Amber Fire</option>
+                        <option value="rose">Rose Blaze</option>
+                    </select>
+                </div>
+            </div>
+
+            <button id="closeSettingsModal" class="w-full mt-6 px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg transition-smooth">
+                Close
+            </button>
+        </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="fixed inset-0 z-30 hidden">
+        <div class="absolute inset-0 bg-black/50" id="mobileMenuBackdrop"></div>
+        <div class="absolute left-0 top-0 bottom-0 w-64 glass border-r border-slate-700 p-4 overflow-y-auto">
+            <nav class="space-y-2">
+                <button class="mobile-nav-btn sidebar-item w-full text-left px-4 py-3 rounded-lg transition-smooth hover:bg-slate-800" data-section="travel">
+                    <span class="text-lg mr-3">✈️</span> Travel
+                </button>
+                <button class="mobile-nav-btn sidebar-item w-full text-left px-4 py-3 rounded-lg transition-smooth hover:bg-slate-800" data-section="weather">
+                    <span class="text-lg mr-3">🌤️</span> Weather
+                </button>
+                <button class="mobile-nav-btn sidebar-item w-full text-left px-4 py-3 rounded-lg transition-smooth hover:bg-slate-800" data-section="telemetry">
+                    <span class="text-lg mr-3">☀️</span> Telemetry
+                </button>
+                <button class="mobile-nav-btn sidebar-item w-full text-left px-4 py-3 rounded-lg transition-smooth hover:bg-slate-800" data-section="quotes">
+                    <span class="text-lg mr-3">💡</span> Quotes
+                </button>
+                <button class="mobile-nav-btn sidebar-item w-full text-left px-4 py-3 rounded-lg transition-smooth hover:bg-slate-800" data-section="chat">
+                    <span class="text-lg mr-3">💬</span> Chat
+                </button>
+                <button class="mobile-nav-btn sidebar-item w-full text-left px-4 py-3 rounded-lg transition-smooth hover:bg-slate-800" data-section="comments">
+                    <span class="text-lg mr-3">📝</span> Comments
+                </button>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Script -->
+    <script>
+        // ============================================
+        // GLOBAL STATE & CONFIGURATION
+        // ============================================
+
+        const APP = {
+            currentTheme: 'cyan',
+            currentLanguage: 'en',
+            tempUnit: 'C',
+            currentCity: 'New York',
+            chatMessages: [],
+            comments: [],
+            users: [
+                { id: 1, name: 'Alex Chen', avatar: '👨‍💼', online: true },
+                { id: 2, name: 'Maria Garcia', avatar: '👩‍💻', online: true },
+                { id: 3, name: 'James Wilson', avatar: '👨‍🔬', online: true },
+                { id: 4, name: 'Sofia Rodriguez', avatar: '👩‍🎨', online: true },
+                { id: 5, name: 'David Kim', avatar: '👨‍🚀', online: true },
+                { id: 6, name: 'Emma Johnson', avatar: '👩‍⚕️', online: true },
+                { id: 7, name: 'Lucas Ahmed', avatar: '👨‍💼', online: true },
+                { id: 8, name: 'Yuki Tanaka', avatar: '👩‍💼', online: true },
+                { id: 9, name: 'Carlos Silva', avatar: '👨‍✈️', online: true },
+                { id: 10, name: 'Lisa Zhang', avatar: '👩‍🔧', online: true },
+                { id: 11, name: 'Nina Petrov', avatar: '👩‍🎓', online: true },
+                { id: 12, name: 'Marco Rossi', avatar: '👨‍🎭', online: true }
+            ]
+        };
+
+        // ============================================
+        // LANGUAGE DEFINITIONS
+        // ============================================
+
+        const LANGUAGES = {
+            uk: 'Українська',
+            en: 'English',
+            ar: 'العربية',
+            de: 'Deutsch',
+            es: 'Español',
+            fr: 'Français',
+            ja: ' 日本語',
+            ko: '한국어',
+            pt: 'Português',
+            ru: 'Русский',
+            tr: 'Türkçe',
+            zh: '中文',
+            af: 'Afrikaans',
+            bg: 'Български',
+            ca: 'Català',
+            cs: 'Čeština',
+            da: 'Dansk',
+            el: 'Ελληνικά',
+            et: 'Eesti',
+            fa: 'فارسی',
+            fi: 'Suomi',
+            he: 'עברית',
+            hu: 'Magyar',
+            id: 'Bahasa Indonesia',
+            it: 'Italiano',
+            nl: 'Nederlands',
+            no: 'Norsk',
+            pl: 'Polski',
+            sv: 'Svenska',
+            th: 'ไทย',
+            vi: 'Tiếng Việt'
+        };
+
+        const TRANSLATIONS = {
+            uk: {
+                'travel': 'Подорожі та Відкриття',
+                'weather': 'Прогноз Погоди',
+                'telemetry': 'Сонячна Телеметрія',
+                'quotes': 'Мудрість & Стратегія',
+                'chat': 'Живий Чат',
+                'comments': 'Секція Коментарів'
+            },
+            en: {
+                'travel': 'Travel & Discoveries',
+                'weather': 'Weather Forecast',
+                'telemetry': 'Solar Telemetry',
+                'quotes': 'Wisdom & Strategy',
+                'chat': 'Live Chat',
+                'comments': 'Comments'
+            },
+            ar: {
+                'travel': 'السفر والاكتشافات',
+                'weather': 'توقعات الطقس',
+                'telemetry': 'قياس الشمس',
+                'quotes': 'الحكمة والاستراتيجية',
+                'chat': 'الدردشة الحية',
+                'comments': 'التعليقات'
+            },
+            de: {
+                'travel': 'Reisen & Entdeckungen',
+                'weather': 'Wettervorhersage',
+                'telemetry': 'Sonnentelemetrie',
+                'quotes': 'Weisheit & Strategie',
+                'chat': 'Live-Chat',
+                'comments': 'Kommentare'
+            },
+            es: {
+                'travel': 'Viajes & Descubrimientos',
+                'weather': 'Pronóstico del Tiempo',
+                'telemetry': 'Telemetría Solar',
+                'quotes': 'Sabiduría & Estrategia',
+                'chat': 'Chat en Vivo',
+                'comments': 'Comentarios'
+            },
+            fr: {
+                'travel': 'Voyages & Découvertes',
+                'weather': 'Prévisions Météo',
+                'telemetry': 'Télémétrie Solaire',
+                'quotes': 'Sagesse & Stratégie',
+                'chat': 'Chat En Direct',
+                'comments': 'Commentaires'
+            },
+            tr: {
+                'travel': 'Seyahat & Keşifler',
+                'weather': 'Hava Durumu Tahmini',
+                'telemetry': 'Güneş Telemetrisi',
+                'quotes': 'Bilgelik & Strateji',
+                'chat': 'Canlı Sohbet',
+                'comments': 'Yorumlar'
+            },
+            pt: {
+                'travel': 'Viagens & Descobertas',
+                'weather': 'Previsão do Tempo',
+                'telemetry': 'Telemetria Solar',
+                'quotes': 'Sabedoria & Estratégia',
+                'chat': 'Chat Ao Vivo',
+                'comments': 'Comentários'
+            },
+            ru: {
+                'travel': 'Путешествия и Открытия',
+                'weather': 'Прогноз Погоды',
+                'telemetry': 'Солнечная Телеметрия',
+                'quotes': 'Мудрость и Стратегия',
+                'chat': 'Живой Чат',
+                'comments': 'Комментарии'
+            },
+            zh: {
+                'travel': '旅行和发现',
+                'weather': '天气预报',
+                'telemetry': '太阳遥测',
+                'quotes': '智慧和战略',
+                'chat': '实时聊天',
+                'comments': '评论'
+            }
+        };
+
+        // ============================================
+        // CITY DATA
+        // ============================================
+
+        const CITY_DATA = {
+            'New York': {
+                museums: [
+                    { name: 'Metropolitan Museum', desc: 'World\'s largest art collection', distance: '2.5 km', rating: 4.8 },
+                    { name: 'American Museum of Natural History', desc: 'Dinosaurs & planetarium', distance: '3.2 km', rating: 4.7 },
+                    { name: 'MoMA', desc: 'Modern art masterpieces', distance: '1.8 km', rating: 4.9 }
+                ],
+                restaurants: [
+                    { name: 'Eleven Madison Park', desc: 'Fine dining experience', distance: '1.2 km', rating: 4.9 },
+                    { name: 'Balthazar', desc: 'French bistro excellence', distance: '0.8 km', rating: 4.7 },
+                    { name: 'Per Se', desc: 'Contemporary cuisine', distance: '2.1 km', rating: 4.8 }
+                ],
+                population: '8.3 Million',
+                timezone: 'EST',
+                temp: 15,
+                humidity: 65,
+                windSpeed: 12
+            },
+            'Paris': {
+                museums: [
+                    { name: 'Louvre Museum', desc: 'Iconic art destination', distance: '2.0 km', rating: 4.8 },
+                    { name: 'Musée d\'Orsay', desc: 'Impressionist masterworks', distance: '1.5 km', rating: 4.7 },
+                    { name: 'Centre Pompidou', desc: 'Modern art & architecture', distance: '3.0 km', rating: 4.6 }
+                ],
+                restaurants: [
+                    { name: 'L\'Astrance', desc: 'Three Michelin stars', distance: '1.5 km', rating: 4.9 },
+                    { name: 'Le Jules Verne', desc: 'Eiffel Tower dining', distance: '0.5 km', rating: 4.8 },
+                    { name: 'Frenchie To Go', desc: 'Contemporary French', distance: '1.2 km', rating: 4.6 }
+                ],
+                population: '2.2 Million',
+                timezone: 'CET',
+                temp: 12,
+                humidity: 72,
+                windSpeed: 8
+            },
+            'Tokyo': {
+                museums: [
+                    { name: 'Tokyo National Museum', desc: 'Japanese art & culture', distance: '1.8 km', rating: 4.7 },
+                    { name: 'Mori Art Museum', desc: 'Contemporary global art', distance: '2.5 km', rating: 4.6 },
+                    { name: 'Ghibli Museum', desc: 'Animation magic', distance: '15 km', rating: 4.9 }
+                ],
+                restaurants: [
+                    { name: 'Sukiyabashi Jiro', desc: 'Premium sushi', distance: '2.0 km', rating: 4.9 },
+                    { name: 'Nabezo', desc: 'Authentic hot pot', distance: '1.5 km', rating: 4.7 },
+                    { name: 'Karasu', desc: 'Fine Japanese cuisine', distance: '1.2 km', rating: 4.8 }
+                ],
+                population: '13.9 Million',
+                timezone: 'JST',
+                temp: 18,
+                humidity: 58,
+                windSpeed: 6
+            },
+            'Istanbul': {
+                museums: [
+                    { name: 'Hagia Sophia', desc: 'Historic mosque & museum', distance: '1.0 km', rating: 4.8 },
+                    { name: 'Istanbul Archaeology Museum', desc: 'Ancient civilizations', distance: '1.5 km', rating: 4.6 },
+                    { name: 'Topkapi Palace Museum', desc: 'Ottoman treasures', distance: '2.0 km', rating: 4.7 }
+                ],
+                restaurants: [
+                    { name: 'Mikla', desc: 'Modern Turkish cuisine', distance: '3.5 km', rating: 4.8 },
+                    { name: 'Balikci Sabahattin', desc: 'Fresh seafood', distance: '1.2 km', rating: 4.7 },
+                    { name: 'Karakol', desc: 'Turkish street food', distance: '2.0 km', rating: 4.5 }
+                ],
+                population: '15.0 Million',
+                timezone: 'EET',
+                temp: 16,
+                humidity: 68,
+                windSpeed: 10
+            },
+            'Kyiv': {
+                museums: [
+                    { name: 'National Art Museum of Ukraine', desc: 'Ukrainian masterworks', distance: '1.0 km', rating: 4.6 },
+                    { name: 'Mystetskyi Arsenal', desc: 'Contemporary Ukrainian art', distance: '2.5 km', rating: 4.7 },
+                    { name: 'PinchukArtCentre', desc: 'Modern global art', distance: '3.0 km', rating: 4.5 }
+                ],
+                restaurants: [
+                    { name: 'Alyona Alyona', desc: 'Modern Ukrainian', distance: '1.8 km', rating: 4.7 },
+                    { name: 'Honey', desc: 'Contemporary dining', distance: '2.2 km', rating: 4.6 },
+                    { name: 'Khmara', desc: 'Traditional Ukrainian', distance: '1.5 km', rating: 4.5 }
+                ],
+                population: '3.0 Million',
+                timezone: 'EET',
+                temp: 10,
+                humidity: 75,
+                windSpeed: 9
+            },
+            'London': {
+                museums: [
+                    { name: 'British Museum', desc: 'World history treasures', distance: '1.2 km', rating: 4.7 },
+                    { name: 'National Gallery', desc: 'Western art collection', distance: '0.8 km', rating: 4.7 },
+                    { name: 'V&A Museum', desc: 'Design & decorative arts', distance: '2.5 km', rating: 4.6 }
+                ],
+                restaurants: [
+                    { name: 'Pétrus', desc: 'Fine French dining', distance: '2.0 km', rating: 4.8 },
+                    { name: 'Dishoom', desc: 'Indian excellence', distance: '1.5 km', rating: 4.7 },
+                    { name: 'Sketch', desc: 'Artistic contemporary', distance: '1.8 km', rating: 4.6 }
+                ],
+                population: '8.9 Million',
+                timezone: 'GMT',
+                temp: 11,
+                humidity: 70,
+                windSpeed: 11
+            }
+        };
+
+        // ============================================
+        // QUOTES DATABASE
+        // ============================================
+
+        const BIBLE_QUOTES = [
+            { text: '"For the Lord is my light and my salvation—whom shall I fear?"', source: 'Psalm 27:1' },
+            { text: '"Trust in the Lord with all your heart and lean not on your own understanding."', source: 'Proverbs 3:5' },
+            { text: '"I can do all this through him who gives me strength."', source: 'Philippians 4:13' },
+            { text: '"The fear of the Lord is the beginning of wisdom."', source: 'Psalm 111:10' },
+            { text: '"Blessed are those who trust in the Lord."', source: 'Jeremiah 17:7' }
+        ];
+
+        const SUN_TZU_QUOTES = [
+            { text: '"The supreme art of war is to subdue the enemy without fighting."', source: 'Chapter III' },
+            { text: '"If you know the enemy and know yourself, you need not fear the result of a hundred battles."', source: 'Chapter III' },
+            { text: '"All warfare is based on deception."', source: 'Chapter I' },
+            { text: '"Speed is the essence of war."', source: 'Chapter V' },
+            { text: '"The supreme commander of an enemy army may be robbed of his strategy."', source: 'Chapter III' }
+        ];
+
+        const ROMAN_QUOTES = [
+            { text: '"It is not the strength of the body that counts, but the strength of the spirit."', author: 'Marcus Aurelius', role: 'Emperor & Philosopher' },
+            { text: '"The impediment to action advances action. What stands in the way becomes the way."', author: 'Marcus Aurelius', role: 'Emperor & Philosopher' },
+            { text: '"Nothing is impossible to a willing heart."', author: 'Julius Caesar', role: 'Military Commander' },
+            { text: '"Cowards die many times before their deaths; the valiant never taste of death but once."', author: 'Scipio Africanus', role: 'General' },
+            { text: '"Discipline is the soul of an army."', author: 'Marcus Aurelius', role: 'Emperor & Philosopher' }
+        ];
+
+        // ============================================
+        // UTILITY FUNCTIONS
+        // ============================================
+
+        function translate(key) {
+            const lang = APP.currentLanguage;
+            return TRANSLATIONS[lang]?.[key] || TRANSLATIONS['en']?.[key] || key;
+        }
+
+        function generateStars(rating) {
+            const stars = Math.floor(rating);
+            return '⭐'.repeat(stars) + (rating % 1 >= 0.5 ? '✨' : '');
+        }
+
+        function formatTime(date) {
+            return date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+        }
+
+        function getRandomItem(arr) {
+            return arr[Math.floor(Math.random() * arr.length)];
+        }
+
+        // ============================================
+        // CITY SELECTION
+        // ============================================
+
+        function updateCityData(cityName) {
+            if (!CITY_DATA[cityName]) return;
+
+            APP.currentCity = cityName;
+            const data = CITY_DATA[cityName];
+
+            // Update location info
+            document.getElementById('cityName').textContent = cityName;
+            document.getElementById('population').textContent = data.population;
+            document.getElementById('timezone').textContent = data.timezone;
+
+            // Update weather
+            document.getElementById('weatherTemp').textContent = `${data.temp}°${APP.tempUnit}`;
+            document.getElementById('currentTemp').textContent = `${data.temp}°${APP.tempUnit}`;
+
+            // Update museums
+            const museumsList = document.getElementById('museumsList');
+            museumsList.innerHTML = data.museums.map(m => `
+                <div class="glow-box glass rounded-lg p-4 hover-glow">
+                    <h4 class="font-bold mb-2">${m.name}</h4>
+                    <p class="text-sm text-gray-400 mb-3">${m.desc}</p>
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <p class="text-xs text-gray-500">${m.distance} away</p>
+                            <div class="star-rating">${generateStars(m.rating)}</div>
+                        </div>
+                        <button class="px-3 py-1 bg-cyan-600 hover:bg-cyan-500 rounded text-sm transition-smooth">
+                            Visit
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+
+            // Update restaurants
+            const restaurantsList = document.getElementById('restaurantsList');
+            restaurantsList.innerHTML = data.restaurants.map(r => `
+                <div class="glow-box glass rounded-lg p-4 hover-glow">
+                    <h4 class="font-bold mb-2">${r.name}</h4>
+                    <p class="text-sm text-gray-400 mb-3">${r.desc}</p>
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <p class="text-xs text-gray-500">${r.distance} away</p>
+                            <div class="star-rating">${generateStars(r.rating)}</div>
+                        </div>
+                        <button class="px-3 py-1 bg-cyan-600 hover:bg-cyan-500 rounded text-sm transition-smooth">
+                            Reserve
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // ============================================
+        // WEATHER FUNCTIONALITY
+        // ============================================
+
+        function initWeather() {
+            const cityData = CITY_DATA['New York'];
+            document.getElementById('weatherTemp').textContent = `${cityData.temp}°C`;
+            document.getElementById('weatherCondition').textContent = 'Partly Cloudy';
+            document.getElementById('weatherHumidity').textContent = `${cityData.humidity}%`;
+            document.getElementById('weatherWind').textContent = `${cityData.windSpeed} m/s`;
+
+            // 5-day forecast
+            const forecastList = document.getElementById('forecastList');
+            const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
+            const conditions = ['☀️ Sunny', '🌤️ Cloudy', '🌧️ Rainy', '⛅ Mixed', '☀️ Clear'];
+            const temps = [18, 16, 14, 15, 19];
+
+            forecastList.innerHTML = days.map((day, i) => `
+                <div class="glow-box glass rounded-lg p-4 text-center hover-glow float-animation" style="animation-delay: ${i * 0.1}s">
+                    <p class="font-semibold mb-2">${day}</p>
+                    <p class="text-2xl mb-2">${conditions[i].split(' ')[0]}</p>
+                    <p class="font-bold text-lg mb-2">${temps[i]}°C</p>
+                    <p class="text-xs text-gray-400">${conditions[i].split(' ')[1]}</p>
+                </div>
+            `).join('');
+        }
+
+        // ============================================
+        // SOLAR TELEMETRY
+        // ============================================
+
+        function refreshTelemetry() {
+            const values = {
+                solarWindSpeed: Math.floor(Math.random() * 150 + 300),
+                xrayFlux: (Math.random() * 0.00002 + 0.00001).toExponential(2),
+                kpIndex: Math.floor(Math.random() * 8),
+                solarFlux: Math.floor(Math.random() * 50 + 120)
+            };
+
+            document.getElementById('solarWindSpeed').textContent = `${values.solarWindSpeed} km/s`;
+            document.getElementById('xrayFlux').textContent = values.xrayFlux;
+            document.getElementById('kpIndex').textContent = values.kpIndex;
+            document.getElementById('solarFlux').textContent = `${values.solarFlux} SFU`;
+
+            // Status indicators
+            const indicators = {
+                solarWindSpeed: values.solarWindSpeed < 350 ? 'status-green' : 'status-yellow',
+                kpIndex: values.kpIndex < 5 ? 'status-green' : values.kpIndex < 7 ? 'status-yellow' : 'status-red'
+            };
+        }
+
+        // ============================================
+        // QUOTES FUNCTIONALITY
+        // ============================================
+
+        function loadNewQuotes() {
+            const bible = getRandomItem(BIBLE_QUOTES);
+            const sunTzu = getRandomItem(SUN_TZU_QUOTES);
+            const roman = getRandomItem(ROMAN_QUOTES);
+
+            document.getElementById('bibleQuote').textContent = bible.text;
+            document.getElementById('sunTzuQuote').textContent = sunTzu.text;
+            document.getElementById('romanQuote').textContent = roman.text;
+        }
+
+        // ============================================
+        // CHAT FUNCTIONALITY
+        // ============================================
+
+        function initChat() {
+            // Add initial messages
+            APP.chatMessages = [
+                { user: 'Alex Chen', avatar: '👨‍💼', text: 'Welcome to the Global Channel! 🌍', time: new Date(Date.now() - 5 * 60000) },
+                { user: 'Maria Garcia', avatar: '👩‍💻', text: 'Excited to connect with everyone here!', time: new Date(Date.now() - 4 * 60000) },
+                { user: 'James Wilson', avatar: '👨‍🔬', text: 'Just launched a new project', time: new Date(Date.now() - 3 * 60000) },
+                { user: 'Sofia Rodriguez', avatar: '👩‍🎨', text: 'That\'s amazing! Tell us more 🎨', time: new Date(Date.now() - 2 * 60000) }
+            ];
+
+            renderChat();
+            renderOnlineUsers();
+        }
+
+        function renderChat() {
+            const chatMessages = document.getElementById('chatMessages');
+            chatMessages.innerHTML = APP.chatMessages.map(msg => `
+                <div class="flex gap-3 animate-fadeIn">
+                    <div class="text-2xl flex-shrink-0">${msg.avatar}</div>
+                    <div class="flex-1 min-w-0">
+                        <div class="flex items-baseline gap-2">
+                            <p class="font-semibold text-sm">${msg.user}</p>
+                            <p class="text-xs text-gray-500">${formatTime(msg.time)}</p>
+                        </div>
+                        <p class="text-sm text-gray-200 break-words">${msg.text}</p>
+                    </div>
+                </div>
+            `).join('');
+
+            // Scroll to bottom
+            setTimeout(() => {
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, 100);
+        }
+
+        function renderOnlineUsers() {
+            const onlineUsers = document.getElementById('onlineUsers');
+            onlineUsers.innerHTML = APP.users.map(user => `
+                <div class="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-800/50 transition-smooth cursor-pointer">
+                    <div class="relative">
+                        <span class="text-2xl">${user.avatar}</span>
+                        <span class="status-indicator status-green absolute bottom-0 right-0"></span>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <p class="text-sm font-semibold truncate">${user.name}</p>
+                        <p class="text-xs text-gray-500">Online</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            if (!input.value.trim()) return;
+
+            const newMessage = {
+                user: 'You',
+                avatar: '👤',
+                text: input.value,
+                time: new Date()
+            };
+
+            APP.chatMessages.push(newMessage);
+            renderChat();
+            input.value = '';
+
+            // Simulate response
+            setTimeout(() => {
+                const responses = [
+                    'That\'s great! 🎉',
+                    'I agree completely!',
+                    'Interesting perspective!',
+                    'Thanks for sharing! 💡',
+                    'Love the energy! ⚡'
+                ];
+                APP.chatMessages.push({
+                    user: getRandomItem(APP.users).name,
+                    avatar: getRandomItem(APP.users).avatar,
+                    text: getRandomItem(responses),
+                    time: new Date()
+                });
+                renderChat();
+            }, 500);
+        }
+
+        // ============================================
+        // COMMENTS FUNCTIONALITY
+        // ============================================
+
+        function renderComments() {
+            const commentsList = document.getElementById('commentsList');
+            commentsList.innerHTML = APP.comments.map((comment, i) => `
+                <div class="comment-card glow-box glass rounded-lg p-4">
+                    <div class="flex items-start justify-between mb-2">
+                        <div>
+                            <p class="font-bold">${comment.name}</p>
+                            <p class="text-xs text-gray-500">${comment.time}</p>
+                        </div>
+                        <button class="text-xl hover:scale-125 transition-transform">👍</button>
+                    </div>
+                    <p class="text-gray-300">${comment.text}</p>
+                </div>
+            `).join('');
+        }
+
+        function addComment() {
+            const name = document.getElementById('commentName').value.trim();
+            const text = document.getElementById('commentText').value.trim();
+
+            if (!name || !text) return;
+
+            APP.comments.unshift({
+                name,
+                text,
+                time: new Date().toLocaleString()
+            });
+
+            if (APP.comments.length > 12) APP.comments.pop();
+
+            renderComments();
+            document.getElementById('commentName').value = '';
+            document.getElementById('commentText').value = '';
+        }
+
+        // ============================================
+        // THEME MANAGEMENT
+        // ============================================
+
+        function setTheme(theme) {
+            document.body.className = document.body.className.replace(/theme-\w+/, `theme-${theme}`);
+            APP.currentTheme = theme;
+            localStorage.setItem('theme', theme);
+        }
+
+        function initThemeColors() {
+            const themes = {
+                cyan: { accent: '#06b6d4', light: '#22d3ee', dark: '#0891b2' },
+                magenta: { accent: '#ec4899', light: '#f472b6', dark: '#be185d' },
+                violet: { accent: '#8b5cf6', light: '#a78bfa', dark: '#6d28d9' },
+                emerald: { accent: '#10b981', light: '#34d399', dark: '#047857' },
+                amber: { accent: '#f59e0b', light: '#fbbf24', dark: '#d97706' },
+                rose: { accent: '#f43f5e', light: '#fb7185', dark: '#be123c' }
+            };
+
+            const currentTheme = themes[APP.currentTheme];
+            document.documentElement.style.setProperty('--accent', currentTheme.accent);
+            document.documentElement.style.setProperty('--accent-light', currentTheme.light);
+            document.documentElement.style.setProperty('--accent-dark', currentTheme.dark);
+        }
+
+        // ============================================
+        // LANGUAGE MANAGEMENT
+        // ============================================
+
+        function initLanguageSelect() {
+            const select = document.getElementById('languageSelect');
+            const settingsSelect = document.getElementById('settingsLanguage');
+
+            Object.entries(LANGUAGES).forEach(([code, name]) => {
+                const option = document.createElement('option');
+                option.value = code;
+                option.textContent = name;
+                select.appendChild(option);
+
+                const settingsOption = option.cloneNode(true);
+                settingsSelect.appendChild(settingsOption);
+            });
+
+            select.value = APP.currentLanguage;
+        }
+
+        function setLanguage(lang) {
+            APP.currentLanguage = lang;
+            document.getElementById('languageSelect').value = lang;
+            document.getElementById('settingsLanguage').value = lang;
+            localStorage.setItem('language', lang);
+        }
+
+        // ============================================
+        // SECTION NAVIGATION
+        // ============================================
+
+        function showSection(sectionId) {
+            document.querySelectorAll('.content-section').forEach(s => s.classList.add('hidden'));
+            document.getElementById(sectionId).classList.remove('hidden');
+
+            document.querySelectorAll('.sidebar-item').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll(`[data-section="${sectionId}"]`).forEach(btn => btn.classList.add('active'));
+
+            closeMobileMenu();
+        }
+
+        // ============================================
+        // MODAL MANAGEMENT
+        // ============================================
+
+        function openThemeModal() {
+            document.getElementById('themeModal').classList.remove('hidden');
+        }
+
+        function closeThemeModal() {
+            document.getElementById('themeModal').classList.add('hidden');
+        }
+
+        function openSettingsModal() {
+            document.getElementById('settingsModal').classList.remove('hidden');
+        }
+
+        function closeSettingsModal() {
+            document.getElementById('settingsModal').classList.add('hidden');
+        }
+
+        function closeMobileMenu() {
+            document.getElementById('mobileMenu').classList.add('hidden');
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobileMenu').classList.toggle('hidden');
+        }
+
+        // ============================================
+        // COLLAPSIBLE SECTIONS
+        // ============================================
+
+        function setupCollapsibles() {
+            document.getElementById('telemetryToggle').addEventListener('click', () => {
+                const content = document.querySelector('#telemetry .collapse-content');
+                const arrow = document.getElementById('telemetryArrow');
+
+                content.classList.toggle('open');
+                arrow.style.transform = content.classList.contains('open') ? 'rotate(0)' : 'rotate(180deg)';
+            });
+        }
+
+        // ============================================
+        // EVENT LISTENERS
+        // ============================================
+
+        function setupEventListeners() {
+            // Navigation
+            document.querySelectorAll('.nav-btn, .mobile-nav-btn').forEach(btn => {
+                btn.addEventListener('click', () => showSection(btn.dataset.section));
+            });
+
+            // Theme
+            document.getElementById('themeBtn').addEventListener('click', openThemeModal);
+            document.getElementById('closeThemeModal').addEventListener('click', closeThemeModal);
+            document.querySelectorAll('.theme-option').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    setTheme(btn.dataset.theme);
+                    document.querySelectorAll('.theme-option').forEach(b => b.classList.remove('border-opacity-100'));
+                    btn.classList.add('border-opacity-100');
+                    initThemeColors();
+                });
+            });
+
+            // Settings
+            document.getElementById('settingsBtn').addEventListener('click', openSettingsModal);
+            document.getElementById('closeSettingsModal').addEventListener('click', closeSettingsModal);
+
+            document.getElementById('settingsLanguage').addEventListener('change', (e) => {
+                setLanguage(e.target.value);
+            });
+
+            document.getElementById('settingsTheme').addEventListener('change', (e) => {
+                setTheme(e.target.value);
+                initThemeColors();
+            });
+
+            document.querySelectorAll('input[name="tempUnit"]').forEach(radio => {
+                radio.addEventListener('change', (e) => {
+                    APP.tempUnit = e.target.value;
+                    // Update all temperature displays
+                });
+            });
+
+            // City selection
+            document.getElementById('cityInput').addEventListener('change', (e) => {
+                if (CITY_DATA[e.target.value]) {
+                    updateCityData(e.target.value);
+                }
+            });
+
+            // Chat
+            document.getElementById('sendChatBtn').addEventListener('click', sendMessage);
+            document.getElementById('chatInput').addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') sendMessage();
+            });
+
+            // Comments
+            document.getElementById('submitCommentBtn').addEventListener('click', addComment);
+
+            // Telemetry
+            document.getElementById('refreshTelemetry').addEventListener('click', refreshTelemetry);
+
+            // Quotes
+            document.getElementById('newQuoteBtn').addEventListener('click', loadNewQuotes);
+
+            // Language select
+            document.getElementById('languageSelect').addEventListener('change', (e) => {
+                setLanguage(e.target.value);
+            });
+
+            // Mobile menu
+            document.getElementById('menuToggle').addEventListener('click', toggleMobileMenu);
+            document.getElementById('mobileMenuBackdrop').addEventListener('click', closeMobileMenu);
+
+            // Modal backdrops
+            document.getElementById('themeModal').addEventListener('click', (e) => {
+                if (e.target === e.currentTarget) closeThemeModal();
+            });
+
+            document.getElementById('settingsModal').addEventListener('click', (e) => {
+                if (e.target === e.currentTarget) closeSettingsModal();
+            });
+        }
+
+        // ============================================
+        // INITIALIZATION
+        // ============================================
+
+        function init() {
+            // Restore preferences
+            APP.currentTheme = localStorage.getItem('theme') || 'cyan';
+            APP.currentLanguage = localStorage.getItem('language') || 'en';
+
+            // Initialize UI
+            setTheme(APP.currentTheme);
+            initThemeColors();
+            initLanguageSelect();
+            setLanguage(APP.currentLanguage);
+            setupEventListeners();
+            setupCollapsibles();
+
+            // Initialize sections
+            updateCityData('New York');
+            initWeather();
+            initChat();
+            loadNewQuotes();
+            refreshTelemetry();
+            renderComments();
+
+            // Show travel section by default
+            showSection('travel');
+
+            console.log('✅ Catalyst Ozwell App initialized successfully!');
+        }
+
+        // Start when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+    </script>
+</body>
+
+</html>
