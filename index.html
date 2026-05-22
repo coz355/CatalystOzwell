@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    curl http://localhost:1234/api/v1/chat \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "lmstudio-community/llama-3.2-3b-instruct",
+    "system_prompt": "You answer only in rhymes.",
+    "input": "What is your favorite color?"
+}'
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Catalyst Ozwell - Global Intelligence Hub with Location Selection">
