@@ -3,224 +3,233 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Catalyst Ozwell - Futuristic AI Intelligence Hub">
-    <title>Catalyst Ozwell | Global Intelligence Nexus</title>
+    <title>Catalyst Ozwell | Intelligence Nexus</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Space+Mono:wght@400;700&display=swap');
-        
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
         body { font-family: 'Inter', system-ui, sans-serif; background: #0a0a0f; color: #e0f2fe; }
         .neon-text { text-shadow: 0 0 20px #22d3ee, 0 0 40px #22d3ee; }
-        .glass { background: rgba(15, 23, 42, 0.92); backdrop-filter: blur(16px); border: 1px solid rgba(34, 211, 238, 0.25); }
-        
-        .breathing-neon {
-            animation: breathe 4s ease-in-out infinite;
-        }
-        
-        @keyframes breathe {
-            0%, 100% { text-shadow: 0 0 20px currentColor, 0 0 40px currentColor; }
-            50% { text-shadow: 0 0 35px currentColor, 0 0 70px currentColor, 0 0 90px currentColor; }
-        }
-        
-        .futuristic-bg {
-            position: fixed; inset: 0; z-index: -2;
-            background: radial-gradient(circle at 50% 30%, rgba(34, 211, 238, 0.15), transparent 70%),
-                        linear-gradient(45deg, #0f172a 0%, #1e2937 100%);
-        }
+        .glass { background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(20px); border: 1px solid rgba(34, 211, 238, 0.3); }
+        .chat-window { scrollbar-width: thin; scrollbar-color: #22d3ee #1e2937; }
+        .message { animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .breathing { animation: breathe 4s ease-in-out infinite; }
+        @keyframes breathe { 0%,100% { text-shadow: 0 0 20px currentColor; } 50% { text-shadow: 0 0 40px currentColor, 0 0 60px currentColor; } }
     </style>
 </head>
-<body class="min-h-screen theme-cyan overflow-x-hidden">
-    <div class="futuristic-bg"></div>
-    <div class="fixed inset-0 bg-[radial-gradient(#22d3ee_0.8px,transparent_1px)] [background-size:40px_40px] opacity-10 pointer-events-none"></div>
+<body class="min-h-screen overflow-x-hidden">
 
-    <div class="flex h-screen">
-        <!-- Sidebar -->
-        <aside class="w-72 glass border-r border-cyan-900/50 hidden lg:flex flex-col">
-            <div class="p-6 border-b border-cyan-900/30">
-                <div class="flex items-center gap-4">
-                    <div class="w-12 h-12 bg-gradient-to-br from-cyan-400 to-violet-500 rounded-2xl flex items-center justify-center text-2xl font-bold neon-text">CO</div>
-                    <div>
-                        <h1 class="text-2xl font-bold tracking-tighter neon-text">CATALYST OZWELL</h1>
-                        <p class="text-xs text-cyan-400">INTELLIGENCE NEXUS v0.9.1</p>
-                    </div>
+<div class="futuristic-bg fixed inset-0 z-[-2]"></div>
+
+<div class="flex h-screen">
+    <!-- Main Content -->
+    <main class="flex-1 flex flex-col">
+        <header class="glass border-b border-cyan-900/50 px-8 py-5 flex justify-between items-center">
+            <div class="flex items-center gap-4">
+                <div class="text-3xl">🌐</div>
+                <div>
+                    <h1 class="text-3xl font-bold neon-text">CATALYST OZWELL</h1>
+                    <p class="text-xs text-cyan-400">LOCAL LLM NEXUS • RTX 3070 POWERED</p>
                 </div>
             </div>
-        </aside>
+            <div id="location-time" class="font-mono text-sm breathing text-cyan-300"></div>
+        </header>
 
-        <!-- Main -->
-        <main class="flex-1 flex flex-col overflow-hidden">
-            <header class="glass border-b border-cyan-900/50 px-6 py-4 flex justify-between items-center">
-                <div class="flex items-center gap-4">
-                    <button onclick="toggleSidebar()" class="lg:hidden text-3xl">☰</button>
-                    <div id="location-display" class="font-mono text-sm breathing-neon flex items-center gap-3">
-                        <span id="city-country">📍 Detecting location...</span>
-                        <span id="local-time" class="text-cyan-300"></span>
-                    </div>
+        <!-- Welcome + Forecast -->
+        <section id="welcome" class="flex-1 overflow-auto p-8">
+            <div class="max-w-7xl mx-auto">
+                <!-- Disclaimers -->
+                <div class="glass rounded-3xl p-6 text-xs mb-8 border border-amber-400/30">
+                    <strong>⚠️ IMPORTANT:</strong> AI responses from local models (Mistral-7B). May contain errors. Weather data informational only.
                 </div>
-                
-                <div class="flex gap-3">
-                    <button onclick="toggleLanguageBar()" class="px-6 py-2 glass rounded-2xl hover:bg-cyan-900/50 flex items-center gap-2">🌍 Languages</button>
-                    <button onclick="toggleThemeBar()" class="px-6 py-2 glass rounded-2xl hover:bg-cyan-900/50 flex items-center gap-2">🎨 Themes</button>
-                    <button onclick="toggleMusic()" class="px-6 py-2 glass rounded-2xl hover:bg-cyan-900/50 flex items-center gap-2">🎵 Music</button>
+
+                <h1 class="text-5xl font-bold neon-text mb-8">Intelligence Nexus</h1>
+
+                <!-- 6-Day Forecast -->
+                <div class="mb-12">
+                    <h2 class="text-2xl font-bold mb-6">🌤️ 6-DAY FORECAST</h2>
+                    <div id="forecast-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4"></div>
                 </div>
-            </header>
 
-            <!-- Welcome + Telemetry -->
-            <section id="welcome" class="flex-1 overflow-auto p-8">
-                <div class="max-w-7xl mx-auto">
-                    <h1 class="text-6xl font-bold tracking-tighter neon-text mb-2">WELCOME TO THE NEXUS</h1>
-                    <p class="text-xl text-cyan-300">Real-time AI Intelligence • Local LLM Powered</p>
+                <!-- Agent Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="agent-grid"></div>
+            </div>
+        </section>
+    </main>
+</div>
 
-                    <!-- Disclaimers -->
-                    <div class="glass rounded-2xl p-5 text-xs text-amber-300 border border-amber-400/30 mb-8">
-                        <strong>⚠️ AI &amp; Forecast Disclaimers:</strong><br>
-                        • All AI responses are generated by local models (Mistral-7B / Gemma) and may contain inaccuracies.<br>
-                        • Weather, solar, and news data are for informational purposes only. Not for critical decisions.<br>
-                        • Always verify important information with official sources.
-                    </div>
+<!-- ==================== AGENT SUBPAGES ==================== -->
 
-                    <!-- Live Location + Time -->
-                    <div class="glass rounded-3xl p-8 mb-8">
-                        <div id="location-full" class="text-4xl font-bold breathing-neon text-center"></div>
-                    </div>
-
-                    <!-- Telemetry Grid -->
-                    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
-                        <div class="glass rounded-3xl p-6">
-                            <div class="text-cyan-400 text-sm">🌡️ WEATHER</div>
-                            <div id="temp" class="text-6xl font-bold">—°C</div>
-                        </div>
-                        <div class="glass rounded-3xl p-6">
-                            <div class="text-amber-400 text-sm">☀️ SOLAR</div>
-                            <div id="solar" class="text-5xl font-bold text-amber-400">LOW</div>
-                        </div>
-                        <div class="glass rounded-3xl p-6">
-                            <div class="text-emerald-400 text-sm">📰 NEWS</div>
-                            <div id="news" class="line-clamp-3 text-sm">Loading local updates...</div>
-                        </div>
-                        <div class="glass rounded-3xl p-6">
-                            <div class="text-violet-400 text-sm">💡 SUGGESTION</div>
-                            <div id="suggestion" class="italic text-sm">Explore RES opportunities in your region.</div>
-                        </div>
-                    </div>
-
-                    <!-- 3 Agent Cards -->
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="agent-grid"></div>
-                </div>
-            </section>
-        </main>
+<!-- Meister Ozwell Subpage -->
+<div id="meister-page" class="hidden fixed inset-0 bg-black/95 z-50 flex flex-col">
+    <div class="glass p-6 border-b flex justify-between">
+        <div class="flex items-center gap-4">
+            <span class="text-4xl">🎓</span>
+            <div>
+                <h2 class="text-2xl font-bold">Meister Ozwell</h2>
+                <p class="text-cyan-400 text-sm">High School Education Evaluator</p>
+            </div>
+        </div>
+        <button onclick="closeSubpage('meister-page')" class="text-4xl text-cyan-400 hover:text-white">×</button>
     </div>
-
-    <!-- Language Bar -->
-    <div id="language-bar" class="fixed bottom-20 right-8 hidden glass p-6 rounded-3xl w-80">
-        <h3 class="font-bold mb-4">🌍 Select Language (11 options)</h3>
-        <div class="grid grid-cols-2 gap-3 text-sm" id="lang-options"></div>
-    </div>
-
-    <!-- Music Player -->
-    <div id="music-player" class="fixed bottom-6 right-6 glass rounded-3xl p-5 hidden w-80">
-        <select id="track-select" class="w-full bg-slate-800 p-3 rounded-2xl mb-4">
-            <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">Soft Pulse Techno</option>
-            <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3">Neon Drift</option>
-            <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3">Ether Flow</option>
-        </select>
-        <div class="flex gap-3">
-            <button onclick="playMusic()" class="flex-1 py-3 bg-cyan-600 rounded-2xl">▶ Play</button>
-            <button onclick="pauseMusic()" class="flex-1 py-3 bg-slate-700 rounded-2xl">⏸ Pause</button>
+    <div class="flex-1 flex flex-col p-6">
+        <div id="meister-chat" class="chat-window flex-1 overflow-auto space-y-6 mb-6"></div>
+        
+        <div class="space-y-4">
+            <textarea id="meister-q" class="w-full p-4 glass rounded-2xl" rows="2" placeholder="Enter the question..."></textarea>
+            <textarea id="meister-a" class="w-full p-4 glass rounded-2xl" rows="3" placeholder="Your answer..."></textarea>
+            <button onclick="evaluateAnswer()" class="w-full py-4 bg-cyan-600 hover:bg-cyan-500 rounded-2xl font-bold">EVALUATE → Score + Verdict + Perfect Answer</button>
         </div>
     </div>
-    <audio id="bg-audio" loop></audio>
+</div>
 
-    <script>
-        let currentLang = 'en';
-        const languages = {
-            'en': '🇬🇧 English', 'tr': '🇹🇷 Türkçe', 'fr': '🇫🇷 Français',
-            'de': '🇩🇪 Deutsch', 'es': '🇪🇸 Español', 'it': '🇮🇹 Italiano',
-            'nl': '🇳🇱 Nederlands', 'uk': '🇺🇦 Українська', 'he': '🇮🇱 עברית',
-            'el': '🇬🇷 Ελληνικά', 'la': '🇻🇦 Latin'
-        };
+<!-- Av.Ozwell Subpage -->
+<div id="av-page" class="hidden fixed inset-0 bg-black/95 z-50 flex flex-col">
+    <div class="glass p-6 border-b flex justify-between">
+        <div class="flex items-center gap-4">
+            <span class="text-4xl">⚖️</span>
+            <div>
+                <h2 class="text-2xl font-bold">Av. Ozwell</h2>
+                <p class="text-pink-400 text-sm">Türk Hukuk Danışmanı • Lt. Colonel Style</p>
+            </div>
+        </div>
+        <button onclick="closeSubpage('av-page')" class="text-4xl text-pink-400 hover:text-white">×</button>
+    </div>
+    <div class="flex-1 flex flex-col p-6">
+        <div id="av-chat" class="chat-window flex-1 overflow-auto space-y-6 mb-6"></div>
+        <div class="flex gap-3">
+            <input id="av-input" class="flex-1 p-5 glass rounded-2xl" placeholder="Hukuki sorunuzu yazın...">
+            <button onclick="sendAvMessage()" class="px-10 bg-pink-600 hover:bg-pink-500 rounded-2xl font-bold">DANIŞ</button>
+        </div>
+    </div>
+</div>
 
-        function initLanguages() {
-            const container = document.getElementById('lang-options');
-            Object.keys(languages).forEach(code => {
-                const btn = document.createElement('button');
-                btn.className = "px-4 py-3 glass rounded-2xl text-left hover:bg-cyan-900/50";
-                btn.textContent = languages[code];
-                btn.onclick = () => { currentLang = code; alert(`Language set to: ${languages[code]}`); };
-                container.appendChild(btn);
-            });
-        }
+<!-- NeOzwell Subpage -->
+<div id="neo-page" class="hidden fixed inset-0 bg-black/95 z-50 flex flex-col">
+    <div class="glass p-6 border-b flex justify-between">
+        <div class="flex items-center gap-4">
+            <span class="text-4xl">🔧</span>
+            <div>
+                <h2 class="text-2xl font-bold">NeOzwell</h2>
+                <p class="text-emerald-400 text-sm">Engineering & Technical Analysis</p>
+            </div>
+        </div>
+        <button onclick="closeSubpage('neo-page')" class="text-4xl text-emerald-400 hover:text-white">×</button>
+    </div>
+    <div class="flex-1 flex flex-col p-6">
+        <div id="neo-chat" class="chat-window flex-1 overflow-auto space-y-6 mb-6"></div>
+        <div class="flex gap-3">
+            <input id="neo-input" class="flex-1 p-5 glass rounded-2xl" placeholder="Describe technical issue or repair...">
+            <button onclick="sendNeoMessage()" class="px-10 bg-emerald-600 hover:bg-emerald-500 rounded-2xl font-bold">ANALYZE</button>
+        </div>
+    </div>
+</div>
 
-        // Location with permission
-        function getAccurateLocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(async (pos) => {
-                    const { latitude, longitude } = pos.coords;
-                    try {
-                        const res = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`);
-                        const data = await res.json();
-                        const city = data.city || data.locality || "Unknown";
-                        const country = data.countryName || "";
-                        const time = new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
-                        
-                        document.getElementById('city-country').innerHTML = `📍 ${city}, ${country}`;
-                        document.getElementById('location-full').innerHTML = `${city}, ${country} <span class="text-cyan-300 text-2xl">• ${time}</span>`;
-                    } catch(e) {
-                        document.getElementById('city-country').textContent = "📍 Location access granted";
-                    }
-                }, () => {
-                    document.getElementById('city-country').textContent = "📍 Location access denied";
-                });
-            }
-        }
+<script>
+// ==================== MEMORY SYSTEM (12 exchanges) ====================
+const MAX_HISTORY = 12;
 
-        function toggleLanguageBar() { document.getElementById('language-bar').classList.toggle('hidden'); }
-        function toggleMusic() { document.getElementById('music-player').classList.toggle('hidden'); }
-        
-        function playMusic() {
-            const audio = document.getElementById('bg-audio');
-            audio.src = document.getElementById('track-select').value;
-            audio.play();
-        }
-        function pauseMusic() { document.getElementById('bg-audio').pause(); }
+function saveHistory(agent, history) {
+    localStorage.setItem(`chat_${agent}`, JSON.stringify(history.slice(-MAX_HISTORY)));
+}
 
-        // Agent Cards
-        function initAgents() {
-            const grid = document.getElementById('agent-grid');
-            grid.innerHTML = `
-                <div onclick="openMeister()" class="chatbot-card glass rounded-3xl p-8 cursor-pointer text-center hover:scale-105">
-                    <div class="text-7xl mb-4">🎓</div>
-                    <h3 class="text-3xl font-bold">Meister Ozwell</h3>
-                    <p class="text-cyan-300 mt-2">Education Scoring Assistant</p>
-                </div>
-                <div onclick="openAv()" class="chatbot-card glass rounded-3xl p-8 cursor-pointer text-center hover:scale-105">
-                    <div class="text-7xl mb-4">⚖️</div>
-                    <h3 class="text-3xl font-bold">Av. Ozwell</h3>
-                    <p class="text-cyan-300 mt-2">Turkish Legal Expert</p>
-                </div>
-                <div onclick="openNeo()" class="chatbot-card glass rounded-3xl p-8 cursor-pointer text-center hover:scale-105">
-                    <div class="text-7xl mb-4">🔧</div>
-                    <h3 class="text-3xl font-bold">NeOzwell</h3>
-                    <p class="text-cyan-300 mt-2">Engineering & Technical Analysis</p>
-                </div>
-            `;
-        }
+function loadHistory(agent) {
+    return JSON.parse(localStorage.getItem(`chat_${agent}`)) || [];
+}
 
-        // Modal placeholders
-        function openMeister() { alert("Meister Ozwell modal opened - Education scoring ready (connected to LM Studio)"); }
-        function openAv() { alert("Av.Ozwell - Turkish Legal Advisor (formal military-lawyer tone)"); }
-        function openNeo() { alert("NeOzwell - Engineering & Technical Assistant"); }
+// ==================== SUBPAGE CONTROLS ====================
+function openSubpage(pageId) {
+    document.getElementById(pageId).classList.remove('hidden');
+    renderChat(pageId.replace('-page', ''));
+}
 
-        window.onload = () => {
-            initLanguages();
-            initAgents();
-            getAccurateLocation();
-            setInterval(() => {
-                const timeEl = document.getElementById('local-time');
-                if (timeEl) timeEl.textContent = new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
-            }, 1000);
-        };
-    </script>
+function closeSubpage(pageId) {
+    document.getElementById(pageId).classList.add('hidden');
+}
+
+// ==================== CHAT RENDERING ====================
+function renderChat(agent) {
+    const container = document.getElementById(agent + '-chat');
+    const history = loadHistory(agent);
+    container.innerHTML = history.map(msg => `
+        <div class="message ${msg.role === 'user' ? 'text-right' : 'text-left'}">
+            <div class="inline-block max-w-[85%] p-4 rounded-3xl ${msg.role === 'user' ? 'bg-cyan-600' : 'glass'}">
+                ${msg.content}
+            </div>
+        </div>
+    `).join('');
+    container.scrollTop = container.scrollHeight;
+}
+
+// ==================== SEND MESSAGE WITH MEMORY ====================
+async function sendMessage(agent, inputId) {
+    const input = document.getElementById(inputId);
+    const text = input.value.trim();
+    if (!text) return;
+
+    let history = loadHistory(agent);
+    history.push({ role: 'user', content: text });
+    
+    // Add to UI
+    renderChat(agent);
+    input.value = '';
+
+    // Simulate AI response (connect to LM Studio later)
+    const response = await simulateAIResponse(agent, text);
+    history.push({ role: 'assistant', content: response });
+    
+    saveHistory(agent, history);
+    renderChat(agent);
+}
+
+// Simulated AI (replace with fetch to your Cloudflare Tunnel later)
+async function simulateAIResponse(agent, prompt) {
+    await new Promise(r => setTimeout(r, 800));
+    
+    if (agent === 'meister') return "Score: 87/100\nVerdict: Strong understanding with good examples.\nPerfect Answer: ...";
+    if (agent === 'av') return "Sayın Danışan, Türk Ticaret Kanunu md. 123'e göre... (Lt. Colonel üslubu)";
+    return "Technical Analysis: Root cause likely ... Recommended fix steps attached.";
+}
+
+// Specific handlers
+function evaluateAnswer() {
+    sendMessage('meister', 'meister-a');
+}
+
+function sendAvMessage() { sendMessage('av', 'av-input'); }
+function sendNeoMessage() { sendMessage('neo', 'neo-input'); }
+
+// ==================== INITIALIZATION ====================
+function initAgents() {
+    const grid = document.getElementById('agent-grid');
+    grid.innerHTML = `
+        <div onclick="openSubpage('meister-page')" class="glass rounded-3xl p-8 cursor-pointer hover:scale-105 transition-all text-center">
+            <div class="text-7xl mb-6">🎓</div>
+            <h3 class="text-3xl font-bold">Meister Ozwell</h3>
+            <p class="text-cyan-300">Education Evaluator • Memory Enabled</p>
+        </div>
+        <div onclick="openSubpage('av-page')" class="glass rounded-3xl p-8 cursor-pointer hover:scale-105 transition-all text-center">
+            <div class="text-7xl mb-6">⚖️</div>
+            <h3 class="text-3xl font-bold">Av. Ozwell</h3>
+            <p class="text-pink-300">Turkish Legal Advisor • 12-msg Memory</p>
+        </div>
+        <div onclick="openSubpage('neo-page')" class="glass rounded-3xl p-8 cursor-pointer hover:scale-105 transition-all text-center">
+            <div class="text-7xl mb-6">🔧</div>
+            <h3 class="text-3xl font-bold">NeOzwell</h3>
+            <p class="text-emerald-300">Engineering Technical Analysis</p>
+        </div>
+    `;
+}
+
+window.onload = () => {
+    initAgents();
+    // Precise time with ms
+    setInterval(() => {
+        const t = new Date();
+        const time = t.toLocaleTimeString('tr-TR', {hour:'2-digit', minute:'2-digit', second:'2-digit'}) + '.' + String(t.getMilliseconds()).padStart(3,'0');
+        document.getElementById('location-time').textContent = time;
+    }, 50);
+};
+</script>
 </body>
 </html>
