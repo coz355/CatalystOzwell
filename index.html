@@ -3,203 +3,527 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Catalyst Ozwell - AI Platform with Education, Legal, and Engineering Assistants">
+    <meta name="keywords" content="AI, chatbots, education, legal, engineering, telemetry, weather, travel">
+    <meta name="author" content="Catalyst Ozwell">
+    <meta property="og:title" content="Catalyst Ozwell - AI Platform">
+    <meta property="og:description" content="Specialized AI assistants for education, Turkish law, and engineering">
+    <meta name="theme-color" content="#0891b2">
     <title>Catalyst Ozwell - AI Platform</title>
+
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts (Modern + Art Deco) -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Playfair+Display:wght@400;700&family=Bebas+Neue&family=Kabel:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Custom Styles & Scripts -->
     <link rel="stylesheet" href="styles.css">
     <script src="config.js"></script>
+    <script src="app.js" defer></script>
 </head>
 <body class="bg-slate-900 text-white">
-    <header class="sticky top-0 z-50 p-6 glass">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 p-6 bg-slate-900/80 backdrop-blur-sm border-b border-slate-700">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <!-- Logo -->
             <div class="flex items-center gap-3">
-                <div class="w-10 h-10 bg-gradient-to-br from-cyan-400 to-violet-600 rounded-lg flex items-center justify-center font-bold">CO</div>
-                <span class="text-xl font-bold theme-text">Catalyst Ozwell</span>
+                <div class="w-10 h-10 bg-gradient-to-br from-cyan-400 to-purple-600 rounded-lg flex items-center justify-center font-bold text-lg">CO</div>
+                <h1 class="text-xl font-bold theme-text">Catalyst Ozwell</h1>
             </div>
+
+            <!-- Controls -->
             <div class="flex items-center gap-4">
-                <select id="locationSelect" class="px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg">
+                <!-- Location Selector -->
+                <select id="locationSelect" class="px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-sm focus:outline-none focus:border-cyan-500">
                     <option value="New York">🗽 New York</option>
                     <option value="Istanbul">🕌 Istanbul</option>
                     <option value="London">🇬🇧 London</option>
                     <option value="Tokyo">🗼 Tokyo</option>
+                    <option value="Paris">🗼 Paris</option>
+                    <option value="Berlin">🏛️ Berlin</option>
                 </select>
-                <select id="languageSelect" class="px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg">
+
+                <!-- Language Selector -->
+                <select id="languageSelect" class="px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-sm focus:outline-none focus:border-cyan-500">
                     <option value="en">English</option>
                     <option value="tr">Türkçe</option>
                 </select>
-                <span id="currentTemp" class="text-sm font-semibold">--°C</span>
+
+                <!-- Current Temperature -->
+                <div id="currentTemp" class="text-sm font-semibold hidden md:block">--°C</div>
             </div>
         </div>
     </header>
 
+    <!-- Main Content -->
     <main class="max-w-7xl mx-auto p-6">
-        <div class="tab-nav">
-            <button class="tab-btn active" data-tab="ai-chat">🤖 AI Chatbots</button>
-            <button class="tab-btn" data-tab="info">ℹ️ Information</button>
-            <button class="tab-btn" data-tab="telemetry">☀️ Telemetry</button>
+        <!-- Primary Tab Navigation -->
+        <div class="flex gap-2 mb-6 bg-slate-800/50 p-1 rounded-xl border border-slate-700">
+            <button class="tab-btn active px-6 py-3 rounded-lg transition-all" data-tab="ai-chat">
+                <span class="mr-2">🤖</span>
+                <span class="theme-text" data-tr-en="AI Chatbots" data-tr-tr="AI Sohbet Robotları">AI Chatbots</span>
+            </button>
+            <button class="tab-btn px-6 py-3 rounded-lg transition-all hover:bg-slate-700/50" data-tab="info">
+                <span class="mr-2">ℹ️</span>
+                <span class="theme-text" data-tr-en="Information" data-tr-tr="Bilgi">Information</span>
+            </button>
+            <button class="tab-btn px-6 py-3 rounded-lg transition-all hover:bg-slate-700/50" data-tab="telemetry">
+                <span class="mr-2">☀️</span>
+                <span class="theme-text" data-tr-en="Telemetry" data-tr-tr="Telemetri">Telemetry</span>
+            </button>
         </div>
 
+        <!-- AI Chatbots Tab -->
         <div id="ai-chat" class="tab-content active">
-            <h2 class="text-3xl font-bold mb-6 theme-text">AI Chatbot Agents</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="agent-card" onclick="openAgent('meister')">
-                    <h3 class="text-xl font-bold">🎓 Meister Ozwell</h3>
-                    <p class="text-sm text-gray-400 mt-2">Education Evaluator</p>
-                </div>
-                <div class="agent-card" onclick="openAgent('av')">
-                    <h3 class="text-xl font-bold">⚖️ Av.Ozwell</h3>
-                    <p class="text-sm text-gray-400 mt-2">Turkish Legal Advisor</p>
-                </div>
-                <div class="agent-card" onclick="openAgent('neo')">
-                    <h3 class="text-xl font-bold">🔧 NeOzwell</h3>
-                    <p class="text-sm text-gray-400 mt-2">Engineering Assistant</p>
-                </div>
+            <div class="mb-6">
+                <h2 class="text-3xl font-bold theme-text" data-tr-en="AI Chatbot Agents" data-tr-tr="AI Sohbet Robot Ajanları">AI Chatbot Agents</h2>
+                <p class="text-gray-400 mt-2" data-tr-en="Specialized agents for education, Turkish law, and engineering"
+                   data-tr-tr="Eğitim, Türk hukuku ve mühendislik için özel ajanlar">Specialized agents for education, Turkish law, and engineering</p>
             </div>
-        </div>
 
-        <div id="info" class="tab-content">
-            <div class="tab-nav mb-6">
-                <button class="tab-btn active" data-info-tab="travel">✈️ Travel</button>
-                <button class="tab-btn" data-info-tab="weather">🌤️ Weather</button>
-                <button class="tab-btn" data-info-tab="quotes">💡 Quotes</button>
-            </div>
-            <div id="info-travel" class="info-tab-content active">
-                <div class="glass rounded-xl p-6 mb-6">
-                    <h3 class="text-xl font-bold mb-4 theme-text">Current Location: <span id="locationCity">New York</span></h3>
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        <div><p class="text-sm text-gray-400">Country</p><p class="font-bold" id="locationCountry">USA</p></div>
-                        <div><p class="text-sm text-gray-400">Population</p><p class="font-bold" id="locationPopulation">8.3M</p></div>
-                        <div><p class="text-sm text-gray-400">Timezone</p><p class="font-bold" id="timezone">EST</p></div>
-                        <div><p class="text-sm text-gray-400">Temperature</p><p class="font-bold" id="currentWeatherTemp">--°C</p></div>
+            <!-- Agent Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Meister Ozwell: Education Evaluator -->
+                <div class="agent-card modern-card" onclick="openAgentModal('meister')">
+                    <div class="agent-header">
+                        <h3 class="text-xl font-bold">🎓 Meister Ozwell</h3>
+                        <p class="text-sm text-gray-400 mt-1" data-tr-en="Education Evaluator" data-tr-tr="Eğitim Değerlendiricisi">Education Evaluator</p>
+                    </div>
+                    <div class="agent-body">
+                        <p class="text-sm text-gray-300 mb-4" data-tr-en="Input a question and your answer to receive a score out of 100, a detailed verdict, and a perfect answer."
+                           data-tr-tr="Soru ve cevap girin: 100 üzerinden puan, detaylı karar ve mükemmel cevap alın.">Input a question and your answer to receive a score out of 100, a detailed verdict, and a perfect answer.</p>
+                        <div class="flex gap-2 flex-wrap">
+                            <span class="badge cyan" data-tr-en="Scoring" data-tr-tr="Puanlama">Scoring</span>
+                            <span class="badge cyan" data-tr-en="Feedback" data-tr-tr="Geri Bildirim">Feedback</span>
+                            <span class="badge cyan" data-tr-en="Analysis" data-tr-tr="Analiz">Analysis</span>
+                        </div>
                     </div>
                 </div>
+
+                <!-- Av.Ozwell: Turkish Legal Advisor -->
+                <div class="agent-card deco-card" onclick="openAgentModal('av')">
+                    <div class="agent-header">
+                        <h3 class="text-xl font-bold">⚖️ Av.Ozwell</h3>
+                        <p class="text-sm text-gray-400 mt-1" data-tr-en="Turkish Legal Advisor" data-tr-tr="Türk Hukuk Danışmanı">Turkish Legal Advisor</p>
+                    </div>
+                    <div class="agent-body">
+                        <p class="text-sm text-gray-300 mb-4" data-tr-en="Professional Turkish legal assistant specializing in RES, expropriation, CED reports, and commercial law."
+                           data-tr-tr="RES, kamulaştırma, CED raporları ve ticaret hukuku konularında profesyonel Türk hukuk danışmanı.">Professional Turkish legal assistant specializing in RES, expropriation, CED reports, and commercial law.</p>
+                        <div class="flex gap-2 flex-wrap">
+                            <span class="badge pink" data-tr-en="Professional" data-tr-tr="Profesyonel">Professional</span>
+                            <span class="badge pink" data-tr-en="Turkish" data-tr-tr="Türkçe">Turkish</span>
+                            <span class="badge pink" data-tr-en="Legal" data-tr-tr="Hukuki">Legal</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NeOzwell: Engineering Assistant -->
+                <div class="agent-card modern-card" onclick="openAgentModal('neo')">
+                    <div class="agent-header">
+                        <h3 class="text-xl font-bold">🔧 NeOzwell</h3>
+                        <p class="text-sm text-gray-400 mt-1" data-tr-en="Engineering Assistant" data-tr-tr="Mühendislik Asistanı">Engineering Assistant</p>
+                    </div>
+                    <div class="agent-body">
+                        <p class="text-sm text-gray-300 mb-4" data-tr-en="Technical analysis, forecasts, and issue resolution for engineering problems."
+                           data-tr-tr="Mühendislik problemleri için teknik analiz, tahminler ve çözüm önerileri.">Technical analysis, forecasts, and issue resolution for engineering problems.</p>
+                        <div class="flex gap-2 flex-wrap">
+                            <span class="badge emerald" data-tr-en="Technical" data-tr-tr="Teknik">Technical</span>
+                            <span class="badge emerald" data-tr-en="Analysis" data-tr-tr="Analiz">Analysis</span>
+                            <span class="badge emerald" data-tr-en="Repair" data-tr-tr="Onarım">Repair</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Information Tab -->
+        <div id="info" class="tab-content">
+            <div class="mb-6">
+                <h2 class="text-3xl font-bold theme-text" data-tr-en="Information Hub" data-tr-tr="Bilgi Merkezi">Information Hub</h2>
+                <p class="text-gray-400 mt-2" data-tr-en="Explore travel, weather, and wisdom"
+                   data-tr-tr="Seyahat, hava durumu ve bilgelik keşfedin">Explore travel, weather, and wisdom</p>
+            </div>
+
+            <!-- Secondary Tab Navigation -->
+            <div class="flex gap-2 mb-6 bg-slate-800/50 p-1 rounded-xl border border-slate-700">
+                <button class="tab-btn active px-4 py-2 rounded-lg transition-all" data-info-tab="travel">
+                    <span class="mr-2">✈️</span>
+                    <span class="theme-text" data-tr-en="Travel" data-tr-tr="Seyahat">Travel</span>
+                </button>
+                <button class="tab-btn px-4 py-2 rounded-lg transition-all hover:bg-slate-700/50" data-info-tab="weather">
+                    <span class="mr-2">🌤️</span>
+                    <span class="theme-text" data-tr-en="Weather" data-tr-tr="Hava Durumu">Weather</span>
+                </button>
+                <button class="tab-btn px-4 py-2 rounded-lg transition-all hover:bg-slate-700/50" data-info-tab="quotes">
+                    <span class="mr-2">💡</span>
+                    <span class="theme-text" data-tr-en="Quotes" data-tr-tr="Alıntılar">Quotes</span>
+                </button>
+            </div>
+
+            <!-- Travel Section -->
+            <div id="info-travel" class="info-tab-content active">
+                <div class="bg-slate-800/50 rounded-xl p-6 mb-6 border border-slate-700">
+                    <h3 class="text-xl font-bold mb-4 theme-text" data-tr-en="Current Location" data-tr-tr="Mevcut Konum">Current Location</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div>
+                            <p class="text-sm text-gray-400" data-tr-en="City" data-tr-tr="Şehir">City</p>
+                            <p class="font-bold text-lg" id="locationCity">New York</p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-400" data-tr-en="Country" data-tr-tr="Ülke">Country</p>
+                            <p class="font-bold text-lg" id="locationCountry">USA</p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-400" data-tr-en="Population" data-tr-tr="Nüfus">Population</p>
+                            <p class="font-bold text-lg" id="locationPopulation">8.3M</p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-400" data-tr-en="Timezone" data-tr-tr="Saat Dilimi">Timezone</p>
+                            <p class="font-bold text-lg" id="timezone">EST</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Museums & Restaurants -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="glass rounded-xl p-6">
-                        <h4 class="text-lg font-bold mb-4 theme-text">🏛️ Museums</h4>
+                    <div class="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+                        <h4 class="text-lg font-bold mb-4 theme-text" data-tr-en="🏛️ Museums" data-tr-tr="🏛️ Müzeler">🏛️ Museums</h4>
                         <div id="museumsList" class="space-y-3"></div>
                     </div>
-                    <div class="glass rounded-xl p-6">
-                        <h4 class="text-lg font-bold mb-4 theme-text">🍽️ Restaurants</h4>
+                    <div class="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+                        <h4 class="text-lg font-bold mb-4 theme-text" data-tr-en="🍽️ Restaurants" data-tr-tr="🍽️ Restoranlar">🍽️ Restaurants</h4>
                         <div id="restaurantsList" class="space-y-3"></div>
                     </div>
                 </div>
+
+                <!-- Attractions -->
+                <div class="mt-6 bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+                    <h4 class="text-lg font-bold mb-4 theme-text" data-tr-en="🌟 Top Attractions" data-tr-tr="🌟 En Popüler Mekanlar">🌟 Top Attractions</h4>
+                    <div id="attractionsList" class="space-y-3"></div>
+                </div>
             </div>
+
+            <!-- Weather Section -->
             <div id="info-weather" class="info-tab-content hidden">
-                <h3 class="text-2xl font-bold mb-6 theme-text">5-Day Weather Forecast</h3>
-                <div class="glass rounded-xl p-6 mb-6">
+                <div class="mb-6">
+                    <h3 class="text-2xl font-bold theme-text" data-tr-en="5-Day Weather Forecast" data-tr-tr="5 Günlük Hava Tahmini">5-Day Weather Forecast</h3>
+                    <p class="text-gray-400 mt-2" data-tr-en="Real-time weather data for selected location"
+                       data-tr-tr="Seçilen konum için gerçek zamanlı hava durumu verileri">Real-time weather data for selected location</p>
+                </div>
+
+                <!-- Current Weather -->
+                <div class="bg-slate-800/50 rounded-xl p-6 mb-6 border border-slate-700">
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div class="text-center">
-                            <p class="text-gray-400 mb-2">Current</p>
+                            <p class="text-gray-400 mb-2" data-tr-en="Current" data-tr-tr="Mevcut">Current</p>
                             <p class="text-4xl font-bold" id="weatherTemp">--°C</p>
-                            <p class="text-gray-400" id="weatherCondition">--</p>
+                            <p class="text-gray-400 mt-2" id="weatherCondition" data-tr-en="Loading..." data-tr-tr="Yükleniyor...">Loading...</p>
                         </div>
                         <div class="text-center">
-                            <p class="text-gray-400 mb-2">Humidity</p>
+                            <p class="text-gray-400 mb-2" data-tr-en="Humidity" data-tr-tr="Nem">Humidity</p>
                             <p class="text-4xl font-bold" id="weatherHumidity">--%</p>
+                            <p class="text-gray-400 mt-2">💧</p>
                         </div>
                         <div class="text-center">
-                            <p class="text-gray-400 mb-2">Wind</p>
+                            <p class="text-gray-400 mb-2" data-tr-en="Wind" data-tr-tr="Rüzgar">Wind</p>
                             <p class="text-4xl font-bold" id="weatherWind">-- m/s</p>
+                            <p class="text-gray-400 mt-2">💨</p>
                         </div>
                     </div>
                 </div>
+
+                <!-- Forecast -->
                 <div class="grid grid-cols-2 md:grid-cols-5 gap-4" id="forecastList"></div>
             </div>
+
+            <!-- Quotes Section -->
             <div id="info-quotes" class="info-tab-content hidden">
-                <h3 class="text-2xl font-bold mb-6 theme-text">Wisdom & Strategy</h3>
+                <div class="mb-6">
+                    <h3 class="text-2xl font-bold theme-text" data-tr-en="Wisdom & Strategy" data-tr-tr="Bilgelik ve Strateji">Wisdom & Strategy</h3>
+                    <p class="text-gray-400 mt-2" data-tr-en="Inspirational quotes from history's greatest minds"
+                       data-tr-tr="Tarihin en büyük zihinlerinden ilham verici alıntılar">Inspirational quotes from history's greatest minds</p>
+                </div>
+
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="glass rounded-xl p-6">
-                        <p class="italic mb-4" id="bibleQuote">"For the Lord is my light..."</p>
-                        <p class="text-sm text-gray-400">📖 The Holy Bible - Psalm 27:1</p>
+                    <div class="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+                        <p class="italic mb-4" id="bibleQuote">"For the Lord is my light and my salvation; whom shall I fear? The Lord is the stronghold of my life; of whom shall I be afraid?"</p>
+                        <div class="border-t border-slate-700 pt-4">
+                            <p class="text-sm text-gray-400">📖 The Holy Bible</p>
+                            <p class="text-xs text-gray-500">Psalm 27:1</p>
+                        </div>
                     </div>
-                    <div class="glass rounded-xl p-6">
-                        <p class="italic mb-4" id="sunTzuQuote">"The supreme art of war..."</p>
-                        <p class="text-sm text-gray-400">⚔️ Sun Tzu - The Art of War</p>
+                    <div class="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+                        <p class="italic mb-4" id="sunTzuQuote">"The supreme art of war is to subdue the enemy without fighting. The greatest victory is to defeat the enemy without ever fighting."</p>
+                        <div class="border-t border-slate-700 pt-4">
+                            <p class="text-sm text-gray-400">⚔️ Sun Tzu</p>
+                            <p class="text-xs text-gray-500">The Art of War, Chapter III</p>
+                        </div>
                     </div>
-                    <div class="glass rounded-xl p-6">
-                        <p class="italic mb-4" id="romanQuote">"It is not the strength..."</p>
-                        <p class="text-sm text-gray-400">🏛️ Marcus Aurelius</p>
+                    <div class="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+                        <p class="italic mb-4" id="romanQuote">"It is not the strength of the body that counts, but the strength of the spirit. The will to win is everything."</p>
+                        <div class="border-t border-slate-700 pt-4">
+                            <p class="text-sm text-gray-400">🏛️ Marcus Aurelius</p>
+                            <p class="text-xs text-gray-500">Meditations</p>
+                        </div>
                     </div>
+                </div>
+
+                <div class="text-center mt-8">
+                    <button id="newQuoteBtn" class="px-8 py-3 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-lg font-bold text-lg hover:from-cyan-400 hover:to-purple-500 transition-all">
+                        ✨ <span data-tr-en="Generate New Quotes" data-tr-tr="Yeni Alıntılar Oluştur">Generate New Quotes</span>
+                    </button>
                 </div>
             </div>
         </div>
 
-        <div id="telemetry" class="tab-content">
-            <h2 class="text-3xl font-bold mb-6 theme-text">Solar Telemetry</h2>
-            <div class="glass rounded-xl p-6">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="bg-slate-800/50 rounded-lg p-4">
-                        <p class="text-sm text-gray-400">Solar Wind Speed</p>
+        <!-- Telemetry Tab -->
+        <div id="telemetry" class="tab-content hidden">
+            <div class="mb-6">
+                <h2 class="text-3xl font-bold theme-text" data-tr-en="Solar Telemetry" data-tr-tr="Güneş Telemetrisi">Solar Telemetry</h2>
+                <p class="text-gray-400 mt-2" data-tr-en="Real-time solar activity monitoring"
+                   data-tr-tr="Gerçek zamanlı güneş aktivitesi izleme">Real-time solar activity monitoring</p>
+            </div>
+
+            <div class="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+                    <!-- Solar Wind Speed -->
+                    <div class="bg-slate-700/50 rounded-lg p-4 border border-slate-600">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-sm font-semibold text-gray-300" data-tr-en="Solar Wind Speed" data-tr-tr="Güneş Rüzgarı Hızı">Solar Wind Speed</span>
+                            <span class="status-indicator bg-emerald-400"></span>
+                        </div>
                         <p class="text-2xl font-bold text-emerald-400" id="solarWindSpeed">-- km/s</p>
+                        <p class="text-xs text-gray-400 mt-2" data-tr-en="Normal: 300-400 km/s" data-tr-tr="Normal: 300-400 km/s">Normal: 300-400 km/s</p>
                     </div>
-                    <div class="bg-slate-800/50 rounded-lg p-4">
-                        <p class="text-sm text-gray-400">CME Activity</p>
+
+                    <!-- CME Activity -->
+                    <div class="bg-slate-700/50 rounded-lg p-4 border border-slate-600">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-sm font-semibold text-gray-300" data-tr-en="CME Activity" data-tr-tr="CME Aktivitesi">CME Activity</span>
+                            <span class="status-indicator bg-amber-400"></span>
+                        </div>
                         <p class="text-2xl font-bold text-amber-400" id="cmeActivity">--</p>
+                        <p class="text-xs text-gray-400 mt-2" data-tr-en="Coronal Mass Ejections" data-tr-tr="Koronal Kütle Atımları">Coronal Mass Ejections</p>
                     </div>
-                    <div class="bg-slate-800/50 rounded-lg p-4">
-                        <p class="text-sm text-gray-400">X-Ray Flux</p>
-                        <p class="text-2xl font-bold text-emerald-400" id="xrayFlux">--</p>
+
+                    <!-- X-Ray Flux -->
+                    <div class="bg-slate-700/50 rounded-lg p-4 border border-slate-600">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-sm font-semibold text-gray-300" data-tr-en="X-Ray Flux" data-tr-tr="X-Işını Akısı">X-Ray Flux</span>
+                            <span class="status-indicator bg-emerald-400"></span>
+                        </div>
+                        <p class="text-2xl font-bold text-emerald-400" id="xrayFlux">-- W/m²</p>
+                        <p class="text-xs text-gray-400 mt-2">0.1-0.8 nm</p>
+                    </div>
+
+                    <!-- Kp Index -->
+                    <div class="bg-slate-700/50 rounded-lg p-4 border border-slate-600">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-sm font-semibold text-gray-300">Kp Index</span>
+                            <span class="status-indicator bg-emerald-400"></span>
+                        </div>
+                        <p class="text-2xl font-bold text-emerald-400" id="kpIndex">--</p>
+                        <p class="text-xs text-gray-400 mt-2" data-tr-en="Scale 0-9" data-tr-tr="0-9 Ölçeği">Scale 0-9</p>
+                    </div>
+
+                    <!-- Solar Flux -->
+                    <div class="bg-slate-700/50 rounded-lg p-4 border border-slate-600">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-sm font-semibold text-gray-300" data-tr-en="Solar Flux" data-tr-tr="Güneş Akısı">Solar Flux</span>
+                            <span class="status-indicator bg-amber-400"></span>
+                        </div>
+                        <p class="text-2xl font-bold text-amber-400" id="solarFlux">-- SFU</p>
+                        <p class="text-xs text-gray-400 mt-2">10.7cm</p>
+                    </div>
+
+                    <!-- Radiation Risk -->
+                    <div class="bg-slate-700/50 rounded-lg p-4 border border-slate-600">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-sm font-semibold text-gray-300" data-tr-en="Radiation Risk" data-tr-tr="Radyasyon Riski">Radiation Risk</span>
+                            <span class="status-indicator bg-emerald-400"></span>
+                        </div>
+                        <p class="text-2xl font-bold text-emerald-400" id="radiationRisk">--</p>
+                        <p class="text-xs text-gray-400 mt-2" data-tr-en="Astronaut Safety" data-tr-tr="Astronot Güvenliği">Astronaut Safety</p>
                     </div>
                 </div>
-                <button id="refreshTelemetry" class="mt-6 btn-primary">🔄 Refresh</button>
+
+                <div class="flex gap-3 flex-wrap">
+                    <button id="refreshTelemetry" class="px-6 py-3 bg-violet-600 hover:bg-violet-500 rounded-lg font-semibold transition-all">
+                        🔄 <span data-tr-en="Refresh Data" data-tr-tr="Verileri Yenile">Refresh Data</span>
+                    </button>
+                    <button class="px-6 py-3 bg-slate-700 hover:bg-slate-600 rounded-lg font-semibold transition-all">
+                        ℹ️ <span data-tr-en="Learn More" data-tr-tr="Daha Fazla Bilgi">Learn More</span>
+                    </button>
+                </div>
             </div>
         </div>
     </main>
 
     <!-- Agent Modals -->
-    <div id="meisterModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>🎓 Meister Ozwell</h2>
-                <button onclick="closeModal('meister')">×</button>
+    <!-- Meister Ozwell Modal -->
+    <div id="meisterModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-slate-800 rounded-xl w-full max-w-2xl max-h-[85vh] overflow-hidden border border-slate-700">
+            <div class="p-6 border-b border-slate-700 flex justify-between items-center">
+                <h2 class="text-xl font-bold theme-text">🎓 Meister Ozwell - <span data-tr-en="Education Evaluator" data-tr-tr="Eğitim Değerlendiricisi">Education Evaluator</span></h2>
+                <button onclick="closeAgentModal('meister')" class="text-gray-400 hover:text-white text-2xl">×</button>
             </div>
-            <div class="chat-container">
-                <div class="chat-messages" id="meisterMessages">
-                    <div class="message bot">Enter a question and your answer to receive a score, verdict, and perfect response.</div>
+            <div class="p-6 h-[65vh] overflow-y-auto">
+                <div id="meisterMessages" class="space-y-4 mb-4">
+                    <div class="bg-slate-700/50 p-4 rounded-lg border border-slate-600">
+                        <p data-tr-en="Welcome to Meister Ozwell, your education evaluator."
+                           data-tr-tr="Meister Ozwell'e hoş geldiniz, eğitim değerlendiriciniz.">Welcome to Meister Ozwell, your education evaluator.</p>
+                        <p class="mt-2" data-tr-en="Enter a question and your answer to receive:"
+                           data-tr-tr="Soru ve cevap girin, alacaksınız:">Enter a question and your answer to receive:</p>
+                        <ul class="list-disc list-inside mt-2 text-sm">
+                            <li data-tr-en="Score out of 100" data-tr-tr="100 üzerinden puan">Score out of 100</li>
+                            <li data-tr-en="Detailed verdict with reasoning" data-tr-tr="Gerekçeli detaylı karar">Detailed verdict with reasoning</li>
+                            <li data-tr-en="Perfect answer example" data-tr-tr="Mükemmel cevap örneği">Perfect answer example</li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="input-area">
-                    <textarea id="meisterQuestion" placeholder="Question..."></textarea>
-                    <textarea id="meisterAnswer" placeholder="Answer..."></textarea>
-                    <button onclick="sendMeister()" class="btn-primary">Evaluate</button>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-semibold mb-2 text-gray-300" data-tr-en="Question" data-tr-tr="Soru">Question</label>
+                        <textarea id="meisterQuestion" placeholder="Enter the question..." class="w-full p-3 bg-slate-700 border border-slate-600 rounded-lg focus:outline-none focus:border-cyan-500" rows="3"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2 text-gray-300" data-tr-en="Your Answer" data-tr-tr="Cevabınız">Your Answer</label>
+                        <textarea id="meisterAnswer" placeholder="Enter your answer..." class="w-full p-3 bg-slate-700 border border-slate-600 rounded-lg focus:outline-none focus:border-cyan-500" rows="4"></textarea>
+                    </div>
+                    <button onclick="sendMeister()" id="meisterSubmitBtn" class="w-full py-3 bg-cyan-600 hover:bg-cyan-500 rounded-lg font-bold transition-all flex items-center justify-center gap-2">
+                        <span data-tr-en="Evaluate" data-tr-tr="Değerlendir">Evaluate</span>
+                        <div id="meisterSpinner" class="hidden w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 
-    <div id="avModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>⚖️ Av.Ozwell</h2>
-                <button onclick="closeModal('av')">×</button>
+    <!-- Av.Ozwell Modal -->
+    <div id="avModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-slate-800 rounded-xl w-full max-w-2xl max-h-[85vh] overflow-hidden border border-slate-700">
+            <div class="p-6 border-b border-slate-700 flex justify-between items-center">
+                <h2 class="text-xl font-bold theme-text" style="color: #ec4899;">⚖️ Av.Ozwell - <span data-tr-en="Turkish Legal Advisor" data-tr-tr="Türk Hukuk Danışmanı">Turkish Legal Advisor</span></h2>
+                <button onclick="closeAgentModal('av')" class="text-gray-400 hover:text-white text-2xl">×</button>
             </div>
-            <div class="chat-container">
-                <div class="chat-messages" id="avMessages">
-                    <div class="message bot">RES, kamulaştırma, CED raporları ve ticaret hukuku konularında yardımcı oluyorum.</div>
+            <div class="p-6 h-[65vh] overflow-y-auto">
+                <div id="avMessages" class="space-y-4 mb-4">
+                    <div class="bg-slate-700/50 p-4 rounded-lg border border-slate-600">
+                        <p data-tr-en="Hello. I am your Turkish legal advisor specializing in:"
+                           data-tr-tr="Merhaba. RES, kamulaştırma, CED raporları ve ticaret hukuku konularında uzman Türk hukuk danışmanınızım.">Hello. I am your Turkish legal advisor specializing in:</p>
+                        <ul class="list-disc list-inside mt-2 text-sm">
+                            <li>RES (Yenilenebilir Enerji Kaynakları)</li>
+                            <li>Kamulaştırma (Expropriation)</li>
+                            <li>CED Raporları (Environmental Impact Reports)</li>
+                            <li>Ticaret Hukuku (Commercial Law)</li>
+                        </ul>
+                        <p class="mt-2" data-tr-en="How can I assist you today?"
+                           data-tr-tr="Bugün size nasıl yardımcı olabilirim?">How can I assist you today?</p>
+                    </div>
                 </div>
-                <div class="input-area">
-                    <input type="text" id="avInput" placeholder="Sorunuzu yazın...">
-                    <button onclick="sendAv()" class="btn-primary">Gönder</button>
+                <div class="flex gap-2">
+                    <input type="text" id="avInput" placeholder="Hukuk sorunuzu yazın..." class="flex-1 p-3 bg-slate-700 border border-slate-600 rounded-lg focus:outline-none focus:border-pink-500">
+                    <button onclick="sendAv()" id="avSubmitBtn" class="px-6 py-3 bg-pink-600 hover:bg-pink-500 rounded-lg font-bold transition-all flex items-center gap-2">
+                        <span id="avSendText" data-tr-en="Send" data-tr-tr="Gönder">Send</span>
+                        <div id="avSpinner" class="hidden w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 
-    <div id="neoModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>🔧 NeOzwell</h2>
-                <button onclick="closeModal('neo')">×</button>
+    <!-- NeOzwell Modal -->
+    <div id="neoModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-slate-800 rounded-xl w-full max-w-2xl max-h-[85vh] overflow-hidden border border-slate-700">
+            <div class="p-6 border-b border-slate-700 flex justify-between items-center">
+                <h2 class="text-xl font-bold theme-text" style="color: #10b981;">🔧 NeOzwell - <span data-tr-en="Engineering Assistant" data-tr-tr="Mühendislik Asistanı">Engineering Assistant</span></h2>
+                <button onclick="closeAgentModal('neo')" class="text-gray-400 hover:text-white text-2xl">×</button>
             </div>
-            <div class="chat-container">
-                <div class="chat-messages" id="neoMessages">
-                    <div class="message bot">Technical analysis, forecasts, and repair assistance.</div>
+            <div class="p-6 h-[65vh] overflow-y-auto">
+                <div id="neoMessages" class="space-y-4 mb-4">
+                    <div class="bg-slate-700/50 p-4 rounded-lg border border-slate-600">
+                        <p data-tr-en="Engineering Assistant online."
+                           data-tr-tr="Mühendislik Asistanı çevrimiçi.">Engineering Assistant online.</p>
+                        <p class="mt-2" data-tr-en="I can help with:"
+                           data-tr-tr="Şunlarda yardımcı olabilirim:">I can help with:</p>
+                        <ul class="list-disc list-inside mt-2 text-sm">
+                            <li data-tr-en="Car and motorcycle repair guidance" data-tr-tr="Araba ve motosiklet tamir rehberliği">Car and motorcycle repair guidance</li>
+                            <li data-tr-en="Technical analysis of engineering problems" data-tr-tr="Mühendislik problemlerinin teknik analizi">Technical analysis of engineering problems</li>
+                            <li data-tr-en="Forecasts and predictions" data-tr-tr="Tahminler ve öngörüler">Forecasts and predictions</li>
+                            <li data-tr-en="Issue resolution strategies" data-tr-tr="Sorun çözme stratejileri">Issue resolution strategies</li>
+                        </ul>
+                        <p class="mt-2" data-tr-en="Describe your technical issue below."
+                           data-tr-tr="Teknik sorununuzu aşağıya açıklayın.">Describe your technical issue below.</p>
+                    </div>
                 </div>
-                <div class="input-area">
-                    <input type="text" id="neoInput" placeholder="Describe your issue...">
-                    <button onclick="sendNeo()" class="btn-primary">Analyze</button>
+                <div class="flex gap-2">
+                    <input type="text" id="neoInput" placeholder="Describe your technical issue..." class="flex-1 p-3 bg-slate-700 border border-slate-600 rounded-lg focus:outline-none focus:border-emerald-500">
+                    <button onclick="sendNeo()" id="neoSubmitBtn" class="px-6 py-3 bg-emerald-600 hover:bg-emerald-500 rounded-lg font-bold transition-all flex items-center gap-2">
+                        <span data-tr-en="Analyze" data-tr-tr="Analiz Et">Analyze</span>
+                        <div id="neoSpinner" class="hidden w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    </button>
                 </div>
             </div>
         </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settingsModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-slate-800 rounded-xl w-full max-w-md p-6 border border-slate-700">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-xl font-bold theme-text" data-tr-en="Settings" data-tr-tr="Ayarlar">Settings</h2>
+                <button onclick="closeSettingsModal()" class="text-gray-400 hover:text-white text-2xl">×</button>
+            </div>
+            <div class="space-y-6">
+                <div>
+                    <label class="block text-sm font-semibold mb-2 text-gray-300" data-tr-en="Language" data-tr-tr="Dil">Language</label>
+                    <select id="settingsLanguage" class="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg focus:outline-none focus:border-cyan-500">
+                        <option value="en">English</option>
+                        <option value="tr">Türkçe</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold mb-2 text-gray-300" data-tr-en="Temperature Unit" data-tr-tr="Sıcaklık Birimi">Temperature Unit</label>
+                    <div class="flex gap-4">
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="radio" name="tempUnit" value="C" checked class="cursor-pointer">
+                            <span data-tr-en="Celsius (°C)" data-tr-tr="Santigrat (°C)">Celsius (°C)</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="radio" name="tempUnit" value="F" class="cursor-pointer">
+                            <span data-tr-en="Fahrenheit (°F)" data-tr-tr="Fahrenheit (°F)">Fahrenheit (°F)</span>
+                        </label>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold mb-2 text-gray-300" data-tr-en="Theme" data-tr-tr="Tema">Theme</label>
+                    <select id="settingsTheme" class="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg focus:outline-none focus:border-cyan-500">
+                        <option value="cyan">Cyan (Modern)</option>
+                        <option value="emerald">Emerald (Modern)</option>
+                        <option value="amber">Amber (Modern)</option>
+                        <option value="magenta">Magenta (Art Deco)</option>
+                        <option value="violet">Violet (Art Deco)</option>
+                        <option value="rose">Rose (Art Deco)</option>
+                    </select>
+                </div>
+            </div>
+            <div class="mt-6 flex gap-3">
+                <button onclick="saveSettings()" class="flex-1 py-3 bg-cyan-600 hover:bg-cyan-500 rounded-lg font-bold transition-all">
+                    <span data-tr-en="Save" data-tr-tr="Kaydet">Save</span>
+                </button>
+                <button onclick="closeSettingsModal()" class="flex-1 py-3 bg-slate-700 hover:bg-slate-600 rounded-lg font-bold transition-all">
+                    <span data-tr-en="Cancel" data-tr-tr="İptal">Cancel</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Theme & Settings Buttons -->
+    <div class="fixed bottom-6 right-6 flex gap-3">
+        <button onclick="openSettingsModal()" class="px-4 py-2 bg-slate-700 hover:bg-slate-600 rounded-lg font-semibold transition-all border border-slate-600">
+            ⚙️ <span data-tr-en="Settings" data-tr-tr="Ayarlar">Settings</span>
+        </button>
     </div>
 
     <script src="app.js"></script>
