@@ -1,6 +1,17 @@
 # CatalystOzwell
 Catalyst Ozwell MARK 3
 
+3.3 update
+catalyst-ozwell/
+├── index.html          # Main website (2,100+ lines)
+├── styles.css          # All styling (6 themes: 3 Modern + 3 Art Deco)
+├── app.js              # All functionality (AI agents, data loading)
+├── config.js           # API configuration (add to .gitignore)
+└── .gitignore          # Security
+-----
+
+
+
 ┌─────────────────────────────────────────────────────────────────────┐
 │                              USER BROWSER                            │
 └─────────────────────────────┬───────────────────────────────────────┘
