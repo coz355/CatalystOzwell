@@ -1,6 +1,39 @@
 # CatalystOzwell
 Catalyst Ozwell MARK 3
+3.4 UPDATE *******
+catalystozwell/
+│
+├── github-pages/                  # Frontend (GitHub Pages)
+│   ├── index.html                 # Main HTML file
+│   ├── styles.css                 # Styling
+│   ├── app.js                     # Frontend logic (API calls to ai.catalystozwell.com)
+│   └── config.js                  # Configuration (API endpoints, keys)
+│
+├── cloudflare/                    # Cloudflare Tunnel + Backend
+│   ├── cloudflared.exe            # Cloudflare Tunnel binary (Windows)
+│   ├── tunnel-config.yml          # Tunnel configuration
+│   └── run-tunnel.bat             # Script to start the tunnel
+│
+├── lm-studio/                     # LM Studio Local Server
+│   ├── lm-studio.exe              # LM Studio binary (if needed)
+│   ├── models/                    # Model storage (symlink to N:\lm-studio-models)
+│   └── start-lm-studio.bat        # Script to start LM Studio
+│
+├── backend/                       # (Optional) Backend API (if not using LM Studio directly)
+│   ├── server.py                  # FastAPI/Flask server (if needed)
+│   ├── requirements.txt           # Python dependencies
+│   └── Dockerfile                 # (Optional) Containerization
+│
+├── scripts/                       # Helper scripts
+│   ├── deploy-gh-pages.bat        # Deploy GitHub Pages
+│   ├── verify-setup.bat           # Verify all components
+│   └── monitor-resources.bat      # Monitor GPU/CPU/RAM usage
+│
+└── README.md                      # Setup instructions
 
+
+
+****
 3.3 update
 catalyst-ozwell/
 ├── index.html          # Main website (2,100+ lines)
