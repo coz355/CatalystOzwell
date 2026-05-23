@@ -3,20 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CatalystOZWELL - AI Chat</title>
+    <meta name="description" content="CatalystOZWELL - Advanced AI Chat with Multiple Themes">
+    <meta name="theme-color" content="#b537f2">
+    <title>CatalystOZWELL - Premium AI Chat Platform</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="lux-neon-violet">
+    <!-- Header Watermark/Disclaimer -->
+    <div class="header-watermark">
+        ⚠️ DISCLAIMER: All responses are suggestions only. Not guaranteed accurate or responsible for use. Information provided is for educational purposes.
+    </div>
+
+    <!-- Main Container -->
     <div class="container">
-        <h1>🤖 CatalystOZWELL AI</h1>
-        <div class="chat-container">
-            <div id="chat-messages"></div>
+        <!-- Header -->
+        <header>
+            <h1>🤖 CatalystOZWELL AI</h1>
+            <p class="tagline">Premium Chat Experience with Multiple Themes</p>
+        </header>
+
+        <!-- Theme Selector Controls -->
+        <div class="controls">
+            <select id="theme-switcher" aria-label="Theme selector">
+                <optgroup label="MODERN NEON - Lux Series">
+                    <option value="lux-neon-violet">✨ Lux Violaceum (Violet Neon)</option>
+                    <option value="lux-neon-cyan">✨ Lux Cyan (Cyan Neon)</option>
+                    <option value="lux-neon-magenta">✨ Lux Magentum (Magenta Neon)</option>
+                </optgroup>
+                <optgroup label="ART DECO - Opus Series">
+                    <option value="opus-deco-gold">🏛️ Opus Aureum (Gold Deco)</option>
+                    <option value="opus-deco-emerald">🏛️ Opus Smaragdus (Emerald Deco)</option>
+                    <option value="opus-deco-sapphire">🏛️ Opus Sapphirinus (Sapphire Deco)</option>
+                </optgroup>
+            </select>
+        </div>
+
+        <!-- Chat Container -->
+        <div class="chat-container" role="main">
+            <div id="chat-messages" aria-label="Chat messages" role="region"></div>
             <div class="input-area">
-                <input type="text" id="user-input" placeholder="Type your message..." autocomplete="off">
-                <button id="send-button">Send</button>
+                <input 
+                    type="text" 
+                    id="user-input" 
+                    placeholder="Type your message..." 
+                    autocomplete="off"
+                    aria-label="Message input"
+                >
+                <button id="send-button" aria-label="Send message">Send</button>
             </div>
         </div>
     </div>
+
+    <!-- Footer Watermark/Disclaimer -->
+    <div class="footer-watermark">
+        © 2026 CatalystOZWELL | ⚠️ Informational Use Only | Verify Information Independently | Not Responsible for Any Decisions or Actions Based on AI Responses
+    </div>
+
+    <!-- Scripts -->
     <script src="config.js"></script>
     <script src="app.js"></script>
 </body>
