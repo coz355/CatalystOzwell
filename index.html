@@ -1,21 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    github_oauth
-    
-    curl http://localhost:1234/api/v1/chat \
-  -H "Content-Type: application/json" \
-  -d '{
-    "model": "lmstudio-community/llama-3.2-3b-instruct",
-    "system_prompt": "You answer only in rhymes.",
-    "input": "What is your favorite color?"
-}'
-    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Catalyst Ozwell - Global Intelligence Hub with Location Selection">
-    <meta name="keywords" content="catalyst ozwell travel weather telemetry chat comments">
-    <title>Catalyst Ozwell - Global Intelligence Hub</title>
+    <meta name="description" content="Catalyst Ozwell - Specialized AI Chatbot Hub featuring Education Evaluator, Turkish Legal Advisor, and Creative Companion">
+    <meta name="keywords" content="catalyst ozwell chatbots education legal advisor creative AI">
+    <meta name="author" content="Catalyst Ozwell">
+    <meta property="og:title" content="Catalyst Ozwell - AI Chatbot Hub">
+    <meta property="og:description" content="Specialized AI-powered chatbots for education, legal consulting, and creative assistance">
+    <meta name="theme-color" content="#0891b2">
+    <title>Catalyst Ozwell - AI Chatbot Hub</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         /* Custom CSS for Neon Post-Modern Theme */
@@ -106,6 +100,16 @@
             animation: pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
         }
 
+        /* Loading Spinner */
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .spinner {
+            animation: spin 1s linear infinite;
+        }
+
         /* Theme Transitions */
         body.theme-cyan {
             --accent: #06b6d4;
@@ -156,92 +160,94 @@
             border-left: 3px solid #22d3ee;
         }
 
-        /* Chat Scrollbar */
-        .chat-messages::-webkit-scrollbar {
+        /* Chatbot Card Styles */
+        .chatbot-card {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            min-height: 500px;
+        }
+
+        .chatbot-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(51, 65, 85, 0.5);
+        }
+
+        .chatbot-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 1.5rem;
+            gap: 1rem;
+            overflow-y: auto;
+        }
+
+        .chatbot-input-area {
+            padding: 1.5rem;
+            border-top: 1px solid rgba(51, 65, 85, 0.5);
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        /* Chat Messages Display */
+        .chat-window {
+            flex: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .message {
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            max-width: 85%;
+            word-wrap: break-word;
+        }
+
+        .message.bot {
+            background: rgba(34, 211, 238, 0.1);
+            border-left: 3px solid var(--accent-light);
+            align-self: flex-start;
+        }
+
+        .message.user {
+            background: rgba(139, 92, 246, 0.2);
+            border-left: 3px solid #a78bfa;
+            align-self: flex-end;
+            max-width: 85%;
+        }
+
+        /* Score Output Card */
+        .score-output {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .score-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #34d399;
+            text-align: center;
+        }
+
+        /* Scrollbar */
+        .chat-window::-webkit-scrollbar {
             width: 6px;
         }
 
-        .chat-messages::-webkit-scrollbar-track {
+        .chat-window::-webkit-scrollbar-track {
             background: rgba(15, 23, 42, 0.5);
         }
 
-        .chat-messages::-webkit-scrollbar-thumb {
+        .chat-window::-webkit-scrollbar-thumb {
             background: rgba(34, 211, 238, 0.5);
             border-radius: 3px;
-        }
-
-        /* Star Rating */
-        .star-rating {
-            display: inline-flex;
-            gap: 2px;
-        }
-
-        .star {
-            color: #fbbf24;
-            font-size: 0.875rem;
-        }
-
-        /* Typing Indicator */
-        @keyframes typing {
-            0%, 60%, 100% { opacity: 0.3; }
-            30% { opacity: 1; }
-        }
-
-        .typing-dot {
-            animation: typing 1.4s infinite;
-        }
-
-        .typing-dot:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-
-        .typing-dot:nth-child(3) {
-            animation-delay: 0.4s;
-        }
-
-        /* Collapsible Section */
-        .collapse-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out;
-        }
-
-        .collapse-content.open {
-            max-height: 2000px;
-            transition: max-height 0.5s ease-in;
-        }
-
-        /* Status Indicator */
-        .status-indicator {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            margin-right: 4px;
-            animation: pulse-glow 2s infinite;
-        }
-
-        .status-green {
-            background-color: #10b981;
-        }
-
-        .status-yellow {
-            background-color: #f59e0b;
-        }
-
-        .status-red {
-            background-color: #ef4444;
-        }
-
-        /* Comment Card */
-        .comment-card {
-            border-left: 3px solid transparent;
-            transition: all 0.3s ease;
-        }
-
-        .comment-card:hover {
-            border-left-color: #22d3ee;
-            transform: translateX(4px);
         }
 
         /* Modal Backdrop */
@@ -302,7 +308,7 @@
             box-shadow: 0 0 20px rgba(34, 211, 238, 0.5);
         }
 
-        /* Error/Success Messages */
+        /* Alert Messages */
         .alert {
             padding: 12px 16px;
             border-radius: 6px;
@@ -347,7 +353,10 @@
             </div>
 
             <nav class="flex-1 p-4 space-y-2">
-                <button class="sidebar-item active nav-btn w-full text-left px-4 py-3 rounded-lg transition-smooth hover:bg-slate-800" data-section="travel">
+                <button class="sidebar-item active nav-btn w-full text-left px-4 py-3 rounded-lg transition-smooth hover:bg-slate-800" data-section="chatbots">
+                    <span class="text-lg mr-3">🤖</span> AI Chatbots
+                </button>
+                <button class="sidebar-item nav-btn w-full text-left px-4 py-3 rounded-lg transition-smooth hover:bg-slate-800" data-section="travel">
                     <span class="text-lg mr-3">✈️</span> Travel & Discoveries
                 </button>
                 <button class="sidebar-item nav-btn w-full text-left px-4 py-3 rounded-lg transition-smooth hover:bg-slate-800" data-section="weather">
@@ -358,9 +367,6 @@
                 </button>
                 <button class="sidebar-item nav-btn w-full text-left px-4 py-3 rounded-lg transition-smooth hover:bg-slate-800" data-section="quotes">
                     <span class="text-lg mr-3">💡</span> Wisdom & Strategy
-                </button>
-                <button class="sidebar-item nav-btn w-full text-left px-4 py-3 rounded-lg transition-smooth hover:bg-slate-800" data-section="chat">
-                    <span class="text-lg mr-3">💬</span> Live Chat Room
                 </button>
                 <button class="sidebar-item nav-btn w-full text-left px-4 py-3 rounded-lg transition-smooth hover:bg-slate-800" data-section="comments">
                     <span class="text-lg mr-3">📝</span> Comments Section
@@ -399,8 +405,120 @@
 
             <!-- Content Area -->
             <div class="flex-1 overflow-y-auto">
+                <!-- Chatbots Section -->
+                <section id="chatbots" class="content-section p-6 max-w-7xl mx-auto w-full">
+                    <h2 class="text-3xl font-bold mb-2 neon-glow" style="color: var(--accent-light)">🤖 Specialized AI Chatbots</h2>
+                    <p class="text-gray-400 mb-8">Interact with our specialized chatbots for education evaluation, legal consulting, and creative assistance.</p>
+
+                    <!-- 3-Column Grid (Responsive) -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Card 1: Meister Ozwell (Education Assistant) -->
+                        <div class="glow-box glass rounded-xl chatbot-card hover-glow">
+                            <div class="chatbot-header">
+                                <h3 class="text-xl font-bold" style="color: var(--accent-light)">🎓 Meister Ozwell</h3>
+                                <p class="text-sm text-gray-400 mt-1">Education Evaluator</p>
+                            </div>
+                            <div class="chatbot-content">
+                                <p class="text-sm text-gray-300 mb-4">High school education evaluator. Input a question and your answer to receive a score out of 100, a detailed verdict explaining the reasoning, and a perfect model answer.</p>
+                                
+                                <div>
+                                    <label class="text-xs font-semibold text-gray-300 mb-2 block">Question</label>
+                                    <textarea id="evalQuestion" placeholder="Enter the question..." class="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg focus:outline-none focus:border-cyan-500 text-sm resize-none h-20" style="font-family: 'Inter', sans-serif;"></textarea>
+                                </div>
+
+                                <div>
+                                    <label class="text-xs font-semibold text-gray-300 mb-2 block">Your Answer</label>
+                                    <textarea id="evalAnswer" placeholder="Enter your answer..." class="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg focus:outline-none focus:border-cyan-500 text-sm resize-none h-20" style="font-family: 'Inter', sans-serif;"></textarea>
+                                </div>
+
+                                <!-- Results Area -->
+                                <div id="evalResults" class="hidden space-y-3">
+                                    <div class="score-output">
+                                        <p class="text-xs text-gray-400 mb-1">Score</p>
+                                        <div class="score-value" id="evalScore">--</div>
+                                        <p class="text-xs text-gray-400 text-center mt-1">/ 100</p>
+                                    </div>
+
+                                    <div class="bg-slate-800/50 rounded-lg p-3 border border-slate-700">
+                                        <p class="text-xs font-semibold text-gray-300 mb-2">Verdict</p>
+                                        <p id="evalVerdict" class="text-sm text-gray-300 leading-relaxed">--</p>
+                                    </div>
+
+                                    <div class="bg-slate-800/50 rounded-lg p-3 border border-slate-700">
+                                        <p class="text-xs font-semibold text-gray-300 mb-2">Perfect Answer</p>
+                                        <p id="evalPerfect" class="text-sm text-gray-300 leading-relaxed">--</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="chatbot-input-area">
+                                <button id="evaluateBtn" class="w-full px-4 py-2 bg-cyan-600 hover:bg-cyan-500 rounded-lg font-semibold transition-smooth hover-glow text-sm flex items-center justify-center gap-2">
+                                    <span>Evaluate</span>
+                                    <svg id="evalSpinner" class="w-4 h-4 hidden spinner" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none" stroke-dasharray="15.7" stroke-dashoffset="0"></circle>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Card 2: Av.Ozwell (Turkish Legal Advisor) -->
+                        <div class="glow-box-pink glass rounded-xl chatbot-card hover-glow">
+                            <div class="chatbot-header">
+                                <h3 class="text-xl font-bold" style="color: var(--accent-light)">⚖️ Av.Ozwell</h3>
+                                <p class="text-sm text-gray-400 mt-1">Türk Hukuk Danışmanı</p>
+                            </div>
+                            <div class="chatbot-content">
+                                <p class="text-sm text-gray-300 mb-4">Yapay zeka tabanlı Türk hukuk danışmanı. Türk hukuku ile ilgili sorularınıza cevap verin ve uzman hukuki görüş alın.</p>
+                                
+                                <div class="chat-window" id="turkishChatWindow">
+                                    <!-- Chat messages populated by JS -->
+                                </div>
+                            </div>
+
+                            <div class="chatbot-input-area">
+                                <div class="flex gap-2">
+                                    <input type="text" id="turkishChatInput" placeholder="Hukuk sorunuzu yazın..." class="flex-1 px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg focus:outline-none focus:border-pink-500 text-sm" style="font-family: 'Inter', sans-serif;">
+                                    <button id="turkishSendBtn" class="px-4 py-2 bg-pink-600 hover:bg-pink-500 rounded-lg font-semibold transition-smooth hover-glow text-sm flex items-center gap-2">
+                                        <span>Gönder</span>
+                                        <svg id="turkishSpinner" class="w-4 h-4 hidden spinner" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none" stroke-dasharray="15.7" stroke-dashoffset="0"></circle>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 3: Creative Companion (Creative Assistant) -->
+                        <div class="glow-box-emerald glass rounded-xl chatbot-card hover-glow">
+                            <div class="chatbot-header">
+                                <h3 class="text-xl font-bold" style="color: var(--accent-light)">✨ Creative Companion</h3>
+                                <p class="text-sm text-gray-400 mt-1">Creative Content Generator</p>
+                            </div>
+                            <div class="chatbot-content">
+                                <p class="text-sm text-gray-300 mb-4">Your personal creative assistant. Generate stories, poems, ideas, and creative content powered by advanced AI. Perfect for writers, artists, and creative professionals.</p>
+                                
+                                <div class="chat-window" id="creativeChatWindow">
+                                    <!-- Chat messages populated by JS -->
+                                </div>
+                            </div>
+
+                            <div class="chatbot-input-area">
+                                <div class="flex gap-2">
+                                    <input type="text" id="creativeChatInput" placeholder="What would you like to create?" class="flex-1 px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg focus:outline-none focus:border-emerald-500 text-sm" style="font-family: 'Inter', sans-serif;">
+                                    <button id="creativeSendBtn" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 rounded-lg font-semibold transition-smooth hover-glow text-sm flex items-center gap-2">
+                                        <span>Send</span>
+                                        <svg id="creativeSpinner" class="w-4 h-4 hidden spinner" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none" stroke-dasharray="15.7" stroke-dashoffset="0"></circle>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
                 <!-- Travel Section -->
-                <section id="travel" class="content-section p-6 max-w-7xl mx-auto w-full">
+                <section id="travel" class="content-section hidden p-6 max-w-7xl mx-auto w-full">
                     <h2 class="text-3xl font-bold mb-6 neon-glow" style="color: var(--accent-light)">✈️ Travel & Nearby Discoveries</h2>
 
                     <!-- City Selector -->
@@ -629,44 +747,6 @@
                     </div>
                 </section>
 
-                <!-- Chat Section -->
-                <section id="chat" class="content-section hidden p-6 max-w-7xl mx-auto w-full">
-                    <h2 class="text-3xl font-bold mb-6 neon-glow" style="color: var(--accent-light)">💬 Live Chat Room</h2>
-
-                    <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
-                        <!-- Chat Messages -->
-                        <div class="lg:col-span-3">
-                            <div class="glow-box glass rounded-xl overflow-hidden flex flex-col h-96">
-                                <div class="bg-gradient-to-r from-cyan-900/30 to-slate-800/30 px-6 py-4 border-b border-slate-700">
-                                    <h3 class="font-bold">Global Channel</h3>
-                                    <p class="text-xs text-gray-400">12 members online</p>
-                                </div>
-
-                                <div id="chatMessages" class="chat-messages flex-1 overflow-y-auto p-4 space-y-4">
-                                    <!-- Messages populated by JS -->
-                                </div>
-
-                                <div class="border-t border-slate-700 p-4">
-                                    <div class="flex gap-2">
-                                        <input type="text" id="chatInput" placeholder="Type a message..." class="flex-1 px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg focus:outline-none focus:border-cyan-500 transition-smooth">
-                                        <button id="sendChatBtn" class="px-4 py-2 bg-cyan-600 hover:bg-cyan-500 rounded-lg font-semibold transition-smooth">
-                                            Send
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Online Users -->
-                        <div class="glow-box glass rounded-xl p-6 h-96 overflow-y-auto">
-                            <h3 class="font-bold mb-4" style="color: var(--accent-light)">👥 Online Users (12)</h3>
-                            <div id="onlineUsers" class="space-y-3">
-                                <!-- Populated by JS -->
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
                 <!-- Comments Section -->
                 <section id="comments" class="content-section hidden p-6 max-w-7xl mx-auto w-full">
                     <h2 class="text-3xl font-bold mb-6 neon-glow" style="color: var(--accent-light)">📝 Comments Section</h2>
@@ -677,7 +757,7 @@
                         <h3 class="font-bold mb-4">Leave a Comment</h3>
                         <div class="space-y-3">
                             <input type="text" id="commentName" placeholder="Your name..." class="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg focus:outline-none focus:border-cyan-500 transition-smooth">
-                            <textarea id="commentText" placeholder="Your comment..." class="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg focus:outline-none focus:border-cyan-500 transition-smooth resize-none h-24"></textarea>
+                            <textarea id="commentText" placeholder="Your comment..." class="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg focus:outline-none focus:border-cyan-500 transition-smooth h-24" style="font-family: 'Inter', sans-serif; resize: none;"></textarea>
                             <button id="submitCommentBtn" class="px-6 py-2 bg-cyan-600 hover:bg-cyan-500 rounded-lg font-semibold transition-smooth hover-glow">
                                 Post Comment
                             </button>
@@ -773,6 +853,9 @@
         <div class="absolute inset-0 bg-black/50" id="mobileMenuBackdrop"></div>
         <div class="absolute left-0 top-0 bottom-0 w-64 glass border-r border-slate-700 p-4 overflow-y-auto">
             <nav class="space-y-2">
+                <button class="mobile-nav-btn sidebar-item w-full text-left px-4 py-3 rounded-lg transition-smooth hover:bg-slate-800" data-section="chatbots">
+                    <span class="text-lg mr-3">🤖</span> Chatbots
+                </button>
                 <button class="mobile-nav-btn sidebar-item w-full text-left px-4 py-3 rounded-lg transition-smooth hover:bg-slate-800" data-section="travel">
                     <span class="text-lg mr-3">✈️</span> Travel
                 </button>
@@ -784,9 +867,6 @@
                 </button>
                 <button class="mobile-nav-btn sidebar-item w-full text-left px-4 py-3 rounded-lg transition-smooth hover:bg-slate-800" data-section="quotes">
                     <span class="text-lg mr-3">💡</span> Quotes
-                </button>
-                <button class="mobile-nav-btn sidebar-item w-full text-left px-4 py-3 rounded-lg transition-smooth hover:bg-slate-800" data-section="chat">
-                    <span class="text-lg mr-3">💬</span> Chat
                 </button>
                 <button class="mobile-nav-btn sidebar-item w-full text-left px-4 py-3 rounded-lg transition-smooth hover:bg-slate-800" data-section="comments">
                     <span class="text-lg mr-3">📝</span> Comments
@@ -806,30 +886,16 @@
             currentLanguage: 'en',
             tempUnit: 'C',
             currentCity: 'New York',
-            chatMessages: [],
             comments: [],
-            users: [
-                { id: 1, name: 'Alex Chen', avatar: '👨‍💼', online: true },
-                { id: 2, name: 'Maria Garcia', avatar: '👩‍💻', online: true },
-                { id: 3, name: 'James Wilson', avatar: '👨‍🔬', online: true },
-                { id: 4, name: 'Sofia Rodriguez', avatar: '👩‍🎨', online: true },
-                { id: 5, name: 'David Kim', avatar: '👨‍🚀', online: true },
-                { id: 6, name: 'Emma Johnson', avatar: '👩‍⚕️', online: true },
-                { id: 7, name: 'Lucas Ahmed', avatar: '👨‍💼', online: true },
-                { id: 8, name: 'Yuki Tanaka', avatar: '👩‍💼', online: true },
-                { id: 9, name: 'Carlos Silva', avatar: '👨‍✈️', online: true },
-                { id: 10, name: 'Lisa Zhang', avatar: '👩‍🔧', online: true },
-                { id: 11, name: 'Nina Petrov', avatar: '👩‍🎓', online: true },
-                { id: 12, name: 'Marco Rossi', avatar: '👨‍🎭', online: true }
-            ]
+            turkishChat: [],
+            creativeChat: []
         };
 
         // ============================================
-        // LANGUAGE DEFINITIONS (26 LANGUAGES)
+        // LANGUAGE DEFINITIONS
         // ============================================
 
         const LANGUAGES = {
-            uk: '🇺🇦 Українська',
             en: '🇬🇧 English',
             ar: '🇸🇦 العربية',
             de: '🇩🇪 Deutsch',
@@ -840,113 +906,12 @@
             pt: '🇵🇹 Português',
             ru: '🇷🇺 Русский',
             tr: '🇹🇷 Türkçe',
-            zh: '🇨🇳 中文',
-            af: '🇿🇦 Afrikaans',
-            bg: '🇧🇬 Български',
-            ca: '🇪🇸 Català',
-            cs: '🇨🇿 Čeština',
-            da: '🇩🇰 Dansk',
-            el: '🇬🇷 Ελληνικά',
-            et: '🇪🇪 Eesti',
-            fa: '🇮🇷 فارسی',
-            fi: '🇫🇮 Suomi',
-            he: '🇮🇱 עברית',
-            hu: '🇭🇺 Magyar',
-            id: '🇮🇩 Bahasa Indonesia',
-            it: '🇮🇹 Italiano',
-            nl: '🇳🇱 Nederlands',
-            no: '🇳🇴 Norsk',
-            pl: '🇵🇱 Polski',
-            sv: '🇸🇪 Svenska',
-            th: '🇹🇭 ไทย',
-            vi: '🇻🇳 Tiếng Việt'
-        };
-
-        const TRANSLATIONS = {
-            uk: {
-                'travel': 'Подорожі та Відкриття',
-                'weather': 'Прогноз Погоди',
-                'telemetry': 'Сонячна Телеметрія',
-                'quotes': 'Мудрість & Стратегія',
-                'chat': 'Живий Чат',
-                'comments': 'Секція Коментарів'
-            },
-            en: {
-                'travel': 'Travel & Discoveries',
-                'weather': 'Weather Forecast',
-                'telemetry': 'Solar Telemetry',
-                'quotes': 'Wisdom & Strategy',
-                'chat': 'Live Chat',
-                'comments': 'Comments'
-            },
-            ar: {
-                'travel': 'السفر والاكتشافات',
-                'weather': 'توقعات الطقس',
-                'telemetry': 'قياس الشمس',
-                'quotes': 'الحكمة والاستراتيجية',
-                'chat': 'الدردشة الحية',
-                'comments': 'التعليقات'
-            },
-            de: {
-                'travel': 'Reisen & Entdeckungen',
-                'weather': 'Wettervorhersage',
-                'telemetry': 'Sonnentelemetrie',
-                'quotes': 'Weisheit & Strategie',
-                'chat': 'Live-Chat',
-                'comments': 'Kommentare'
-            },
-            es: {
-                'travel': 'Viajes & Descubrimientos',
-                'weather': 'Pronóstico del Tiempo',
-                'telemetry': 'Telemetría Solar',
-                'quotes': 'Sabiduría & Estrategia',
-                'chat': 'Chat en Vivo',
-                'comments': 'Comentarios'
-            },
-            fr: {
-                'travel': 'Voyages & Découvertes',
-                'weather': 'Prévisions Météo',
-                'telemetry': 'Télémétrie Solaire',
-                'quotes': 'Sagesse & Stratégie',
-                'chat': 'Chat En Direct',
-                'comments': 'Commentaires'
-            },
-            tr: {
-                'travel': 'Seyahat & Keşifler',
-                'weather': 'Hava Durumu Tahmini',
-                'telemetry': 'Güneş Telemetrisi',
-                'quotes': 'Bilgelik & Strateji',
-                'chat': 'Canlı Sohbet',
-                'comments': 'Yorumlar'
-            },
-            pt: {
-                'travel': 'Viagens & Descobertas',
-                'weather': 'Previsão do Tempo',
-                'telemetry': 'Telemetria Solar',
-                'quotes': 'Sabedoria & Estratégia',
-                'chat': 'Chat Ao Vivo',
-                'comments': 'Comentários'
-            },
-            ru: {
-                'travel': 'Путешествия и Открытия',
-                'weather': 'Прогноз Погоды',
-                'telemetry': 'Солнечная Телеметрия',
-                'quotes': 'Мудрость и Стратегия',
-                'chat': 'Живой Чат',
-                'comments': 'Комментарии'
-            },
-            zh: {
-                'travel': '旅行和发现',
-                'weather': '天气预报',
-                'telemetry': '太阳遥测',
-                'quotes': '智慧和战略',
-                'chat': '实时聊天',
-                'comments': '评论'
-            }
+            uk: '🇺🇦 Українська',
+            zh: '🇨🇳 中文'
         };
 
         // ============================================
-        // CITY DATA (NEW YORK, ROME, AMSTERDAM, KYIV, JERUSALEM)
+        // CITY DATA
         // ============================================
 
         const CITY_DATA = {
@@ -998,157 +963,321 @@
                 ],
                 restaurants: [
                     { name: 'Greetje', desc: 'Modern Dutch cuisine', distance: '1.0 km', rating: 4.7 },
-                    { name: 'Café de Jaren', desc: 'Canal-side dining', distance: '0.5 km', rating: 4.6 },
-                    { name: 'Daalder', desc: 'Contemporary cooking', distance: '1.8 km', rating: 4.5 }
+                    { name: 'Broodnodig', desc: 'Artisan sandwiches', distance: '0.5 km', rating: 4.6 },
+                    { name: 'De Kas', desc: 'Fine dining experience', distance: '2.5 km', rating: 4.8 }
                 ],
                 population: '2.4 Million',
                 timezone: 'CET',
                 temp: 12,
-                humidity: 72,
-                windSpeed: 10
+                humidity: 70,
+                windSpeed: 15
             },
             'Kyiv': {
                 emoji: '🇺🇦',
                 country: 'Ukraine',
                 museums: [
-                    { name: 'National Art Museum of Ukraine', desc: 'Ukrainian masterworks', distance: '1.0 km', rating: 4.6 },
-                    { name: 'Mystetskyi Arsenal', desc: 'Contemporary Ukrainian art', distance: '2.5 km', rating: 4.7 },
-                    { name: 'PinchukArtCentre', desc: 'Modern global art', distance: '3.0 km', rating: 4.5 }
+                    { name: 'National Art Museum', desc: 'Ukrainian art collection', distance: '2.0 km', rating: 4.7 },
+                    { name: 'Pirogovo Museum', desc: 'Ethnographic open-air museum', distance: '10 km', rating: 4.6 },
+                    { name: 'PinchukArtCentre', desc: 'Contemporary art hub', distance: '1.5 km', rating: 4.8 }
                 ],
                 restaurants: [
-                    { name: 'Alyona Alyona', desc: 'Modern Ukrainian', distance: '1.8 km', rating: 4.7 },
-                    { name: 'Honey', desc: 'Contemporary dining', distance: '2.2 km', rating: 4.6 },
-                    { name: 'Khmara', desc: 'Traditional Ukrainian', distance: '1.5 km', rating: 4.5 }
+                    { name: 'Barvy', desc: 'Modern Ukrainian cuisine', distance: '1.2 km', rating: 4.7 },
+                    { name: 'Puzata Hata', desc: 'Traditional Ukrainian', distance: '0.8 km', rating: 4.5 },
+                    { name: 'Mandarin Plaza', desc: 'Asian fusion', distance: '2.0 km', rating: 4.6 }
                 ],
-                population: '3.0 Million',
+                population: '2.9 Million',
                 timezone: 'EET',
                 temp: 10,
                 humidity: 75,
-                windSpeed: 9
+                windSpeed: 10
             },
             'Jerusalem': {
                 emoji: '🕌',
                 country: 'Israel',
                 museums: [
-                    { name: 'Israel Museum', desc: 'Comprehensive art & history', distance: '2.5 km', rating: 4.8 },
-                    { name: 'Bible Lands Museum', desc: 'Ancient Near East artifacts', distance: '1.5 km', rating: 4.6 },
-                    { name: 'Yad Vashem', desc: 'Holocaust memorial & museum', distance: '2.0 km', rating: 4.9 }
+                    { name: 'Israel Museum', desc: 'Art and archaeology', distance: '2.5 km', rating: 4.8 },
+                    { name: 'Yad Vashem', desc: 'Holocaust memorial', distance: '3.0 km', rating: 4.9 },
+                    { name: 'Rockefeller Museum', desc: 'Ancient Middle East', distance: '1.8 km', rating: 4.6 }
                 ],
                 restaurants: [
-                    { name: 'Eucalyptus', desc: 'Biblical cuisine', distance: '1.2 km', rating: 4.7 },
-                    { name: 'Tzabar', desc: 'Israeli specialties', distance: '0.8 km', rating: 4.6 },
-                    { name: 'Sababa', desc: 'Mediterranean flavors', distance: '1.8 km', rating: 4.5 }
+                    { name: 'Azura', desc: 'Mediterranean cuisine', distance: '1.0 km', rating: 4.7 },
+                    { name: 'Lina', desc: 'Traditional Palestinian', distance: '0.6 km', rating: 4.6 },
+                    { name: 'Canela Bistro', desc: 'French-Israeli fusion', distance: '1.5 km', rating: 4.8 }
                 ],
                 population: '0.9 Million',
                 timezone: 'IST',
                 temp: 22,
-                humidity: 45,
-                windSpeed: 6
+                humidity: 55,
+                windSpeed: 9
             }
         };
 
         // ============================================
-        // QUOTES DATABASE
+        // UI INITIALIZATION
         // ============================================
 
-        const BIBLE_QUOTES = [
-            { text: '"For the Lord is my light and my salvation—whom shall I fear?"', source: 'Psalm 27:1' },
-            { text: '"Trust in the Lord with all your heart and lean not on your own understanding."', source: 'Proverbs 3:5' },
-            { text: '"I can do all this through him who gives me strength."', source: 'Philippians 4:13' },
-            { text: '"The fear of the Lord is the beginning of wisdom."', source: 'Psalm 111:10' },
-            { text: '"Blessed are those who trust in the Lord."', source: 'Jeremiah 17:7' }
-        ];
-
-        const SUN_TZU_QUOTES = [
-            { text: '"The supreme art of war is to subdue the enemy without fighting."', source: 'Chapter III' },
-            { text: '"If you know the enemy and know yourself, you need not fear the result of a hundred battles."', source: 'Chapter III' },
-            { text: '"All warfare is based on deception."', source: 'Chapter I' },
-            { text: '"Speed is the essence of war."', source: 'Chapter V' },
-            { text: '"The supreme commander of an enemy army may be robbed of his strategy."', source: 'Chapter III' }
-        ];
-
-        const ROMAN_QUOTES = [
-            { text: '"It is not the strength of the body that counts, but the strength of the spirit."', author: 'Marcus Aurelius', role: 'Emperor & Philosopher' },
-            { text: '"The impediment to action advances action. What stands in the way becomes the way."', author: 'Marcus Aurelius', role: 'Emperor & Philosopher' },
-            { text: '"Nothing is impossible to a willing heart."', author: 'Julius Caesar', role: 'Military Commander' },
-            { text: '"Cowards die many times before their deaths; the valiant never taste of death but once."', author: 'Scipio Africanus', role: 'General' },
-            { text: '"Discipline is the soul of an army."', author: 'Marcus Aurelius', role: 'Emperor & Philosopher' }
-        ];
-
-        // ============================================
-        // UTILITY FUNCTIONS
-        // ============================================
-
-        function translate(key) {
-            const lang = APP.currentLanguage;
-            return TRANSLATIONS[lang]?.[key] || TRANSLATIONS['en']?.[key] || key;
-        }
-
-        function generateStars(rating) {
-            const stars = Math.floor(rating);
-            return '⭐'.repeat(stars) + (rating % 1 >= 0.5 ? '✨' : '');
-        }
-
-        function formatTime(date) {
-            return date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
-        }
-
-        function getRandomItem(arr) {
-            return arr[Math.floor(Math.random() * arr.length)];
-        }
-
-        function showAlert(message, type = 'success') {
-            const alertContainer = document.getElementById('alertContainer');
-            const alertEl = document.createElement('div');
-            alertEl.className = `alert alert-${type}`;
-            alertEl.textContent = message;
-            alertContainer.appendChild(alertEl);
+        function initializeUI() {
+            // Populate language select
+            const languageSelect = document.getElementById('languageSelect');
+            const settingsLanguage = document.getElementById('settingsLanguage');
             
-            setTimeout(() => alertEl.remove(), 3000);
+            Object.entries(LANGUAGES).forEach(([code, name]) => {
+                const option = document.createElement('option');
+                option.value = code;
+                option.textContent = name;
+                languageSelect.appendChild(option);
+                
+                const settingsOption = option.cloneNode(true);
+                settingsLanguage.appendChild(settingsOption);
+            });
+
+            languageSelect.value = APP.currentLanguage;
+            settingsLanguage.value = APP.currentLanguage;
+
+            // Apply initial theme
+            applyTheme(APP.currentTheme);
+            updateWeather();
+            updateCityData('New York');
         }
 
         // ============================================
-        // CITY SELECTION
+        // THEME MANAGEMENT
         // ============================================
 
-        function updateCityData(cityName) {
-            if (!CITY_DATA[cityName]) {
-                console.error(`City ${cityName} not found in CITY_DATA`);
+        function applyTheme(theme) {
+            document.body.className = `bg-slate-900 text-white theme-${theme}`;
+            APP.currentTheme = theme;
+            localStorage.setItem('theme', theme);
+        }
+
+        // ============================================
+        // EDUCATION EVALUATOR (Meister Ozwell)
+        // ============================================
+
+        document.getElementById('evaluateBtn').addEventListener('click', async function() {
+            const question = document.getElementById('evalQuestion').value.trim();
+            const answer = document.getElementById('evalAnswer').value.trim();
+            
+            if (!question || !answer) {
+                alert('Please fill in both question and answer fields');
                 return;
             }
 
-            APP.currentCity = cityName;
-            const data = CITY_DATA[cityName];
+            // Show loading state
+            const btn = this;
+            const spinner = document.getElementById('evalSpinner');
+            btn.disabled = true;
+            spinner.classList.remove('hidden');
 
-            // Update active button
-            document.querySelectorAll('.city-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.dataset.city === cityName);
+            // Simulate evaluation with client-side logic
+            await new Promise(resolve => setTimeout(resolve, 1500));
+
+            // Client-side scoring simulation
+            const score = Math.floor(Math.random() * 40) + 60; // 60-100
+            const verdict = generateVerdict(question, answer, score);
+            const perfectAnswer = generatePerfectAnswer(question);
+
+            // Display results
+            document.getElementById('evalResults').classList.remove('hidden');
+            document.getElementById('evalScore').textContent = score;
+            document.getElementById('evalVerdict').textContent = verdict;
+            document.getElementById('evalPerfect').textContent = perfectAnswer;
+
+            btn.disabled = false;
+            spinner.classList.add('hidden');
+        });
+
+        function generateVerdict(question, answer, score) {
+            const verdicts = {
+                high: 'Excellent response! Your answer demonstrates a strong understanding of the concept with clear reasoning and comprehensive coverage.',
+                medium: 'Good effort! Your answer shows understanding but could be improved with more specific examples and clearer argumentation.',
+                low: 'Your answer touches on relevant concepts but lacks depth and clarity. Consider studying the fundamentals more thoroughly.'
+            };
+
+            let level = score >= 80 ? 'high' : score >= 70 ? 'medium' : 'low';
+            return verdicts[level];
+        }
+
+        function generatePerfectAnswer(question) {
+            return `Based on the question "${question.substring(0, 40)}...", an ideal answer would include: (1) Clear definition of key terms, (2) Logical step-by-step explanation, (3) Relevant examples, (4) Connection to broader concepts.`;
+        }
+
+        // ============================================
+        // TURKISH LEGAL ADVISOR (Av.Ozwell)
+        // ============================================
+
+        document.getElementById('turkishSendBtn').addEventListener('click', async function() {
+            const input = document.getElementById('turkishChatInput').value.trim();
+            if (!input) return;
+
+            const chatWindow = document.getElementById('turkishChatWindow');
+            
+            // Add user message
+            const userMsg = document.createElement('div');
+            userMsg.className = 'message user';
+            userMsg.textContent = input;
+            chatWindow.appendChild(userMsg);
+
+            document.getElementById('turkishChatInput').value = '';
+
+            // Show loading spinner
+            const spinner = document.getElementById('turkishSpinner');
+            spinner.classList.remove('hidden');
+
+            // Simulate response
+            await new Promise(resolve => setTimeout(resolve, 1000));
+
+            // Add bot response
+            const botMsg = document.createElement('div');
+            botMsg.className = 'message bot';
+            botMsg.textContent = 'Türk hukuku hakkında sorduğunuz soruya yanıt vermek için daha fazla bilgiye ihtiyacım var. Lütfen daha spesifik detaylar sağlayınız.';
+            chatWindow.appendChild(botMsg);
+
+            spinner.classList.add('hidden');
+            chatWindow.scrollTop = chatWindow.scrollHeight;
+        });
+
+        // ============================================
+        // CREATIVE COMPANION
+        // ============================================
+
+        document.getElementById('creativeSendBtn').addEventListener('click', async function() {
+            const input = document.getElementById('creativeChatInput').value.trim();
+            if (!input) return;
+
+            const chatWindow = document.getElementById('creativeChatWindow');
+            
+            // Add user message
+            const userMsg = document.createElement('div');
+            userMsg.className = 'message user';
+            userMsg.textContent = input;
+            chatWindow.appendChild(userMsg);
+
+            document.getElementById('creativeChatInput').value = '';
+
+            // Show loading spinner
+            const spinner = document.getElementById('creativeSpinner');
+            spinner.classList.remove('hidden');
+
+            // Simulate response
+            await new Promise(resolve => setTimeout(resolve, 1200));
+
+            // Add bot response
+            const botMsg = document.createElement('div');
+            botMsg.className = 'message bot';
+            botMsg.textContent = `That's an interesting creative prompt! I'd love to help you with: "${input}". Let me think about the best approach to bring your creative vision to life...`;
+            chatWindow.appendChild(botMsg);
+
+            spinner.classList.add('hidden');
+            chatWindow.scrollTop = chatWindow.scrollHeight;
+        });
+
+        // ============================================
+        // NAVIGATION & SECTION SWITCHING
+        // ============================================
+
+        document.querySelectorAll('.nav-btn, .mobile-nav-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const section = this.dataset.section;
+                showSection(section);
+                
+                // Update active state
+                document.querySelectorAll('.sidebar-item').forEach(item => item.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Close mobile menu
+                closeMobileMenu();
             });
+        });
 
-            // Update location info
-            document.getElementById('cityName').textContent = cityName;
+        function showSection(sectionId) {
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.add('hidden');
+            });
+            document.getElementById(sectionId).classList.remove('hidden');
+        }
+
+        // ============================================
+        // THEME MODAL
+        // ============================================
+
+        document.getElementById('themeBtn').addEventListener('click', function() {
+            document.getElementById('themeModal').classList.remove('hidden');
+        });
+
+        document.getElementById('closeThemeModal').addEventListener('click', function() {
+            document.getElementById('themeModal').classList.add('hidden');
+        });
+
+        document.querySelectorAll('.theme-option').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const theme = this.dataset.theme;
+                applyTheme(theme);
+                document.getElementById('settingsTheme').value = theme;
+                document.getElementById('themeModal').classList.add('hidden');
+            });
+        });
+
+        // ============================================
+        // SETTINGS MODAL
+        // ============================================
+
+        document.getElementById('settingsBtn').addEventListener('click', function() {
+            document.getElementById('settingsModal').classList.remove('hidden');
+        });
+
+        document.getElementById('closeSettingsModal').addEventListener('click', function() {
+            document.getElementById('settingsModal').classList.add('hidden');
+        });
+
+        document.getElementById('settingsTheme').addEventListener('change', function() {
+            applyTheme(this.value);
+        });
+
+        // ============================================
+        // MOBILE MENU
+        // ============================================
+
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            document.getElementById('mobileMenu').classList.remove('hidden');
+        });
+
+        document.getElementById('mobileMenuBackdrop').addEventListener('click', closeMobileMenu);
+
+        function closeMobileMenu() {
+            document.getElementById('mobileMenu').classList.add('hidden');
+        }
+
+        // ============================================
+        // CITY & TRAVEL MANAGEMENT
+        // ============================================
+
+        document.querySelectorAll('.city-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.city-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                updateCityData(this.dataset.city);
+            });
+        });
+
+        function updateCityData(city) {
+            APP.currentCity = city;
+            const data = CITY_DATA[city];
+
+            document.getElementById('cityName').textContent = city;
             document.getElementById('population').textContent = data.population;
             document.getElementById('timezone').textContent = data.timezone;
             document.getElementById('country').textContent = data.country;
-
-            // Update weather
-            document.getElementById('weatherTemp').textContent = `${data.temp}°${APP.tempUnit}`;
-            document.getElementById('currentTemp').textContent = `${data.temp}°${APP.tempUnit}`;
 
             // Update museums
             const museumsList = document.getElementById('museumsList');
             museumsList.innerHTML = data.museums.map(m => `
                 <div class="glow-box glass rounded-lg p-4 hover-glow">
-                    <h4 class="font-bold mb-2">${m.name}</h4>
-                    <p class="text-sm text-gray-400 mb-3">${m.desc}</p>
-                    <div class="flex justify-between items-center">
-                        <div>
-                            <p class="text-xs text-gray-500">${m.distance} away</p>
-                            <div class="star-rating">${generateStars(m.rating)}</div>
-                        </div>
-                        <button class="px-3 py-1 bg-cyan-600 hover:bg-cyan-500 rounded text-sm transition-smooth">
-                            Visit
-                        </button>
+                    <p class="font-semibold">${m.name}</p>
+                    <p class="text-xs text-gray-400 mt-1">${m.desc}</p>
+                    <div class="flex justify-between items-center mt-3 text-xs">
+                        <span>📍 ${m.distance}</span>
+                        <span>⭐ ${m.rating}</span>
                     </div>
                 </div>
             `).join('');
@@ -1157,461 +1286,157 @@
             const restaurantsList = document.getElementById('restaurantsList');
             restaurantsList.innerHTML = data.restaurants.map(r => `
                 <div class="glow-box glass rounded-lg p-4 hover-glow">
-                    <h4 class="font-bold mb-2">${r.name}</h4>
-                    <p class="text-sm text-gray-400 mb-3">${r.desc}</p>
-                    <div class="flex justify-between items-center">
-                        <div>
-                            <p class="text-xs text-gray-500">${r.distance} away</p>
-                            <div class="star-rating">${generateStars(r.rating)}</div>
-                        </div>
-                        <button class="px-3 py-1 bg-cyan-600 hover:bg-cyan-500 rounded text-sm transition-smooth">
-                            Reserve
-                        </button>
+                    <p class="font-semibold">${r.name}</p>
+                    <p class="text-xs text-gray-400 mt-1">${r.desc}</p>
+                    <div class="flex justify-between items-center mt-3 text-xs">
+                        <span>📍 ${r.distance}</span>
+                        <span>⭐ ${r.rating}</span>
                     </div>
                 </div>
             `).join('');
 
-            console.log(`✅ Switched to ${cityName}`);
+            updateWeather();
         }
 
         // ============================================
-        // WEATHER FUNCTIONALITY
+        // WEATHER MANAGEMENT
         // ============================================
 
-        function initWeather() {
-            const cityData = CITY_DATA['New York'];
-            document.getElementById('weatherTemp').textContent = `${cityData.temp}°C`;
-            document.getElementById('weatherCondition').textContent = 'Partly Cloudy';
-            document.getElementById('weatherHumidity').textContent = `${cityData.humidity}%`;
-            document.getElementById('weatherWind').textContent = `${cityData.windSpeed} m/s`;
+        function updateWeather() {
+            const data = CITY_DATA[APP.currentCity];
+            const temp = APP.tempUnit === 'F' ? Math.round((data.temp * 9/5) + 32) : data.temp;
+            const unit = APP.tempUnit === 'F' ? '°F' : '°C';
 
-            // 5-day forecast
+            document.getElementById('currentTemp').textContent = `${temp}${unit}`;
+            document.getElementById('weatherTemp').textContent = `${temp}${unit}`;
+            document.getElementById('weatherHumidity').textContent = `${data.humidity}%`;
+            document.getElementById('weatherWind').textContent = `${data.windSpeed} m/s`;
+
+            // Generate forecast
             const forecastList = document.getElementById('forecastList');
             const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
-            const conditions = ['☀️ Sunny', '🌤️ Cloudy', '🌧️ Rainy', '⛅ Mixed', '☀️ Clear'];
-            const temps = [18, 16, 14, 15, 19];
-
-            forecastList.innerHTML = days.map((day, i) => `
-                <div class="glow-box glass rounded-lg p-4 text-center hover-glow">
-                    <p class="font-semibold mb-2">${day}</p>
-                    <p class="text-2xl mb-2">${conditions[i].split(' ')[0]}</p>
-                    <p class="font-bold text-lg mb-2">${temps[i]}°C</p>
-                    <p class="text-xs text-gray-400">${conditions[i].split(' ')[1]}</p>
-                </div>
-            `).join('');
-
-            console.log('✅ Weather initialized');
+            forecastList.innerHTML = days.map((day, i) => {
+                const temp = APP.tempUnit === 'F' ? Math.round(((data.temp + i - 2) * 9/5) + 32) : (data.temp + i - 2);
+                return `
+                    <div class="glow-box glass rounded-lg p-4 text-center hover-glow">
+                        <p class="font-semibold text-sm">${day}</p>
+                        <p class="text-2xl my-2">🌤️</p>
+                        <p class="text-lg font-bold">${temp}${unit}</p>
+                    </div>
+                `;
+            }).join('');
         }
 
+        // Temperature unit change
+        document.querySelectorAll('input[name="tempUnit"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                APP.tempUnit = this.value;
+                updateWeather();
+            });
+        });
+
         // ============================================
-        // SOLAR TELEMETRY
+        // QUOTES MANAGEMENT
         // ============================================
 
-        function refreshTelemetry() {
-            const values = {
-                solarWindSpeed: Math.floor(Math.random() * 150 + 300),
-                xrayFlux: (Math.random() * 0.00002 + 0.00001).toExponential(2),
-                kpIndex: Math.floor(Math.random() * 8),
-                solarFlux: Math.floor(Math.random() * 50 + 120)
+        document.getElementById('newQuoteBtn').addEventListener('click', function() {
+            const quotes = {
+                bible: [
+                    '"For the Lord is my light and my salvation; whom shall I fear?"',
+                    '"Trust in the Lord with all your heart and lean not on your own understanding."',
+                    '"I can do all things through Christ who strengthens me."'
+                ],
+                sunTzu: [
+                    '"The supreme art of war is to subdue the enemy without fighting."',
+                    '"Know yourself and know your enemy."',
+                    '"All warfare is based on deception."'
+                ],
+                marcus: [
+                    '"It is not the strength of the body that counts, but the strength of the spirit."',
+                    '"You have power over your mind, not outside events. Realize this, and you will find strength."',
+                    '"Waste no more time arguing what a good person should be. Be one."'
+                ]
             };
 
-            document.getElementById('solarWindSpeed').textContent = `${values.solarWindSpeed} km/s`;
-            document.getElementById('xrayFlux').textContent = values.xrayFlux;
-            document.getElementById('kpIndex').textContent = values.kpIndex;
-            document.getElementById('solarFlux').textContent = `${values.solarFlux} SFU`;
-
-            console.log('✅ Telemetry refreshed');
-        }
+            document.getElementById('bibleQuote').textContent = quotes.bible[Math.floor(Math.random() * quotes.bible.length)];
+            document.getElementById('sunTzuQuote').textContent = quotes.sunTzu[Math.floor(Math.random() * quotes.sunTzu.length)];
+            document.getElementById('romanQuote').textContent = quotes.marcus[Math.floor(Math.random() * quotes.marcus.length)];
+        });
 
         // ============================================
-        // QUOTES FUNCTIONALITY
+        // TELEMETRY TOGGLE
         // ============================================
 
-        function loadNewQuotes() {
-            const bible = getRandomItem(BIBLE_QUOTES);
-            const sunTzu = getRandomItem(SUN_TZU_QUOTES);
-            const roman = getRandomItem(ROMAN_QUOTES);
-
-            document.getElementById('bibleQuote').textContent = bible.text;
-            document.getElementById('sunTzuQuote').textContent = sunTzu.text;
-            document.getElementById('romanQuote').textContent = roman.text;
-
-            console.log('✅ Quotes loaded');
-        }
+        document.getElementById('telemetryToggle').addEventListener('click', function() {
+            const content = this.nextElementSibling;
+            const arrow = document.getElementById('telemetryArrow');
+            
+            content.classList.toggle('open');
+            arrow.style.transform = content.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0)';
+        });
 
         // ============================================
-        // CHAT FUNCTIONALITY
+        // COMMENTS MANAGEMENT
         // ============================================
 
-        function initChat() {
-            APP.chatMessages = [
-                { user: 'Alex Chen', avatar: '👨‍💼', text: 'Welcome to the Global Channel! 🌍', time: new Date(Date.now() - 5 * 60000) },
-                { user: 'Maria Garcia', avatar: '👩‍💻', text: 'Excited to connect with everyone here!', time: new Date(Date.now() - 4 * 60000) },
-                { user: 'James Wilson', avatar: '👨‍🔬', text: 'Just launched a new project', time: new Date(Date.now() - 3 * 60000) },
-                { user: 'Sofia Rodriguez', avatar: '👩‍🎨', text: 'That\'s amazing! Tell us more 🎨', time: new Date(Date.now() - 2 * 60000) }
-            ];
-
-            renderChat();
-            renderOnlineUsers();
-            console.log('✅ Chat initialized');
-        }
-
-        function renderChat() {
-            const chatMessages = document.getElementById('chatMessages');
-            chatMessages.innerHTML = APP.chatMessages.map(msg => `
-                <div class="flex gap-3">
-                    <div class="text-2xl flex-shrink-0">${msg.avatar}</div>
-                    <div class="flex-1 min-w-0">
-                        <div class="flex items-baseline gap-2">
-                            <p class="font-semibold text-sm">${msg.user}</p>
-                            <p class="text-xs text-gray-500">${formatTime(msg.time)}</p>
-                        </div>
-                        <p class="text-sm text-gray-200 break-words">${msg.text}</p>
-                    </div>
-                </div>
-            `).join('');
-
-            setTimeout(() => {
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-            }, 100);
-        }
-
-        function renderOnlineUsers() {
-            const onlineUsers = document.getElementById('onlineUsers');
-            onlineUsers.innerHTML = APP.users.map(user => `
-                <div class="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-800/50 transition-smooth cursor-pointer">
-                    <div class="relative">
-                        <span class="text-2xl">${user.avatar}</span>
-                        <span class="status-indicator status-green absolute bottom-0 right-0"></span>
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <p class="text-sm font-semibold truncate">${user.name}</p>
-                        <p class="text-xs text-gray-500">Online</p>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function sendMessage() {
-            const input = document.getElementById('chatInput');
-            if (!input.value.trim()) return;
-
-            const newMessage = {
-                user: 'You',
-                avatar: '👤',
-                text: input.value,
-                time: new Date()
-            };
-
-            APP.chatMessages.push(newMessage);
-            renderChat();
-            input.value = '';
-
-            setTimeout(() => {
-                const response = {
-                    user: getRandomItem(APP.users).name,
-                    avatar: getRandomItem(APP.users).avatar,
-                    text: getRandomItem(['That\'s great! 🎉', 'I agree completely!', 'Interesting perspective!', 'Thanks for sharing! 💡', 'Love the energy! ⚡']),
-                    time: new Date()
-                };
-                APP.chatMessages.push(response);
-                renderChat();
-            }, 500);
-        }
-
-        // ============================================
-        // COMMENTS FUNCTIONALITY
-        // ============================================
-
-        function renderComments() {
-            const commentsList = document.getElementById('commentsList');
-            commentsList.innerHTML = APP.comments.map((comment, i) => `
-                <div class="comment-card glow-box glass rounded-lg p-4">
-                    <div class="flex items-start justify-between mb-2">
-                        <div>
-                            <p class="font-bold">${comment.name}</p>
-                            <p class="text-xs text-gray-500">${comment.time}</p>
-                        </div>
-                        <button class="text-xl hover:scale-125 transition-transform" onclick="alert('Like functionality - ' + ${i})">👍</button>
-                    </div>
-                    <p class="text-gray-300">${comment.text}</p>
-                </div>
-            `).join('');
-        }
-
-        function addComment() {
+        document.getElementById('submitCommentBtn').addEventListener('click', function() {
             const name = document.getElementById('commentName').value.trim();
             const text = document.getElementById('commentText').value.trim();
 
             if (!name || !text) {
-                showAlert('Please fill in name and comment', 'error');
+                showAlert('Please fill in all fields', 'error');
                 return;
             }
 
-            APP.comments.unshift({
+            const comment = {
+                id: Date.now(),
                 name,
                 text,
-                time: new Date().toLocaleString()
-            });
-
-            if (APP.comments.length > 12) APP.comments.pop();
-
-            renderComments();
-            document.getElementById('commentName').value = '';
-            document.getElementById('commentText').value = '';
-            showAlert('Comment posted successfully! ✅', 'success');
-        }
-
-        // ============================================
-        // THEME MANAGEMENT
-        // ============================================
-
-        function setTheme(theme) {
-            document.body.className = document.body.className.replace(/theme-\w+/, `theme-${theme}`);
-            APP.currentTheme = theme;
-            localStorage.setItem('theme', theme);
-            initThemeColors();
-            console.log(`✅ Theme changed to ${theme}`);
-        }
-
-        function initThemeColors() {
-            const themes = {
-                cyan: { accent: '#06b6d4', light: '#22d3ee', dark: '#0891b2' },
-                magenta: { accent: '#ec4899', light: '#f472b6', dark: '#be185d' },
-                violet: { accent: '#8b5cf6', light: '#a78bfa', dark: '#6d28d9' },
-                emerald: { accent: '#10b981', light: '#34d399', dark: '#047857' },
-                amber: { accent: '#f59e0b', light: '#fbbf24', dark: '#d97706' },
-                rose: { accent: '#f43f5e', light: '#fb7185', dark: '#be123c' }
+                timestamp: new Date().toLocaleString()
             };
 
-            const currentTheme = themes[APP.currentTheme];
-            document.documentElement.style.setProperty('--accent', currentTheme.accent);
-            document.documentElement.style.setProperty('--accent-light', currentTheme.light);
-            document.documentElement.style.setProperty('--accent-dark', currentTheme.dark);
+            APP.comments.push(comment);
+            displayComments();
+            document.getElementById('commentName').value = '';
+            document.getElementById('commentText').value = '';
+            showAlert('Comment posted successfully!', 'success');
+        });
+
+        function displayComments() {
+            const commentsList = document.getElementById('commentsList');
+            commentsList.innerHTML = APP.comments.map(comment => `
+                <div class="glow-box glass rounded-xl p-6 hover-glow">
+                    <div class="flex justify-between items-start mb-3">
+                        <div>
+                            <p class="font-bold">${comment.name}</p>
+                            <p class="text-xs text-gray-400">${comment.timestamp}</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300">${comment.text}</p>
+                </div>
+            `).reverse().join('');
         }
 
-        // ============================================
-        // LANGUAGE MANAGEMENT
-        // ============================================
+        function showAlert(message, type) {
+            const container = document.getElementById('alertContainer');
+            const alert = document.createElement('div');
+            alert.className = `alert alert-${type}`;
+            alert.textContent = message;
+            container.appendChild(alert);
 
-        function initLanguageSelect() {
-            const select = document.getElementById('languageSelect');
-            const settingsSelect = document.getElementById('settingsLanguage');
-
-            Object.entries(LANGUAGES).forEach(([code, name]) => {
-                const option = document.createElement('option');
-                option.value = code;
-                option.textContent = name;
-                select.appendChild(option);
-
-                const settingsOption = option.cloneNode(true);
-                settingsSelect.appendChild(settingsOption);
-            });
-
-            select.value = APP.currentLanguage;
-            console.log('✅ Language selector initialized');
-        }
-
-        function setLanguage(lang) {
-            APP.currentLanguage = lang;
-            document.getElementById('languageSelect').value = lang;
-            document.getElementById('settingsLanguage').value = lang;
-            localStorage.setItem('language', lang);
-            console.log(`✅ Language changed to ${lang}`);
-        }
-
-        // ============================================
-        // SECTION NAVIGATION
-        // ============================================
-
-        function showSection(sectionId) {
-            document.querySelectorAll('.content-section').forEach(s => s.classList.add('hidden'));
-            document.getElementById(sectionId).classList.remove('hidden');
-
-            document.querySelectorAll('.sidebar-item, .mobile-nav-btn').forEach(btn => btn.classList.remove('active'));
-            document.querySelectorAll(`[data-section="${sectionId}"]`).forEach(btn => btn.classList.add('active'));
-
-            closeMobileMenu();
-            console.log(`✅ Navigated to ${sectionId}`);
-        }
-
-        // ============================================
-        // MODAL MANAGEMENT
-        // ============================================
-
-        function openThemeModal() {
-            document.getElementById('themeModal').classList.remove('hidden');
-        }
-
-        function closeThemeModal() {
-            document.getElementById('themeModal').classList.add('hidden');
-        }
-
-        function openSettingsModal() {
-            document.getElementById('settingsModal').classList.remove('hidden');
-        }
-
-        function closeSettingsModal() {
-            document.getElementById('settingsModal').classList.add('hidden');
-        }
-
-        function closeMobileMenu() {
-            document.getElementById('mobileMenu').classList.add('hidden');
-        }
-
-        function toggleMobileMenu() {
-            document.getElementById('mobileMenu').classList.toggle('hidden');
-        }
-
-        // ============================================
-        // COLLAPSIBLE SECTIONS
-        // ============================================
-
-        function setupCollapsibles() {
-            const toggle = document.getElementById('telemetryToggle');
-            if (toggle) {
-                toggle.addEventListener('click', () => {
-                    const content = document.querySelector('#telemetry .collapse-content');
-                    const arrow = document.getElementById('telemetryArrow');
-                    content.classList.toggle('open');
-                    arrow.style.transform = content.classList.contains('open') ? 'rotate(0)' : 'rotate(180deg)';
-                });
-            }
-        }
-
-        // ============================================
-        // EVENT LISTENERS
-        // ============================================
-
-        function setupEventListeners() {
-            // Navigation
-            document.querySelectorAll('.nav-btn, .mobile-nav-btn').forEach(btn => {
-                btn.addEventListener('click', () => showSection(btn.dataset.section));
-            });
-
-            // City selection
-            document.querySelectorAll('.city-btn').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    updateCityData(btn.dataset.city);
-                });
-            });
-
-            // Theme
-            document.getElementById('themeBtn').addEventListener('click', openThemeModal);
-            document.getElementById('closeThemeModal').addEventListener('click', closeThemeModal);
-            document.querySelectorAll('.theme-option').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    setTheme(btn.dataset.theme);
-                });
-            });
-
-            // Settings
-            document.getElementById('settingsBtn').addEventListener('click', openSettingsModal);
-            document.getElementById('closeSettingsModal').addEventListener('click', closeSettingsModal);
-
-            document.getElementById('settingsLanguage').addEventListener('change', (e) => {
-                setLanguage(e.target.value);
-            });
-
-            document.getElementById('settingsTheme').addEventListener('change', (e) => {
-                setTheme(e.target.value);
-            });
-
-            document.querySelectorAll('input[name="tempUnit"]').forEach(radio => {
-                radio.addEventListener('change', (e) => {
-                    APP.tempUnit = e.target.value;
-                    updateCityData(APP.currentCity);
-                });
-            });
-
-            // Chat
-            document.getElementById('sendChatBtn').addEventListener('click', sendMessage);
-            document.getElementById('chatInput').addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') sendMessage();
-            });
-
-            // Comments
-            document.getElementById('submitCommentBtn').addEventListener('click', addComment);
-
-            // Telemetry
-            document.getElementById('refreshTelemetry').addEventListener('click', refreshTelemetry);
-
-            // Quotes
-            document.getElementById('newQuoteBtn').addEventListener('click', loadNewQuotes);
-
-            // Language select
-            document.getElementById('languageSelect').addEventListener('change', (e) => {
-                setLanguage(e.target.value);
-            });
-
-            // Mobile menu
-            document.getElementById('menuToggle').addEventListener('click', toggleMobileMenu);
-            document.getElementById('mobileMenuBackdrop').addEventListener('click', closeMobileMenu);
-
-            // Modal backdrops
-            document.getElementById('themeModal').addEventListener('click', (e) => {
-                if (e.target === e.currentTarget) closeThemeModal();
-            });
-
-            document.getElementById('settingsModal').addEventListener('click', (e) => {
-                if (e.target === e.currentTarget) closeSettingsModal();
-            });
-
-            console.log('✅ Event listeners setup complete');
+            setTimeout(() => alert.remove(), 3000);
         }
 
         // ============================================
         // INITIALIZATION
         // ============================================
 
-        function init() {
-            try {
-                // Restore preferences
-                APP.currentTheme = localStorage.getItem('theme') || 'cyan';
-                APP.currentLanguage = localStorage.getItem('language') || 'en';
+        document.addEventListener('DOMContentLoaded', initializeUI);
 
-                // Initialize UI
-                setTheme(APP.currentTheme);
-                initThemeColors();
-                initLanguageSelect();
-                setLanguage(APP.currentLanguage);
-                setupEventListeners();
-                setupCollapsibles();
-
-                // Initialize sections
-                updateCityData('New York');
-                initWeather();
-                initChat();
-                loadNewQuotes();
-                refreshTelemetry();
-                renderComments();
-
-                // Show travel section by default
-                showSection('travel');
-
-                console.log('✅ ========================================');
-                console.log('✅ Catalyst Ozwell App initialized successfully!');
-                console.log('✅ ========================================');
-                console.log('✅ Features enabled:');
-                console.log('   ✓ Travel & Discoveries (5 cities)');
-                console.log('   ✓ Weather Forecast');
-                console.log('   ✓ Solar Telemetry');
-                console.log('   ✓ Wisdom & Strategy Quotes');
-                console.log('   ✓ Live Chat Room (12 users)');
-                console.log('   ✓ Comments Section');
-                console.log('   ✓ 26 Languages Support');
-                console.log('   ✓ 6 Theme Colors');
-                console.log('✅ ========================================');
-            } catch (error) {
-                console.error('❌ Initialization error:', error);
-            }
-        }
-
-        // Start when DOM is ready
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', init);
-        } else {
-            init();
+        // Restore theme from localStorage
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            applyTheme(savedTheme);
         }
     </script>
 </body>
