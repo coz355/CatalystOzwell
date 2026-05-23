@@ -3,252 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Catalyst Ozwell - AI Chatbot Hub with Education, Legal, and Engineering Assistants">
-    <meta name="keywords" content="AI, chatbots, education, legal, engineering, telemetry, weather, travel">
+    <meta name="description" content="Catalyst Ozwell - AI Platform with Art Deco & Modern Themes">
+    <meta name="keywords" content="AI, chatbots, education, legal, engineering, Art Deco, modern themes, travel, weather">
     <meta name="author" content="Catalyst Ozwell">
-    <meta property="og:title" content="Catalyst Ozwell - AI Powered Platform">
-    <meta property="og:description" content="Specialized AI assistants for education, Turkish law, and engineering">
+    <meta property="og:title" content="Catalyst Ozwell - AI Platform">
+    <meta property="og:description" content="Specialized AI assistants with Art Deco and modern themes">
     <meta name="theme-color" content="#0891b2">
     <title>Catalyst Ozwell - AI Platform</title>
+
+    <!-- Fonts (Modern + Art Deco) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Playfair+Display:wght@400;700&family=Bebas+Neue&family=Kabel:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #06b6d4;
-            --primary-dark: #0891b2;
-            --primary-light: #22d3ee;
-            --bg-dark: #0f172a;
-            --bg-darker: #020617;
-            --bg-card: rgba(15, 23, 42, 0.8);
-            --text-primary: #f8fafc;
-            --text-secondary: #94a3b8;
-            --border-color: rgba(51, 65, 85, 0.5);
-            --glow-cyan: rgba(6, 182, 212, 0.5);
-            --glow-pink: rgba(236, 72, 153, 0.5);
-            --glow-emerald: rgba(16, 185, 129, 0.5);
-        }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, var(--bg-darker) 0%, var(--bg-dark) 100%);
-        }
-
-        /* Glass Effect */
-        .glass {
-            background: var(--bg-card);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid var(--border-color);
-        }
-
-        /* Glow Effects */
-        .glow-cyan { box-shadow: 0 0 20px var(--glow-cyan), 0 0 40px var(--glow-cyan); }
-        .glow-pink { box-shadow: 0 0 20px var(--glow-pink), 0 0 40px var(--glow-pink); }
-        .glow-emerald { box-shadow: 0 0 20px var(--glow-emerald), 0 0 40px var(--glow-emerald); }
-
-        /* Neon Text */
-        .neon-text {
-            text-shadow: 0 0 5px var(--primary-light),
-                         0 0 10px var(--primary-light),
-                         0 0 15px var(--primary-light);
-        }
-
-        /* Tab System */
-        .tab-nav {
-            display: flex;
-            gap: 0.5rem;
-            background: var(--bg-card);
-            padding: 0.5rem;
-            border-radius: 0.75rem;
-            border: 1px solid var(--border-color);
-            margin-bottom: 1.5rem;
-        }
-
-        .tab-btn {
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.5rem;
-            background: transparent;
-            color: var(--text-secondary);
-            transition: all 0.3s;
-            border: 1px solid transparent;
-        }
-
-        .tab-btn.active {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
-        }
-
-        .tab-btn:hover:not(.active) {
-            background: rgba(255, 255, 255, 0.05);
-            color: var(--text-primary);
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-            animation: fadeIn 0.3s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Chatbot Cards */
-        .agent-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 1rem;
-            padding: 1.5rem;
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-
-        .agent-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary);
-        }
-
-        /* Chat Window */
-        .chat-container {
-            display: flex;
-            flex-direction: column;
-            height: 500px;
-            max-height: 70vh;
-        }
-
-        .chat-messages {
-            flex: 1;
-            overflow-y: auto;
-            padding: 1rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .message {
-            max-width: 80%;
-            padding: 0.75rem 1rem;
-            border-radius: 0.75rem;
-            line-height: 1.6;
-        }
-
-        .message.user {
-            align-self: flex-end;
-            background: var(--primary);
-            color: white;
-            border-bottom-right-radius: 0;
-        }
-
-        .message.bot {
-            align-self: flex-start;
-            background: rgba(255, 255, 255, 0.05);
-            border-bottom-left-radius: 0;
-            border-left: 3px solid var(--primary);
-        }
-
-        /* Score Display */
-        .score-display {
-            background: rgba(16, 185, 129, 0.1);
-            border: 1px solid rgba(16, 185, 129, 0.3);
-            border-radius: 0.75rem;
-            padding: 1.5rem;
-            text-align: center;
-            margin: 1rem 0;
-        }
-
-        .score-value {
-            font-size: 3rem;
-            font-weight: 800;
-            color: #34d399;
-        }
-
-        /* Input Area */
-        .input-area {
-            display: flex;
-            gap: 0.5rem;
-            padding: 1rem;
-            background: var(--bg-card);
-            border-top: 1px solid var(--border-color);
-        }
-
-        .input-area input,
-        .input-area textarea {
-            flex: 1;
-            padding: 0.75rem 1rem;
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid var(--border-color);
-            border-radius: 0.5rem;
-            color: var(--text-primary);
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        .input-area input:focus,
-        .input-area textarea:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-
-        /* Button Styles */
-        .btn-primary {
-            padding: 0.75rem 1.5rem;
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 0.5rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .btn-primary:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-        }
-
-        .btn-primary:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-
-        /* Loading Spinner */
-        .spinner {
-            width: 1rem;
-            height: 1rem;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-top: 2px solid white;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .agent-grid {
-                grid-template-columns: 1fr;
-            }
-            .chat-container {
-                height: 400px;
-            }
-        }
-
-        /* Utility Classes */
-        .hidden { display: none; }
-        .text-balance { text-wrap: balance; }
-    </style>
+    <!-- Custom Files -->
+    <link rel="stylesheet" href="styles.css">
+    <script src="config.js"></script>
+    <script src="app.js" defer></script>
 </head>
-<body class="text-white">
+<body class="bg-slate-900 text-white">
     <!-- Header -->
     <header class="glass sticky top-0 z-50 px-6 py-4">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
@@ -256,10 +30,20 @@
                 <div class="w-10 h-10 bg-gradient-to-br from-cyan-400 to-violet-600 rounded-lg flex items-center justify-center">
                     <span class="font-bold text-lg">CO</span>
                 </div>
-                <h1 class="text-xl font-bold neon-text">Catalyst Ozwell</h1>
+                <h1 class="text-xl font-bold theme-text">Catalyst Ozwell</h1>
             </div>
 
             <div class="flex items-center gap-4">
+                <!-- Location Selector -->
+                <select id="locationSelect" class="px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg focus:outline-none focus:border-cyan-500 cursor-pointer">
+                    <option value="New York">🗽 New York</option>
+                    <option value="Rome">🏛️ Rome</option>
+                    <option value="Amsterdam">🚲 Amsterdam</option>
+                    <option value="Istanbul">🕌 Istanbul</option>
+                    <option value="London">🇬🇧 London</option>
+                    <option value="Tokyo">🗼 Tokyo</option>
+                </select>
+
                 <select id="languageSelect" class="px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg focus:outline-none focus:border-cyan-500 cursor-pointer">
                     <option value="en">English</option>
                     <option value="tr">Türkçe</option>
@@ -274,49 +58,53 @@
         <!-- Tab Navigation -->
         <div class="tab-nav">
             <button class="tab-btn active" data-tab="ai-chat">
-                <span class="mr-2">🤖</span> AI Chatbots
+                <span class="mr-2">🤖</span> <span class="theme-text" data-tr-en="AI Chatbots" data-tr-tr="AI Sohbet Robotları">AI Chatbots</span>
             </button>
             <button class="tab-btn" data-tab="info">
-                <span class="mr-2">ℹ️</span> Information
+                <span class="mr-2">ℹ️</span> <span class="theme-text" data-tr-en="Information" data-tr-tr="Bilgi">Information</span>
             </button>
             <button class="tab-btn" data-tab="telemetry">
-                <span class="mr-2">☀️</span> Telemetry
+                <span class="mr-2">☀️</span> <span class="theme-text" data-tr-en="Telemetry" data-tr-tr="Telemetri">Telemetry</span>
             </button>
         </div>
 
         <!-- AI Chatbots Tab -->
         <div id="ai-chat" class="tab-content active">
-            <h2 class="text-3xl font-bold mb-2 neon-text">AI Chatbot Agents</h2>
-            <p class="text-gray-400 mb-8">Specialized agents for education, Turkish law, and engineering</p>
+            <h2 class="text-3xl font-bold mb-2 theme-text" data-tr-en="AI Chatbot Agents" data-tr-tr="AI Sohbet Robot Ajanları">AI Chatbot Agents</h2>
+            <p class="text-gray-400 mb-8" data-tr-en="Specialized agents for education, Turkish law, and engineering"
+               data-tr-tr="Eğitim, Türk hukuku ve mühendislik için özel ajanlar">Specialized agents for education, Turkish law, and engineering</p>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <!-- Meister Ozwell: Education Evaluator -->
-                <div class="agent-card glow-cyan" onclick="openAgentModal('meister')">
+                <div class="agent-card modern-card" onclick="openAgentModal('meister')">
                     <h3 class="text-xl font-bold mb-2">🎓 Meister Ozwell</h3>
-                    <p class="text-sm text-gray-400 mb-4">Education Evaluator - Get scored answers with detailed feedback</p>
+                    <p class="text-sm text-gray-400 mb-4" data-tr-en="Education Evaluator - Get scored answers with detailed feedback"
+                       data-tr-tr="Eğitim Değerlendiricisi - Puanlanmış cevaplar ve detaylı geri bildirim alın">Education Evaluator - Get scored answers with detailed feedback</p>
                     <div class="flex gap-2 mt-auto">
-                        <span class="text-xs bg-cyan-900/50 px-2 py-1 rounded-full">Scoring</span>
-                        <span class="text-xs bg-cyan-900/50 px-2 py-1 rounded-full">Feedback</span>
+                        <span class="text-xs bg-cyan-900/50 px-2 py-1 rounded-full" data-tr-en="Scoring" data-tr-tr="Puanlama">Scoring</span>
+                        <span class="text-xs bg-cyan-900/50 px-2 py-1 rounded-full" data-tr-en="Feedback" data-tr-tr="Geri Bildirim">Feedback</span>
                     </div>
                 </div>
 
                 <!-- Av.Ozwell: Turkish Legal -->
-                <div class="agent-card glow-pink" onclick="openAgentModal('av')">
+                <div class="agent-card modern-card" onclick="openAgentModal('av')">
                     <h3 class="text-xl font-bold mb-2">⚖️ Av.Ozwell</h3>
-                    <p class="text-sm text-gray-400 mb-4">Türk Hukuk Danışmanı - RES, Kamulaştırma, CED Raporları</p>
+                    <p class="text-sm text-gray-400 mb-4" data-tr-en="Turkish Legal Advisor - RES, Expropriation, CED Reports"
+                       data-tr-tr="Türk Hukuk Danışmanı - RES, Kamulaştırma, CED Raporları">Turkish Legal Advisor - RES, Expropriation, CED Reports</p>
                     <div class="flex gap-2 mt-auto">
-                        <span class="text-xs bg-pink-900/50 px-2 py-1 rounded-full">Professional</span>
-                        <span class="text-xs bg-pink-900/50 px-2 py-1 rounded-full">Türkçe</span>
+                        <span class="text-xs bg-pink-900/50 px-2 py-1 rounded-full" data-tr-en="Professional" data-tr-tr="Profesyonel">Professional</span>
+                        <span class="text-xs bg-pink-900/50 px-2 py-1 rounded-full" data-tr-en="Turkish" data-tr-tr="Türkçe">Turkish</span>
                     </div>
                 </div>
 
                 <!-- NeOzwell: Engineering -->
-                <div class="agent-card glow-emerald" onclick="openAgentModal('neo')">
+                <div class="agent-card modern-card" onclick="openAgentModal('neo')">
                     <h3 class="text-xl font-bold mb-2">🔧 NeOzwell</h3>
-                    <p class="text-sm text-gray-400 mb-4">Engineering Assistant - Technical analysis & repair</p>
+                    <p class="text-sm text-gray-400 mb-4" data-tr-en="Engineering Assistant - Technical analysis & repair"
+                       data-tr-tr="Mühendislik Asistanı - Teknik analiz ve onarım">Engineering Assistant - Technical analysis & repair</p>
                     <div class="flex gap-2 mt-auto">
-                        <span class="text-xs bg-emerald-900/50 px-2 py-1 rounded-full">Technical</span>
-                        <span class="text-xs bg-emerald-900/50 px-2 py-1 rounded-full">Repair</span>
+                        <span class="text-xs bg-emerald-900/50 px-2 py-1 rounded-full" data-tr-en="Technical" data-tr-tr="Teknik">Technical</span>
+                        <span class="text-xs bg-emerald-900/50 px-2 py-1 rounded-full" data-tr-en="Repair" data-tr-tr="Onarım">Repair</span>
                     </div>
                 </div>
             </div>
@@ -324,76 +112,101 @@
 
         <!-- Information Tab -->
         <div id="info" class="tab-content">
-            <h2 class="text-3xl font-bold mb-6 neon-text">Information Hub</h2>
+            <h2 class="text-3xl font-bold mb-6 theme-text" data-tr-en="Information Hub" data-tr-tr="Bilgi Merkezi">Information Hub</h2>
 
-            <!-- Sub-tabs for Info -->
             <div class="tab-nav mb-6">
-                <button class="tab-btn active" data-info-tab="travel">✈️ Travel</button>
-                <button class="tab-btn" data-info-tab="weather">🌤️ Weather</button>
-                <button class="tab-btn" data-info-tab="quotes">💡 Quotes</button>
-                <button class="tab-btn" data-info-tab="comments">📝 Comments</button>
+                <button class="tab-btn active" data-info-tab="travel">
+                    <span class="mr-2">✈️</span> <span class="theme-text" data-tr-en="Travel" data-tr-tr="Seyahat">Travel</span>
+                </button>
+                <button class="tab-btn" data-info-tab="weather">
+                    <span class="mr-2">🌤️</span> <span class="theme-text" data-tr-en="Weather" data-tr-tr="Hava Durumu">Weather</span>
+                </button>
+                <button class="tab-btn" data-info-tab="quotes">
+                    <span class="mr-2">💡</span> <span class="theme-text" data-tr-en="Quotes" data-tr-tr="Alıntılar">Quotes</span>
+                </button>
+                <button class="tab-btn" data-info-tab="comments">
+                    <span class="mr-2">📝</span> <span class="theme-text" data-tr-en="Comments" data-tr-tr="Yorumlar">Comments</span>
+                </button>
             </div>
 
             <!-- Travel Section -->
             <div id="info-travel" class="info-tab-content active">
-                <h3 class="text-2xl font-bold mb-4">🌍 Travel & Discoveries</h3>
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    <div class="glass rounded-xl p-6">
-                        <h4 class="text-xl font-bold mb-4">Select Destination</h4>
-                        <div class="flex flex-wrap gap-2">
-                            <button class="px-4 py-2 bg-slate-800 rounded-lg hover:bg-slate-700 transition" data-city="New York">🗽 New York</button>
-                            <button class="px-4 py-2 bg-slate-800 rounded-lg hover:bg-slate-700 transition" data-city="Rome">🏛️ Rome</button>
-                            <button class="px-4 py-2 bg-slate-800 rounded-lg hover:bg-slate-700 transition" data-city="Amsterdam">🚲 Amsterdam</button>
-                            <button class="px-4 py-2 bg-slate-800 rounded-lg hover:bg-slate-700 transition" data-city="Istanbul">🕌 Istanbul</button>
+                <h3 class="text-2xl font-bold mb-4 theme-text" data-tr-en="Travel & Nearby Discoveries" data-tr-tr="Seyahat ve Yakın Keşifler">Travel & Nearby Discoveries</h3>
+
+                <!-- City Info -->
+                <div class="glass rounded-xl p-6 mb-8">
+                    <h4 class="text-xl font-bold mb-4 theme-text" data-tr-en="Current Location" data-tr-tr="Mevcut Konum">Current Location</h4>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div>
+                            <p class="text-sm text-gray-400" data-tr-en="City" data-tr-tr="Şehir">City</p>
+                            <p class="font-bold" id="locationCity">New York</p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-400" data-tr-en="Country" data-tr-tr="Ülke">Country</p>
+                            <p class="font-bold" id="locationCountry">USA</p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-400" data-tr-en="Population" data-tr-tr="Nüfus">Population</p>
+                            <p class="font-bold" id="locationPopulation">8.3M</p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-400" data-tr-en="Timezone" data-tr-tr="Saat Dilimi">Timezone</p>
+                            <p class="font-bold" id="timezone">EST</p>
                         </div>
                     </div>
+                </div>
+
+                <!-- Museums & Restaurants -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     <div class="glass rounded-xl p-6">
-                        <h4 class="text-xl font-bold mb-4">📍 Current Location</h4>
-                        <div class="space-y-3">
-                            <div><p class="text-sm text-gray-400">City</p><p class="font-bold" id="locationCity">New York</p></div>
-                            <div><p class="text-sm text-gray-400">Population</p><p class="font-bold" id="locationPopulation">8.3M</p></div>
-                            <div><p class="text-sm text-gray-400">Country</p><p class="font-bold" id="locationCountry">USA</p></div>
-                        </div>
+                        <h4 class="text-xl font-bold mb-4 theme-text" data-tr-en="🏛️ Museums" data-tr-tr="🏛️ Müzeler">🏛️ Museums</h4>
+                        <div id="museumsList" class="space-y-3"></div>
                     </div>
                     <div class="glass rounded-xl p-6">
-                        <h4 class="text-xl font-bold mb-4">🍽️ Restaurants</h4>
-                        <div id="restaurantsList" class="space-y-3">
-                            <!-- Populated by JS -->
-                        </div>
+                        <h4 class="text-xl font-bold mb-4 theme-text" data-tr-en="🍽️ Restaurants" data-tr-tr="🍽️ Restoranlar">🍽️ Restaurants</h4>
+                        <div id="restaurantsList" class="space-y-3"></div>
                     </div>
+                </div>
+
+                <!-- Attractions -->
+                <div class="mt-6 glass rounded-xl p-6">
+                    <h4 class="text-xl font-bold mb-4 theme-text" data-tr-en="🌟 Top Attractions" data-tr-tr="🌟 En Popüler Mekanlar">🌟 Top Attractions</h4>
+                    <div id="attractionsList" class="space-y-3"></div>
                 </div>
             </div>
 
             <!-- Weather Section -->
             <div id="info-weather" class="info-tab-content hidden">
-                <h3 class="text-2xl font-bold mb-6">🌤️ 5-Day Weather Forecast</h3>
-                <div class="glass rounded-xl p-6 mb-6">
+                <h3 class="text-2xl font-bold mb-6 theme-text" data-tr-en="5-Day Weather Forecast" data-tr-tr="5 Günlük Hava Tahmini">5-Day Weather Forecast</h3>
+
+                <!-- Current Weather -->
+                <div class="glass rounded-xl p-6 mb-8">
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div class="text-center">
-                            <p class="text-gray-400 mb-2">Current</p>
-                            <p class="text-4xl font-bold" id="weatherTemp">--°C</p>
-                            <p class="text-gray-400 mt-2" id="weatherCondition">--</p>
+                            <p class="text-gray-400 mb-2" data-tr-en="Current Temp" data-tr-tr="Mevcut Sıcaklık">Current Temp</p>
+                            <p id="weatherTemp" class="text-4xl font-bold">--°C</p>
+                            <p id="weatherCondition" class="text-gray-400 mt-2">--</p>
                         </div>
                         <div class="text-center">
-                            <p class="text-gray-400 mb-2">Humidity</p>
-                            <p class="text-4xl font-bold" id="weatherHumidity">--%</p>
+                            <p class="text-gray-400 mb-2" data-tr-en="Humidity" data-tr-tr="Nem">Humidity</p>
+                            <p id="weatherHumidity" class="text-4xl font-bold">--%</p>
                             <p class="text-gray-400 mt-2">💧</p>
                         </div>
                         <div class="text-center">
-                            <p class="text-gray-400 mb-2">Wind</p>
-                            <p class="text-4xl font-bold" id="weatherWind">-- m/s</p>
+                            <p class="text-gray-400 mb-2" data-tr-en="Wind" data-tr-tr="Rüzgar">Wind</p>
+                            <p id="weatherWind" class="text-4xl font-bold">-- m/s</p>
                             <p class="text-gray-400 mt-2">💨</p>
                         </div>
                     </div>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-5 gap-4" id="forecastList">
-                    <!-- Forecast items -->
-                </div>
+
+                <!-- Forecast -->
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-4" id="forecastList"></div>
             </div>
 
             <!-- Quotes Section -->
             <div id="info-quotes" class="info-tab-content hidden">
-                <h3 class="text-2xl font-bold mb-6">💡 Wisdom & Strategy</h3>
+                <h3 class="text-2xl font-bold mb-6 theme-text" data-tr-en="Wisdom & Strategy" data-tr-tr="Bilgelik ve Strateji">Wisdom & Strategy</h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="glass rounded-xl p-6">
                         <p class="italic mb-4" id="bibleQuote">"For the Lord is my light and my salvation..."</p>
@@ -418,19 +231,24 @@
                     </div>
                 </div>
                 <div class="text-center mt-8">
-                    <button id="newQuoteBtn" class="btn-primary mx-auto">✨ Generate New Quotes</button>
+                    <button id="newQuoteBtn" class="btn-primary mx-auto">
+                        <span data-tr-en="Generate New Quotes" data-tr-tr="Yeni Alıntılar Oluştur">✨ Generate New Quotes</span>
+                    </button>
                 </div>
             </div>
 
             <!-- Comments Section -->
             <div id="info-comments" class="info-tab-content hidden">
-                <h3 class="text-2xl font-bold mb-6">📝 Comments Section</h3>
+                <h3 class="text-2xl font-bold mb-6 theme-text" data-tr-en="Comments Section" data-tr-tr="Yorumlar Bölümü">Comments Section</h3>
+                <div id="alertContainer"></div>
                 <div class="glass rounded-xl p-6 mb-6">
-                    <h4 class="font-bold mb-4">Leave a Comment</h4>
+                    <h4 class="font-bold mb-4 theme-text" data-tr-en="Leave a Comment" data-tr-tr="Yorum Bırakın">Leave a Comment</h4>
                     <div class="space-y-3">
                         <input type="text" id="commentName" placeholder="Your name..." class="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg focus:outline-none focus:border-cyan-500">
                         <textarea id="commentText" placeholder="Your comment..." class="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg focus:outline-none focus:border-cyan-500 h-24 resize-none"></textarea>
-                        <button id="submitCommentBtn" class="btn-primary">Post Comment</button>
+                        <button id="submitCommentBtn" class="btn-primary">
+                            <span data-tr-en="Post Comment" data-tr-tr="Yorum Gönder">Post Comment</span>
+                        </button>
                     </div>
                 </div>
                 <div id="commentsList" class="space-y-4"></div>
@@ -439,14 +257,14 @@
 
         <!-- Telemetry Tab -->
         <div id="telemetry" class="tab-content">
-            <h2 class="text-3xl font-bold mb-6 neon-text">☀️ Solar Telemetry</h2>
+            <h2 class="text-3xl font-bold mb-6 theme-text" data-tr-en="Solar Telemetry" data-tr-tr="Güneş Telemetrisi">Solar Telemetry</h2>
             <div class="glass rounded-xl overflow-hidden">
                 <div class="bg-gradient-to-r from-violet-900/30 to-purple-900/30 px-6 py-4 flex items-center justify-between">
                     <div class="flex items-center gap-4">
                         <span class="text-2xl">☀️</span>
                         <div>
-                            <h3 class="text-xl font-bold">SUN TELEMETRY</h3>
-                            <p class="text-xs text-gray-400">Real-time Solar Activity Monitoring</p>
+                            <h3 class="text-xl font-bold theme-text" data-tr-en="SUN TELEMETRY" data-tr-tr="GÜNEŞ TELEMETRİSİ">SUN TELEMETRY</h3>
+                            <p class="text-xs text-gray-400" data-tr-en="Real-time Solar Activity Monitoring" data-tr-tr="Gerçek Zamanlı Güneş Aktivitesi İzleme">Real-time Solar Activity Monitoring</p>
                         </div>
                     </div>
                 </div>
@@ -454,31 +272,60 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
                         <div class="bg-slate-800/50 rounded-lg p-4 border border-violet-500/30">
                             <div class="flex justify-between items-center mb-3">
-                                <span class="text-sm font-semibold text-gray-300">Solar Wind Speed</span>
+                                <span class="text-sm font-semibold text-gray-300" data-tr-en="Solar Wind Speed" data-tr-tr="Güneş Rüzgarı Hızı">Solar Wind Speed</span>
                                 <span class="w-3 h-3 rounded-full bg-emerald-400"></span>
                             </div>
                             <p class="text-2xl font-bold text-emerald-400" id="solarWindSpeed">350 km/s</p>
-                            <p class="text-xs text-gray-400 mt-2">Normal: 300-400 km/s</p>
+                            <p class="text-xs text-gray-400 mt-2" data-tr-en="Normal: 300-400 km/s" data-tr-tr="Normal: 300-400 km/s">Normal: 300-400 km/s</p>
                         </div>
                         <div class="bg-slate-800/50 rounded-lg p-4 border border-violet-500/30">
                             <div class="flex justify-between items-center mb-3">
-                                <span class="text-sm font-semibold text-gray-300">CME Activity</span>
+                                <span class="text-sm font-semibold text-gray-300" data-tr-en="CME Activity" data-tr-tr="CME Aktivitesi">CME Activity</span>
                                 <span class="w-3 h-3 rounded-full bg-amber-400"></span>
                             </div>
                             <p class="text-2xl font-bold text-amber-400" id="cmeActivity">Moderate</p>
-                            <p class="text-xs text-gray-400 mt-2">Coronal Mass Ejections</p>
+                            <p class="text-xs text-gray-400 mt-2" data-tr-en="Coronal Mass Ejections" data-tr-tr="Koronal Kütle Atımları">Coronal Mass Ejections</p>
                         </div>
                         <div class="bg-slate-800/50 rounded-lg p-4 border border-violet-500/30">
                             <div class="flex justify-between items-center mb-3">
-                                <span class="text-sm font-semibold text-gray-300">X-Ray Flux</span>
+                                <span class="text-sm font-semibold text-gray-300" data-tr-en="X-Ray Flux" data-tr-tr="X-Işını Akısı">X-Ray Flux</span>
                                 <span class="w-3 h-3 rounded-full bg-emerald-400"></span>
                             </div>
                             <p class="text-2xl font-bold text-emerald-400" id="xrayFlux">1.2E-05</p>
                             <p class="text-xs text-gray-400 mt-2">Watts/m²</p>
                         </div>
+                        <div class="bg-slate-800/50 rounded-lg p-4 border border-violet-500/30">
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="text-sm font-semibold text-gray-300">Kp Index</span>
+                                <span class="w-3 h-3 rounded-full bg-emerald-400"></span>
+                            </div>
+                            <p class="text-2xl font-bold text-emerald-400" id="kpIndex">3</p>
+                            <p class="text-xs text-gray-400 mt-2" data-tr-en="Scale 0-9" data-tr-tr="0-9 Ölçeği">Scale 0-9</p>
+                        </div>
+                        <div class="bg-slate-800/50 rounded-lg p-4 border border-violet-500/30">
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="text-sm font-semibold text-gray-300" data-tr-en="Solar Flux" data-tr-tr="Güneş Akısı">Solar Flux</span>
+                                <span class="w-3 h-3 rounded-full bg-amber-400"></span>
+                            </div>
+                            <p class="text-2xl font-bold text-amber-400" id="solarFlux">145 SFU</p>
+                            <p class="text-xs text-gray-400 mt-2">Solar Flux Units</p>
+                        </div>
+                        <div class="bg-slate-800/50 rounded-lg p-4 border border-violet-500/30">
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="text-sm font-semibold text-gray-300" data-tr-en="Radiation Risk" data-tr-tr="Radyasyon Riski">Radiation Risk</span>
+                                <span class="w-3 h-3 rounded-full bg-emerald-400"></span>
+                            </div>
+                            <p class="text-2xl font-bold text-emerald-400" id="radiationRisk">Low</p>
+                            <p class="text-xs text-gray-400 mt-2" data-tr-en="Astronaut Safety" data-tr-tr="Astronot Güvenliği">Astronaut Safety</p>
+                        </div>
                     </div>
-                    <div class="flex gap-3">
-                        <button id="refreshTelemetry" class="btn-primary">🔄 Refresh Data</button>
+                    <div class="flex gap-3 flex-wrap">
+                        <button id="refreshTelemetry" class="btn-primary">
+                            <span data-tr-en="Refresh Data" data-tr-tr="Verileri Yenile">🔄 Refresh Data</span>
+                        </button>
+                        <button id="telemetryInfo" class="px-6 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg font-semibold transition-smooth">
+                            <span data-tr-en="Learn More" data-tr-tr="Daha Fazla Bilgi">ℹ️ Learn More</span>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -490,24 +337,21 @@
     <div id="meisterModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="glass rounded-xl max-w-2xl w-full max-h-[90vh] overflow-hidden">
             <div class="p-6 border-b border-slate-700 flex justify-between items-center">
-                <h2 class="text-2xl font-bold neon-text">🎓 Meister Ozwell</h2>
+                <h2 class="text-2xl font-bold theme-text">🎓 Meister Ozwell</h2>
                 <button onclick="closeAgentModal('meister')" class="text-gray-400 hover:text-white">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                    </svg>
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                 </button>
             </div>
             <div class="p-6 chat-container">
                 <div class="chat-messages" id="meisterMessages">
-                    <div class="message bot">
-                        <p>Welcome to Meister Ozwell, your education evaluator. Enter a question and your answer to receive a score, verdict, and perfect response.</p>
-                    </div>
+                    <div class="message bot"><p data-tr-en="Welcome to Meister Ozwell, your education evaluator. Enter a question and your answer to receive a score, verdict, and perfect response."
+                          data-tr-tr="Meister Ozwell'e hoş geldiniz, eğitim değerlendiriciniz. Soru ve cevap girin, puan, karar ve mükemmel yanıt alın.">Welcome to Meister Ozwell, your education evaluator. Enter a question and your answer to receive a score, verdict, and perfect response.</p></div>
                 </div>
                 <div class="input-area">
                     <textarea id="meisterQuestionInput" placeholder="Enter the question..." class="flex-1" rows="2"></textarea>
                     <textarea id="meisterAnswerInput" placeholder="Enter your answer..." class="flex-1" rows="3"></textarea>
                     <button id="meisterSubmit" class="btn-primary">
-                        <span>Evaluate</span>
+                        <span data-tr-en="Evaluate" data-tr-tr="Değerlendir">Evaluate</span>
                         <div id="meisterSpinner" class="hidden spinner"></div>
                     </button>
                 </div>
@@ -519,23 +363,20 @@
     <div id="avModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="glass rounded-xl max-w-2xl w-full max-h-[90vh] overflow-hidden">
             <div class="p-6 border-b border-slate-700 flex justify-between items-center">
-                <h2 class="text-2xl font-bold neon-text" style="color: #ec4899;">⚖️ Av.Ozwell</h2>
+                <h2 class="text-2xl font-bold theme-text" style="color: #ec4899;">⚖️ Av.Ozwell</h2>
                 <button onclick="closeAgentModal('av')" class="text-gray-400 hover:text-white">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                    </svg>
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                 </button>
             </div>
             <div class="p-6 chat-container">
                 <div class="chat-messages" id="avMessages">
-                    <div class="message bot">
-                        <p>Merhaba. RES, kamulaştırma, CED raporları ve ticaret hukuku konularında size profesyonel hukuki destek sunuyorum.</p>
-                    </div>
+                    <div class="message bot"><p data-tr-en="Hello. I am your Turkish legal advisor specializing in RES, expropriation, CED reports, and commercial law. How can I assist you today?"
+                          data-tr-tr="Merhaba. RES, kamulaştırma, CED raporları ve ticaret hukuku konularında uzman Türk hukuk danışmanınızım. Nasıl yardımcı olabilirim?">Hello. I am your Turkish legal advisor specializing in RES, expropriation, CED reports, and commercial law. How can I assist you today?</p></div>
                 </div>
                 <div class="input-area">
                     <input type="text" id="avInput" placeholder="Hukuk sorunuzu yazın..." class="flex-1">
                     <button id="avSubmit" class="btn-primary" style="background: #ec4899;">
-                        <span id="avSendText">Gönder</span>
+                        <span id="avSendText" data-tr-en="Send" data-tr-tr="Gönder">Send</span>
                         <div id="avSpinner" class="hidden spinner"></div>
                     </button>
                 </div>
@@ -547,659 +388,25 @@
     <div id="neoModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="glass rounded-xl max-w-2xl w-full max-h-[90vh] overflow-hidden">
             <div class="p-6 border-b border-slate-700 flex justify-between items-center">
-                <h2 class="text-2xl font-bold neon-text" style="color: #10b981;">🔧 NeOzwell</h2>
+                <h2 class="text-2xl font-bold theme-text" style="color: #10b981;">🔧 NeOzwell</h2>
                 <button onclick="closeAgentModal('neo')" class="text-gray-400 hover:text-white">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                    </svg>
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                 </button>
             </div>
             <div class="p-6 chat-container">
                 <div class="chat-messages" id="neoMessages">
-                    <div class="message bot">
-                        <p>Engineering Assistant online. Describe your technical issue, car/motorcycle repair need, or ask for analysis.</p>
-                    </div>
+                    <div class="message bot"><p data-tr-en="Engineering Assistant online. Describe your technical issue, car/motorcycle repair need, or ask for analysis."
+                          data-tr-tr="Mühendislik Asistanı çevrimiçi. Teknik sorununuzu, araba/motosiklet tamir ihtiyacınızı açıklayın veya analiz isteyin.">Engineering Assistant online. Describe your technical issue, car/motorcycle repair need, or ask for analysis.</p></div>
                 </div>
                 <div class="input-area">
                     <input type="text" id="neoInput" placeholder="Describe your technical issue..." class="flex-1">
                     <button id="neoSubmit" class="btn-primary" style="background: #10b981;">
-                        <span>Analyze</span>
+                        <span data-tr-en="Analyze" data-tr-tr="Analiz Et">Analyze</span>
                         <div id="neoSpinner" class="hidden spinner"></div>
                     </button>
                 </div>
             </div>
         </div>
     </div>
-
-    <script>
-        // ======================
-        // GLOBAL STATE
-        // ======================
-        const APP = {
-            currentLanguage: 'en',
-            currentTheme: 'cyan',
-            apiEndpoint: 'https://ai.catalystozwell.com/api/chat', // Update with your actual endpoint
-            cityData: {
-                'New York': { population: '8.3M', country: 'USA', timezone: 'EST' },
-                'Rome': { population: '2.8M', country: 'Italy', timezone: 'CET' },
-                'Amsterdam': { population: '0.9M', country: 'Netherlands', timezone: 'CET' },
-                'Istanbul': { population: '15.5M', country: 'Turkey', timezone: 'TRT' }
-            },
-            weatherData: {
-                'New York': { temp: 22, condition: 'Sunny', humidity: 65, wind: 5.2 },
-                'Rome': { temp: 25, condition: 'Partly Cloudy', humidity: 70, wind: 3.1 },
-                'Amsterdam': { temp: 18, condition: 'Rainy', humidity: 85, wind: 8.4 },
-                'Istanbul': { temp: 24, condition: 'Clear', humidity: 60, wind: 4.5 }
-            },
-            telemetryData: {
-                solarWindSpeed: '350 km/s',
-                cmeActivity: 'Moderate',
-                xrayFlux: '1.2E-05'
-            },
-            quotes: {
-                en: {
-                    bible: { text: '"For the Lord is my light and my salvation..."', source: 'Psalm 27:1' },
-                    sunTzu: { text: '"The supreme art of war is to subdue the enemy without fighting..."', source: 'The Art of War, Chapter III' },
-                    roman: { text: '"It is not the strength of the body that counts, but the strength of the spirit..."', source: 'Marcus Aurelius' }
-                },
-                tr: {
-                    bible: { text: '"RAB benim ışığım ve kurtuluşumdur..."', source: 'Mezmur 27:1' },
-                    sunTzu: { text: '"Savaşın en üstün sanatı, düşmanı savaşmadan yenmek..."', source: 'Savaş Sanatı, Üçüncü Bölüm' },
-                    roman: { text: '"Bedenin gücü değil, ruhun gücü önemlidir..."', source: 'Marcus Aurelius' }
-                }
-            }
-        };
-
-        // ======================
-        // INITIALIZATION
-        // ======================
-        document.addEventListener('DOMContentLoaded', () => {
-            initTabs();
-            initInfoTabs();
-            initLanguageSwitcher();
-            initThemeSwitcher();
-            initChatbots();
-            loadInitialData();
-        });
-
-        // ======================
-        // TAB SYSTEM
-        // ======================
-        function initTabs() {
-            const tabButtons = document.querySelectorAll('.tab-btn[data-tab]');
-            const tabContents = document.querySelectorAll('.tab-content');
-
-            tabButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    const targetTab = button.dataset.tab;
-
-                    // Deactivate all buttons and contents
-                    tabButtons.forEach(btn => btn.classList.remove('active'));
-                    tabContents.forEach(content => content.classList.remove('active'));
-
-                    // Activate selected
-                    button.classList.add('active');
-                    document.getElementById(targetTab).classList.add('active');
-                });
-            });
-        }
-
-        // ======================
-        // INFO TABS (Nested)
-        // ======================
-        function initInfoTabs() {
-            const infoTabButtons = document.querySelectorAll('.tab-btn[data-info-tab]');
-            const infoTabContents = document.querySelectorAll('.info-tab-content');
-
-            infoTabButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    const targetTab = button.dataset.infoTab;
-
-                    infoTabButtons.forEach(btn => btn.classList.remove('active'));
-                    infoTabContents.forEach(content => content.classList.add('hidden'));
-
-                    button.classList.add('active');
-                    document.getElementById(`info-${targetTab}`).classList.remove('hidden');
-                });
-            });
-        }
-
-        // ======================
-        // LANGUAGE SWITCHER
-        // ======================
-        function initLanguageSwitcher() {
-            const languageSelect = document.getElementById('languageSelect');
-            const settingsLanguage = document.getElementById('settingsLanguage');
-
-            // Sync both dropdowns
-            const syncLanguage = () => {
-                const lang = languageSelect.value;
-                settingsLanguage.value = lang;
-                APP.currentLanguage = lang;
-                updateLanguage();
-                saveSettings();
-            };
-
-            languageSelect.addEventListener('change', syncLanguage);
-            settingsLanguage.addEventListener('change', () => {
-                languageSelect.value = settingsLanguage.value;
-                syncLanguage();
-            });
-
-            // Load saved language
-            loadSettings();
-        }
-
-        function updateLanguage() {
-            const lang = APP.currentLanguage;
-            const elements = document.querySelectorAll('[data-tr-en], [data-tr-tr]');
-
-            elements.forEach(el => {
-                const text = el.getAttribute(`data-tr-${lang}`);
-                if (text) el.textContent = text;
-            });
-
-            // Update Av.Ozwell description
-            const avDescription = document.getElementById('avDescription');
-            if (avDescription) {
-                avDescription.textContent = lang === 'tr' ?
-                    'Yapay zeka tabanlı Türk hukuk danışmanı. RES, kamulaştırma, CED raporları ve ticaret hukuku konularında uzman hukuki görüşler sunar.' :
-                    'Turkish legal advisor specializing in RES, expropriation, CED reports, and commercial law.';
-            }
-
-            // Update quotes
-            updateQuotes();
-        }
-
-        // ======================
-        // THEME SWITCHER
-        // ======================
-        function initThemeSwitcher() {
-            const themeBtn = document.getElementById('themeBtn');
-            const themeModal = document.getElementById('themeModal');
-            const themeOptions = document.querySelectorAll('.theme-option');
-            const closeThemeModal = document.getElementById('closeThemeModal');
-            const settingsTheme = document.getElementById('settingsTheme');
-
-            // Open modal
-            themeBtn.addEventListener('click', () => themeModal.classList.remove('hidden'));
-
-            // Close modal
-            closeThemeModal.addEventListener('click', () => themeModal.classList.add('hidden'));
-
-            // Apply theme
-            themeOptions.forEach(option => {
-                option.addEventListener('click', () => {
-                    const theme = option.dataset.theme;
-                    applyTheme(theme);
-                    themeModal.classList.add('hidden');
-                    settingsTheme.value = theme;
-                    saveSettings();
-                });
-            });
-
-            // Settings theme sync
-            settingsTheme.addEventListener('change', () => {
-                applyTheme(settingsTheme.value);
-                saveSettings();
-            });
-
-            // Load saved theme
-            loadSettings();
-        }
-
-        function applyTheme(theme) {
-            APP.currentTheme = theme;
-
-            // Remove all theme classes
-            document.body.className = document.body.className.replace(/\btheme-\w+/g, '');
-
-            // Add new theme class
-            document.body.classList.add(`theme-${theme}`);
-
-            // Update CSS variables
-            const themes = {
-                cyan: { primary: '#06b6d4', primaryLight: '#22d3ee', primaryDark: '#0891b2' },
-                magenta: { primary: '#ec4899', primaryLight: '#f472b6', primaryDark: '#be185d' },
-                violet: { primary: '#8b5cf6', primaryLight: '#a78bfa', primaryDark: '#6d28d9' },
-                emerald: { primary: '#10b981', primaryLight: '#34d399', primaryDark: '#047857' },
-                amber: { primary: '#f59e0b', primaryLight: '#fbbf24', primaryDark: '#d97706' },
-                rose: { primary: '#f43f5e', primaryLight: '#fb7185', primaryDark: '#be123c' }
-            };
-
-            const themeConfig = themes[theme] || themes.cyan;
-            document.documentElement.style.setProperty('--primary', themeConfig.primary);
-            document.documentElement.style.setProperty('--primary-light', themeConfig.primaryLight);
-            document.documentElement.style.setProperty('--primary-dark', themeConfig.primaryDark);
-        }
-
-        // ======================
-        // SETTINGS MANAGEMENT
-        // ======================
-        function saveSettings() {
-            localStorage.setItem('catalystOzwellSettings', JSON.stringify({
-                language: APP.currentLanguage,
-                theme: APP.currentTheme,
-                tempUnit: document.querySelector('input[name="tempUnit"]:checked')?.value || 'C'
-            }));
-        }
-
-        function loadSettings() {
-            const settings = localStorage.getItem('catalystOzwellSettings');
-            if (settings) {
-                try {
-                    const parsed = JSON.parse(settings);
-                    APP.currentLanguage = parsed.language || 'en';
-                    APP.currentTheme = parsed.theme || 'cyan';
-
-                    // Apply language
-                    document.getElementById('languageSelect').value = parsed.language;
-                    document.getElementById('settingsLanguage').value = parsed.language;
-                    updateLanguage();
-
-                    // Apply theme
-                    applyTheme(parsed.theme);
-                    document.getElementById('settingsTheme').value = parsed.theme;
-
-                    // Apply temp unit
-                    if (parsed.tempUnit) {
-                        const radio = document.querySelector(`input[name="tempUnit"][value="${parsed.tempUnit}"]`);
-                        if (radio) radio.checked = true;
-                    }
-                } catch (e) {
-                    console.error('Error loading settings:', e);
-                }
-            }
-        }
-
-        // ======================
-        // CHATBOT FUNCTIONALITY
-        // ======================
-        function initChatbots() {
-            // Modal open/close
-            document.querySelectorAll('[data-agent]').forEach(card => {
-                card.addEventListener('click', () => {
-                    const agent = card.dataset.agent;
-                    openAgentModal(agent);
-                });
-            });
-
-            // Meister Ozwell (Education Evaluator)
-            const meisterSubmit = document.getElementById('meisterSubmit');
-            meisterSubmit.addEventListener('click', () => {
-                const question = document.getElementById('meisterQuestionInput').value;
-                const answer = document.getElementById('meisterAnswerInput').value;
-
-                if (!question.trim() || !answer.trim()) {
-                    showMessage('meister', 'Please enter both a question and your answer.', 'bot');
-                    return;
-                }
-
-                // Show loading
-                meisterSubmit.disabled = true;
-                document.getElementById('meisterSpinner').classList.remove('hidden');
-
-                // Simulate API call (replace with actual API call)
-                setTimeout(() => {
-                    simulateEducationEvaluation(question, answer);
-                    meisterSubmit.disabled = false;
-                    document.getElementById('meisterSpinner').classList.add('hidden');
-                }, 1500);
-            });
-
-            // Av.Ozwell (Turkish Legal)
-            const avSubmit = document.getElementById('avSubmit');
-            avSubmit.addEventListener('click', () => {
-                const input = document.getElementById('avInput');
-                const message = input.value.trim();
-
-                if (!message) return;
-
-                // Add user message
-                addMessage('av', message, 'user');
-                input.value = '';
-
-                // Show loading
-                avSubmit.disabled = true;
-                document.getElementById('avSpinner').classList.remove('hidden');
-
-                // Simulate API call
-                setTimeout(() => {
-                    simulateLegalResponse(message);
-                    avSubmit.disabled = false;
-                    document.getElementById('avSpinner').classList.add('hidden');
-                }, 1500);
-            });
-
-            // Allow Enter key for Av.Ozwell
-            document.getElementById('avInput').addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') {
-                    document.getElementById('avSubmit').click();
-                }
-            });
-
-            // NeOzwell (Engineering)
-            const neoSubmit = document.getElementById('neoSubmit');
-            neoSubmit.addEventListener('click', () => {
-                const input = document.getElementById('neoInput');
-                const message = input.value.trim();
-
-                if (!message) return;
-
-                // Add user message
-                addMessage('neo', message, 'user');
-                input.value = '';
-
-                // Show loading
-                neoSubmit.disabled = true;
-                document.getElementById('neoSpinner').classList.remove('hidden');
-
-                // Simulate API call
-                setTimeout(() => {
-                    simulateEngineeringResponse(message);
-                    neoSubmit.disabled = false;
-                    document.getElementById('neoSpinner').classList.add('hidden');
-                }, 1500);
-            });
-
-            // Allow Enter key for NeOzwell
-            document.getElementById('neoInput').addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') {
-                    document.getElementById('neoSubmit').click();
-                }
-            });
-        }
-
-        function openAgentModal(agent) {
-            // Close all modals
-            document.querySelectorAll('[id$="Modal"]').forEach(modal => {
-                modal.classList.add('hidden');
-            });
-
-            // Open selected modal
-            const modal = document.getElementById(`${agent}Modal`);
-            modal.classList.remove('hidden');
-
-            // Focus input
-            const input = modal.querySelector('input, textarea');
-            if (input) input.focus();
-        }
-
-        function closeAgentModal(agent) {
-            document.getElementById(`${agent}Modal`).classList.add('hidden');
-        }
-
-        function addMessage(agent, text, type) {
-            const container = document.getElementById(`${agent}Messages`);
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `message ${type}`;
-            messageDiv.innerHTML = `<p>${text}</p>`;
-            container.appendChild(messageDiv);
-            container.scrollTop = container.scrollHeight;
-        }
-
-        function showMessage(agent, text, type) {
-            addMessage(agent, text, type);
-        }
-
-        // ======================
-        // SIMULATED RESPONSES
-        // (Replace with actual API calls)
-        // ======================
-        function simulateEducationEvaluation(question, answer) {
-            const container = document.getElementById('meisterMessages');
-
-            // Add user's question and answer
-            addMessage('meister', `Q: ${question}`, 'user');
-            addMessage('meister', `A: ${answer}`, 'user');
-
-            // Simulate scoring
-            const score = Math.floor(Math.random() * 40) + 60; // 60-100
-            const verdicts = {
-                en: [
-                    "Excellent response! You've demonstrated a deep understanding of the subject.",
-                    "Good attempt, but there's room for improvement in your reasoning.",
-                    "You're on the right track, but missed some key details.",
-                    "Your answer shows basic understanding but lacks depth.",
-                    "This needs more work. Review the fundamentals."
-                ],
-                tr: [
-                    "Mükemmel cevap! Konuyu derinlemesine anladığınızı gösterdiniz.",
-                    "İyi bir girişim, ancak mantıkta gelişme alanları var.",
-                    "Doğru yoldasın, ancak bazı önemli detayları kaçırdın.",
-                    "Cevabınız temel anlayışı gösteriyor ancak derinlikten yoksun.",
-                    "Daha fazla çalışma gerekiyor. Temelleri gözden geçirin."
-                ]
-            };
-
-            const perfectAnswers = {
-                en: [
-                    `The perfect answer to "${question}" would be: [Detailed, comprehensive response that addresses all aspects of the question with proper reasoning and examples.]`,
-                    `An ideal response would include: 1) Clear understanding of the question, 2) Logical reasoning, 3) Relevant examples, 4) Proper conclusion.`
-                ],
-                tr: [
-                    `"${question}" sorusuna mükemmel cevap: [Sorunun tüm yönlerini ele alan, mantıklı ve örneklerle desteklenmiş kapsamlı bir cevap olacaktır.]`,
-                    `İdeal bir cevap şunları içermelidir: 1) Sorunun net anlaşılması, 2) Mantıklı akıl yürütme, 3) İlgili örnekler, 4) Uygun sonuç.`
-                ]
-            };
-
-            const lang = APP.currentLanguage;
-            const verdict = verdicts[lang][Math.floor(Math.random() * verdicts[lang].length)];
-            const perfectAnswer = perfectAnswers[lang][Math.floor(Math.random() * perfectAnswers[lang].length)];
-
-            // Create score display
-            const scoreDiv = document.createElement('div');
-            scoreDiv.className = 'score-display';
-            scoreDiv.innerHTML = `
-                <p class="text-sm font-semibold text-gray-300 mb-2">Score</p>
-                <div class="score-value">${score}</div>
-                <p class="text-xs text-gray-400 mt-1">/ 100</p>
-                <div class="mt-4 text-left">
-                    <p class="text-sm font-semibold text-gray-300 mb-2">Verdict</p>
-                    <p class="text-sm text-gray-300">${verdict}</p>
-                </div>
-                <div class="mt-4 text-left">
-                    <p class="text-sm font-semibold text-gray-300 mb-2">Perfect Answer</p>
-                    <p class="text-sm text-gray-300">${perfectAnswer}</p>
-                </div>
-            `;
-
-            container.appendChild(scoreDiv);
-            container.scrollTop = container.scrollHeight;
-        }
-
-        function simulateLegalResponse(message) {
-            const responses = {
-                en: [
-                    "Based on Turkish commercial law and the information provided, here's my professional analysis...",
-                    "Under RES (Renewable Energy Sources) regulations, your situation requires...",
-                    "For expropriation (kamulaştırma) cases, the key considerations are...",
-                    "The CED report indicates that... [detailed legal analysis in professional language]"
-                ],
-                tr: [
-                    "Türk ticaret hukuku ve sağlanan bilgiler doğrultusunda, profesyonel analizim şu şekildedir...",
-                    "RES (Yenilenebilir Enerji Kaynakları) düzenlemelerine göre, durumunuz için...",
-                    "Kamulaştırma işlemlerinde dikkat edilmesi gereken temel hususlar...",
-                    "CED raporuna göre... [profesyonel hukuk dilinde detaylı analiz]"
-                ]
-            };
-
-            const lang = APP.currentLanguage;
-            const response = responses[lang][Math.floor(Math.random() * responses[lang].length)];
-            showMessage('av', response, 'bot');
-        }
-
-        function simulateEngineeringResponse(message) {
-            const responses = {
-                en: [
-                    "For your car repair issue: 1) First check the [specific component], 2) If that's not the issue, examine [another part], 3) The most likely cause is...",
-                    "Based on your description, this appears to be a [technical issue]. Recommended solution: [detailed steps].",
-                    "For motorcycle maintenance: This is typically caused by [common problem]. Here's how to fix it: [step-by-step guide].",
-                    "Technical analysis shows that [detailed analysis]. Forecast: [predicted outcome]. Resolution: [recommended actions]."
-                ],
-                tr: [
-                    "Araç tamir sorununuz için: 1) Öncelikle [bileşen] kontrol edin, 2) Sorun çözülmediyse [başa parça] inceleyin, 3) En muhtemel neden...",
-                    "Açıklamanıza dayanarak, bu [teknik sorun] gibi görünüyor. Önerilen çözüm: [detaylı adımlar].",
-                    "Motorsiklet bakımı için: Bu genellikle [yaygın sorun] nedeniyle olur. Çözüm: [adım adım kılavuz].",
-                    "Teknik analiz [detaylı analiz] gösteriyor. Tahmin: [öngörülen sonuç]. Çözüm: [önerilen eylemler]."
-                ]
-            };
-
-            const lang = APP.currentLanguage;
-            const response = responses[lang][Math.floor(Math.random() * responses[lang].length)];
-            showMessage('neo', response, 'bot');
-        }
-
-        // ======================
-        // DATA LOADING
-        // ======================
-        function loadInitialData() {
-            // Load weather
-            updateWeather();
-
-            // Load city info
-            updateCityInfo();
-
-            // Load telemetry
-            updateTelemetry();
-
-            // Load quotes
-            updateQuotes();
-        }
-
-        function updateWeather() {
-            const city = APP.currentCity || 'New York';
-            const weather = APP.weatherData[city];
-
-            if (weather) {
-                document.getElementById('weatherTemp').textContent = `${weather.temp}°${getTempUnit()}`;
-                document.getElementById('weatherCondition').textContent = weather.condition;
-                document.getElementById('weatherHumidity').textContent = `${weather.humidity}%`;
-                document.getElementById('weatherWind').textContent = `${weather.wind} m/s`;
-            }
-
-            // Generate forecast
-            const forecastList = document.getElementById('forecastList');
-            forecastList.innerHTML = '';
-
-            for (let i = 1; i <= 5; i++) {
-                const day = new Date();
-                day.setDate(day.getDate() + i);
-
-                const forecastItem = document.createElement('div');
-                forecastItem.className = 'glass rounded-xl p-4 text-center';
-                forecastItem.innerHTML = `
-                    <p class="text-xs text-gray-400">${day.toLocaleDateString('en-US', { weekday: 'short' })}</p>
-                    <p class="text-2xl font-bold mt-2">${Math.floor(Math.random() * 10) + 18}°${getTempUnit()}</p>
-                    <p class="text-xs text-gray-400 mt-2">☀️</p>
-                `;
-                forecastList.appendChild(forecastItem);
-            }
-        }
-
-        function updateCityInfo() {
-            const city = APP.currentCity || 'New York';
-            const cityInfo = APP.cityData[city];
-
-            if (cityInfo) {
-                document.getElementById('locationCity').textContent = city;
-                document.getElementById('locationPopulation').textContent = cityInfo.population;
-                document.getElementById('locationCountry').textContent = cityInfo.country;
-                document.getElementById('timezone').textContent = cityInfo.timezone;
-            }
-        }
-
-        function updateTelemetry() {
-            document.getElementById('solarWindSpeed').textContent = APP.telemetryData.solarWindSpeed;
-            document.getElementById('cmeActivity').textContent = APP.telemetryData.cmeActivity;
-            document.getElementById('xrayFlux').textContent = APP.telemetryData.xrayFlux;
-        }
-
-        function updateQuotes() {
-            const lang = APP.currentLanguage;
-            const quotes = APP.quotes[lang];
-
-            if (quotes) {
-                document.getElementById('bibleQuote').textContent = `"${quotes.bible.text}"`;
-                document.getElementById('sunTzuQuote').textContent = `"${quotes.sunTzu.text}"`;
-                document.getElementById('romanQuote').textContent = `"${quotes.roman.text}"`;
-            }
-        }
-
-        function getTempUnit() {
-            const unit = document.querySelector('input[name="tempUnit"]:checked')?.value || 'C';
-            return unit === 'F' ? 'F' : 'C';
-        }
-
-        // ======================
-        // EVENT LISTENERS
-        // ======================
-        document.addEventListener('click', (e) => {
-            // City selector
-            if (e.target.classList.contains('city-btn')) {
-                const city = e.target.dataset.city;
-                APP.currentCity = city;
-                updateCityInfo();
-                updateWeather();
-            }
-
-            // Refresh telemetry
-            if (e.target.id === 'refreshTelemetry') {
-                // Simulate refresh
-                APP.telemetryData = {
-                    solarWindSpeed: `${Math.floor(Math.random() * 100) + 300} km/s`,
-                    cmeActivity: ['Low', 'Moderate', 'High'][Math.floor(Math.random() * 3)],
-                    xrayFlux: (Math.random() * 0.00002 + 0.00001).toExponential(2)
-                };
-                updateTelemetry();
-            }
-
-            // New quotes
-            if (e.target.id === 'newQuoteBtn') {
-                // Simulate new quotes
-                updateQuotes();
-            }
-
-            // Submit comment
-            if (e.target.id === 'submitCommentBtn') {
-                const name = document.getElementById('commentName').value.trim();
-                const text = document.getElementById('commentText').value.trim();
-
-                if (name && text) {
-                    const commentsList = document.getElementById('commentsList');
-                    const commentDiv = document.createElement('div');
-                    commentDiv.className = 'glass rounded-xl p-4';
-                    commentDiv.innerHTML = `
-                        <div class="flex justify-between items-start">
-                            <h4 class="font-bold">${name}</h4>
-                            <span class="text-xs text-gray-400">${new Date().toLocaleString()}</span>
-                        </div>
-                        <p class="mt-2 text-gray-300">${text}</p>
-                    `;
-                    commentsList.prepend(commentDiv);
-
-                    // Clear form
-                    document.getElementById('commentName').value = '';
-                    document.getElementById('commentText').value = '';
-
-                    // Show success
-                    const alert = document.createElement('div');
-                    alert.className = 'alert alert-success';
-                    alert.textContent = APP.currentLanguage === 'tr' ? 'Yorumunuz başarıyla eklendi!' : 'Comment posted successfully!';
-                    document.getElementById('alertContainer').prepend(alert);
-                    setTimeout(() => alert.remove(), 3000);
-                }
-            }
-        });
-
-        // Close modals on backdrop click
-        document.querySelectorAll('[id$="Modal"]').forEach(modal => {
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    modal.classList.add('hidden');
-                }
-            });
-        });
-    </script>
 </body>
 </html>
