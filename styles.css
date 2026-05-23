@@ -1,78 +1,786 @@
+/* ============================================
+   CATALYST OZWELL - PREMIUM CSS STYLING
+   6 Themes: 3 Modern Neon + 3 Art Deco
+   ============================================ */
+
+* {
+    box-sizing: border-box;
+}
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f5f5f5;
-    color: #333;
+    transition: background-color 0.5s ease, color 0.5s ease;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
+
+/* ============================================
+   HEADER & FOOTER WATERMARKS
+   ============================================ */
+
+.header-watermark,
+.footer-watermark {
+    padding: 12px 20px;
+    background-color: #ff0000;
+    color: #ffffff;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid #cc0000;
+}
+
+.header-watermark {
+    border-bottom: 2px solid #cc0000;
+}
+
+.footer-watermark {
+    border-top: 2px solid #cc0000;
+    margin-top: auto;
+}
+
+/* ============================================
+   MAIN LAYOUT
+   ============================================ */
 
 .container {
-    max-width: 800px;
+    max-width: 900px;
     margin: 0 auto;
     padding: 20px;
+    flex: 1;
+    width: 100%;
 }
 
-h1 {
+header {
     text-align: center;
-    color: #2c3e50;
+    margin-bottom: 20px;
 }
+
+header h1 {
+    font-size: 2.5em;
+    margin: 10px 0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+header .tagline {
+    font-size: 0.9em;
+    margin: 5px 0 0 0;
+    opacity: 0.8;
+}
+
+/* ============================================
+   CONTROLS
+   ============================================ */
+
+.controls {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    gap: 10px;
+}
+
+#theme-switcher {
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: 2px solid;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#theme-switcher:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* ============================================
+   CHAT CONTAINER
+   ============================================ */
 
 .chat-container {
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
     padding: 20px;
-    margin-top: 20px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+    border: 2px solid;
 }
 
 #chat-messages {
-    height: 400px;
+    flex: 1;
     overflow-y: auto;
-    margin-bottom: 10px;
-    border: 1px solid #eee;
+    margin-bottom: 15px;
     padding: 10px;
-    border-radius: 4px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
+
+/* Custom scrollbar for all themes */
+#chat-messages::-webkit-scrollbar {
+    width: 8px;
+}
+
+#chat-messages::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    opacity: 0.5;
+}
+
+/* ============================================
+   INPUT AREA
+   ============================================ */
 
 .input-area {
     display: flex;
     gap: 10px;
+    margin-top: auto;
 }
 
 #user-input {
     flex: 1;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 16px;
+    padding: 12px 15px;
+    border: 2px solid;
+    border-radius: 8px;
+    font-size: 15px;
+    transition: all 0.3s ease;
+}
+
+#user-input:focus {
+    outline: none;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+#user-input:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
 }
 
 #send-button {
-    padding: 10px 20px;
-    background-color: #3498db;
-    color: white;
-    border: none;
-    border-radius: 4px;
+    padding: 12px 25px;
+    border: 2px solid;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
     cursor: pointer;
-    font-size: 16px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-#send-button:hover {
-    background-color: #2980b9;
+#send-button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 }
+
+#send-button:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+#send-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* ============================================
+   MESSAGES
+   ============================================ */
 
 .message {
-    margin-bottom: 10px;
-    padding: 10px;
-    border-radius: 4px;
+    padding: 12px 15px;
+    border-radius: 8px;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    animation: slideIn 0.3s ease;
+    max-width: 85%;
 }
 
 .user-message {
-    background-color: #e3f2fd;
-    text-align: right;
+    align-self: flex-end;
+    border-bottom-right-radius: 2px;
 }
 
 .bot-message {
-    background-color: #f1f1f1;
-    text-align: left;
+    align-self: flex-start;
+    border-bottom-left-radius: 2px;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================================
+   THEME: LUX VIOLACEUM (Violet Neon)
+   ============================================ */
+
+body.lux-neon-violet {
+    background: linear-gradient(135deg, #1a0033 0%, #2d0052 100%);
+    color: #e0d5ff;
+}
+
+body.lux-neon-violet header h1 {
+    background: linear-gradient(135deg, #b537f2 0%, #ff006e 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+body.lux-neon-violet header .tagline {
+    color: #b537f2;
+}
+
+body.lux-neon-violet #theme-switcher {
+    background-color: #b537f2;
+    color: white;
+    border-color: #ff006e;
+}
+
+body.lux-neon-violet #theme-switcher:hover {
+    box-shadow: 0 0 20px rgba(181, 55, 242, 0.5), 0 0 40px rgba(255, 0, 110, 0.3);
+}
+
+body.lux-neon-violet .chat-container {
+    background-color: rgba(45, 0, 82, 0.6);
+    border-color: #b537f2;
+    box-shadow: 0 0 20px rgba(181, 55, 242, 0.3);
+}
+
+body.lux-neon-violet #chat-messages {
+    background-color: rgba(26, 0, 51, 0.8);
+    border-color: #b537f2;
+}
+
+body.lux-neon-violet #chat-messages::-webkit-scrollbar-thumb {
+    background-color: #b537f2;
+}
+
+body.lux-neon-violet #user-input {
+    background-color: rgba(45, 0, 82, 0.8);
+    color: #e0d5ff;
+    border-color: #b537f2;
+}
+
+body.lux-neon-violet #user-input::placeholder {
+    color: rgba(224, 213, 255, 0.5);
+}
+
+body.lux-neon-violet #send-button {
+    background-color: #b537f2;
+    color: white;
+    border-color: #ff006e;
+    box-shadow: 0 0 10px rgba(181, 55, 242, 0.4);
+}
+
+body.lux-neon-violet #send-button:hover:not(:disabled) {
+    box-shadow: 0 0 20px rgba(181, 55, 242, 0.6), 0 0 30px rgba(255, 0, 110, 0.3);
+}
+
+body.lux-neon-violet .user-message {
+    background-color: rgba(181, 55, 242, 0.2);
+    color: #b537f2;
+    border-left: 3px solid #b537f2;
+}
+
+body.lux-neon-violet .bot-message {
+    background-color: rgba(255, 0, 110, 0.1);
+    color: #ff9bcf;
+    border-right: 3px solid #ff006e;
+}
+
+/* ============================================
+   THEME: LUX CYAN (Cyan Neon)
+   ============================================ */
+
+body.lux-neon-cyan {
+    background: linear-gradient(135deg, #000a33 0%, #001a66 100%);
+    color: #a8e6ff;
+}
+
+body.lux-neon-cyan header h1 {
+    background: linear-gradient(135deg, #00d9ff 0%, #0099ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+body.lux-neon-cyan header .tagline {
+    color: #00d9ff;
+}
+
+body.lux-neon-cyan #theme-switcher {
+    background-color: #00d9ff;
+    color: #001a66;
+    border-color: #0099ff;
+}
+
+body.lux-neon-cyan #theme-switcher:hover {
+    box-shadow: 0 0 20px rgba(0, 217, 255, 0.5), 0 0 40px rgba(0, 153, 255, 0.3);
+}
+
+body.lux-neon-cyan .chat-container {
+    background-color: rgba(0, 26, 102, 0.6);
+    border-color: #00d9ff;
+    box-shadow: 0 0 20px rgba(0, 217, 255, 0.3);
+}
+
+body.lux-neon-cyan #chat-messages {
+    background-color: rgba(0, 10, 51, 0.8);
+    border-color: #00d9ff;
+}
+
+body.lux-neon-cyan #chat-messages::-webkit-scrollbar-thumb {
+    background-color: #00d9ff;
+}
+
+body.lux-neon-cyan #user-input {
+    background-color: rgba(0, 26, 102, 0.8);
+    color: #a8e6ff;
+    border-color: #00d9ff;
+}
+
+body.lux-neon-cyan #user-input::placeholder {
+    color: rgba(168, 230, 255, 0.5);
+}
+
+body.lux-neon-cyan #send-button {
+    background-color: #00d9ff;
+    color: #001a66;
+    border-color: #0099ff;
+    box-shadow: 0 0 10px rgba(0, 217, 255, 0.4);
+}
+
+body.lux-neon-cyan #send-button:hover:not(:disabled) {
+    box-shadow: 0 0 20px rgba(0, 217, 255, 0.6), 0 0 30px rgba(0, 153, 255, 0.3);
+}
+
+body.lux-neon-cyan .user-message {
+    background-color: rgba(0, 217, 255, 0.15);
+    color: #00d9ff;
+    border-left: 3px solid #00d9ff;
+}
+
+body.lux-neon-cyan .bot-message {
+    background-color: rgba(0, 153, 255, 0.1);
+    color: #66d9ff;
+    border-right: 3px solid #0099ff;
+}
+
+/* ============================================
+   THEME: LUX MAGENTUM (Magenta Neon)
+   ============================================ */
+
+body.lux-neon-magenta {
+    background: linear-gradient(135deg, #330022 0%, #660055 100%);
+    color: #ff99dd;
+}
+
+body.lux-neon-magenta header h1 {
+    background: linear-gradient(135deg, #ff0088 0%, #ff3366 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+body.lux-neon-magenta header .tagline {
+    color: #ff0088;
+}
+
+body.lux-neon-magenta #theme-switcher {
+    background-color: #ff0088;
+    color: white;
+    border-color: #ff3366;
+}
+
+body.lux-neon-magenta #theme-switcher:hover {
+    box-shadow: 0 0 20px rgba(255, 0, 136, 0.5), 0 0 40px rgba(255, 51, 102, 0.3);
+}
+
+body.lux-neon-magenta .chat-container {
+    background-color: rgba(102, 0, 85, 0.6);
+    border-color: #ff0088;
+    box-shadow: 0 0 20px rgba(255, 0, 136, 0.3);
+}
+
+body.lux-neon-magenta #chat-messages {
+    background-color: rgba(51, 0, 34, 0.8);
+    border-color: #ff0088;
+}
+
+body.lux-neon-magenta #chat-messages::-webkit-scrollbar-thumb {
+    background-color: #ff0088;
+}
+
+body.lux-neon-magenta #user-input {
+    background-color: rgba(102, 0, 85, 0.8);
+    color: #ff99dd;
+    border-color: #ff0088;
+}
+
+body.lux-neon-magenta #user-input::placeholder {
+    color: rgba(255, 153, 221, 0.5);
+}
+
+body.lux-neon-magenta #send-button {
+    background-color: #ff0088;
+    color: white;
+    border-color: #ff3366;
+    box-shadow: 0 0 10px rgba(255, 0, 136, 0.4);
+}
+
+body.lux-neon-magenta #send-button:hover:not(:disabled) {
+    box-shadow: 0 0 20px rgba(255, 0, 136, 0.6), 0 0 30px rgba(255, 51, 102, 0.3);
+}
+
+body.lux-neon-magenta .user-message {
+    background-color: rgba(255, 0, 136, 0.15);
+    color: #ff0088;
+    border-left: 3px solid #ff0088;
+}
+
+body.lux-neon-magenta .bot-message {
+    background-color: rgba(255, 51, 102, 0.1);
+    color: #ff66bb;
+    border-right: 3px solid #ff3366;
+}
+
+/* ============================================
+   THEME: OPUS AUREUM (Gold Deco)
+   ============================================ */
+
+body.opus-deco-gold {
+    background: linear-gradient(135deg, #3d2817 0%, #2a1810 100%);
+    color: #d4af37;
+}
+
+body.opus-deco-gold header h1 {
+    background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-family: 'Georgia', serif;
+}
+
+body.opus-deco-gold header .tagline {
+    color: #d4af37;
+    font-family: 'Georgia', serif;
+}
+
+body.opus-deco-gold #theme-switcher {
+    background-color: #2a1810;
+    color: #d4af37;
+    border-color: #ffd700;
+    font-family: 'Georgia', serif;
+}
+
+body.opus-deco-gold #theme-switcher:hover {
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+}
+
+body.opus-deco-gold .chat-container {
+    background: linear-gradient(135deg, rgba(42, 24, 16, 0.8), rgba(61, 40, 23, 0.8));
+    border-color: #d4af37;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+    border-width: 3px;
+}
+
+body.opus-deco-gold #chat-messages {
+    background: linear-gradient(135deg, rgba(26, 15, 10, 0.9), rgba(42, 24, 16, 0.9));
+    border-color: #d4af37;
+}
+
+body.opus-deco-gold #chat-messages::-webkit-scrollbar-thumb {
+    background-color: #d4af37;
+}
+
+body.opus-deco-gold #user-input {
+    background-color: rgba(42, 24, 16, 0.9);
+    color: #d4af37;
+    border-color: #d4af37;
+}
+
+body.opus-deco-gold #user-input::placeholder {
+    color: rgba(212, 175, 55, 0.5);
+}
+
+body.opus-deco-gold #send-button {
+    background: linear-gradient(135deg, #ffd700, #ffed4e);
+    color: #2a1810;
+    border-color: #d4af37;
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+    font-family: 'Georgia', serif;
+}
+
+body.opus-deco-gold #send-button:hover:not(:disabled) {
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5);
+}
+
+body.opus-deco-gold .user-message {
+    background-color: rgba(212, 175, 55, 0.1);
+    color: #ffd700;
+    border-left: 4px solid #d4af37;
+}
+
+body.opus-deco-gold .bot-message {
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.08), rgba(255, 237, 78, 0.05));
+    color: #d4af37;
+    border-right: 4px solid #d4af37;
+}
+
+/* ============================================
+   THEME: OPUS SMARAGDUS (Emerald Deco)
+   ============================================ */
+
+body.opus-deco-emerald {
+    background: linear-gradient(135deg, #1a3a2e 0%, #0f2818 100%);
+    color: #50c878;
+}
+
+body.opus-deco-emerald header h1 {
+    background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-family: 'Georgia', serif;
+}
+
+body.opus-deco-emerald header .tagline {
+    color: #50c878;
+    font-family: 'Georgia', serif;
+}
+
+body.opus-deco-emerald #theme-switcher {
+    background-color: #0f2818;
+    color: #50c878;
+    border-color: #2ecc71;
+    font-family: 'Georgia', serif;
+}
+
+body.opus-deco-emerald #theme-switcher:hover {
+    box-shadow: 0 0 15px rgba(80, 200, 120, 0.4);
+}
+
+body.opus-deco-emerald .chat-container {
+    background: linear-gradient(135deg, rgba(15, 40, 24, 0.8), rgba(26, 58, 46, 0.8));
+    border-color: #50c878;
+    box-shadow: 0 0 20px rgba(80, 200, 120, 0.2);
+    border-width: 3px;
+}
+
+body.opus-deco-emerald #chat-messages {
+    background: linear-gradient(135deg, rgba(10, 24, 16, 0.9), rgba(15, 40, 24, 0.9));
+    border-color: #50c878;
+}
+
+body.opus-deco-emerald #chat-messages::-webkit-scrollbar-thumb {
+    background-color: #50c878;
+}
+
+body.opus-deco-emerald #user-input {
+    background-color: rgba(15, 40, 24, 0.9);
+    color: #50c878;
+    border-color: #50c878;
+}
+
+body.opus-deco-emerald #user-input::placeholder {
+    color: rgba(80, 200, 120, 0.5);
+}
+
+body.opus-deco-emerald #send-button {
+    background: linear-gradient(135deg, #2ecc71, #27ae60);
+    color: white;
+    border-color: #50c878;
+    box-shadow: 0 4px 12px rgba(80, 200, 120, 0.3);
+    font-family: 'Georgia', serif;
+}
+
+body.opus-deco-emerald #send-button:hover:not(:disabled) {
+    box-shadow: 0 6px 20px rgba(80, 200, 120, 0.5);
+}
+
+body.opus-deco-emerald .user-message {
+    background-color: rgba(80, 200, 120, 0.1);
+    color: #2ecc71;
+    border-left: 4px solid #50c878;
+}
+
+body.opus-deco-emerald .bot-message {
+    background: linear-gradient(135deg, rgba(80, 200, 120, 0.08), rgba(46, 204, 113, 0.05));
+    color: #50c878;
+    border-right: 4px solid #50c878;
+}
+
+/* ============================================
+   THEME: OPUS SAPPHIRINUS (Sapphire Deco)
+   ============================================ */
+
+body.opus-deco-sapphire {
+    background: linear-gradient(135deg, #0d1f33 0%, #051a26 100%);
+    color: #64b5f6;
+}
+
+body.opus-deco-sapphire header h1 {
+    background: linear-gradient(135deg, #1e90ff 0%, #4169e1 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-family: 'Georgia', serif;
+}
+
+body.opus-deco-sapphire header .tagline {
+    color: #64b5f6;
+    font-family: 'Georgia', serif;
+}
+
+body.opus-deco-sapphire #theme-switcher {
+    background-color: #051a26;
+    color: #64b5f6;
+    border-color: #1e90ff;
+    font-family: 'Georgia', serif;
+}
+
+body.opus-deco-sapphire #theme-switcher:hover {
+    box-shadow: 0 0 15px rgba(100, 181, 246, 0.4);
+}
+
+body.opus-deco-sapphire .chat-container {
+    background: linear-gradient(135deg, rgba(5, 26, 38, 0.8), rgba(13, 31, 51, 0.8));
+    border-color: #64b5f6;
+    box-shadow: 0 0 20px rgba(100, 181, 246, 0.2);
+    border-width: 3px;
+}
+
+body.opus-deco-sapphire #chat-messages {
+    background: linear-gradient(135deg, rgba(3, 15, 22, 0.9), rgba(5, 26, 38, 0.9));
+    border-color: #64b5f6;
+}
+
+body.opus-deco-sapphire #chat-messages::-webkit-scrollbar-thumb {
+    background-color: #64b5f6;
+}
+
+body.opus-deco-sapphire #user-input {
+    background-color: rgba(5, 26, 38, 0.9);
+    color: #64b5f6;
+    border-color: #64b5f6;
+}
+
+body.opus-deco-sapphire #user-input::placeholder {
+    color: rgba(100, 181, 246, 0.5);
+}
+
+body.opus-deco-sapphire #send-button {
+    background: linear-gradient(135deg, #1e90ff, #4169e1);
+    color: white;
+    border-color: #64b5f6;
+    box-shadow: 0 4px 12px rgba(100, 181, 246, 0.3);
+    font-family: 'Georgia', serif;
+}
+
+body.opus-deco-sapphire #send-button:hover:not(:disabled) {
+    box-shadow: 0 6px 20px rgba(100, 181, 246, 0.5);
+}
+
+body.opus-deco-sapphire .user-message {
+    background-color: rgba(100, 181, 246, 0.1);
+    color: #1e90ff;
+    border-left: 4px solid #64b5f6;
+}
+
+body.opus-deco-sapphire .bot-message {
+    background: linear-gradient(135deg, rgba(100, 181, 246, 0.08), rgba(30, 144, 255, 0.05));
+    color: #64b5f6;
+    border-right: 4px solid #64b5f6;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 1.8em !important;
+    }
+
+    header .tagline {
+        font-size: 0.8em !important;
+    }
+
+    .chat-container {
+        height: 400px !important;
+    }
+
+    .message {
+        max-width: 95%;
+    }
+
+    #theme-switcher {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 10px;
+    }
+
+    header h1 {
+        font-size: 1.5em !important;
+        margin: 5px 0 !important;
+    }
+
+    .chat-container {
+        height: 300px !important;
+        padding: 15px !important;
+    }
+
+    .input-area {
+        gap: 5px;
+    }
+
+    #user-input,
+    #send-button {
+        padding: 10px !important;
+        font-size: 14px !important;
+    }
+
+    #send-button {
+        padding: 10px 15px !important;
+    }
+
+    .header-watermark,
+    .footer-watermark {
+        font-size: 10px;
+        padding: 8px 10px;
+    }
+}
+
+/* ============================================
+   ACCESSIBILITY & ANIMATIONS
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    /* Themes already provide dark mode */
 }
