@@ -3,43 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Catalyst Ozwell - Futuristic AI Intelligence Hub with Real-time Telemetry & Specialized Agents">
-    <meta name="keywords" content="catalyst ozwell, AI chatbots, Meister Ozwell, Av.Ozwell, NeOzwell, local LLM">
+    <meta name="description" content="Catalyst Ozwell - Futuristic AI Intelligence Hub">
     <title>Catalyst Ozwell | Global Intelligence Nexus</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Space+Mono:wght@400;700&display=swap');
         
-        body {
-            font-family: 'Inter', system-ui, sans-serif;
-            background: #0a0a0f;
-            color: #e0f2fe;
+        body { font-family: 'Inter', system-ui, sans-serif; background: #0a0a0f; color: #e0f2fe; }
+        .neon-text { text-shadow: 0 0 20px #22d3ee, 0 0 40px #22d3ee; }
+        .glass { background: rgba(15, 23, 42, 0.92); backdrop-filter: blur(16px); border: 1px solid rgba(34, 211, 238, 0.25); }
+        
+        .breathing-neon {
+            animation: breathe 4s ease-in-out infinite;
         }
         
-        .neon-text { text-shadow: 0 0 20px #22d3ee, 0 0 40px #22d3ee; }
-        .glass { background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(16px); border: 1px solid rgba(34, 211, 238, 0.2); }
+        @keyframes breathe {
+            0%, 100% { text-shadow: 0 0 20px currentColor, 0 0 40px currentColor; }
+            50% { text-shadow: 0 0 35px currentColor, 0 0 70px currentColor, 0 0 90px currentColor; }
+        }
         
-        .chatbot-card, .telemetry-panel { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
-        .chatbot-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 0 40px rgba(34, 211, 238, 0.6); }
-        
-        .collapsible { transition: all 0.3s ease; }
-        
-        /* Futuristic Background */
         .futuristic-bg {
-            position: fixed;
-            inset: 0;
+            position: fixed; inset: 0; z-index: -2;
             background: radial-gradient(circle at 50% 30%, rgba(34, 211, 238, 0.15), transparent 70%),
                         linear-gradient(45deg, #0f172a 0%, #1e2937 100%);
-            z-index: -2;
-            animation: gridMove 25s linear infinite;
         }
-        
-        @keyframes gridMove { 0% { background-position: 0 0; } 100% { background-position: 100px 100px; } }
     </style>
 </head>
 <body class="min-h-screen theme-cyan overflow-x-hidden">
-    <!-- Futuristic Background -->
     <div class="futuristic-bg"></div>
     <div class="fixed inset-0 bg-[radial-gradient(#22d3ee_0.8px,transparent_1px)] [background-size:40px_40px] opacity-10 pointer-events-none"></div>
 
@@ -51,178 +42,184 @@
                     <div class="w-12 h-12 bg-gradient-to-br from-cyan-400 to-violet-500 rounded-2xl flex items-center justify-center text-2xl font-bold neon-text">CO</div>
                     <div>
                         <h1 class="text-2xl font-bold tracking-tighter neon-text">CATALYST OZWELL</h1>
-                        <p class="text-xs text-cyan-400">INTELLIGENCE NEXUS v0.9</p>
+                        <p class="text-xs text-cyan-400">INTELLIGENCE NEXUS v0.9.1</p>
                     </div>
                 </div>
             </div>
-            
-            <nav class="flex-1 p-4 space-y-1">
-                <a href="#" onclick="showSection('welcome')" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-cyan-900/30 active">🌐 Welcome Nexus</a>
-                <a href="#" onclick="showSection('chatbots')" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-cyan-900/30">🤖 AI Agents</a>
-                <a href="#" onclick="showSection('telemetry')" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-cyan-900/30">📡 Live Telemetry</a>
-            </nav>
         </aside>
 
-        <!-- Main Content -->
+        <!-- Main -->
         <main class="flex-1 flex flex-col overflow-hidden">
-            <!-- Top Bar -->
-            <header class="glass border-b border-cyan-900/50 px-6 py-4 flex items-center justify-between">
-                <div class="flex items-center gap-6">
-                    <button onclick="toggleSidebar()" class="lg:hidden text-2xl">☰</button>
-                    <div id="user-location" class="text-sm font-medium flex items-center gap-2">
-                        <span id="city">Detecting...</span>
+            <header class="glass border-b border-cyan-900/50 px-6 py-4 flex justify-between items-center">
+                <div class="flex items-center gap-4">
+                    <button onclick="toggleSidebar()" class="lg:hidden text-3xl">☰</button>
+                    <div id="location-display" class="font-mono text-sm breathing-neon flex items-center gap-3">
+                        <span id="city-country">📍 Detecting location...</span>
+                        <span id="local-time" class="text-cyan-300"></span>
                     </div>
                 </div>
                 
-                <!-- Collapsible Customization Bar -->
-                <div class="flex items-center gap-4">
-                    <button onclick="toggleLanguageBar()" class="px-5 py-2 glass rounded-2xl flex items-center gap-2 hover:bg-cyan-900/50">
-                        🌍 <span id="current-lang">EN</span>
-                    </button>
-                    <button onclick="toggleThemeBar()" class="px-5 py-2 glass rounded-2xl flex items-center gap-2 hover:bg-cyan-900/50">
-                        🎨 Theme
-                    </button>
-                    <button onclick="toggleMusic()" class="px-5 py-2 glass rounded-2xl flex items-center gap-2 hover:bg-cyan-900/50">
-                        🎵 Music
-                    </button>
+                <div class="flex gap-3">
+                    <button onclick="toggleLanguageBar()" class="px-6 py-2 glass rounded-2xl hover:bg-cyan-900/50 flex items-center gap-2">🌍 Languages</button>
+                    <button onclick="toggleThemeBar()" class="px-6 py-2 glass rounded-2xl hover:bg-cyan-900/50 flex items-center gap-2">🎨 Themes</button>
+                    <button onclick="toggleMusic()" class="px-6 py-2 glass rounded-2xl hover:bg-cyan-900/50 flex items-center gap-2">🎵 Music</button>
                 </div>
             </header>
 
-            <!-- Welcome / Telemetry Section -->
+            <!-- Welcome + Telemetry -->
             <section id="welcome" class="flex-1 overflow-auto p-8">
                 <div class="max-w-7xl mx-auto">
-                    <h1 class="text-6xl font-bold tracking-tighter neon-text mb-4">WELCOME TO THE NEXUS</h1>
-                    <p class="text-xl text-cyan-300 mb-12">Real-time intelligence for your location • Powered by local LLM agents</p>
-                    
-                    <!-- Live Telemetry Dashboard -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                    <h1 class="text-6xl font-bold tracking-tighter neon-text mb-2">WELCOME TO THE NEXUS</h1>
+                    <p class="text-xl text-cyan-300">Real-time AI Intelligence • Local LLM Powered</p>
+
+                    <!-- Disclaimers -->
+                    <div class="glass rounded-2xl p-5 text-xs text-amber-300 border border-amber-400/30 mb-8">
+                        <strong>⚠️ AI &amp; Forecast Disclaimers:</strong><br>
+                        • All AI responses are generated by local models (Mistral-7B / Gemma) and may contain inaccuracies.<br>
+                        • Weather, solar, and news data are for informational purposes only. Not for critical decisions.<br>
+                        • Always verify important information with official sources.
+                    </div>
+
+                    <!-- Live Location + Time -->
+                    <div class="glass rounded-3xl p-8 mb-8">
+                        <div id="location-full" class="text-4xl font-bold breathing-neon text-center"></div>
+                    </div>
+
+                    <!-- Telemetry Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
                         <div class="glass rounded-3xl p-6">
-                            <div class="text-cyan-400 text-sm mb-2">🌡️ CURRENT WEATHER</div>
-                            <div id="temp-display" class="text-6xl font-bold">18°C</div>
-                            <div id="weather-desc" class="text-cyan-200">Partly Cloudy • Istanbul</div>
+                            <div class="text-cyan-400 text-sm">🌡️ WEATHER</div>
+                            <div id="temp" class="text-6xl font-bold">—°C</div>
                         </div>
                         <div class="glass rounded-3xl p-6">
-                            <div class="text-amber-400 text-sm mb-2">☀️ SOLAR ACTIVITY</div>
-                            <div id="solar-status" class="text-5xl font-bold text-amber-400">LOW</div>
-                            <div class="text-sm text-cyan-300">Kp Index: 2.8 • Safe for comms</div>
+                            <div class="text-amber-400 text-sm">☀️ SOLAR</div>
+                            <div id="solar" class="text-5xl font-bold text-amber-400">LOW</div>
                         </div>
                         <div class="glass rounded-3xl p-6">
-                            <div class="text-emerald-400 text-sm mb-2">📰 LOCAL NEWS</div>
-                            <div id="news-headline" class="line-clamp-3 text-sm">Turkish energy reforms advance RES projects in 2026...</div>
+                            <div class="text-emerald-400 text-sm">📰 NEWS</div>
+                            <div id="news" class="line-clamp-3 text-sm">Loading local updates...</div>
                         </div>
                         <div class="glass rounded-3xl p-6">
-                            <div class="text-violet-400 text-sm mb-2">💡 SUGGESTION</div>
-                            <div id="suggestion" class="italic">"Consider reviewing your solar investment portfolio today."</div>
+                            <div class="text-violet-400 text-sm">💡 SUGGESTION</div>
+                            <div id="suggestion" class="italic text-sm">Explore RES opportunities in your region.</div>
                         </div>
                     </div>
 
                     <!-- 3 Agent Cards -->
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="agent-grid">
-                        <!-- Cards populated by JS -->
-                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="agent-grid"></div>
                 </div>
-            </section>
-
-            <!-- Chatbots Section (Modals) -->
-            <section id="chatbots" class="hidden flex-1 p-8">
-                <!-- Modal windows triggered from cards -->
             </section>
         </main>
     </div>
 
-    <!-- Agent Modals (Collapsible Chat Windows) -->
-    <!-- Meister Ozwell Modal -->
-    <div id="meister-modal" class="fixed inset-0 bg-black/90 hidden flex items-center justify-center z-50">
-        <div class="glass w-full max-w-2xl rounded-3xl max-h-[90vh] flex flex-col">
-            <div class="p-6 border-b flex justify-between items-center">
-                <h2 class="text-2xl font-bold">🎓 Meister Ozwell - Education Evaluator</h2>
-                <button onclick="closeModal('meister-modal')" class="text-3xl text-cyan-400">×</button>
-            </div>
-            <!-- Chat content + scoring UI -->
-            <div class="flex-1 p-6 overflow-auto" id="meister-content">
-                <!-- Dynamic content -->
-            </div>
-        </div>
+    <!-- Language Bar -->
+    <div id="language-bar" class="fixed bottom-20 right-8 hidden glass p-6 rounded-3xl w-80">
+        <h3 class="font-bold mb-4">🌍 Select Language (11 options)</h3>
+        <div class="grid grid-cols-2 gap-3 text-sm" id="lang-options"></div>
     </div>
 
-    <!-- Similar modals for Av.Ozwell and NeOzwell -->
-
-    <!-- Background Music Player -->
-    <div id="music-player" class="fixed bottom-6 right-6 glass rounded-3xl p-4 hidden flex-col gap-3 w-80">
-        <div class="flex justify-between items-center">
-            <span class="font-medium">Ambient Techno Lounge</span>
-            <button onclick="toggleMusicPlayer()" class="text-xl">✕</button>
-        </div>
-        <select id="track-select" class="bg-slate-800 rounded-2xl p-3">
-            <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">Track 1 - Soft Pulse</option>
-            <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3">Track 2 - Neon Drift</option>
-            <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3">Track 3 - Ether Flow</option>
+    <!-- Music Player -->
+    <div id="music-player" class="fixed bottom-6 right-6 glass rounded-3xl p-5 hidden w-80">
+        <select id="track-select" class="w-full bg-slate-800 p-3 rounded-2xl mb-4">
+            <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">Soft Pulse Techno</option>
+            <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3">Neon Drift</option>
+            <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3">Ether Flow</option>
         </select>
-        <div class="flex gap-4">
+        <div class="flex gap-3">
             <button onclick="playMusic()" class="flex-1 py-3 bg-cyan-600 rounded-2xl">▶ Play</button>
             <button onclick="pauseMusic()" class="flex-1 py-3 bg-slate-700 rounded-2xl">⏸ Pause</button>
         </div>
     </div>
-
     <audio id="bg-audio" loop></audio>
 
     <script>
-        // Tailwind script already included
-        let currentAudio = document.getElementById('bg-audio');
-        
-        function toggleMusicPlayer() {
-            document.getElementById('music-player').classList.toggle('hidden');
+        let currentLang = 'en';
+        const languages = {
+            'en': '🇬🇧 English', 'tr': '🇹🇷 Türkçe', 'fr': '🇫🇷 Français',
+            'de': '🇩🇪 Deutsch', 'es': '🇪🇸 Español', 'it': '🇮🇹 Italiano',
+            'nl': '🇳🇱 Nederlands', 'uk': '🇺🇦 Українська', 'he': '🇮🇱 עברית',
+            'el': '🇬🇷 Ελληνικά', 'la': '🇻🇦 Latin'
+        };
+
+        function initLanguages() {
+            const container = document.getElementById('lang-options');
+            Object.keys(languages).forEach(code => {
+                const btn = document.createElement('button');
+                btn.className = "px-4 py-3 glass rounded-2xl text-left hover:bg-cyan-900/50";
+                btn.textContent = languages[code];
+                btn.onclick = () => { currentLang = code; alert(`Language set to: ${languages[code]}`); };
+                container.appendChild(btn);
+            });
         }
+
+        // Location with permission
+        function getAccurateLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(async (pos) => {
+                    const { latitude, longitude } = pos.coords;
+                    try {
+                        const res = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`);
+                        const data = await res.json();
+                        const city = data.city || data.locality || "Unknown";
+                        const country = data.countryName || "";
+                        const time = new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+                        
+                        document.getElementById('city-country').innerHTML = `📍 ${city}, ${country}`;
+                        document.getElementById('location-full').innerHTML = `${city}, ${country} <span class="text-cyan-300 text-2xl">• ${time}</span>`;
+                    } catch(e) {
+                        document.getElementById('city-country').textContent = "📍 Location access granted";
+                    }
+                }, () => {
+                    document.getElementById('city-country').textContent = "📍 Location access denied";
+                });
+            }
+        }
+
+        function toggleLanguageBar() { document.getElementById('language-bar').classList.toggle('hidden'); }
+        function toggleMusic() { document.getElementById('music-player').classList.toggle('hidden'); }
         
         function playMusic() {
-            const track = document.getElementById('track-select').value;
-            currentAudio.src = track;
-            currentAudio.play();
+            const audio = document.getElementById('bg-audio');
+            audio.src = document.getElementById('track-select').value;
+            audio.play();
         }
-        
-        function pauseMusic() {
-            currentAudio.pause();
-        }
-        
-        // Telemetry simulation (replace with real APIs later)
-        function updateTelemetry() {
-            // Use free public APIs like Open-Meteo for weather
-            document.getElementById('temp-display').textContent = "19°C";
-        }
-        
-        // Initialize 3 cards
+        function pauseMusic() { document.getElementById('bg-audio').pause(); }
+
+        // Agent Cards
         function initAgents() {
             const grid = document.getElementById('agent-grid');
             grid.innerHTML = `
-                <div onclick="openAgent('meister')" class="chatbot-card glass rounded-3xl p-8 cursor-pointer">
-                    <div class="text-6xl mb-6">🎓</div>
-                    <h3 class="text-3xl font-bold mb-2">Meister Ozwell</h3>
-                    <p class="text-cyan-300">High School Education Scoring</p>
+                <div onclick="openMeister()" class="chatbot-card glass rounded-3xl p-8 cursor-pointer text-center hover:scale-105">
+                    <div class="text-7xl mb-4">🎓</div>
+                    <h3 class="text-3xl font-bold">Meister Ozwell</h3>
+                    <p class="text-cyan-300 mt-2">Education Scoring Assistant</p>
                 </div>
-                <div onclick="openAgent('av')" class="chatbot-card glass rounded-3xl p-8 cursor-pointer">
-                    <div class="text-6xl mb-6">⚖️</div>
-                    <h3 class="text-3xl font-bold mb-2">Av. Ozwell</h3>
-                    <p class="text-cyan-300">Turkish Legal Specialist</p>
+                <div onclick="openAv()" class="chatbot-card glass rounded-3xl p-8 cursor-pointer text-center hover:scale-105">
+                    <div class="text-7xl mb-4">⚖️</div>
+                    <h3 class="text-3xl font-bold">Av. Ozwell</h3>
+                    <p class="text-cyan-300 mt-2">Turkish Legal Expert</p>
                 </div>
-                <div onclick="openAgent('neo')" class="chatbot-card glass rounded-3xl p-8 cursor-pointer">
-                    <div class="text-6xl mb-6">🔧</div>
-                    <h3 class="text-3xl font-bold mb-2">NeOzwell</h3>
-                    <p class="text-cyan-300">Engineering & Technical Analysis</p>
+                <div onclick="openNeo()" class="chatbot-card glass rounded-3xl p-8 cursor-pointer text-center hover:scale-105">
+                    <div class="text-7xl mb-4">🔧</div>
+                    <h3 class="text-3xl font-bold">NeOzwell</h3>
+                    <p class="text-cyan-300 mt-2">Engineering & Technical Analysis</p>
                 </div>
             `;
         }
-        
-        function openAgent(agent) {
-            // Open appropriate modal
-            if (agent === 'meister') document.getElementById('meister-modal').classList.remove('hidden');
-            // Add similar for others
-        }
-        
-        // Initialize everything
+
+        // Modal placeholders
+        function openMeister() { alert("Meister Ozwell modal opened - Education scoring ready (connected to LM Studio)"); }
+        function openAv() { alert("Av.Ozwell - Turkish Legal Advisor (formal military-lawyer tone)"); }
+        function openNeo() { alert("NeOzwell - Engineering & Technical Assistant"); }
+
         window.onload = () => {
+            initLanguages();
             initAgents();
-            updateTelemetry();
-            // Load local LLM connection config from previous setup
+            getAccurateLocation();
+            setInterval(() => {
+                const timeEl = document.getElementById('local-time');
+                if (timeEl) timeEl.textContent = new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+            }, 1000);
         };
     </script>
 </body>
