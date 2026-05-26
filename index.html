@@ -3,233 +3,1221 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catalyst Ozwell | Intelligence Nexus</title>
+    <title>JCARVIS • Neural Companion</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
-        body { font-family: 'Inter', system-ui, sans-serif; background: #0a0a0f; color: #e0f2fe; }
-        .neon-text { text-shadow: 0 0 20px #22d3ee, 0 0 40px #22d3ee; }
-        .glass { background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(20px); border: 1px solid rgba(34, 211, 238, 0.3); }
-        .chat-window { scrollbar-width: thin; scrollbar-color: #22d3ee #1e2937; }
-        .message { animation: fadeIn 0.3s ease; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .breathing { animation: breathe 4s ease-in-out infinite; }
-        @keyframes breathe { 0%,100% { text-shadow: 0 0 20px currentColor; } 50% { text-shadow: 0 0 40px currentColor, 0 0 60px currentColor; } }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Space+Grotesk:wght@500;600&amp;display=swap');
+
+        :root {
+            --cyan: #00f3ff;
+            --magenta: #ff00aa;
+            --violet: #8b00ff;
+            --acid: #39ff14;
+        }
+
+        body {
+            font-family: 'Inter', system_ui, sans-serif;
+        }
+
+        .font-display {
+            font-family: 'Space Grotesk', 'Inter', sans-serif;
+            font-weight: 600;
+            letter-spacing: -0.025em;
+        }
+
+        .cyber-bg {
+            background-color: #0a0a0f;
+            background-image:
+                radial-gradient(circle at 25% 25%, rgba(0, 243, 255, 0.04) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(139, 0, 255, 0.04) 0%, transparent 50%);
+        }
+
+        .glass {
+            background: rgba(20, 20, 30, 0.75);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .neon-cyan {
+            color: #00f3ff;
+            text-shadow: 0 0 10px #00f3ff, 0 0 20px #00f3ff;
+        }
+
+        .neon-magenta {
+            color: #ff00aa;
+            text-shadow: 0 0 10px #ff00aa, 0 0 20px #ff00aa;
+        }
+
+        .neon-violet {
+            color: #8b00ff;
+            text-shadow: 0 0 10px #8b00ff, 0 0 20px #8b00ff;
+        }
+
+        .neon-acid {
+            color: #39ff14;
+            text-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14;
+        }
+
+        .neon-border {
+            border-color: rgba(0, 243, 255, 0.3);
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.1);
+        }
+
+        .section-header {
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 600;
+            color: #00f3ff;
+            opacity: 0.9;
+        }
+
+        .panel {
+            transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1),
+                       box-shadow 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .panel:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1),
+                       0 8px 10px -6px rgb(0 0 0 / 0.1),
+                       0 0 0 1px rgba(0, 243, 255, 0.1);
+        }
+
+        .glitch {
+            position: relative;
+            transition: all 0.2s ease;
+        }
+
+        .glitch:hover {
+            animation: glitch 0.4s infinite;
+        }
+
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+
+        .scanline {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                transparent 50%,
+                rgba(0, 243, 255, 0.03) 50%
+            );
+            background-size: 100% 4px;
+            pointer-events: none;
+            animation: scan 3s linear infinite;
+            z-index: 1;
+            border-radius: inherit;
+        }
+
+        @keyframes scan {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 200px; }
+        }
+
+        .holo {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .holo::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 50%;
+            height: 300%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255,255,255,0.08),
+                transparent
+            );
+            transform: skewX(-25deg);
+            animation: holo-shimmer 2.5s infinite;
+        }
+
+        @keyframes holo-shimmer {
+            0% { transform: translateX(-200%) skewX(-25deg); }
+            20% { transform: translateX(400%) skewX(-25deg); }
+            100% { transform: translateX(400%) skewX(-25deg); }
+        }
+
+        .cyber-text {
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        .data-value {
+            font-family: 'Space Grotesk', monospace;
+            font-feature-settings: "tnum";
+        }
+
+        .neon-button {
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .neon-button:hover {
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.5);
+            transform: translateY(-1px);
+        }
+
+        .modal {
+            animation: modalEnter 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .quote-row {
+            transition: all 0.3s cubic-bezier(0.23, 1.0, 0.32, 1);
+        }
+
+        .neon-glow-cyan {
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.4);
+        }
+
+        .status-dot {
+            animation: pulse 2s infinite;
+        }
+
+        .futuristic-font {
+            font-family: 'Space Grotesk', 'Inter', system_ui, sans-serif;
+            font-weight: 600;
+        }
     </style>
 </head>
-<body class="min-h-screen overflow-x-hidden">
+<body class="cyber-bg text-white min-h-screen overflow-x-hidden">
+    <!-- Subtle scanline overlay -->
+    <div class="fixed inset-0 pointer-events-none z-50" style="background: linear-gradient(to bottom, transparent 50%, rgba(0, 243, 255, 0.015) 50%); background-size: 100% 6px; animation: scan 4s linear infinite;"></div>
 
-<div class="futuristic-bg fixed inset-0 z-[-2]"></div>
+    <!-- HEADER -->
+    <header class="border-b border-white/10 bg-black/40 backdrop-blur-xl sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-6 py-5">
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+                <!-- Logo -->
+                <div class="flex items-center gap-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-cyan-400 to-violet-500 flex items-center justify-center">
+                            <i class="fa-solid fa-brain text-black text-2xl"></i>
+                        </div>
+                        <div>
+                            <h1 class="glitch text-4xl futuristic-font tracking-tighter font-semibold neon-cyan">JCARVIS</h1>
+                            <p class="text-[10px] text-white/40 -mt-1 tracking-[3px]">NEURAL COMPANION</p>
+                        </div>
+                    </div>
+                </div>
 
-<div class="flex h-screen">
-    <!-- Main Content -->
-    <main class="flex-1 flex flex-col">
-        <header class="glass border-b border-cyan-900/50 px-8 py-5 flex justify-between items-center">
-            <div class="flex items-center gap-4">
-                <div class="text-3xl">🌐</div>
-                <div>
-                    <h1 class="text-3xl font-bold neon-text">CATALYST OZWELL</h1>
-                    <p class="text-xs text-cyan-400">LOCAL LLM NEXUS • RTX 3070 POWERED</p>
+                <!-- Subtitle + Status -->
+                <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6">
+                    <div class="flex items-center gap-2">
+                        <div class="flex items-center gap-2 text-sm">
+                            <div class="w-2 h-2 bg-emerald-400 rounded-full status-dot"></div>
+                            <span class="text-white/70 text-sm">System Nominal</span>
+                        </div>
+                        <div class="hidden sm:block text-white/30">•</div>
+                        <div class="text-xs sm:text-sm text-white/60">
+                            Neural Companion • Created by <span class="text-white/90 font-medium">Canberk Oztoprak</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Clock + Location -->
+                <div class="flex items-center gap-4">
+                    <!-- Live Clock -->
+                    <div class="flex items-center gap-2 px-4 py-2 rounded-2xl glass border border-white/10">
+                        <i class="fa-regular fa-clock text-cyan-400"></i>
+                        <div id="clock" class="font-mono text-xl font-semibold tracking-[2px] neon-cyan">00:00:00</div>
+                    </div>
+
+                    <!-- Location -->
+                    <div class="flex items-center gap-2">
+                        <div class="flex items-center bg-black/40 border border-white/10 rounded-2xl px-1 py-1">
+                            <input id="location-input"
+                                   type="text"
+                                   value="Istanbul, TR"
+                                   class="bg-transparent px-3 py-1.5 text-sm w-40 focus:outline-none text-white placeholder-white/40">
+                            <button onclick="updateLocation()"
+                                    class="px-4 py-1.5 text-xs font-semibold bg-white/10 hover:bg-white/20 active:bg-white/30 rounded-xl transition-all flex items-center gap-1.5">
+                                <i class="fa-solid fa-sync-alt text-xs"></i>
+                                <span class="hidden sm:inline">Update</span>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div id="location-time" class="font-mono text-sm breathing text-cyan-300"></div>
-        </header>
+        </div>
+    </header>
 
-        <!-- Welcome + Forecast -->
-        <section id="welcome" class="flex-1 overflow-auto p-8">
-            <div class="max-w-7xl mx-auto">
-                <!-- Disclaimers -->
-                <div class="glass rounded-3xl p-6 text-xs mb-8 border border-amber-400/30">
-                    <strong>⚠️ IMPORTANT:</strong> AI responses from local models (Mistral-7B). May contain errors. Weather data informational only.
-                </div>
+    <!-- MAIN CONTENT -->
+    <main class="max-w-7xl mx-auto px-6 pt-8 pb-16">
 
-                <h1 class="text-5xl font-bold neon-text mb-8">Intelligence Nexus</h1>
-
-                <!-- 6-Day Forecast -->
-                <div class="mb-12">
-                    <h2 class="text-2xl font-bold mb-6">🌤️ 6-DAY FORECAST</h2>
-                    <div id="forecast-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4"></div>
-                </div>
-
-                <!-- Agent Cards -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="agent-grid"></div>
+        <!-- SECTION LABEL -->
+        <div class="flex items-center justify-between mb-6">
+            <div>
+                <div class="section-header">NEURAL DASHBOARD v2.0</div>
+                <div class="text-2xl font-semibold tracking-tight mt-1">Environmental Intelligence &amp; Neural Guidance</div>
             </div>
-        </section>
+            <button onclick="refreshAllData()"
+                    class="flex items-center gap-2 px-5 py-2.5 text-sm font-medium border border-white/20 hover:border-white/40 rounded-2xl transition-all hover:bg-white/5">
+                <i class="fa-solid fa-sync-alt"></i>
+                <span>Refresh All Data</span>
+            </button>
+        </div>
+
+        <!-- 3 COLUMN GRID -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+            <!-- LEFT COLUMN: Environmental Intelligence -->
+            <div class="space-y-6">
+
+                <!-- 3-Day Weather Forecast -->
+                <div class="panel glass rounded-3xl p-6 border border-white/10">
+                    <div class="flex items-center justify-between mb-5">
+                        <div class="flex items-center gap-3">
+                            <i class="fa-solid fa-cloud-sun text-2xl text-cyan-400"></i>
+                            <div>
+                                <div class="font-semibold text-lg">3-Day Forecast</div>
+                                <div class="text-[10px] text-white/50 tracking-widest">ENVIRONMENTAL MATRIX</div>
+                            </div>
+                        </div>
+                        <button onclick="refreshWeather()"
+                                class="text-xs px-3 py-1 rounded-xl border border-white/20 hover:bg-white/5 transition-colors flex items-center gap-1.5">
+                            <i class="fa-solid fa-sync text-[10px]"></i>
+                            <span class="text-[10px]">REFRESH</span>
+                        </button>
+                    </div>
+
+                    <div id="weather-grid" class="grid grid-cols-3 gap-3">
+                        <!-- Populated by JS -->
+                    </div>
+
+                    <div class="mt-4 text-[10px] text-white/40 flex items-center gap-2">
+                        <i class="fa-solid fa-satellite text-xs"></i>
+                        <span>Data simulated • <span class="text-cyan-400/70">Connect OpenWeatherMap API</span></span>
+                    </div>
+                </div>
+
+                <!-- Geological Activity -->
+                <div class="panel glass rounded-3xl p-6 border border-white/10">
+                    <div class="flex items-center justify-between mb-5">
+                        <div class="flex items-center gap-3">
+                            <i class="fa-solid fa-globe text-2xl text-violet-400"></i>
+                            <div>
+                                <div class="font-semibold text-lg">Geological Activity</div>
+                            </div>
+                        </div>
+                        <button onclick="refreshGeology()"
+                                class="text-xs px-3 py-1 rounded-xl border border-white/20 hover:bg-white/5 transition-colors flex items-center gap-1.5">
+                            <i class="fa-solid fa-sync text-[10px]"></i>
+                            <span class="text-[10px]">REFRESH</span>
+                        </button>
+                    </div>
+
+                    <!-- Seismic -->
+                    <div class="mb-5">
+                        <div class="flex items-center justify-between mb-2">
+                            <div class="flex items-center gap-2">
+                                <span class="text-sm font-medium">Seismic Activity</span>
+                            </div>
+                            <span id="seismic-risk"
+                                  class="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">LOW</span>
+                        </div>
+
+                        <div id="seismic-list" class="space-y-2 text-sm">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Volcanic -->
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <div class="flex items-center gap-2">
+                                <span class="text-sm font-medium">Volcanic Activity</span>
+                            </div>
+                            <span id="volcanic-risk"
+                                  class="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-400 border border-amber-500/30">MODERATE</span>
+                        </div>
+
+                        <div id="volcanic-list" class="space-y-2 text-sm">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+
+                    <div class="mt-4 pt-4 border-t border-white/10 text-[10px] text-white/40">
+                        USGS integration ready • <span class="text-violet-400">Real-time feed available</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CENTER COLUMN: Air & Lifestyle -->
+            <div class="space-y-6">
+
+                <!-- Air Quality & UV -->
+                <div class="panel glass rounded-3xl p-6 border border-white/10">
+                    <div class="flex items-center justify-between mb-5">
+                        <div class="flex items-center gap-3">
+                            <i class="fa-solid fa-wind text-2xl text-emerald-400"></i>
+                            <div class="font-semibold text-lg">Air Quality &amp; UV</div>
+                        </div>
+                        <button onclick="refreshAirQuality()"
+                                class="text-xs px-3 py-1 rounded-xl border border-white/20 hover:bg-white/5 transition-colors flex items-center gap-1.5">
+                            <i class="fa-solid fa-sync text-[10px]"></i>
+                            <span class="text-[10px]">REFRESH</span>
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <!-- AQI -->
+                        <div class="bg-black/30 rounded-2xl p-4 border border-white/10">
+                            <div class="text-xs text-white/50 mb-1">AQI INDEX</div>
+                            <div id="aqi-value" class="text-5xl font-semibold font-display data-value tracking-tighter">47</div>
+                            <div id="aqi-status" class="text-emerald-400 text-sm font-medium mt-1">Good • Excellent air</div>
+
+                            <div class="mt-3 h-1.5 bg-white/10 rounded-full overflow-hidden">
+                                <div id="aqi-bar" class="h-1.5 w-[35%] bg-emerald-400 rounded-full" style="width: 35%"></div>
+                            </div>
+                        </div>
+
+                        <!-- UV -->
+                        <div class="bg-black/30 rounded-2xl p-4 border border-white/10">
+                            <div class="text-xs text-white/50 mb-1">UV INDEX</div>
+                            <div class="flex items-baseline gap-1">
+                                <div id="uv-value" class="text-5xl font-semibold font-display data-value tracking-tighter">3</div>
+                                <div class="text-lg text-amber-400">/11</div>
+                            </div>
+                            <div id="uv-status" class="text-amber-400 text-sm font-medium mt-0.5">Moderate</div>
+
+                            <div class="mt-2 text-xs text-white/50">
+                                Peak: <span id="uv-peak" class="text-white/80">14:00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lifestyle Suggestions -->
+                <div class="panel glass rounded-3xl p-6 border border-white/10 h-full">
+                    <div class="flex items-center justify-between mb-5">
+                        <div class="flex items-center gap-3">
+                            <i class="fa-solid fa-user-shield text-2xl text-magenta-400"></i>
+                            <div class="font-semibold text-lg">Lifestyle Protocol</div>
+                        </div>
+                        <button onclick="refreshLifestyle()"
+                                class="text-xs px-3 py-1 rounded-xl border border-white/20 hover:bg-white/5 transition-colors flex items-center gap-1.5">
+                            <i class="fa-solid fa-sync text-[10px]"></i>
+                            <span class="text-[10px]">REFRESH</span>
+                        </button>
+                    </div>
+
+                    <div id="lifestyle-content" class="space-y-5 text-sm">
+                        <!-- Populated dynamically by JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT COLUMN: Wisdom & Agents -->
+            <div class="space-y-6">
+
+                <!-- Quotes Panel -->
+                <div class="panel glass rounded-3xl p-6 border border-white/10">
+                    <div class="flex items-center justify-between mb-5">
+                        <div class="flex items-center gap-3">
+                            <i class="fa-solid fa-quote-left text-2xl text-violet-400"></i>
+                            <div class="font-semibold text-lg">Neural Wisdom</div>
+                        </div>
+                        <button onclick="refreshQuotes()"
+                                class="px-4 py-1.5 text-xs font-semibold bg-white/10 hover:bg-white/15 active:bg-white/20 rounded-xl transition-all flex items-center gap-2">
+                            <i class="fa-solid fa-sync-alt"></i>
+                            <span>REFRESH</span>
+                        </button>
+                    </div>
+
+                    <div class="space-y-3">
+                        <!-- Bible New Testament -->
+                        <div class="holo quote-row bg-black/30 border border-white/10 rounded-2xl px-4 py-3">
+                            <div class="text-[10px] text-violet-400 font-medium mb-1 flex items-center gap-2">
+                                <span>NEW TESTAMENT</span>
+                            </div>
+                            <div id="quote-nt" class="text-sm leading-tight text-white/90"></div>
+                        </div>
+
+                        <!-- Old Testament -->
+                        <div class="holo quote-row bg-black/30 border border-white/10 rounded-2xl px-4 py-3">
+                            <div class="text-[10px] text-cyan-400 font-medium mb-1 flex items-center gap-2">
+                                <span>OLD TESTAMENT</span>
+                            </div>
+                            <div id="quote-ot" class="text-sm leading-tight text-white/90"></div>
+                        </div>
+
+                        <!-- Marcus Aurelius -->
+                        <div class="holo quote-row bg-black/30 border border-white/10 rounded-2xl px-4 py-3">
+                            <div class="text-[10px] text-emerald-400 font-medium mb-1 flex items-center gap-2">
+                                <span>MARCUS AURELIUS</span>
+                            </div>
+                            <div id="quote-ma" class="text-sm leading-tight text-white/90"></div>
+                        </div>
+
+                        <!-- Socrates -->
+                        <div class="holo quote-row bg-black/30 border border-white/10 rounded-2xl px-4 py-3">
+                            <div class="text-[10px] text-amber-400 font-medium mb-1 flex items-center gap-2">
+                                <span>SOCRATES</span>
+                            </div>
+                            <div id="quote-socrates" class="text-sm leading-tight text-white/90"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Agents Hub -->
+                <div class="panel glass rounded-3xl p-6 border border-white/10">
+                    <div class="font-semibold text-lg mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-robot text-cyan-400"></i>
+                        <span>AI Agents Hub</span>
+                    </div>
+
+                    <div class="space-y-3">
+                        <!-- Jcarvis Core -->
+                        <div onclick="openAgentModal('jcarvis')"
+                             class="group cursor-pointer bg-gradient-to-r from-black/60 to-black/40 hover:from-black/40 hover:to-black/60 transition-all border border-white/10 hover:border-cyan-500/30 rounded-2xl p-4 flex gap-4 items-center">
+                            <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-cyan-400 to-violet-500 flex-shrink-0 flex items-center justify-center">
+                                <i class="fa-solid fa-brain text-black"></i>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <div class="font-semibold flex items-center gap-2">
+                                    Jcarvis Core
+                                    <span class="text-[9px] px-1.5 py-px bg-cyan-500/20 text-cyan-400 rounded">PRIMARY</span>
+                                </div>
+                                <div class="text-xs text-white/60">Neural Companion • Philosophical &amp; Strategic</div>
+                            </div>
+                            <i class="fa-solid fa-arrow-right text-white/40 group-hover:text-white/80 transition-colors"></i>
+                        </div>
+
+                        <!-- HealingOzwell -->
+                        <div onclick="openAgentModal('healing')"
+                             class="group cursor-pointer bg-gradient-to-r from-black/60 to-black/40 hover:from-black/40 hover:to-black/60 transition-all border border-white/10 hover:border-emerald-500/30 rounded-2xl p-4 flex gap-4 items-center">
+                            <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-400 to-teal-500 flex-shrink-0 flex items-center justify-center">
+                                <i class="fa-solid fa-heart-pulse text-black"></i>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <div class="font-semibold">HealingOzwell</div>
+                                <div class="text-xs text-white/60">Simple Health Suggestions Bot</div>
+                            </div>
+                            <i class="fa-solid fa-arrow-right text-white/40 group-hover:text-white/80 transition-colors"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
-</div>
 
-<!-- ==================== AGENT SUBPAGES ==================== -->
-
-<!-- Meister Ozwell Subpage -->
-<div id="meister-page" class="hidden fixed inset-0 bg-black/95 z-50 flex flex-col">
-    <div class="glass p-6 border-b flex justify-between">
-        <div class="flex items-center gap-4">
-            <span class="text-4xl">🎓</span>
-            <div>
-                <h2 class="text-2xl font-bold">Meister Ozwell</h2>
-                <p class="text-cyan-400 text-sm">High School Education Evaluator</p>
+    <!-- FOOTER -->
+    <footer class="border-t border-white/10 bg-black/30 py-5">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <div class="text-xs text-white/50 tracking-widest">
+                CREATED BY CANBERK OZTOPRAK • JCARVIS v2.0 • POWERED BY GROK SUPER CAPABILITIES
+            </div>
+            <div class="text-[10px] text-white/30 mt-1">
+                This is a simulated neural interface. All data is illustrative unless connected to live APIs.
             </div>
         </div>
-        <button onclick="closeSubpage('meister-page')" class="text-4xl text-cyan-400 hover:text-white">×</button>
-    </div>
-    <div class="flex-1 flex flex-col p-6">
-        <div id="meister-chat" class="chat-window flex-1 overflow-auto space-y-6 mb-6"></div>
-        
-        <div class="space-y-4">
-            <textarea id="meister-q" class="w-full p-4 glass rounded-2xl" rows="2" placeholder="Enter the question..."></textarea>
-            <textarea id="meister-a" class="w-full p-4 glass rounded-2xl" rows="3" placeholder="Your answer..."></textarea>
-            <button onclick="evaluateAnswer()" class="w-full py-4 bg-cyan-600 hover:bg-cyan-500 rounded-2xl font-bold">EVALUATE → Score + Verdict + Perfect Answer</button>
-        </div>
-    </div>
-</div>
+    </footer>
 
-<!-- Av.Ozwell Subpage -->
-<div id="av-page" class="hidden fixed inset-0 bg-black/95 z-50 flex flex-col">
-    <div class="glass p-6 border-b flex justify-between">
-        <div class="flex items-center gap-4">
-            <span class="text-4xl">⚖️</span>
-            <div>
-                <h2 class="text-2xl font-bold">Av. Ozwell</h2>
-                <p class="text-pink-400 text-sm">Türk Hukuk Danışmanı • Lt. Colonel Style</p>
+    <!-- JCARVIS CORE MODAL -->
+    <div id="modal-jcarvis" onclick="closeModal('jcarvis')" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
+        <div onclick="event.stopImmediatePropagation()" class="modal w-full max-w-lg glass rounded-3xl border border-white/20 overflow-hidden">
+            <!-- Header -->
+            <div class="px-6 pt-5 pb-4 border-b border-white/10 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-cyan-400 to-violet-500 flex items-center justify-center">
+                        <i class="fa-solid fa-brain text-black text-lg"></i>
+                    </div>
+                    <div>
+                        <div class="font-semibold">Jcarvis Core</div>
+                        <div class="text-xs text-cyan-400">Primary Neural Intelligence</div>
+                    </div>
+                </div>
+                <button onclick="closeModal('jcarvis')" class="w-9 h-9 flex items-center justify-center text-white/50 hover:text-white">
+                    <i class="fa-solid fa-times text-xl"></i>
+                </button>
+            </div>
+
+            <!-- Chat Area -->
+            <div id="chat-jcarvis" class="h-80 p-5 overflow-y-auto space-y-4 bg-black/30 text-sm"></div>
+
+            <!-- Input -->
+            <div class="p-4 border-t border-white/10 flex gap-2">
+                <input id="input-jcarvis"
+                       onkeypress="if (event.key === 'Enter') sendMessage('jcarvis')"
+                       type="text"
+                       class="flex-1 bg-white/5 border border-white/10 focus:border-white/30 px-4 py-3 rounded-2xl text-sm focus:outline-none"
+                       placeholder="Ask Jcarvis anything...">
+                <button onclick="sendMessage('jcarvis')"
+                        class="px-5 bg-gradient-to-r from-cyan-400 to-violet-500 text-black font-medium rounded-2xl text-sm flex items-center justify-center active:scale-95 transition-transform">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
             </div>
         </div>
-        <button onclick="closeSubpage('av-page')" class="text-4xl text-pink-400 hover:text-white">×</button>
     </div>
-    <div class="flex-1 flex flex-col p-6">
-        <div id="av-chat" class="chat-window flex-1 overflow-auto space-y-6 mb-6"></div>
-        <div class="flex gap-3">
-            <input id="av-input" class="flex-1 p-5 glass rounded-2xl" placeholder="Hukuki sorunuzu yazın...">
-            <button onclick="sendAvMessage()" class="px-10 bg-pink-600 hover:bg-pink-500 rounded-2xl font-bold">DANIŞ</button>
-        </div>
-    </div>
-</div>
 
-<!-- NeOzwell Subpage -->
-<div id="neo-page" class="hidden fixed inset-0 bg-black/95 z-50 flex flex-col">
-    <div class="glass p-6 border-b flex justify-between">
-        <div class="flex items-center gap-4">
-            <span class="text-4xl">🔧</span>
-            <div>
-                <h2 class="text-2xl font-bold">NeOzwell</h2>
-                <p class="text-emerald-400 text-sm">Engineering & Technical Analysis</p>
+    <!-- HealingOzwell MODAL -->
+    <div id="modal-healing" onclick="closeModal('healing')" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
+        <div onclick="event.stopImmediatePropagation()" class="modal w-full max-w-lg glass rounded-3xl border border-white/20 overflow-hidden">
+            <!-- Header -->
+            <div class="px-6 pt-5 pb-4 border-b border-white/10 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center">
+                        <i class="fa-solid fa-heart-pulse text-black text-lg"></i>
+                    </div>
+                    <div>
+                        <div class="font-semibold">HealingOzwell</div>
+                        <div class="text-xs text-emerald-400">Health &amp; Wellness Bot</div>
+                    </div>
+                </div>
+                <button onclick="closeModal('healing')" class="w-9 h-9 flex items-center justify-center text-white/50 hover:text-white">
+                    <i class="fa-solid fa-times text-xl"></i>
+                </button>
+            </div>
+
+            <!-- Chat Area -->
+            <div id="chat-healing" class="h-80 p-5 overflow-y-auto space-y-4 bg-black/30 text-sm"></div>
+
+            <!-- Input -->
+            <div class="p-4 border-t border-white/10 flex gap-2">
+                <input id="input-healing"
+                       onkeypress="if (event.key === 'Enter') sendMessage('healing')"
+                       type="text"
+                       class="flex-1 bg-white/5 border border-white/10 focus:border-white/30 px-4 py-3 rounded-2xl text-sm focus:outline-none"
+                       placeholder="Ask for health guidance...">
+                <button onclick="sendMessage('healing')"
+                        class="px-5 bg-gradient-to-r from-emerald-400 to-teal-500 text-black font-medium rounded-2xl text-sm flex items-center justify-center active:scale-95 transition-transform">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
             </div>
         </div>
-        <button onclick="closeSubpage('neo-page')" class="text-4xl text-emerald-400 hover:text-white">×</button>
     </div>
-    <div class="flex-1 flex flex-col p-6">
-        <div id="neo-chat" class="chat-window flex-1 overflow-auto space-y-6 mb-6"></div>
-        <div class="flex gap-3">
-            <input id="neo-input" class="flex-1 p-5 glass rounded-2xl" placeholder="Describe technical issue or repair...">
-            <button onclick="sendNeoMessage()" class="px-10 bg-emerald-600 hover:bg-emerald-500 rounded-2xl font-bold">ANALYZE</button>
-        </div>
-    </div>
-</div>
 
-<script>
-// ==================== MEMORY SYSTEM (12 exchanges) ====================
-const MAX_HISTORY = 12;
+    <script>
+        // ==================== TAILWIND CONFIG ====================
+        function initTailwind() {
+            document.documentElement.style.setProperty('--accent-cyan', '#00f3ff');
+        }
 
-function saveHistory(agent, history) {
-    localStorage.setItem(`chat_${agent}`, JSON.stringify(history.slice(-MAX_HISTORY)));
-}
+        // ==================== LIVE CLOCK ====================
+        function updateClock() {
+            const clockEl = document.getElementById('clock');
 
-function loadHistory(agent) {
-    return JSON.parse(localStorage.getItem(`chat_${agent}`)) || [];
-}
+            setInterval(() => {
+                const now = new Date();
+                const timeString = now.toLocaleTimeString('en-US', {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit',
+                    hour12: false
+                });
+                clockEl.textContent = timeString;
+            }, 1000);
+        }
 
-// ==================== SUBPAGE CONTROLS ====================
-function openSubpage(pageId) {
-    document.getElementById(pageId).classList.remove('hidden');
-    renderChat(pageId.replace('-page', ''));
-}
+        // ==================== LOCATION ====================
+        let currentLocation = "Istanbul, TR";
 
-function closeSubpage(pageId) {
-    document.getElementById(pageId).classList.add('hidden');
-}
+        function updateLocation() {
+            const input = document.getElementById('location-input');
+            const newLocation = input.value.trim();
 
-// ==================== CHAT RENDERING ====================
-function renderChat(agent) {
-    const container = document.getElementById(agent + '-chat');
-    const history = loadHistory(agent);
-    container.innerHTML = history.map(msg => `
-        <div class="message ${msg.role === 'user' ? 'text-right' : 'text-left'}">
-            <div class="inline-block max-w-[85%] p-4 rounded-3xl ${msg.role === 'user' ? 'bg-cyan-600' : 'glass'}">
-                ${msg.content}
-            </div>
-        </div>
-    `).join('');
-    container.scrollTop = container.scrollHeight;
-}
+            if (!newLocation) {
+                input.value = currentLocation;
+                return;
+            }
 
-// ==================== SEND MESSAGE WITH MEMORY ====================
-async function sendMessage(agent, inputId) {
-    const input = document.getElementById(inputId);
-    const text = input.value.trim();
-    if (!text) return;
+            currentLocation = newLocation;
 
-    let history = loadHistory(agent);
-    history.push({ role: 'user', content: text });
-    
-    // Add to UI
-    renderChat(agent);
-    input.value = '';
+            // Trigger refresh of weather + lifestyle with new location flavor
+            refreshWeather();
+            refreshLifestyle();
 
-    // Simulate AI response (connect to LM Studio later)
-    const response = await simulateAIResponse(agent, text);
-    history.push({ role: 'assistant', content: response });
-    
-    saveHistory(agent, history);
-    renderChat(agent);
-}
+            // Small visual confirmation
+            const originalBorder = input.style.borderColor;
+            input.style.borderColor = '#00f3ff';
+            setTimeout(() => {
+                input.style.borderColor = originalBorder || '';
+            }, 800);
+        }
 
-// Simulated AI (replace with fetch to your Cloudflare Tunnel later)
-async function simulateAIResponse(agent, prompt) {
-    await new Promise(r => setTimeout(r, 800));
-    
-    if (agent === 'meister') return "Score: 87/100\nVerdict: Strong understanding with good examples.\nPerfect Answer: ...";
-    if (agent === 'av') return "Sayın Danışan, Türk Ticaret Kanunu md. 123'e göre... (Lt. Colonel üslubu)";
-    return "Technical Analysis: Root cause likely ... Recommended fix steps attached.";
-}
+        // ==================== QUOTES DATABASE ====================
+        const quotes = {
+            newTestament: [
+                "For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life. — John 3:16",
+                "I can do all this through him who gives me strength. — Philippians 4:13",
+                "The Lord is my shepherd, I lack nothing. — Psalm 23:1",
+                "Love your neighbor as yourself. — Matthew 22:39",
+                "Blessed are the peacemakers, for they will be called children of God. — Matthew 5:9",
+                "Do not worry about tomorrow, for tomorrow will worry about itself. — Matthew 6:34",
+                "The truth will set you free. — John 8:32",
+                "Be still, and know that I am God. — Psalm 46:10",
+                "Faith is confidence in what we hope for and assurance about what we do not see. — Hebrews 11:1",
+                "Rejoice always, pray continually, give thanks in all circumstances. — 1 Thessalonians 5:16-18",
+                "Greater love has no one than this: to lay down one's life for one's friends. — John 15:13",
+                "Do not be overcome by evil, but overcome evil with good. — Romans 12:21",
+                "Trust in the Lord with all your heart. — Proverbs 3:5",
+                "Let your light shine before others. — Matthew 5:16",
+                "Peace I leave with you; my peace I give you. — John 14:27"
+            ],
+            oldTestament: [
+                "The Lord bless you and keep you; the Lord make his face shine on you. — Numbers 6:24-25",
+                "Even though I walk through the darkest valley, I will fear no evil. — Psalm 23:4",
+                "The fear of the Lord is the beginning of wisdom. — Proverbs 9:10",
+                "Be strong and courageous. Do not be afraid. — Joshua 1:9",
+                "The Lord is my light and my salvation—whom shall I fear? — Psalm 27:1",
+                "A wise man will hear and increase learning. — Proverbs 1:5",
+                "He has made everything beautiful in its time. — Ecclesiastes 3:11",
+                "The Lord your God is with you, the Mighty Warrior who saves. — Zephaniah 3:17",
+                "As iron sharpens iron, so one person sharpens another. — Proverbs 27:17",
+                "The grass withers and the flowers fall, but the word of our God endures forever. — Isaiah 40:8",
+                "Do not be afraid, for I am with you. — Isaiah 41:10",
+                "The Lord is good to those whose hope is in him. — Lamentations 3:25",
+                "Guard your heart, for everything you do flows from it. — Proverbs 4:23",
+                "Those who hope in the Lord will renew their strength. — Isaiah 40:31",
+                "A cheerful heart is good medicine. — Proverbs 17:22"
+            ],
+            marcusAurelius: [
+                "You have power over your mind - not outside events. Realize this, and you will find strength.",
+                "The happiness of your life depends upon the quality of your thoughts.",
+                "Everything we hear is an opinion, not a fact. Everything we see is a perspective, not the truth.",
+                "Waste no more time arguing about what a good man should be. Be one.",
+                "The best revenge is to be unlike him who performed the injury.",
+                "It is not death that a man should fear, but he should fear never beginning to live.",
+                "Choose not to be harmed — and you won’t feel harmed.",
+                "The impediment to action advances action. What stands in the way becomes the way.",
+                "Very little is needed to make a happy life; it is all within yourself, in your way of thinking.",
+                "Accept the things to which fate binds you, and love the people with whom fate brings you together.",
+                "The soul becomes dyed with the color of its thoughts.",
+                "When you arise in the morning, think of what a precious privilege it is to be alive.",
+                "Do not act as if you had ten thousand years to live. Death hangs over you.",
+                "Look within. Within is the fountain of good, and it will ever bubble up, if you will ever dig.",
+                "How much more grievous are the consequences of anger than the causes of it."
+            ],
+            socrates: [
+                "The only true wisdom is in knowing you know nothing.",
+                "An unexamined life is not worth living.",
+                "I know that I am intelligent, because I know that I know nothing.",
+                "The secret of happiness, you see, is not found in seeking more, but in developing the capacity to enjoy less.",
+                "He who is not contented with what he has, would not be contented with what he would like to have.",
+                "Wonder is the beginning of wisdom.",
+                "To find yourself, think for yourself.",
+                "Education is the kindling of a flame, not the filling of a vessel.",
+                "The way to gain a good reputation is to endeavor to be what you desire to appear.",
+                "Prefer knowledge to wealth, for the one is transitory, the other perpetual.",
+                "By all means, marry. If you get a good wife, you'll become happy; if you get a bad one, you'll become a philosopher.",
+                "Be kind, for everyone you meet is fighting a hard battle.",
+                "The highest form of human excellence is to question oneself and others.",
+                "Do not do to others what angers you if done to you by others.",
+                "The mind is everything. What you think, you become."
+            ]
+        };
 
-// Specific handlers
-function evaluateAnswer() {
-    sendMessage('meister', 'meister-a');
-}
+        let quoteIndices = {
+            newTestament: 0,
+            oldTestament: 0,
+            marcusAurelius: 0,
+            socrates: 0
+        };
 
-function sendAvMessage() { sendMessage('av', 'av-input'); }
-function sendNeoMessage() { sendMessage('neo', 'neo-input'); }
+        function refreshQuotes() {
+            // New Testament
+            const ntEl = document.getElementById('quote-nt');
+            quoteIndices.newTestament = (quoteIndices.newTestament + 1) % quotes.newTestament.length;
+            ntEl.innerHTML = quotes.newTestament[quoteIndices.newTestament];
 
-// ==================== INITIALIZATION ====================
-function initAgents() {
-    const grid = document.getElementById('agent-grid');
-    grid.innerHTML = `
-        <div onclick="openSubpage('meister-page')" class="glass rounded-3xl p-8 cursor-pointer hover:scale-105 transition-all text-center">
-            <div class="text-7xl mb-6">🎓</div>
-            <h3 class="text-3xl font-bold">Meister Ozwell</h3>
-            <p class="text-cyan-300">Education Evaluator • Memory Enabled</p>
-        </div>
-        <div onclick="openSubpage('av-page')" class="glass rounded-3xl p-8 cursor-pointer hover:scale-105 transition-all text-center">
-            <div class="text-7xl mb-6">⚖️</div>
-            <h3 class="text-3xl font-bold">Av. Ozwell</h3>
-            <p class="text-pink-300">Turkish Legal Advisor • 12-msg Memory</p>
-        </div>
-        <div onclick="openSubpage('neo-page')" class="glass rounded-3xl p-8 cursor-pointer hover:scale-105 transition-all text-center">
-            <div class="text-7xl mb-6">🔧</div>
-            <h3 class="text-3xl font-bold">NeOzwell</h3>
-            <p class="text-emerald-300">Engineering Technical Analysis</p>
-        </div>
-    `;
-}
+            // Old Testament
+            const otEl = document.getElementById('quote-ot');
+            quoteIndices.oldTestament = (quoteIndices.oldTestament + 1) % quotes.oldTestament.length;
+            otEl.innerHTML = quotes.oldTestament[quoteIndices.oldTestament];
 
-window.onload = () => {
-    initAgents();
-    // Precise time with ms
-    setInterval(() => {
-        const t = new Date();
-        const time = t.toLocaleTimeString('tr-TR', {hour:'2-digit', minute:'2-digit', second:'2-digit'}) + '.' + String(t.getMilliseconds()).padStart(3,'0');
-        document.getElementById('location-time').textContent = time;
-    }, 50);
-};
-</script>
+            // Marcus Aurelius
+            const maEl = document.getElementById('quote-ma');
+            quoteIndices.marcusAurelius = (quoteIndices.marcusAurelius + 1) % quotes.marcusAurelius.length;
+            maEl.innerHTML = quotes.marcusAurelius[quoteIndices.marcusAurelius];
+
+            // Socrates
+            const socEl = document.getElementById('quote-socrates');
+            quoteIndices.socrates = (quoteIndices.socrates + 1) % quotes.socrates.length;
+            socEl.innerHTML = quotes.socrates[quoteIndices.socrates];
+        }
+
+        // ==================== WEATHER DATA ====================
+        const weatherData = [
+            {
+                day: "Today",
+                icon: "☀️",
+                temp: 8,
+                feelsLike: 5,
+                precip: 10,
+                wind: 14,
+                humidity: 62
+            },
+            {
+                day: "Tomorrow",
+                icon: "⛅",
+                temp: 11,
+                feelsLike: 9,
+                precip: 30,
+                wind: 9,
+                humidity: 71
+            },
+            {
+                day: "Day +2",
+                icon: "🌧️",
+                temp: 6,
+                feelsLike: 3,
+                precip: 80,
+                wind: 22,
+                humidity: 89
+            }
+        ];
+
+        function renderWeather(data = weatherData) {
+            const container = document.getElementById('weather-grid');
+            container.innerHTML = '';
+
+            data.forEach(item => {
+                const card = document.createElement('div');
+                card.className = `bg-black/30 border border-white/10 rounded-2xl p-4 text-center hover:border-white/20 transition-colors`;
+
+                card.innerHTML = `
+                    <div class="text-xs text-white/50 font-medium tracking-widest">${item.day}</div>
+                    <div class="text-4xl my-1.5">${item.icon}</div>
+                    <div class="text-3xl font-semibold font-display tracking-tighter">${item.temp}°<span class="text-base align-super text-white/60">C</span></div>
+
+                    <div class="text-[10px] mt-3 text-white/50">Feels like</div>
+                    <div class="font-medium">${item.feelsLike}°C</div>
+
+                    <div class="mt-3 pt-3 border-t border-white/10 grid grid-cols-3 text-[10px]">
+                        <div>
+                            <div class="text-white/40">Rain</div>
+                            <div class="font-medium">${item.precip}%</div>
+                        </div>
+                        <div>
+                            <div class="text-white/40">Wind</div>
+                            <div class="font-medium">${item.wind}km</div>
+                        </div>
+                        <div>
+                            <div class="text-white/40">Humid</div>
+                            <div class="font-medium">${item.humidity}%</div>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function refreshWeather() {
+            // Simulate slight variation in weather data
+            const newData = weatherData.map(item => ({
+                ...item,
+                temp: item.temp + (Math.random() * 3 - 1.5),
+                feelsLike: item.feelsLike + (Math.random() * 2 - 1),
+                precip: Math.max(0, Math.min(100, item.precip + (Math.random() * 20 - 10))),
+                humidity: Math.max(40, Math.min(95, item.humidity + (Math.random() * 10 - 5)))
+            }));
+
+            renderWeather(newData);
+
+            // Also refresh lifestyle when weather changes
+            setTimeout(refreshLifestyle, 600);
+        }
+
+        // ==================== GEOLOGICAL DATA ====================
+        function renderGeology() {
+            // Seismic
+            const seismicList = document.getElementById('seismic-list');
+            seismicList.innerHTML = `
+                <div class="flex justify-between items-center text-xs">
+                    <div class="flex items-center gap-2">
+                        <span class="text-emerald-400">•</span>
+                        <span>4.1 • Marmara Sea</span>
+                    </div>
+                    <span class="font-mono text-white/50">2h ago</span>
+                </div>
+                <div class="flex justify-between items-center text-xs">
+                    <div class="flex items-center gap-2">
+                        <span class="text-emerald-400">•</span>
+                        <span>2.8 • Bursa region</span>
+                    </div>
+                    <span class="font-mono text-white/50">11h ago</span>
+                </div>
+            `;
+            document.getElementById('seismic-risk').className = `text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30`;
+            document.getElementById('seismic-risk').textContent = "LOW";
+
+            // Volcanic
+            const volcanicList = document.getElementById('volcanic-list');
+            volcanicList.innerHTML = `
+                <div class="flex justify-between items-center text-xs">
+                    <div class="flex items-center gap-2">
+                        <span class="text-amber-400">•</span>
+                        <span>Etna • Strombolian</span>
+                    </div>
+                    <span class="font-mono text-white/50">4d ago</span>
+                </div>
+                <div class="flex justify-between items-center text-xs">
+                    <div class="flex items-center gap-2">
+                        <span class="text-emerald-400">•</span>
+                        <span>No major activity</span>
+                    </div>
+                    <span class="font-mono text-white/50">—</span>
+                </div>
+            `;
+            document.getElementById('volcanic-risk').className = `text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-400 border border-amber-500/30`;
+            document.getElementById('volcanic-risk').textContent = "MODERATE";
+        }
+
+        function refreshGeology() {
+            const risks = ["LOW", "MODERATE", "ELEVATED"];
+            const seismicEl = document.getElementById('seismic-risk');
+            const volcanicEl = document.getElementById('volcanic-risk');
+
+            // Randomize slightly
+            seismicEl.textContent = risks[Math.floor(Math.random() * 2)];
+            volcanicEl.textContent = risks[Math.floor(Math.random() * 3)];
+
+            // Color update
+            if (seismicEl.textContent === "LOW") {
+                seismicEl.className = `text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30`;
+            } else {
+                seismicEl.className = `text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-400 border border-amber-500/30`;
+            }
+
+            renderGeology();
+        }
+
+        // ==================== AIR QUALITY ====================
+        let currentAQI = 47;
+        let currentUV = 3;
+
+        function renderAirQuality() {
+            const aqiEl = document.getElementById('aqi-value');
+            const statusEl = document.getElementById('aqi-status');
+            const bar = document.getElementById('aqi-bar');
+
+            aqiEl.textContent = currentAQI;
+
+            if (currentAQI <= 50) {
+                statusEl.textContent = "Good • Excellent air";
+                statusEl.className = "text-emerald-400 text-sm font-medium mt-1";
+                bar.style.width = `${Math.min(currentAQI, 50) * 1.8}%`;
+                bar.style.backgroundColor = "#10b981";
+            } else if (currentAQI <= 100) {
+                statusEl.textContent = "Moderate • Sensitive groups";
+                statusEl.className = "text-amber-400 text-sm font-medium mt-1";
+                bar.style.backgroundColor = "#f59e0b";
+            } else {
+                statusEl.textContent = "Unhealthy • Limit exposure";
+                statusEl.className = "text-red-400 text-sm font-medium mt-1";
+                bar.style.backgroundColor = "#ef4444";
+            }
+        }
+
+        function renderUV() {
+            const uvEl = document.getElementById('uv-value');
+            const statusEl = document.getElementById('uv-status');
+            const peakEl = document.getElementById('uv-peak');
+
+            uvEl.textContent = currentUV;
+
+            if (currentUV <= 2) {
+                statusEl.textContent = "Low";
+                statusEl.className = "text-emerald-400 text-sm font-medium mt-0.5";
+            } else if (currentUV <= 5) {
+                statusEl.textContent = "Moderate";
+                statusEl.className = "text-amber-400 text-sm font-medium mt-0.5";
+            } else {
+                statusEl.textContent = "High";
+                statusEl.className = "text-orange-400 text-sm font-medium mt-0.5";
+            }
+
+            peakEl.textContent = (currentUV > 4) ? "13:40" : "14:10";
+        }
+
+        function refreshAirQuality() {
+            currentAQI = Math.floor(Math.random() * 55) + 25;
+            currentUV = Math.floor(Math.random() * 6) + 2;
+
+            renderAirQuality();
+            renderUV();
+
+            setTimeout(() => {
+                refreshLifestyle();
+            }, 400);
+        }
+
+        // ==================== LIFESTYLE SUGGESTIONS ====================
+        function refreshLifestyle() {
+            const container = document.getElementById('lifestyle-content');
+
+            const aqi = currentAQI;
+            const uv = currentUV;
+            const temp = parseInt(weatherData[0].temp);
+            const precip = weatherData[0].precip;
+
+            let clothing = "";
+            let spf = "";
+            let tips = [];
+
+            // Clothing logic
+            if (temp < 5) {
+                clothing = "Heavy coat + thermal layers. Wool or down recommended.";
+            } else if (temp < 10) {
+                clothing = "Insulated jacket + scarf. Layering advised.";
+            } else {
+                clothing = "Light jacket or hoodie. Comfortable layers.";
+            }
+
+            // SPF logic
+            if (uv >= 5) {
+                spf = "SPF 50+ • Reapply every 90 minutes. Avoid 11:30–15:30.";
+            } else if (uv >= 3) {
+                spf = "SPF 30 • Reapply every 2 hours. Peak exposure 12:00–16:00.";
+            } else {
+                spf = "SPF 15 minimum. Reapply after 3 hours outdoors.";
+            }
+
+            // Practical tips
+            if (aqi > 60) tips.push("Minimize outdoor exertion today.");
+            if (precip > 60) tips.push("Carry waterproof layer. Umbrella recommended.");
+            if (uv >= 5) tips.push("Seek shade during peak UV hours.");
+            if (temp < 6) tips.push("Stay hydrated — cold air is dehydrating.");
+
+            tips.push("Hydrate consistently throughout the day.");
+
+            container.innerHTML = `
+                <div>
+                    <div class="text-xs uppercase tracking-widest text-white/50 mb-1">Clothing Protocol</div>
+                    <div class="text-white/90">${clothing}</div>
+                </div>
+                <div>
+                    <div class="text-xs uppercase tracking-widest text-white/50 mb-1">Sun Protection</div>
+                    <div class="text-white/90">${spf}</div>
+                </div>
+                <div>
+                    <div class="text-xs uppercase tracking-widest text-white/50 mb-1">Field Recommendations</div>
+                    <ul class="text-white/80 space-y-1 mt-1">
+                        ${tips.map(t => `<li class="flex gap-2"><span class="text-cyan-400">→</span> ${t}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+        }
+
+        // ==================== AGENT CHAT ====================
+        let chatHistories = {
+            jcarvis: [],
+            healing: []
+        };
+
+        function openAgentModal(agent) {
+            const modal = document.getElementById(`modal-${agent}`);
+            const chatContainer = document.getElementById(`chat-${agent}`);
+
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+
+            // Seed welcome message if empty
+            if (chatHistories[agent].length === 0) {
+                if (agent === 'jcarvis') {
+                    addMessageToChat(agent, 'ai', "Hello. I am Jcarvis. How may I assist your thinking today?");
+                } else {
+                    addMessageToChat(agent, 'ai', "Hello. I'm HealingOzwell. How can I support your well-being right now?");
+                }
+            } else {
+                // Re-render existing chat
+                chatContainer.innerHTML = '';
+                chatHistories[agent].forEach(msg => {
+                    addMessageToChat(agent, msg.type, msg.text, true);
+                });
+            }
+
+            // Focus input
+            setTimeout(() => {
+                document.getElementById(`input-${agent}`).focus();
+            }, 300);
+        }
+
+        function closeModal(agent) {
+            const modal = document.getElementById(`modal-${agent}`);
+            modal.classList.remove('flex');
+            modal.classList.add('hidden');
+        }
+
+        function addMessageToChat(agent, type, text, isRestoring = false) {
+            const container = document.getElementById(`chat-${agent}`);
+
+            if (!isRestoring) {
+                chatHistories[agent].push({ type, text });
+            }
+
+            const messageDiv = document.createElement('div');
+
+            if (type === 'user') {
+                messageDiv.className = `flex justify-end`;
+                messageDiv.innerHTML = `
+                    <div class="max-w-[80%] bg-white/10 border border-white/10 rounded-2xl rounded-tr-none px-4 py-2.5 text-sm">
+                        ${text}
+                    </div>
+                `;
+            } else {
+                messageDiv.className = `flex justify-start`;
+                const color = agent === 'jcarvis' ? 'cyan' : 'emerald';
+                messageDiv.innerHTML = `
+                    <div class="max-w-[80%] bg-black/40 border border-white/10 rounded-2xl rounded-tl-none px-4 py-2.5 text-sm">
+                        <span class="text-${color}-400 font-medium text-xs tracking-wider">${agent === 'jcarvis' ? 'JCARVIS' : 'HEALING'}</span><br>
+                        ${text}
+                    </div>
+                `;
+            }
+
+            container.appendChild(messageDiv);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function sendMessage(agent) {
+            const input = document.getElementById(`input-${agent}`);
+            const value = input.value.trim();
+
+            if (!value) return;
+
+            // Add user message
+            addMessageToChat(agent, 'user', value);
+            input.value = '';
+
+            // Simulate thinking
+            setTimeout(() => {
+                const response = generateAgentResponse(agent, value);
+                addMessageToChat(agent, 'ai', response);
+            }, 650);
+        }
+
+        function generateAgentResponse(agent, message) {
+            const lower = message.toLowerCase();
+
+            if (agent === 'jcarvis') {
+                if (lower.includes('purpose') || lower.includes('meaning')) {
+                    return "Purpose is not discovered. It is constructed through deliberate action repeated over time.";
+                }
+                if (lower.includes('fear') || lower.includes('afraid')) {
+                    return "Fear is data. It is information about what you value. Use it as a compass, not a cage.";
+                }
+                if (lower.includes('future') || lower.includes('tomorrow')) {
+                    return "The future is not a place we go to. It is a place we create.";
+                }
+                if (lower.includes('decision') || lower.includes('choose')) {
+                    return "Every choice is a vote for the person you are becoming. Vote wisely.";
+                }
+                return "Interesting perspective. Tell me more about what you are truly seeking.";
+            } else {
+                // HealingOzwell
+                if (lower.includes('tired') || lower.includes('exhausted') || lower.includes('energy')) {
+                    return "Start with 10 minutes of deliberate stillness. Breathe deeply. Your nervous system needs recalibration.";
+                }
+                if (lower.includes('stress') || lower.includes('anxious') || lower.includes('anxiety')) {
+                    return "Try the 5-4-3-2-1 grounding technique. Name 5 things you see, 4 you can touch, 3 you hear, 2 you smell, 1 you taste.";
+                }
+                if (lower.includes('sleep') || lower.includes('insomnia')) {
+                    return "Reduce blue light after 21:00. Keep the room cool (18–20°C). Consider magnesium glycinate 30 minutes before bed.";
+                }
+                if (lower.includes('headache')) {
+                    return "Hydrate immediately. Check your posture. Step away from screens for 20 minutes and look at distant objects.";
+                }
+                return "Small consistent actions compound. What is one tiny thing you can do for your body right now?";
+            }
+        }
+
+        // ==================== FULL REFRESH ====================
+        function refreshAllData() {
+            refreshWeather();
+            refreshGeology();
+            refreshAirQuality();
+
+            setTimeout(() => {
+                refreshLifestyle();
+            }, 350);
+        }
+
+        // ==================== INITIALIZE ALL ====================
+        function initializeDashboard() {
+            initTailwind();
+
+            // Clock
+            updateClock();
+
+            // Weather
+            renderWeather();
+
+            // Geology
+            renderGeology();
+
+            // Air Quality
+            currentAQI = 47;
+            currentUV = 3;
+            renderAirQuality();
+            renderUV();
+
+            // Lifestyle
+            refreshLifestyle();
+
+            // Initial quotes
+            const ntEl = document.getElementById('quote-nt');
+            const otEl = document.getElementById('quote-ot');
+            const maEl = document.getElementById('quote-ma');
+            const socEl = document.getElementById('quote-socrates');
+
+            ntEl.innerHTML = quotes.newTestament[0];
+            otEl.innerHTML = quotes.oldTestament[0];
+            maEl.innerHTML = quotes.marcusAurelius[0];
+            socEl.innerHTML = quotes.socrates[0];
+
+            // Random initial location flavor
+            const locationInput = document.getElementById('location-input');
+            locationInput.addEventListener('focus', () => {
+                locationInput.select();
+            });
+
+            // Keyboard support for modals
+            document.addEventListener('keydown', function(e) {
+                if (e.key === "Escape") {
+                    const openModals = document.querySelectorAll('.modal');
+                    if (openModals.length) {
+                        openModals[openModals.length - 1].parentElement.classList.add('hidden');
+                        openModals[openModals.length - 1].parentElement.classList.remove('flex');
+                    }
+                }
+            });
+
+            // Final touch: subtle random glitch on logo occasionally
+            setInterval(() => {
+                const logo = document.querySelector('.glitch');
+                if (logo && Math.random() > 0.92) {
+                    logo.style.animation = 'glitch 0.3s';
+                    setTimeout(() => {
+                        if (logo) logo.style.animation = '';
+                    }, 320);
+                }
+            }, 14000);
+
+            // Boot message in console (dev only)
+            console.log('%c[JCARVIS] Neural dashboard initialized successfully.', 'color:#00f3ff');
+        }
+
+        // Boot the application
+        window.onload = initializeDashboard;
+    </script>
 </body>
 </html>
