@@ -3,90 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JCARVIS • Neural Companion</title>
+    <title>CATOzwell • Daily Life Companion</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Space+Grotesk:wght@500;600&amp;family=JetBrains+Mono:wght@400;500&amp;family=Playfair+Display:wght@700&amp;family=Cinzel:wght@400;700&amp;family=UnifrakturMaguntia&amp;display=swap" rel="stylesheet">
     <style>
         :root {
-            --accent1: #7dd3fc;
-            --accent2: #a78bfa;
-            --accent3: #6366f1;
-            --accent4: #c0b3ff;
+            --accent1: #7dd3fc; --accent2: #a78bfa; --accent3: #6366f1; --accent4: #c0b3ff;
             --font-display: 'Space Grotesk', system_ui, sans-serif;
-            --bg: #0a0a0f;
-            --glass-bg: rgba(20, 22, 32, 0.82);
-            --glass-border: rgba(255,255,255,0.09);
-            --text: #f1f1f3;
-            --text-muted: #a1a1aa;
+            --bg: #0a0a0f; --glass-bg: rgba(20, 22, 32, 0.82); --glass-border: rgba(255,255,255,0.09);
         }
-
-        body { 
-            font-family: 'Inter', system_ui, sans-serif; 
-            background: var(--bg);
-            color: var(--text);
-        }
-        
+        body { font-family: 'Inter', system_ui, sans-serif; background: var(--bg); color: #f1f1f3; }
         .font-display { font-family: var(--font-display); letter-spacing: -0.025em; }
-
         .glass {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            transition: all 0.2s cubic-bezier(0.23,1,0.32,1);
+            background: var(--glass-bg); backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border); transition: all 0.2s cubic-bezier(0.23,1,0.32,1);
         }
-
         .panel { transition: all 0.2s cubic-bezier(0.23,1,0.32,1); }
-        .panel:hover { transform: translateY(-1px); }
-
         .weather-card { min-height: 148px; display: flex; flex-direction: column; justify-content: space-between; }
-
-        .temp-display {
-            font-size: 2rem; line-height: 1; font-weight: 700;
-            font-family: var(--font-display);
-        }
-
+        .temp-display { font-size: 2rem; line-height: 1; font-weight: 700; font-family: var(--font-display); }
         .music-player { background: rgba(15, 15, 25, 0.92); border: 1px solid rgba(255,255,255,0.08); }
-
-        .track-active {
-            background: rgba(255,255,255,0.08);
-            border-left: 3px solid var(--accent1);
-        }
-
-        /* Deep Theme Support */
+        .track-active { background: rgba(255,255,255,0.08); border-left: 3px solid var(--accent1); }
         body.theme-forest  { --bg: #0c120f; --glass-bg: rgba(18,26,22,0.86); --glass-border: rgba(163,163,172,0.12); }
         body.theme-kidplay { --bg: #0f0a12; --glass-bg: rgba(28,18,36,0.85); --glass-border: rgba(251,191,36,0.18); }
         body.theme-hearth  { --bg: #120d0a; --glass-bg: rgba(38,28,22,0.87); --glass-border: rgba(245,158,11,0.15); }
         body.theme-minimal { --bg: #0f1115; --glass-bg: rgba(24,26,32,0.82); --glass-border: rgba(148,163,184,0.14); }
         body.theme-forge   { --bg: #0a0908; --glass-bg: rgba(22,20,18,0.88); --glass-border: rgba(245,158,11,0.16); }
-
-        /* Gothic Reader */
         .gothic-reader { background: #0a0a0a; color: #f4f1e9; font-family: 'Cinzel', Georgia, serif; }
         .gothic-reader .book-title { font-family: 'UnifrakturMaguntia', serif; letter-spacing: 1px; }
-        .gothic-reader .verse { line-height: 1.78; font-size: 1.02rem; margin-bottom: 0.75rem; }
-        .gothic-reader .verse-num { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: #c9b89a; }
-
-        .telemetry-bar { height: 8px; background: linear-gradient(90deg, #5c513a, #a38b5f); border-radius: 999px; }
-
-        #planet-bg { mix-blend-mode: screen; }
+        .guidance-card { background: rgba(0,0,0,0.28); border: 1px solid rgba(255,255,255,0.08); }
+        .guidance-card:hover { border-color: var(--accent1); transform: translateY(-1px); }
+        .disclaimer-banner {
+            background: linear-gradient(90deg, #451a03, #78350f);
+            border: 1px solid #f59e0b;
+            color: #fed7aa;
+            font-size: 12px;
+            letter-spacing: 0.3px;
+        }
     </style>
 </head>
 <body class="min-h-screen">
+    <!-- Prominent Disclaimer Banner -->
+    <div class="disclaimer-banner text-center py-2 px-4 text-sm font-medium sticky top-0 z-[100]">
+        ⚠️ <strong>IMPORTANT:</strong> CATOzwell provides <strong>only informative suggestions</strong>. 
+        All content may contain errors or inaccuracies. This is not professional, medical, legal, or financial advice. 
+        Always use your own judgment and consult qualified experts when needed.
+    </div>
+
     <!-- Animated Planet Background -->
-    <canvas id="planet-bg" class="fixed inset-0 pointer-events-none z-[-1] opacity-55"></canvas>
+    <canvas id="planet-bg" class="fixed inset-0 pointer-events-none z-[-1] opacity-50"></canvas>
 
     <!-- Header -->
     <header class="border-b border-white/10 bg-black/40 backdrop-blur-xl sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
             <div class="flex items-center gap-3">
                 <div class="w-9 h-9 rounded-2xl bg-gradient-to-br from-sky-400 to-violet-500 flex items-center justify-center">
-                    <i class="fa-solid fa-brain text-black text-2xl"></i>
+                    <i class="fa-solid fa-compass text-black text-2xl"></i>
                 </div>
-                <h1 class="text-4xl font-display font-semibold tracking-tighter" data-i18n="app_title">JCARVIS</h1>
+                <div>
+                    <h1 class="text-4xl font-display font-semibold tracking-tighter">CATOzwell</h1>
+                    <div class="text-[10px] text-white/50 -mt-1">Daily Life Companion</div>
+                </div>
             </div>
 
             <div class="flex items-center gap-3">
-                <!-- Clock -->
                 <div class="hidden md:flex items-center gap-2 px-4 py-2 rounded-2xl glass border border-white/10">
                     <i class="fa-regular fa-clock text-sky-400"></i>
                     <div id="clock" class="font-mono text-xl font-semibold tracking-[2.5px]">00:00:00</div>
@@ -99,7 +79,7 @@
 
                 <button onclick="showSettings()" class="px-3 py-2 rounded-2xl glass border border-white/10 hover:border-white/30 text-sm flex items-center gap-2">
                     <i class="fa-solid fa-palette"></i>
-                    <span id="theme-display" data-i18n="theme">Theme</span>
+                    <span id="theme-display">Theme</span>
                 </button>
 
                 <button onclick="showSettings()" class="w-10 h-10 flex items-center justify-center rounded-2xl glass border border-white/10 hover:border-white/30">
@@ -112,7 +92,7 @@
     <!-- Location Bar -->
     <div class="max-w-7xl mx-auto px-6 pt-6">
         <div class="flex flex-wrap items-center gap-3">
-            <span class="text-xs uppercase tracking-[2px] text-white/50" data-i18n="location">Location</span>
+            <span class="text-xs uppercase tracking-[2px] text-white/50">Location</span>
 
             <div onclick="showLocationPicker()" class="flex items-center gap-3 px-5 py-2 rounded-2xl glass border border-white/10 hover:border-sky-400/50 cursor-pointer">
                 <i class="fa-solid fa-map-marker-alt text-sky-400"></i>
@@ -122,33 +102,49 @@
 
             <button onclick="detectUserLocation()" class="px-4 py-2 text-sm rounded-2xl border border-white/20 hover:bg-white/5 flex items-center gap-2">
                 <i class="fa-solid fa-location-arrow"></i>
-                <span data-i18n="detect_location">Detect Location</span>
+                <span>Detect Location</span>
             </button>
 
             <button onclick="refreshAllData()" class="px-4 py-2 text-sm rounded-2xl border border-white/20 hover:bg-white/5 flex items-center gap-2">
                 <i class="fa-solid fa-sync-alt"></i>
-                <span data-i18n="refresh">Refresh</span>
+                <span>Refresh All</span>
             </button>
         </div>
     </div>
 
     <main class="max-w-7xl mx-auto px-6 pt-6 pb-12">
-        <!-- Top Grid -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        
+        <!-- DAILY LIFE GUIDANCE -->
+        <div class="panel glass rounded-3xl p-6 border border-white/10 mb-8">
+            <div class="flex items-center justify-between mb-5">
+                <div>
+                    <div class="font-semibold text-xl tracking-tight">Today's Guidance</div>
+                    <div class="text-xs text-white/50">Contextual daily life recommendations — updated with your current conditions</div>
+                </div>
+                <button onclick="refreshDailyGuidance()" class="text-xs px-4 py-1.5 border border-white/20 rounded-xl hover:bg-white/5">Refresh Guidance</button>
+            </div>
+
+            <div id="daily-guidance" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                <!-- Populated dynamically with rich categories -->
+            </div>
+        </div>
+
+        <!-- Top Row -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
             
             <!-- Weather -->
             <div class="panel glass rounded-3xl p-6 border border-white/10">
                 <div class="flex justify-between items-center mb-4">
-                    <div class="font-semibold text-lg" data-i18n="weather_title">3-Day Forecast</div>
-                    <button onclick="refreshWeather()" class="text-xs px-3 py-1 rounded-xl border border-white/20" data-i18n="refresh">Refresh</button>
+                    <div class="font-semibold text-lg">3-Day Forecast</div>
+                    <button onclick="refreshWeather()" class="text-xs px-3 py-1 rounded-xl border border-white/20">Refresh</button>
                 </div>
                 <div id="weather-grid" class="grid grid-cols-3 gap-3"></div>
             </div>
 
-            <!-- Air + Lifestyle -->
+            <!-- Air + Quick Notes -->
             <div class="space-y-6">
                 <div class="panel glass rounded-3xl p-6 border border-white/10">
-                    <div class="font-semibold text-lg mb-4" data-i18n="air_quality">Air Quality &amp; UV</div>
+                    <div class="font-semibold text-lg mb-4">Air Quality &amp; UV</div>
                     <div class="grid grid-cols-2 gap-4">
                         <div class="bg-black/30 rounded-2xl p-4 border border-white/10">
                             <div class="text-xs text-white/50">AQI</div>
@@ -162,100 +158,73 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="panel glass rounded-3xl p-6 border border-white/10">
-                    <div class="font-semibold text-lg mb-4" data-i18n="lifestyle">Lifestyle Protocol</div>
-                    <div id="lifestyle-content" class="text-sm space-y-2"></div>
+                    <div class="font-semibold text-lg mb-3">Quick Notes</div>
+                    <div id="lifestyle-content" class="text-sm space-y-2 text-white/80"></div>
                 </div>
             </div>
 
-            <!-- Local AI Agents -->
+            <!-- Local AI Companions -->
             <div class="panel glass rounded-3xl p-6 border border-white/10">
-                <div class="font-semibold text-lg mb-4" data-i18n="ai_companions">Local AI Companions</div>
+                <div class="font-semibold text-lg mb-4">Local AI Companions <span class="text-[10px] text-emerald-400">(Mistral 7B)</span></div>
                 <div class="space-y-2 text-sm">
                     <div onclick="openAgentModal('edu')" class="cursor-pointer flex gap-3 items-center bg-black/40 hover:bg-black/60 border border-white/10 rounded-2xl p-3">
                         <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-sky-400 to-indigo-500 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-graduation-cap text-black"></i></div>
-                        <div><div class="font-semibold">EduMentor</div><div class="text-xs text-white/60" data-i18n="edu_desc">Education • Learning</div></div>
+                        <div><div class="font-semibold">EduMentor</div><div class="text-xs text-white/60">Learning • Curiosity • Growth</div></div>
                     </div>
                     <div onclick="openAgentModal('well')" class="cursor-pointer flex gap-3 items-center bg-black/40 hover:bg-black/60 border border-white/10 rounded-2xl p-3">
                         <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-rose-400 to-pink-500 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-heart text-black"></i></div>
-                        <div><div class="font-semibold">Vitalis</div><div class="text-xs text-white/60" data-i18n="well_desc">Wellbeing • Balance</div></div>
+                        <div><div class="font-semibold">Vitalis</div><div class="text-xs text-white/60">Wellbeing • Energy • Balance</div></div>
                     </div>
                     <div onclick="openAgentModal('eng')" class="cursor-pointer flex gap-3 items-center bg-black/40 hover:bg-black/60 border border-white/10 rounded-2xl p-3">
                         <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-cogs text-black"></i></div>
-                        <div><div class="font-semibold">Forge</div><div class="text-xs text-white/60" data-i18n="eng_desc">Engineering • Problem Solving</div></div>
+                        <div><div class="font-semibold">Forge</div><div class="text-xs text-white/60">Problem Solving • Building • Practical</div></div>
+                    </div>
+                </div>
+                <div class="text-[10px] text-emerald-400/70 mt-3">Powered by your local Mistral 7B (LM Studio)</div>
+            </div>
+        </div>
+
+        <!-- Local Intelligence + Telemetry -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+            <div class="panel glass rounded-3xl p-6 border border-white/10">
+                <div class="flex justify-between mb-4">
+                    <div class="font-semibold text-lg">Local Intelligence</div>
+                    <button onclick="refreshLocalIntel()" class="text-xs px-4 py-1 border border-white/20 rounded-xl">Refresh</button>
+                </div>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <div class="text-emerald-400 text-xs mb-2">FOOD RECOMMENDATIONS</div>
+                        <div id="food-list" class="space-y-2 text-sm"></div>
+                    </div>
+                    <div>
+                        <div class="text-violet-400 text-xs mb-2">HISTORICAL PLACES</div>
+                        <div id="history-list" class="space-y-2 text-sm"></div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Local Intelligence (Food + History) -->
-        <div class="mt-8 panel glass rounded-3xl p-6 border border-white/10">
-            <div class="flex justify-between mb-4">
-                <div class="font-semibold text-lg" data-i18n="local_intel">Local Intelligence</div>
-                <button onclick="refreshLocalIntel()" class="text-xs px-4 py-1 border border-white/20 rounded-xl" data-i18n="refresh">Refresh</button>
-            </div>
-            <div class="grid md:grid-cols-2 gap-6">
-                <div>
-                    <div class="text-emerald-400 text-xs mb-2" data-i18n="food_recs">FOOD RECOMMENDATIONS</div>
-                    <div id="food-list" class="space-y-2 text-sm"></div>
-                </div>
-                <div>
-                    <div class="text-violet-400 text-xs mb-2" data-i18n="historical">HISTORICAL PLACES</div>
-                    <div id="history-list" class="space-y-2 text-sm"></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Traveler & Camper Telemetry -->
-        <div class="mt-8 panel glass rounded-3xl p-6 border border-white/10">
-            <div class="flex justify-between items-center mb-4">
-                <div>
-                    <div class="font-semibold text-lg" data-i18n="traveler_title">Location Intelligence</div>
-                    <div class="text-xs text-white/50" data-i18n="traveler_sub">Traveler &amp; Camper Cockpit • Real-time conditions</div>
-                </div>
-                <button onclick="refreshTravelerTelemetry()" class="text-xs px-4 py-1 border border-white/20 rounded-xl" data-i18n="refresh">Refresh</button>
-            </div>
-            <div class="grid grid-cols-2 md:grid-cols-5 gap-3" id="traveler-grid"></div>
-            <div id="traveler-extra" class="mt-4 text-xs text-white/60 flex flex-wrap gap-x-5 gap-y-1"></div>
-        </div>
-
-        <!-- Faith Telemetry (kept from previous) -->
-        <div class="mt-8 panel glass rounded-3xl p-6 border border-white/10">
-            <div class="flex items-center justify-between mb-5">
-                <div>
-                    <div class="font-semibold text-lg" data-i18n="faith_title">Faith Telemetry</div>
-                    <div class="text-xs text-white/50">Global Church • Population • Recent Activity</div>
-                </div>
-            </div>
-            <div class="grid md:grid-cols-12 gap-6">
-                <div class="md:col-span-5 bg-black/30 rounded-2xl p-5 border border-white/10">
-                    <div class="text-xs tracking-widest text-amber-400/80 mb-1">WORLDWIDE CHRISTIAN POPULATION</div>
-                    <div class="text-6xl font-display font-bold text-amber-200">2.41B</div>
-                    <div class="text-sm text-white/60 mt-1">~31% of global population • +22M net growth per year</div>
-                </div>
-                <div class="md:col-span-7">
-                    <div class="text-xs tracking-widest text-white/50 mb-3">REGIONAL DISTRIBUTION</div>
-                    <div class="space-y-2 text-sm">
-                        <div class="flex justify-between text-xs"><span>Africa</span><span>32%</span></div>
-                        <div class="bg-white/10 h-1.5 rounded"><div class="telemetry-bar" style="width:32%"></div></div>
-                        <div class="flex justify-between text-xs"><span>Latin America</span><span>24%</span></div>
-                        <div class="bg-white/10 h-1.5 rounded"><div class="telemetry-bar" style="width:24%"></div></div>
-                        <div class="flex justify-between text-xs"><span>Europe</span><span>19%</span></div>
-                        <div class="bg-white/10 h-1.5 rounded"><div class="telemetry-bar" style="width:19%"></div></div>
+            <div class="panel glass rounded-3xl p-6 border border-white/10">
+                <div class="flex justify-between items-center mb-4">
+                    <div>
+                        <div class="font-semibold text-lg">Location Telemetry</div>
+                        <div class="text-xs text-white/50">Traveler &amp; Camper Data</div>
                     </div>
+                    <button onclick="refreshTravelerTelemetry()" class="text-xs px-4 py-1 border border-white/20 rounded-xl">Refresh</button>
                 </div>
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-3" id="traveler-grid"></div>
+                <div id="traveler-extra" class="mt-4 text-xs text-white/60 flex flex-wrap gap-x-5 gap-y-1"></div>
             </div>
         </div>
 
-        <!-- Music Player with Visualizer -->
-        <div class="mt-8 panel music-player rounded-3xl p-5 border border-white/10">
+        <!-- Music -->
+        <div class="panel music-player rounded-3xl p-5 border border-white/10 mb-8">
             <div class="flex items-center justify-between mb-3">
                 <div class="flex items-center gap-2">
                     <i class="fa-solid fa-headset text-sky-400"></i>
-                    <span class="font-semibold" data-i18n="music_title">Ambient Soundscape</span>
+                    <span class="font-semibold">Ambient Soundscape</span>
                 </div>
-                <div class="text-xs text-white/50" data-i18n="music_sub">12 Warm Ambient Tracks • Elevator Music</div>
+                <div class="text-xs text-white/50">Warm tracks for focus &amp; rest</div>
             </div>
 
             <div class="flex items-center gap-4">
@@ -271,41 +240,46 @@
                 <div class="text-xs text-white/60 w-12 text-right" id="time-display">0:00 / 0:00</div>
             </div>
 
-            <canvas id="eq-canvas" height="52" class="w-full mt-3 rounded-xl bg-black/50 border border-white/10"></canvas>
-
+            <canvas id="eq-canvas" height="48" class="w-full mt-3 rounded-xl bg-black/50 border border-white/10"></canvas>
             <div class="mt-3 flex gap-2 flex-wrap" id="track-list"></div>
         </div>
 
-        <!-- Sacred Texts Entry -->
-        <div class="mt-8 panel glass rounded-3xl p-6 border border-amber-400/20">
-            <div class="flex flex-col md:flex-row md:items-center gap-6">
+        <!-- Faith + Sacred Texts -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div class="panel glass rounded-3xl p-6 border border-white/10">
+                <div class="font-semibold text-lg mb-4">Faith Telemetry</div>
+                <div class="text-sm text-white/70">Global Christian population: <span class="font-semibold text-amber-200">2.41 billion</span> (≈31% of world population). Data is approximate and for reflective use only.</div>
+            </div>
+
+            <div class="panel glass rounded-3xl p-6 border border-amber-400/20 bg-gradient-to-br from-black/40 to-transparent flex items-center">
                 <div class="flex-1">
-                    <div class="uppercase text-xs tracking-[3px] text-amber-400/70 mb-1">PUBLIC DOMAIN • KING JAMES VERSION</div>
-                    <div class="font-semibold text-2xl tracking-tight">Old Testament • Gothic Reader</div>
-                    <div class="text-white/70 mt-2">Easy-to-read blackletter edition for reflection.</div>
+                    <div class="uppercase text-xs tracking-[3px] text-amber-400/70 mb-1">Public Domain • King James Version</div>
+                    <div class="font-semibold text-xl">Old Testament • Gothic Reader</div>
                 </div>
-                <button onclick="openBibleReader()" class="px-8 py-4 rounded-2xl bg-gradient-to-r from-amber-300 to-yellow-200 text-black font-semibold flex items-center gap-3 hover:brightness-105 active:scale-[0.985]">
-                    <i class="fa-solid fa-book-open text-xl"></i>
-                    <span data-i18n="open_reader">Enter Sacred Reader</span>
+                <button onclick="openBibleReader()" class="px-6 py-3 rounded-2xl bg-gradient-to-r from-amber-300 to-yellow-200 text-black font-semibold flex items-center gap-2 hover:brightness-105">
+                    <i class="fa-solid fa-book-open"></i>
+                    <span>Open Reader</span>
                 </button>
             </div>
         </div>
+
     </main>
 
-    <!-- Modals: Settings, Location, 3 Agents, Bible Reader -->
+    <!-- Modals (Settings, Location, 3 Agents, Bible Reader) - kept compact but fully functional -->
+
     <!-- Settings Modal -->
     <div id="settings-modal" onclick="closeSettings()" class="hidden fixed inset-0 bg-black/80 z-[200] flex items-center justify-center p-4">
         <div onclick="event.stopImmediatePropagation()" class="glass w-full max-w-2xl rounded-3xl p-7 border border-white/15">
             <div class="flex justify-between mb-6">
-                <div class="text-2xl font-semibold" data-i18n="settings">Settings</div>
+                <div class="text-2xl font-semibold">Settings</div>
                 <button onclick="closeSettings()" class="text-2xl">&times;</button>
             </div>
             <div class="mb-6">
-                <div class="font-medium mb-3" data-i18n="language">Language</div>
+                <div class="font-medium mb-3">Language</div>
                 <div class="grid grid-cols-4 gap-2 text-sm" id="lang-options"></div>
             </div>
             <div>
-                <div class="font-medium mb-3" data-i18n="theme">Theme</div>
+                <div class="font-medium mb-3">Theme</div>
                 <div class="flex flex-wrap gap-3" id="theme-options"></div>
             </div>
         </div>
@@ -314,7 +288,7 @@
     <!-- Location Picker -->
     <div id="location-modal" onclick="closeLocationModal()" class="hidden fixed inset-0 bg-black/80 z-[200] flex items-center justify-center p-4">
         <div onclick="event.stopImmediatePropagation()" class="glass max-w-lg w-full rounded-3xl p-6 border border-white/15">
-            <h3 class="font-semibold text-xl mb-4" data-i18n="select_city">Select City</h3>
+            <h3 class="font-semibold text-xl mb-4">Select City</h3>
             <div class="grid grid-cols-2 gap-3" id="city-grid"></div>
         </div>
     </div>
@@ -323,13 +297,12 @@
     <div id="modal-edu" onclick="closeAgentModal('edu')" class="hidden fixed inset-0 bg-black/85 z-[200] flex items-center justify-center p-4">
         <div onclick="event.stopImmediatePropagation()" class="glass w-full max-w-xl rounded-3xl border border-sky-400/30 overflow-hidden">
             <div class="px-6 py-4 border-b border-white/10 flex justify-between bg-sky-950/30">
-                <div class="flex items-center gap-3"><div class="w-9 h-9 rounded-2xl bg-gradient-to-br from-sky-400 to-indigo-500 flex items-center justify-center"><i class="fa-solid fa-graduation-cap text-black"></i></div>
-                <div><div class="font-semibold text-lg">EduMentor</div><div class="text-xs text-sky-300/80" data-i18n="edu_desc">Education • Learning</div></div></div>
+                <div><div class="font-semibold text-lg">EduMentor</div><div class="text-xs text-sky-300/80">Learning • Curiosity • Growth</div></div>
                 <button onclick="closeAgentModal('edu')">&times;</button>
             </div>
             <div id="chat-edu" class="h-80 overflow-y-auto p-5 space-y-3 bg-black/40 text-sm"></div>
             <div class="p-4 border-t border-white/10 flex gap-2 bg-black/20">
-                <input id="input-edu" onkeypress="if(event.key==='Enter') sendToAgent('edu')" class="flex-1 bg-white/5 border border-white/15 rounded-2xl px-4 py-3 text-sm" placeholder="What would you like to explore?">
+                <input id="input-edu" onkeypress="if(event.key==='Enter') sendToAgent('edu')" class="flex-1 bg-white/5 border border-white/15 rounded-2xl px-4 py-3 text-sm" placeholder="Ask anything about learning, skills, or knowledge...">
                 <button onclick="sendToAgent('edu')" class="px-6 bg-sky-400 text-black rounded-2xl font-semibold">Send</button>
             </div>
         </div>
@@ -338,13 +311,12 @@
     <div id="modal-well" onclick="closeAgentModal('well')" class="hidden fixed inset-0 bg-black/85 z-[200] flex items-center justify-center p-4">
         <div onclick="event.stopImmediatePropagation()" class="glass w-full max-w-xl rounded-3xl border border-rose-400/30 overflow-hidden">
             <div class="px-6 py-4 border-b border-white/10 flex justify-between bg-rose-950/30">
-                <div class="flex items-center gap-3"><div class="w-9 h-9 rounded-2xl bg-gradient-to-br from-rose-400 to-pink-500 flex items-center justify-center"><i class="fa-solid fa-heart text-black"></i></div>
-                <div><div class="font-semibold text-lg">Vitalis</div><div class="text-xs text-rose-300/80" data-i18n="well_desc">Wellbeing • Balance</div></div></div>
+                <div><div class="font-semibold text-lg">Vitalis</div><div class="text-xs text-rose-300/80">Wellbeing • Energy • Balance</div></div>
                 <button onclick="closeAgentModal('well')">&times;</button>
             </div>
             <div id="chat-well" class="h-80 overflow-y-auto p-5 space-y-3 bg-black/40 text-sm"></div>
             <div class="p-4 border-t border-white/10 flex gap-2 bg-black/20">
-                <input id="input-well" onkeypress="if(event.key==='Enter') sendToAgent('well')" class="flex-1 bg-white/5 border border-white/15 rounded-2xl px-4 py-3 text-sm" placeholder="How are you feeling today?">
+                <input id="input-well" onkeypress="if(event.key==='Enter') sendToAgent('well')" class="flex-1 bg-white/5 border border-white/15 rounded-2xl px-4 py-3 text-sm" placeholder="How are you feeling? Need support or clarity?">
                 <button onclick="sendToAgent('well')" class="px-6 bg-rose-400 text-black rounded-2xl font-semibold">Send</button>
             </div>
         </div>
@@ -353,72 +325,69 @@
     <div id="modal-eng" onclick="closeAgentModal('eng')" class="hidden fixed inset-0 bg-black/85 z-[200] flex items-center justify-center p-4">
         <div onclick="event.stopImmediatePropagation()" class="glass w-full max-w-xl rounded-3xl border border-amber-400/30 overflow-hidden">
             <div class="px-6 py-4 border-b border-white/10 flex justify-between bg-amber-950/30">
-                <div class="flex items-center gap-3"><div class="w-9 h-9 rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center"><i class="fa-solid fa-cogs text-black"></i></div>
-                <div><div class="font-semibold text-lg">Forge</div><div class="text-xs text-amber-300/80" data-i18n="eng_desc">Engineering • Solve</div></div></div>
+                <div><div class="font-semibold text-lg">Forge</div><div class="text-xs text-amber-300/80">Problem Solving • Building • Practical</div></div>
                 <button onclick="closeAgentModal('eng')">&times;</button>
             </div>
             <div id="chat-eng" class="h-80 overflow-y-auto p-5 space-y-3 bg-black/40 text-sm"></div>
             <div class="p-4 border-t border-white/10 flex gap-2 bg-black/20">
-                <input id="input-eng" onkeypress="if(event.key==='Enter') sendToAgent('eng')" class="flex-1 bg-white/5 border border-white/15 rounded-2xl px-4 py-3 text-sm" placeholder="Describe your challenge or project...">
+                <input id="input-eng" onkeypress="if(event.key==='Enter') sendToAgent('eng')" class="flex-1 bg-white/5 border border-white/15 rounded-2xl px-4 py-3 text-sm" placeholder="Describe your project, challenge or idea...">
                 <button onclick="sendToAgent('eng')" class="px-6 bg-amber-400 text-black rounded-2xl font-semibold">Send</button>
             </div>
         </div>
     </div>
 
-    <!-- Gothic Bible Reader Modal -->
+    <!-- Gothic Bible Reader -->
     <div id="bible-reader-modal" onclick="closeBibleReader()" class="hidden fixed inset-0 bg-[#050505] z-[210] flex items-center justify-center p-4">
         <div onclick="event.stopImmediatePropagation()" class="gothic-reader w-full max-w-5xl rounded-3xl overflow-hidden border border-[#2a261f] flex flex-col max-h-[96vh]">
             <div class="bg-[#11100d] px-8 py-5 border-b border-[#2a261f] flex justify-between">
                 <div><div class="font-semibold text-3xl book-title">OLD TESTAMENT</div><div class="text-xs text-[#a38b5f]">KING JAMES VERSION • PUBLIC DOMAIN</div></div>
                 <button onclick="closeBibleReader()" class="text-2xl">&times;</button>
             </div>
-            <div class="bg-[#0d0c0a] px-8 py-3 flex flex-wrap gap-2 border-b border-[#1f1c17]" id="bible-tabs"></div>
-            <div id="bible-content" class="p-8 md:p-10 overflow-auto flex-1 bg-[#0a0a0a] text-[#f4f1e9] text-[15.5px]" style="max-height: calc(100vh - 210px);"></div>
+            <div id="bible-content" class="p-8 md:p-10 overflow-auto flex-1 bg-[#0a0a0a] text-[#f4f1e9] text-[15.5px]"></div>
         </div>
     </div>
 
     <script>
-        // ==================== CONFIG & DATA ====================
+        // ==================== CONFIG ====================
+        const LLM_ENDPOINT = "http://192.168.178.72:1234/v1/chat/completions";
+        const LLM_MODEL = "mistral-7b-instruct-v0.3";
+
         let currentCity = "Istanbul";
         let currentLang = "en";
         let currentTheme = "stellar";
-        let audio = null;
         let audioContext = null;
         let analyser = null;
         let isPlaying = false;
         let currentTrackIndex = 0;
         let progressInterval = null;
         let eqAnimation = null;
+        let lastWeatherData = null;
 
         const cities = [
             { name: "Istanbul", country: "TR" }, { name: "Ankara", country: "TR" },
             { name: "Paris", country: "FR" }, { name: "London", country: "UK" },
             { name: "Berlin", country: "DE" }, { name: "Rome", country: "IT" },
-            { name: "New York", country: "US" }, { name: "Miami", country: "US" },
-            { name: "Moscow", country: "RU" }, { name: "Munich", country: "DE" }
+            { name: "New York", country: "US" }, { name: "Amsterdam", country: "NL" },
+            { name: "Tokyo", country: "JP" }, { name: "Sydney", country: "AU" },
+            { name: "Madrid", country: "ES" }, { name: "Bangkok", country: "TH" }
         ];
 
-        // Comprehensive translations (brute-force coverage for final version)
-        const i18n = {
-            en: { app_title: "JCARVIS • Neural Companion", location: "Location", detect_location: "Detect Location", refresh: "Refresh", weather_title: "3-Day Forecast", ai_companions: "Local AI Companions", edu_desc: "Education • Learning", well_desc: "Wellbeing • Balance", eng_desc: "Engineering • Solve", local_intel: "Local Intelligence", food_recs: "FOOD RECOMMENDATIONS", historical: "HISTORICAL PLACES", traveler_title: "Location Intelligence", traveler_sub: "Traveler & Camper Cockpit • Real-time conditions", faith_title: "Faith Telemetry", open_reader: "Enter Sacred Reader", music_title: "Ambient Soundscape", music_sub: "12 Warm Ambient Tracks • Elevator Music", settings: "Settings", language: "Language", theme: "Theme", select_city: "Select City" },
-            tr: { app_title: "JCARVIS • Nöral Yoldaş", location: "Konum", detect_location: "Konum Bul", refresh: "Yenile", weather_title: "3 Günlük Tahmin", ai_companions: "Yerel Yapay Zeka Arkadaşları", edu_desc: "Eğitim • Öğrenme", well_desc: "İyilik Hali • Denge", eng_desc: "Mühendislik • Çözüm", local_intel: "Yerel İstihbarat", food_recs: "YEMEK ÖNERİLERİ", historical: "TARİHİ YERLER", traveler_title: "Konum İstihbaratı", traveler_sub: "Seyahat & Kamp Kokpiti", faith_title: "İnanç Telemetrisi", open_reader: "Kutsal Metinleri Aç", music_title: "Ambient Ses Manzarası", music_sub: "12 Sıcak Ambient Parça", settings: "Ayarlar", language: "Dil", theme: "Tema", select_city: "Şehir Seç" },
-            de: { app_title: "JCARVIS • Neuraler Begleiter", location: "Standort", detect_location: "Standort erkennen", refresh: "Aktualisieren", weather_title: "3-Tage-Vorhersage", ai_companions: "Lokale KI-Begleiter", edu_desc: "Bildung • Lernen", well_desc: "Wohlbefinden • Balance", eng_desc: "Ingenieurwesen • Lösen", local_intel: "Lokale Intelligenz", food_recs: "ESSENS-EMPFEHLUNGEN", historical: "HISTORISCHE ORTE", traveler_title: "Standort-Intelligenz", traveler_sub: "Reise- & Camping-Cockpit", faith_title: "Glaubens-Telemetrie", open_reader: "Heilige Texte öffnen", music_title: "Ambient Klanglandschaft", music_sub: "12 warme Ambient-Tracks", settings: "Einstellungen", language: "Sprache", theme: "Thema", select_city: "Stadt wählen" },
-            fr: { app_title: "JCARVIS • Compagnon Neural", location: "Emplacement", detect_location: "Détecter position", refresh: "Actualiser", weather_title: "Prévisions 3 jours", ai_companions: "Compagnons IA locaux", edu_desc: "Éducation • Apprentissage", well_desc: "Bien-être • Équilibre", eng_desc: "Ingénierie • Résoudre", local_intel: "Intelligence locale", food_recs: "RECOMMANDATIONS CULINAIRES", historical: "LIEUX HISTORIQUES", traveler_title: "Intelligence de localisation", traveler_sub: "Cockpit Voyageur & Campeur", faith_title: "Télémétrie spirituelle", open_reader: "Ouvrir les Textes Sacrés", music_title: "Paysage sonore ambiant", music_sub: "12 pistes ambiantes chaudes", settings: "Paramètres", language: "Langue", theme: "Thème", select_city: "Choisir ville" }
-            // Other languages abbreviated for length but fully functional in real use. Pattern is identical.
-        };
-
-        // Rich location-based suggestions (per city/region)
+        // Expanded location suggestions
         const locationSuggestions = {
-            "Istanbul": { food: ["İskender Kebab", "Simit & Çay", "Fresh seafood at Karaköy"], history: ["Hagia Sophia", "Topkapi Palace", "Basilica Cistern"] },
-            "Paris": { food: ["Croissant & Café", "Steak Frites", "Macarons at Ladurée"], history: ["Eiffel Tower", "Louvre Museum", "Notre-Dame"] },
-            "London": { food: ["Fish & Chips", "Full English Breakfast", "Afternoon Tea"], history: ["Tower of London", "British Museum", "Westminster Abbey"] },
-            "Berlin": { food: ["Currywurst", "Döner Kebab", "Pretzels & Beer"], history: ["Brandenburg Gate", "Berlin Wall", "Reichstag"] },
-            "Rome": { food: ["Pasta Carbonara", "Gelato", "Pizza al Taglio"], history: ["Colosseum", "Vatican", "Trevi Fountain"] },
-            "New York": { food: ["New York Pizza", "Bagels", "Hot Dogs in Central Park"], history: ["Statue of Liberty", "Empire State", "Central Park"] },
-            default: { food: ["Local specialty dish", "Seasonal market produce", "Traditional street food"], history: ["Old town center", "Major historical landmark", "Local museum"] }
+            "Istanbul": { food: ["İskender Kebab", "Grilled fish at Karaköy", "Simit & strong Turkish tea"], history: ["Hagia Sophia", "Topkapı Palace", "Basilica Cistern"] },
+            "Ankara": { food: ["Testi kebabı", "Mantı", "Fresh pide"], history: ["Anıtkabir", "Museum of Anatolian Civilizations", "Hattusha"] },
+            "Paris": { food: ["Croissant + café au lait", "Steak frites", "Real macarons"], history: ["Eiffel Tower", "Louvre", "Notre-Dame"] },
+            "London": { food: ["Fish & chips", "Full English", "Sunday roast"], history: ["Tower of London", "British Museum", "Westminster Abbey"] },
+            "Berlin": { food: ["Currywurst", "Döner", "Käsespätzle"], history: ["Brandenburg Gate", "Berlin Wall", "Reichstag"] },
+            "Rome": { food: ["Carbonara", "Cacio e pepe", "Real gelato"], history: ["Colosseum", "Vatican Museums", "Trevi Fountain"] },
+            "Amsterdam": { food: ["Stroopwafels", "Bitterballen", "Fresh herring"], history: ["Anne Frank House", "Rijksmuseum", "Canal Ring"] },
+            "Tokyo": { food: ["Ramen", "Sushi at Tsukiji", "Tonkatsu"], history: ["Senso-ji Temple", "Meiji Shrine", "Imperial Palace"] },
+            "Sydney": { food: ["Meat pie", "Fresh oysters", "Flat white + avocado toast"], history: ["Sydney Opera House", "Harbour Bridge", "Bondi Beach"] },
+            "Madrid": { food: ["Tortilla española", "Jamón ibérico", "Churros con chocolate"], history: ["Prado Museum", "Royal Palace", "Retiro Park"] },
+            "Bangkok": { food: ["Pad Thai", "Tom Yum Goong", "Mango sticky rice"], history: ["Grand Palace", "Wat Arun", "Chatuchak Market"] },
+            default: { food: ["Local seasonal specialty", "Traditional street food", "Market fresh produce"], history: ["Old town center", "Major historical landmark", "Local cultural museum"] }
         };
 
-        // 6 Deep Themes
         const themes = {
             stellar: { name: "Stellar Night", class: "theme-stellar" },
             forest:  { name: "Forest Calm", class: "theme-forest" },
@@ -428,7 +397,6 @@
             forge:   { name: "Forge Tech", class: "theme-forge" }
         };
 
-        // 12 Track names (warm elevator style)
         const tracks = [
             { title: "Velvet Horizon", mood: "warm-pad" }, { title: "Morning Mist", mood: "soft-piano" },
             { title: "Copper Wind", mood: "gentle-guitar" }, { title: "Lumen", mood: "warm-pad" },
@@ -438,270 +406,155 @@
             { title: "Ember & Ash", mood: "soft-piano" }, { title: "Open Sky", mood: "gentle-guitar" }
         ];
 
-        // ==================== CORE FUNCTIONS (Streamlined) ====================
-        function getTranslation(key) {
-            return (i18n[currentLang] && i18n[currentLang][key]) || i18n.en[key] || key;
-        }
+        // ==================== LOCAL LLM INTEGRATION ====================
+        async function callLocalLLM(systemPrompt, userMessage) {
+            const messages = [
+                { role: "system", content: systemPrompt },
+                { role: "user", content: userMessage }
+            ];
 
-        function applyTranslations() {
-            document.querySelectorAll('[data-i18n]').forEach(el => {
-                const key = el.getAttribute('data-i18n');
-                if (key) el.textContent = getTranslation(key);
-            });
-            // Special dynamic updates
-            const langEl = document.getElementById('lang-display');
-            if (langEl) langEl.textContent = currentLang.toUpperCase();
-        }
-
-        function setLanguage(lang) {
-            currentLang = lang;
-            localStorage.setItem('jc_lang', lang);
-            applyTranslations();
-            refreshLocalIntel(); // re-render translated suggestions
-            // Re-render traveler cards if needed
-            if (lastWeatherData) renderTravelerTelemetry(lastWeatherData, currentCity);
-        }
-
-        function applyTheme(key) {
-            currentTheme = key;
-            const theme = themes[key] || themes.stellar;
-            
-            // Remove all theme classes
-            Object.values(themes).forEach(t => document.body.classList.remove(t.class));
-            document.body.classList.add(theme.class);
-            
-            localStorage.setItem('jc_theme', key);
-            document.getElementById('theme-display').textContent = theme.name.split(" ")[0];
-        }
-
-        // ==================== MUSIC - Warm Elevator Ambient (High Quality) ====================
-        function initAudio() {
-            if (!audioContext) audioContext = new (window.AudioContext || window.webkitAudioContext)();
-            if (!analyser) {
-                analyser = audioContext.createAnalyser();
-                analyser.fftSize = 128;
-                analyser.smoothingTimeConstant = 0.82;
-            }
-        }
-
-        function createWarmAmbient(mood) {
-            initAudio();
-            if (audio) { try { audio.pause(); } catch(e){} }
-
-            const master = audioContext.createGain();
-            master.gain.value = 0.55;
-
-            const filter = audioContext.createBiquadFilter();
-            filter.type = 'lowpass';
-            filter.frequency.value = (mood === 'soft-piano') ? 920 : 1250;
-
-            const delay = audioContext.createDelay(0.8);
-            delay.delayTime.value = 0.38;
-            const delayGain = audioContext.createGain(); delayGain.gain.value = 0.22;
-            const feedback = audioContext.createGain(); feedback.gain.value = 0.28;
-
-            // Layered warm oscillators (sounds like real pads + soft piano)
-            const osc1 = audioContext.createOscillator(); osc1.type = 'sine'; osc1.frequency.value = 48;
-            const osc2 = audioContext.createOscillator(); osc2.type = 'sine'; osc2.frequency.value = 72;
-            const osc3 = audioContext.createOscillator(); osc3.type = (mood === 'gentle-guitar') ? 'sawtooth' : 'sine'; osc3.frequency.value = 96;
-
-            const noise = audioContext.createBufferSource();
-            const buffer = audioContext.createBuffer(1, audioContext.sampleRate * 4, audioContext.sampleRate);
-            const data = buffer.getChannelData(0);
-            for (let i = 0; i < data.length; i++) data[i] = Math.random() * 2 - 1;
-            noise.buffer = buffer;
-            noise.loop = true;
-
-            const noiseFilter = audioContext.createBiquadFilter();
-            noiseFilter.type = 'lowpass'; noiseFilter.frequency.value = 380;
-            const noiseGain = audioContext.createGain(); noiseGain.gain.value = (mood === 'warm-pad') ? 0.018 : 0.008;
-
-            const lfo = audioContext.createOscillator(); lfo.frequency.value = 0.06;
-            const lfoGain = audioContext.createGain(); lfoGain.gain.value = 12;
-            lfo.connect(lfoGain); lfoGain.connect(filter.frequency);
-
-            // Connect everything
-            const merger = audioContext.createGain();
-            osc1.connect(filter); osc2.connect(filter); osc3.connect(filter);
-            noise.connect(noiseFilter); noiseFilter.connect(noiseGain); noiseGain.connect(filter);
-            filter.connect(master);
-            master.connect(delay);
-            delay.connect(delayGain);
-            delayGain.connect(feedback);
-            feedback.connect(delay);
-            delayGain.connect(merger);
-            master.connect(merger);
-            merger.connect(analyser);
-            analyser.connect(audioContext.destination);
-
-            osc1.start(); osc2.start(); osc3.start(); noise.start(); lfo.start();
-
-            audio = { stop: () => { [osc1,osc2,osc3,lfo,noise].forEach(o => {try{o.stop()}catch(e){}}); } };
-            return master;
-        }
-
-        function playTrack(index) {
-            if (audio && audio.stop) audio.stop();
-            stopEq();
-            currentTrackIndex = index;
-            document.getElementById('track-title').textContent = tracks[index].title;
-
-            const gain = createWarmAmbient(tracks[index].mood);
-            isPlaying = true;
-            updatePlayButton();
-            startProgress();
-            startEqVisualizer();
-            renderTrackList();
-        }
-
-        function togglePlay() {
-            if (!isPlaying) {
-                playTrack(currentTrackIndex);
-            } else {
-                if (audio && audio.stop) audio.stop();
-                isPlaying = false;
-                stopEq();
-                updatePlayButton();
-            }
-        }
-
-        function updatePlayButton() {
-            const icon = document.getElementById('play-icon');
-            icon.className = isPlaying ? "fa-solid fa-pause text-xl" : "fa-solid fa-play text-xl";
-        }
-
-        function startProgress() {
-            if (progressInterval) clearInterval(progressInterval);
-            progressInterval = setInterval(() => {
-                if (!isPlaying) return;
-                const bar = document.getElementById('progress-bar');
-                const time = document.getElementById('time-display');
-                if (bar) bar.style.width = (Math.sin(Date.now()/1800) * 30 + 45) + '%';
-                if (time) time.textContent = "2:14 / 4:20";
-            }, 400);
-        }
-
-        function startEqVisualizer() {
-            const canvas = document.getElementById('eq-canvas');
-            const ctx = canvas.getContext('2d');
-            stopEq();
-
-            function draw() {
-                eqAnimation = requestAnimationFrame(draw);
-                if (!ctx || !isPlaying) return;
-                const w = canvas.width = canvas.offsetWidth;
-                const h = canvas.height;
-                ctx.clearRect(0, 0, w, h);
-
-                if (analyser) {
-                    const data = new Uint8Array(analyser.frequencyBinCount);
-                    analyser.getByteFrequencyData(data);
-                    const barW = w / data.length * 1.8;
-                    for (let i = 0; i < data.length; i++) {
-                        const bh = (data[i] / 255) * h * 0.85;
-                        ctx.fillStyle = `hsl(210, 70%, ${55 + (data[i]/255)*25}%)`;
-                        ctx.fillRect(i * barW, h - bh, barW - 1.2, bh);
-                    }
-                } else {
-                    // Fallback gentle animation
-                    for (let i = 0; i < 18; i++) {
-                        const t = Date.now() / 420 + i;
-                        const bh = (Math.sin(t) * 0.4 + 0.6) * h * 0.7;
-                        ctx.fillStyle = i % 2 ? '#a5b4fc' : '#7dd3fc';
-                        ctx.fillRect(i * (w/18), h - bh, (w/18)-2, bh);
-                    }
-                }
-            }
-            draw();
-        }
-
-        function stopEq() {
-            if (eqAnimation) cancelAnimationFrame(eqAnimation);
-            eqAnimation = null;
-            const c = document.getElementById('eq-canvas');
-            if (c) c.getContext('2d').clearRect(0,0,c.width,c.height);
-        }
-
-        function renderTrackList() {
-            const c = document.getElementById('track-list');
-            c.innerHTML = '';
-            tracks.forEach((t, i) => {
-                const b = document.createElement('button');
-                b.className = `px-3 py-1 text-xs rounded-xl border border-white/10 hover:border-sky-400/50 ${i===currentTrackIndex ? 'track-active' : ''}`;
-                b.textContent = t.title;
-                b.onclick = () => playTrack(i);
-                c.appendChild(b);
-            });
-        }
-
-        // ==================== LOCATION & WEATHER (Streamlined) ====================
-        async function detectUserLocation() {
-            // ... (kept compact from previous high-quality version)
-            const el = document.getElementById('current-location');
-            el.textContent = "Detecting...";
             try {
-                const pos = await new Promise((res, rej) => navigator.geolocation.getCurrentPosition(res, rej, {timeout:7000}));
-                const geo = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${pos.coords.latitude}&longitude=${pos.coords.longitude}`).then(r=>r.json());
-                currentCity = geo.city || "Your City";
-                el.textContent = `${currentCity}, ${geo.countryCode||''}`;
-                refreshAllData();
-            } catch {
-                const ip = await fetch('https://ipapi.co/json/').then(r=>r.json()).catch(()=>null);
-                if (ip?.city) { currentCity = ip.city; el.textContent = `${ip.city}, ${ip.country_name}`; }
-                refreshAllData();
+                const response = await fetch(LLM_ENDPOINT, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        model: LLM_MODEL,
+                        messages: messages,
+                        temperature: 0.75,
+                        max_tokens: 450,
+                        stream: false
+                    })
+                });
+
+                if (!response.ok) throw new Error("Local model request failed");
+
+                const data = await response.json();
+                return data.choices?.[0]?.message?.content || "I couldn't generate a response right now.";
+            } catch (err) {
+                console.warn("Local LLM call failed:", err);
+                return fallbackAgentResponse(userMessage);
             }
         }
+
+        function fallbackAgentResponse(message) {
+            const msg = message.toLowerCase();
+            if (msg.includes("learn") || msg.includes("study")) return "Learning compounds when you teach what you just learned. What topic are you currently exploring?";
+            if (msg.includes("feel") || msg.includes("tired") || msg.includes("stress")) return "Small consistent actions help most. Would you like a simple 2-minute reset technique?";
+            return "That's a good question. Can you give me a bit more context so I can help you better?";
+        }
+
+        // ==================== DAILY LIFE GUIDANCE (Expanded) ====================
+        function generateDailyGuidance(weather, city) {
+            const container = document.getElementById('daily-guidance');
+            const c = weather?.current_condition?.[0] || {};
+            const temp = parseInt(c.temp_C || 15);
+            const wind = parseInt(c.windspeedKmph || 10);
+            const humidity = parseInt(c.humidity || 60);
+            const uv = parseInt(weather?.weather?.[0]?.uvIndex || 3);
+            const pressure = parseInt(c.pressure || 1015);
+
+            let html = '';
+
+            // 1. Attire
+            let attire = temp < 5 ? "Heavy insulated layers, gloves, scarf, and waterproof boots." : 
+                         temp < 12 ? "Medium layers + light jacket. Closed shoes recommended." :
+                         temp > 30 ? "Light breathable clothes, sun hat, and strong sunscreen." : 
+                         "Comfortable layers. Light jacket for evenings.";
+            if (wind > 22) attire += " Strong windproof outer layer advised.";
+            html += makeGuidanceCard("Attire & Protection", attire, "sky");
+
+            // 2. Hydration & Nutrition
+            let hydration = `Target ${temp > 28 ? "3.5–4" : "2.5–3"} liters of water today.`;
+            if (humidity < 35) hydration += " Dry air — increase fluids and consider electrolytes.";
+            if (temp > 29) hydration += " Favor light meals and fresh fruit.";
+            html += makeGuidanceCard("Hydration & Nutrition", hydration, "emerald");
+
+            // 3. Activity Windows
+            let activity = (temp > 30 || uv > 8) ? "Do outdoor activities before 10:30 or after 17:00. Rest in shade during peak hours." :
+                            (wind > 25) ? "Good day for indoor focus or sheltered movement. Avoid exposed ridges." :
+                            "Very good conditions for walking, light exercise, and outdoor time.";
+            html += makeGuidanceCard("Activity Windows", activity, "violet");
+
+            // 4. Wellbeing
+            let wellbeing = pressure < 1008 ? "Low pressure — you may feel lower energy or mood. Prioritize gentle movement and rest." : 
+                            "Take short movement breaks every 90 minutes. Get natural light.";
+            html += makeGuidanceCard("Wellbeing & Mood", wellbeing, "rose");
+
+            // 5. Productivity & Focus (NEW)
+            let productivity = (temp > 28 || uv > 7) ? "Your best focus window is early morning or late afternoon. Protect deep work time." :
+                              "Solid conditions for focused work. Consider a 25-minute deep work block followed by a short walk.";
+            html += makeGuidanceCard("Focus & Productivity", productivity, "amber");
+
+            // 6. Sleep & Recovery (NEW)
+            let sleep = temp < 8 ? "Cooler evenings — good for sleep. Keep bedroom slightly cooler than daytime." :
+                        "Aim to finish heavy meals and screens at least 60–90 minutes before bed.";
+            html += makeGuidanceCard("Sleep & Recovery", sleep, "indigo");
+
+            // 7. Travel / Commute Safety (NEW)
+            let travel = `Pressure ${pressure} hPa. `;
+            travel += wind > 20 ? "Expect stronger gusts — secure loose items if traveling." : "Generally stable conditions for travel.";
+            if (uv > 6) travel += " Pack sunscreen and water if spending time outside.";
+            html += makeGuidanceCard("Travel & Commute", travel, "teal");
+
+            container.innerHTML = html;
+        }
+
+        function makeGuidanceCard(title, text, color) {
+            const colors = { sky: "text-sky-300", emerald: "text-emerald-300", violet: "text-violet-300", rose: "text-rose-300", amber: "text-amber-300", indigo: "text-indigo-300", teal: "text-teal-300" };
+            return `<div class="guidance-card rounded-2xl p-4"><div class="font-semibold text-sm mb-2 ${colors[color] || 'text-white'}">${title}</div><div class="text-sm text-white/85">${text}</div></div>`;
+        }
+
+        function refreshDailyGuidance() {
+            generateDailyGuidance(lastWeatherData, currentCity);
+        }
+
+        // ==================== WEATHER, TELEMETRY, LOCAL INTEL, MUSIC ====================
+        // (Kept functional and clean from previous high-quality version)
 
         async function fetchWeather(city) {
-            try { return await fetch(`https://wttr.in/${city}?format=j1`).then(r => r.json()); } 
-            catch { return null; }
+            try { return await fetch(`https://wttr.in/${city}?format=j1`).then(r => r.json()); } catch { return null; }
         }
-
-        let lastWeatherData = null;
 
         function renderWeather(data) {
             const grid = document.getElementById('weather-grid');
             grid.innerHTML = '';
             if (!data?.weather) {
-                // fallback
-                ['Today','Tomorrow','+2'].forEach((d,i) => {
-                    const c = document.createElement('div');
-                    c.className = 'weather-card bg-black/30 border border-white/10 rounded-2xl p-3 text-center';
-                    c.innerHTML = `<div class="text-xs text-white/50">${d}</div><div class="text-4xl my-1">☁️</div><div class="temp-display">14°</div>`;
-                    grid.appendChild(c);
+                ['Today','Tomorrow','+2'].forEach(d => {
+                    const el = document.createElement('div');
+                    el.className = 'weather-card bg-black/30 border border-white/10 rounded-2xl p-3 text-center';
+                    el.innerHTML = `<div class="text-xs text-white/50">${d}</div><div class="text-4xl my-1">☁️</div><div class="temp-display">15°</div>`;
+                    grid.appendChild(el);
                 });
                 return;
             }
             data.weather.slice(0,3).forEach((day,i) => {
-                const c = document.createElement('div');
-                c.className = 'weather-card bg-black/30 border border-white/10 rounded-2xl p-3 text-center';
-                c.innerHTML = `<div class="text-xs text-white/50">${i===0?'Today':i===1?'Tomorrow':'+2'}</div><div class="text-4xl my-1">${getWeatherIcon(day.hourly[0].weatherCode)}</div><div class="temp-display">${day.avgtempC}°</div>`;
-                grid.appendChild(c);
+                const el = document.createElement('div');
+                el.className = 'weather-card bg-black/30 border border-white/10 rounded-2xl p-3 text-center';
+                el.innerHTML = `<div class="text-xs text-white/50">${i===0?'Today':i===1?'Tomorrow':'+2'}</div><div class="text-4xl my-1">${getWeatherIcon(day.hourly[0].weatherCode)}</div><div class="temp-display">${day.avgtempC}°</div>`;
+                grid.appendChild(el);
             });
         }
 
-        function getWeatherIcon(code){ return code<200?'☀️':code<300?'⛅':code<600?'🌧️':'☁️'; }
+        function getWeatherIcon(c) { return c<200?'☀️':c<300?'⛅':c<600?'🌧️':'☁️'; }
 
-        // ==================== TRAVELER TELEMETRY ====================
-        async function refreshTravelerTelemetry() {
-            const grid = document.getElementById('traveler-grid');
-            grid.innerHTML = '<div class="col-span-5 text-sm p-3 text-white/50">Loading rich telemetry...</div>';
+        async function refreshWeather() {
             const data = await fetchWeather(currentCity);
             lastWeatherData = data;
-            renderTravelerTelemetry(data);
+            renderWeather(data);
+            generateDailyGuidance(data, currentCity);
         }
 
-        function renderTravelerTelemetry(data) {
+        async function refreshTravelerTelemetry() {
             const grid = document.getElementById('traveler-grid');
-            const extra = document.getElementById('traveler-extra');
             grid.innerHTML = '';
+            const data = lastWeatherData || await fetchWeather(currentCity);
             const c = data?.current_condition?.[0] || {};
             const items = [
-                {l:'Pressure', v: (c.pressure||'1012')+' hPa'},
-                {l:'Humidity', v: (c.humidity||'62')+'%'},
-                {l:'Wind', v: (c.windspeedKmph||'9')+' km/h'},
-                {l:'Feels Like', v: (c.FeelsLikeC||'14')+'°'},
-                {l:'Comfort', v: 'Good for walking'}
+                {l:'Pressure',v:(c.pressure||'1013')+' hPa'},
+                {l:'Humidity',v:(c.humidity||'58')+'%'},
+                {l:'Wind',v:(c.windspeedKmph||'8')+' km/h'},
+                {l:'Feels Like',v:(c.FeelsLikeC||'14')+'°'},
+                {l:'Comfort',v:'Good'}
             ];
             items.forEach(it => {
                 const d = document.createElement('div');
@@ -709,82 +562,15 @@
                 d.innerHTML = `<div class="font-semibold">${it.v}</div><div class="text-[10px] text-white/50">${it.l}</div>`;
                 grid.appendChild(d);
             });
-            extra.innerHTML = `<div>Elevation: ~120m</div><div>Sunrise: 06:12</div>`;
+            document.getElementById('traveler-extra').innerHTML = `<div>Elevation ~120m</div>`;
         }
 
-        // ==================== LOCAL INTEL (Smart per-location) ====================
         function refreshLocalIntel() {
-            const food = document.getElementById('food-list');
-            const hist = document.getElementById('history-list');
+            const f = document.getElementById('food-list');
+            const h = document.getElementById('history-list');
             const data = locationSuggestions[currentCity] || locationSuggestions.default;
-
-            food.innerHTML = data.food.map(f => `<div>→ ${f}</div>`).join('');
-            hist.innerHTML = data.history.map(h => `<div>→ ${h}</div>`).join('');
-        }
-
-        // ==================== 3 LOCAL AI AGENTS (High Quality) ====================
-        function openAgentModal(type) {
-            const modal = document.getElementById(`modal-${type}`);
-            modal.classList.remove('hidden'); modal.classList.add('flex');
-            const chat = document.getElementById(`chat-${type}`);
-            if (!chat.dataset.ready) {
-                const welcomes = {edu: "Hello! What would you like to learn today?", well: "I'm here. How are you feeling?", eng: "Tell me about your project or challenge."};
-                chat.innerHTML = `<div><span class="inline-block bg-white/10 px-3 py-2 rounded-2xl">${welcomes[type]}</span></div>`;
-                chat.dataset.ready = 'true';
-            }
-        }
-        function closeAgentModal(type) {
-            const m = document.getElementById(`modal-${type}`);
-            m.classList.add('hidden'); m.classList.remove('flex');
-        }
-
-        function sendToAgent(type) {
-            const input = document.getElementById(`input-${type}`);
-            const chat = document.getElementById(`chat-${type}`);
-            const val = input.value.trim(); if (!val) return;
-            chat.innerHTML += `<div class="text-right"><span class="inline-block bg-white/10 px-3 py-2 rounded-2xl">${val}</span></div>`;
-            input.value = '';
-            setTimeout(() => {
-                const replies = {
-                    edu: "Great question. Knowledge builds on itself — tell me more about what you're trying to understand.",
-                    well: "Thank you for sharing. Small consistent steps often help the most. Would you like a simple technique?",
-                    eng: "Solid problem framing. What constraints are we working with? Let's break it down."
-                };
-                chat.innerHTML += `<div><span class="inline-block bg-black/40 px-3 py-2 rounded-2xl">${replies[type]}</span></div>`;
-                chat.scrollTop = chat.scrollHeight;
-            }, 650);
-        }
-
-        // ==================== GOTHIC READER (kept high quality) ====================
-        function openBibleReader() {
-            const m = document.getElementById('bible-reader-modal');
-            m.classList.remove('hidden'); m.classList.add('flex');
-            // Simple content injection (abbreviated for final file cleanliness)
-            document.getElementById('bible-content').innerHTML = `<div class="max-w-3xl mx-auto"><div class="book-title text-4xl mb-6">Psalm 23</div><div class="verse">The Lord is my shepherd; I shall not want...</div></div>`;
-        }
-        function closeBibleReader() {
-            const m = document.getElementById('bible-reader-modal');
-            m.classList.add('hidden'); m.classList.remove('flex');
-        }
-
-        // ==================== PLANETS ====================
-        function initPlanets() {
-            const c = document.getElementById('planet-bg');
-            if (!c) return;
-            const ctx = c.getContext('2d');
-            let w,h,ps=[];
-            function rs(){ w=c.width=window.innerWidth; h=c.height=window.innerHeight; }
-            window.addEventListener('resize',rs); rs();
-            ps = [{x:w*.15,y:h*.2,r:42,color:'#3b82f6'},{x:w*.82,y:h*.7,r:29,color:'#c026ff'},{x:w*.4,y:h*.8,r:55,color:'#f59e0b'},{x:w*.9,y:h*.25,r:19,color:'#34d399'}];
-            function draw(){ ctx.clearRect(0,0,w,h); ps.forEach(p=>{p.x+=0.014;p.y+=0.008;if(p.x>w+60)p.x=-50;ctx.fillStyle=p.color;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();}); requestAnimationFrame(draw); }
-            draw();
-        }
-
-        // ==================== MAIN REFRESH & INIT ====================
-        async function refreshWeather() {
-            const data = await fetchWeather(currentCity);
-            lastWeatherData = data;
-            renderWeather(data);
+            f.innerHTML = data.food.map(x => `<div>→ ${x}</div>`).join('');
+            h.innerHTML = data.history.map(x => `<div>→ ${x}</div>`).join('');
         }
 
         function refreshAllData() {
@@ -793,10 +579,252 @@
             refreshTravelerTelemetry();
         }
 
+        // ==================== AI AGENTS WITH LOCAL LLM ====================
+        const agentPrompts = {
+            edu: "You are EduMentor, a wise and patient education companion. Explain concepts clearly, encourage curiosity, and give practical learning advice. Keep responses helpful and encouraging.",
+            well: "You are Vitalis, a calm and empathetic wellbeing guide. Offer gentle, practical support for emotional and physical balance. Focus on small actionable steps.",
+            eng: "You are Forge, a practical engineering and problem-solving companion. Be direct, structured, and solution-oriented. Help users break down challenges into clear next steps."
+        };
+
+        async function sendToAgent(type) {
+            const input = document.getElementById(`input-${type}`);
+            const chat = document.getElementById(`chat-${type}`);
+            const val = input.value.trim();
+            if (!val) return;
+
+            chat.innerHTML += `<div class="text-right"><span class="inline-block bg-white/10 px-3 py-2 rounded-2xl">${val}</span></div>`;
+            input.value = '';
+            chat.scrollTop = chat.scrollHeight;
+
+            const thinkingId = 'think-' + Date.now();
+            chat.innerHTML += `<div id="${thinkingId}" class="text-emerald-400 text-xs pl-1">Thinking with local Mistral...</div>`;
+            chat.scrollTop = chat.scrollHeight;
+
+            const systemPrompt = agentPrompts[type];
+            const reply = await callLocalLLM(systemPrompt, val);
+
+            const thinking = document.getElementById(thinkingId);
+            if (thinking) thinking.remove();
+
+            chat.innerHTML += `<div><span class="inline-block bg-black/40 px-3 py-2 rounded-2xl">${reply}</span></div>`;
+            chat.scrollTop = chat.scrollHeight;
+        }
+
+        function openAgentModal(type) {
+            const modal = document.getElementById(`modal-${type}`);
+            modal.classList.remove('hidden'); modal.classList.add('flex');
+            const chat = document.getElementById(`chat-${type}`);
+            if (!chat.dataset.ready) {
+                const welcomes = {
+                    edu: "Hello! I'm EduMentor. What would you like to explore or understand today?",
+                    well: "Hi, I'm Vitalis. How are you feeling right now?",
+                    eng: "Forge here. What project or challenge are you working on?"
+                };
+                chat.innerHTML = `<div><span class="inline-block bg-white/10 px-3 py-2 rounded-2xl">${welcomes[type]}</span></div>`;
+                chat.dataset.ready = 'true';
+            }
+        }
+
+        function closeAgentModal(type) {
+            const m = document.getElementById(`modal-${type}`);
+            m.classList.add('hidden'); m.classList.remove('flex');
+        }
+
+        // ==================== MUSIC, THEMES, LANGUAGES, PLANETS (Fully functional) ====================
+        // Music engine (warm ambient) - unchanged from previous high quality version
+        function initAudio() {
+            if (!audioContext) audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            if (!analyser) { analyser = audioContext.createAnalyser(); analyser.fftSize = 128; }
+        }
+
+        function createWarmAmbient(mood) {
+            initAudio();
+            const master = audioContext.createGain(); master.gain.value = 0.5;
+            const filter = audioContext.createBiquadFilter(); filter.type = 'lowpass'; filter.frequency.value = 1100;
+            const osc1 = audioContext.createOscillator(); osc1.type = 'sine'; osc1.frequency.value = 48;
+            const osc2 = audioContext.createOscillator(); osc2.type = 'sine'; osc2.frequency.value = 72;
+            const osc3 = audioContext.createOscillator(); osc3.type = 'sine'; osc3.frequency.value = 96;
+            const noise = audioContext.createBufferSource();
+            const buf = audioContext.createBuffer(1, audioContext.sampleRate * 4, audioContext.sampleRate);
+            const dat = buf.getChannelData(0); for (let i = 0; i < dat.length; i++) dat[i] = Math.random()*2-1;
+            noise.buffer = buf; noise.loop = true;
+            const nF = audioContext.createBiquadFilter(); nF.type = 'lowpass'; nF.frequency.value = 380;
+            const nG = audioContext.createGain(); nG.gain.value = 0.01;
+            osc1.connect(filter); osc2.connect(filter); osc3.connect(filter);
+            noise.connect(nF); nF.connect(nG); nG.connect(filter);
+            filter.connect(master); master.connect(analyser); analyser.connect(audioContext.destination);
+            osc1.start(); osc2.start(); osc3.start(); noise.start();
+            return { stop: () => { [osc1,osc2,osc3,noise].forEach(o=>{try{o.stop()}catch(e){}}); } };
+        }
+
+        function playTrack(i) {
+            if (window.currentAudio) window.currentAudio.stop();
+            currentTrackIndex = i;
+            document.getElementById('track-title').textContent = tracks[i].title;
+            window.currentAudio = createWarmAmbient(tracks[i].mood);
+            isPlaying = true; updatePlayButton(); startProgress(); startEqVisualizer(); renderTrackList();
+        }
+
+        function togglePlay() {
+            if (!isPlaying) playTrack(currentTrackIndex);
+            else { if (window.currentAudio) window.currentAudio.stop(); isPlaying = false; stopEq(); updatePlayButton(); }
+        }
+
+        function updatePlayButton() {
+            document.getElementById('play-icon').className = isPlaying ? "fa-solid fa-pause text-xl" : "fa-solid fa-play text-xl";
+        }
+
+        function startProgress() {
+            if (progressInterval) clearInterval(progressInterval);
+            progressInterval = setInterval(() => {
+                const bar = document.getElementById('progress-bar');
+                if (bar) bar.style.width = (38 + Math.sin(Date.now()/1700)*22) + '%';
+            }, 400);
+        }
+
+        function startEqVisualizer() {
+            const canvas = document.getElementById('eq-canvas');
+            const ctx = canvas.getContext('2d');
+            stopEq();
+            function draw() {
+                eqAnimation = requestAnimationFrame(draw);
+                const w = canvas.width = canvas.offsetWidth, h = canvas.height;
+                ctx.clearRect(0,0,w,h);
+                if (analyser) {
+                    const d = new Uint8Array(analyser.frequencyBinCount);
+                    analyser.getByteFrequencyData(d);
+                    const bw = w / d.length * 1.6;
+                    for (let i=0; i<d.length; i++) {
+                        const bh = (d[i]/255) * h * 0.85;
+                        ctx.fillStyle = `hsl(205,75%,${52+(d[i]/255)*28}%)`;
+                        ctx.fillRect(i*bw, h-bh, bw-1.2, bh);
+                    }
+                }
+            }
+            draw();
+        }
+        function stopEq() { if (eqAnimation) cancelAnimationFrame(eqAnimation); }
+
+        function renderTrackList() {
+            const c = document.getElementById('track-list');
+            c.innerHTML = '';
+            tracks.forEach((t,i) => {
+                const b = document.createElement('button');
+                b.className = `px-3 py-1 text-xs rounded-xl border border-white/10 hover:border-sky-400/60 ${i===currentTrackIndex ? 'track-active' : ''}`;
+                b.textContent = t.title;
+                b.onclick = () => playTrack(i);
+                c.appendChild(b);
+            });
+        }
+
+        function initPlanets() {
+            const c = document.getElementById('planet-bg');
+            if (!c) return;
+            const ctx = c.getContext('2d');
+            let w,h,ps=[];
+            function rs(){w=c.width=window.innerWidth; h=c.height=window.innerHeight;}
+            window.addEventListener('resize',rs); rs();
+            ps = [{x:w*0.12,y:h*0.22,r:36,color:'#3b82f6'},{x:w*0.78,y:h*0.68,r:24,color:'#c026ff'},{x:w*0.33,y:h*0.82,r:50,color:'#f59e0b'},{x:w*0.88,y:h*0.18,r:16,color:'#34d399'}];
+            function draw(){ ctx.clearRect(0,0,w,h); ps.forEach(p=>{p.x+=0.015;p.y+=0.008;if(p.x>w+50)p.x=-40;ctx.fillStyle=p.color;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();}); requestAnimationFrame(draw); }
+            draw();
+        }
+
         function initClock() {
             setInterval(() => {
-                document.getElementById('clock').textContent = new Date().toLocaleTimeString('en-GB', {hour:'2-digit',minute:'2-digit',second:'2-digit'});
-            }, 1000);
+                document.getElementById('clock').textContent = new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+            },1000);
+        }
+
+        function applyTheme(key) {
+            currentTheme = key;
+            Object.values(themes).forEach(t => document.body.classList.remove(t.class));
+            document.body.classList.add(themes[key].class);
+            localStorage.setItem('cato_theme', key);
+            document.getElementById('theme-display').textContent = themes[key].name.split(" ")[0];
+        }
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('cato_lang', lang);
+            document.getElementById('lang-display').textContent = lang.toUpperCase();
+        }
+
+        function showSettings() {
+            const modal = document.getElementById('settings-modal');
+            modal.classList.remove('hidden'); modal.classList.add('flex');
+
+            const lc = document.getElementById('lang-options');
+            lc.innerHTML = '';
+            ['en','tr','de','fr','es'].forEach(code => {
+                const b = document.createElement('button');
+                b.className = `px-3 py-2 rounded-2xl border text-xs ${currentLang===code ? 'border-sky-400 bg-sky-400/10':'border-white/10'}`;
+                b.textContent = code.toUpperCase();
+                b.onclick = () => { setLanguage(code); closeSettings(); };
+                lc.appendChild(b);
+            });
+
+            const tc = document.getElementById('theme-options');
+            tc.innerHTML = '';
+            Object.keys(themes).forEach(k => {
+                const d = document.createElement('div');
+                d.className = `w-9 h-9 rounded-2xl border-2 cursor-pointer ${currentTheme===k ? 'border-white':'border-white/20'}`;
+                d.onclick = () => { applyTheme(k); closeSettings(); };
+                tc.appendChild(d);
+            });
+        }
+
+        function closeSettings() {
+            const m = document.getElementById('settings-modal');
+            m.classList.add('hidden'); m.classList.remove('flex');
+        }
+
+        function showLocationPicker() {
+            const modal = document.getElementById('location-modal');
+            const grid = document.getElementById('city-grid');
+            grid.innerHTML = '';
+            cities.forEach(city => {
+                const b = document.createElement('button');
+                b.className = `px-4 py-3 rounded-2xl border text-left text-sm ${city.name===currentCity ? 'border-sky-400 bg-sky-400/10' : 'border-white/10'}`;
+                b.innerHTML = `<div class="font-medium">${city.name}</div><div class="text-xs text-white/50">${city.country}</div>`;
+                b.onclick = () => {
+                    currentCity = city.name;
+                    document.getElementById('current-location').textContent = `${city.name}, ${city.country}`;
+                    closeLocationModal();
+                    refreshAllData();
+                };
+                grid.appendChild(b);
+            });
+            modal.classList.remove('hidden'); modal.classList.add('flex');
+        }
+
+        function closeLocationModal() {
+            const m = document.getElementById('location-modal');
+            m.classList.add('hidden'); m.classList.remove('flex');
+        }
+
+        async function detectUserLocation() {
+            const el = document.getElementById('current-location');
+            el.textContent = "Detecting...";
+            try {
+                const pos = await new Promise((res,rej)=>navigator.geolocation.getCurrentPosition(res,rej,{timeout:8000}));
+                const geo = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${pos.coords.latitude}&longitude=${pos.coords.longitude}`).then(r=>r.json());
+                currentCity = geo.city || "Your City";
+                el.textContent = `${currentCity}, ${geo.countryCode||''}`;
+            } catch {
+                const ip = await fetch('https://ipapi.co/json/').then(r=>r.json()).catch(()=>null);
+                if (ip?.city) { currentCity = ip.city; el.textContent = `${ip.city}, ${ip.country_name}`; }
+            }
+            refreshAllData();
+        }
+
+        function openBibleReader() {
+            const m = document.getElementById('bible-reader-modal');
+            m.classList.remove('hidden'); m.classList.add('flex');
+            document.getElementById('bible-content').innerHTML = `<div class="max-w-3xl mx-auto"><div class="book-title text-4xl mb-6">Psalm 23</div><div class="verse">The Lord is my shepherd; I shall not want...</div></div>`;
+        }
+        function closeBibleReader() {
+            const m = document.getElementById('bible-reader-modal');
+            m.classList.add('hidden'); m.classList.remove('flex');
         }
 
         function initialize() {
@@ -804,24 +832,21 @@
             initPlanets();
             renderTrackList();
 
-            // Restore
-            const savedTheme = localStorage.getItem('jc_theme') || 'stellar';
-            const savedLang = localStorage.getItem('jc_lang') || 'en';
+            const savedTheme = localStorage.getItem('cato_theme') || 'stellar';
+            const savedLang = localStorage.getItem('cato_lang') || 'en';
             applyTheme(savedTheme);
             setLanguage(savedLang);
 
             document.getElementById('current-location').textContent = "Istanbul, TR";
             currentCity = "Istanbul";
 
-            // Initial loads
+            setTimeout(() => detectUserLocation(), 600);
             setTimeout(() => {
-                detectUserLocation();
-                refreshLocalIntel();
-            }, 600);
+                refreshAllData();
+                generateDailyGuidance(null, currentCity);
+            }, 1200);
 
-            setTimeout(refreshAllData, 1100);
-
-            console.log('%c[JCARVIS Final] Clean • Fully Localized • Warm Ambient Music • Deep Theming ready.', 'color:#64748b');
+            console.log('%c[CATOzwell Final] Local Mistral 7B integration active. All features ready.', 'color:#64748b');
         }
 
         window.onload = initialize;
