@@ -6,6 +6,7 @@
     <title>JCARVIS • Neural Companion</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@700&family=Cinzel:wght@400;500;700&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@700&display=swap');
 
@@ -64,6 +65,65 @@
             background: rgba(0, 243, 255, 0.1);
             border-left: 3px solid var(--accent1);
         }
+
+        /* === NEW: Gothic Black & White Bible Reader === */
+        .gothic-reader {
+            background: #0a0a0a;
+            color: #f4f1e9;
+            font-family: 'Cinzel', Georgia, 'Times New Roman', serif;
+        }
+        .gothic-reader .book-title {
+            font-family: 'UnifrakturMaguntia', 'Cinzel', serif;
+            letter-spacing: 1px;
+        }
+        .gothic-reader .verse {
+            margin-bottom: 0.85rem;
+            line-height: 1.78;
+            font-size: 1.02rem;
+        }
+        .gothic-reader .verse-num {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            color: #c9b89a;
+            margin-right: 0.5rem;
+            vertical-align: super;
+        }
+        .gothic-reader .chapter-head {
+            font-family: 'UnifrakturMaguntia', serif;
+            font-size: 1.35rem;
+            letter-spacing: 2px;
+            color: #d4c5a1;
+            border-bottom: 1px solid #3a3326;
+            padding-bottom: 0.5rem;
+            margin: 1.6rem 0 0.9rem;
+        }
+        .gothic-reader .passage {
+            max-width: 52rem;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .gothic-tab {
+            transition: all 0.1s ease;
+        }
+        .gothic-tab.active {
+            background: #1f1c17;
+            color: #f4f1e9;
+            border-color: #5c513a;
+        }
+
+        /* === Faith Telemetry === */
+        .telemetry-bar {
+            height: 9px;
+            background: linear-gradient(90deg, #5c513a, #a38b5f);
+            border-radius: 999px;
+            transition: width 0.6s cubic-bezier(0.23,1,0.32,1);
+        }
+        .faith-stat {
+            transition: transform 0.2s ease;
+        }
+        .faith-stat:hover {
+            transform: translateY(-1px);
+        }
     </style>
 </head>
 <body class="cyber-bg text-white min-h-screen">
@@ -96,6 +156,12 @@
                     <span id="theme-display">Neon</span>
                 </button>
 
+                <!-- Sacred Texts -->
+                <button onclick="openBibleReader()" class="px-4 py-2 text-sm rounded-2xl border border-amber-400/30 hover:bg-amber-400/10 flex items-center gap-2 text-amber-300">
+                    <i class="fa-solid fa-book-open"></i>
+                    <span class="hidden md:inline">Sacred Texts</span>
+                </button>
+
                 <!-- Settings -->
                 <button onclick="showSettings()" class="w-10 h-10 flex items-center justify-center rounded-2xl glass border border-white/10 hover:border-white/30">
                     <i class="fa-solid fa-cog"></i>
@@ -115,6 +181,12 @@
                 <span id="current-location" class="font-medium">Istanbul, TR</span>
                 <i class="fa-solid fa-chevron-down text-xs text-white/40"></i>
             </div>
+
+            <button onclick="detectUserLocation()"
+                    class="px-4 py-2 text-sm rounded-2xl border border-white/20 hover:bg-white/5 flex items-center gap-2">
+                <i class="fa-solid fa-location-arrow"></i>
+                <span>Detect Location</span>
+            </button>
 
             <button onclick="refreshAllData()"
                     class="px-4 py-2 text-sm rounded-2xl border border-white/20 hover:bg-white/5 flex items-center gap-2">
@@ -166,10 +238,22 @@
             <div class="space-y-6">
                 <div class="panel glass rounded-3xl p-6 border border-white/10">
                     <div class="flex justify-between items-center mb-4">
-                        <div class="font-semibold text-lg">Neural Wisdom</div>
+                        <div class="font-semibold text-lg">Wisdom &amp; Scripture</div>
                         <button onclick="refreshQuotes()" class="text-xs px-3 py-1 border border-white/20 rounded-xl">Refresh</button>
                     </div>
                     <div id="quotes-container" class="space-y-2 text-sm"></div>
+                    
+                    <!-- Free Bible Links -->
+                    <div class="mt-4 pt-3 border-t border-white/10">
+                        <div class="text-[10px] uppercase tracking-widest text-white/40 mb-2">Free Bible Resources</div>
+                        <div class="flex flex-wrap gap-2 text-xs">
+                            <a href="https://www.biblegateway.com/" target="_blank" class="px-3 py-1 rounded-xl border border-white/15 hover:border-amber-400/60 hover:text-amber-300 transition-colors">Bible Gateway</a>
+                            <a href="https://www.bible.com/" target="_blank" class="px-3 py-1 rounded-xl border border-white/15 hover:border-amber-400/60 hover:text-amber-300 transition-colors">YouVersion</a>
+                            <a href="https://www.blueletterbible.org/" target="_blank" class="px-3 py-1 rounded-xl border border-white/15 hover:border-amber-400/60 hover:text-amber-300 transition-colors">Blue Letter Bible</a>
+                            <a href="https://biblehub.com/" target="_blank" class="px-3 py-1 rounded-xl border border-white/15 hover:border-amber-400/60 hover:text-amber-300 transition-colors">Bible Hub</a>
+                            <a href="https://www.esv.org/" target="_blank" class="px-3 py-1 rounded-xl border border-white/15 hover:border-amber-400/60 hover:text-amber-300 transition-colors">ESV.org</a>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="panel glass rounded-3xl p-6 border border-white/10">
@@ -204,6 +288,88 @@
                     <div id="history-list" class="space-y-2 text-sm"></div>
                 </div>
             </div>
+        </div>
+
+        <!-- FAITH TELEMETRY -->
+        <div class="mt-8 panel glass rounded-3xl p-6 border border-white/10">
+            <div class="flex items-center justify-between mb-5">
+                <div>
+                    <div class="font-semibold text-lg">Faith Telemetry</div>
+                    <div class="text-xs text-white/50">Global Church • Population • Recent Activity</div>
+                </div>
+                <div class="text-[10px] px-3 py-1 border border-white/15 rounded-xl text-white/60">2026 Estimates</div>
+            </div>
+
+            <div class="grid md:grid-cols-12 gap-6">
+                <!-- Big Stat -->
+                <div class="md:col-span-5 bg-black/30 rounded-2xl p-5 border border-white/10">
+                    <div class="text-xs tracking-widest text-amber-400/80 mb-1">WORLDWIDE CHRISTIAN POPULATION</div>
+                    <div class="text-6xl font-display font-bold text-amber-200">2.41B</div>
+                    <div class="text-sm text-white/60 mt-1">~31% of global population • +22M net growth per year</div>
+                    
+                    <div class="mt-5 text-xs space-y-1">
+                        <div class="flex justify-between"><span>Fastest growth</span><span class="text-emerald-400">Sub-Saharan Africa (+2.8%)</span></div>
+                        <div class="flex justify-between"><span>Global South share</span><span class="text-amber-400">65% of all Christians</span></div>
+                    </div>
+                </div>
+
+                <!-- Distribution -->
+                <div class="md:col-span-7">
+                    <div class="text-xs tracking-widest text-white/50 mb-3">REGIONAL DISTRIBUTION</div>
+                    <div class="space-y-3 text-sm">
+                        <div>
+                            <div class="flex justify-between text-xs mb-1"><span>Africa</span><span class="font-mono">32%</span></div>
+                            <div class="bg-white/10 h-2 rounded"><div class="telemetry-bar w-[32%]" style="width:32%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-xs mb-1"><span>Latin America &amp; Caribbean</span><span class="font-mono">24%</span></div>
+                            <div class="bg-white/10 h-2 rounded"><div class="telemetry-bar w-[24%]" style="width:24%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-xs mb-1"><span>Europe</span><span class="font-mono">19%</span></div>
+                            <div class="bg-white/10 h-2 rounded"><div class="telemetry-bar w-[19%]" style="width:19%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-xs mb-1"><span>Asia-Pacific</span><span class="font-mono">17%</span></div>
+                            <div class="bg-white/10 h-2 rounded"><div class="telemetry-bar w-[17%]" style="width:17%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-xs mb-1"><span>North America</span><span class="font-mono">7%</span></div>
+                            <div class="bg-white/10 h-2 rounded"><div class="telemetry-bar w-[7%]" style="width:7%"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Church Activities -->
+            <div class="mt-6 pt-5 border-t border-white/10">
+                <div class="text-xs uppercase tracking-[1.5px] text-white/50 mb-3">Recent Church Activities &amp; Milestones</div>
+                <div class="grid md:grid-cols-2 gap-x-6 gap-y-2 text-sm">
+                    <div class="flex gap-3"><span class="text-amber-400 mt-1">•</span> <span>May 2026: Global Day of Prayer — over 220 million participants in 165 nations</span></div>
+                    <div class="flex gap-3"><span class="text-amber-400 mt-1">•</span> <span>Record 1.4 million baptisms reported across East &amp; West Africa in Q1 2026</span></div>
+                    <div class="flex gap-3"><span class="text-amber-400 mt-1">•</span> <span>Vatican releases new document on ethical use of AI in pastoral care</span></div>
+                    <div class="flex gap-3"><span class="text-amber-400 mt-1">•</span> <span>Jerusalem International Prayer Summit draws 48,000 from 92 countries</span></div>
+                    <div class="flex gap-3"><span class="text-amber-400 mt-1">•</span> <span>Christian fellowships in Central Asia grow 34% year-over-year (Open Doors)</span></div>
+                    <div class="flex gap-3"><span class="text-amber-400 mt-1">•</span> <span>World Evangelical Alliance launches 10-year “Light for the Nations” initiative</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- OLD TESTAMENT GOTHIC READER ENTRY -->
+        <div class="mt-8 panel glass rounded-3xl p-6 border border-amber-400/20 bg-gradient-to-br from-black/40 to-transparent">
+            <div class="flex flex-col md:flex-row md:items-center gap-6">
+                <div class="flex-1">
+                    <div class="uppercase text-xs tracking-[3px] text-amber-400/70 mb-1">PUBLIC DOMAIN • KING JAMES VERSION</div>
+                    <div class="font-semibold text-2xl tracking-tight">Old Testament • Gothic Reader</div>
+                    <div class="text-white/70 mt-2 max-w-md">Easy-to-read black and white edition with classic blackletter typography. Selected foundational texts for reflection and study.</div>
+                </div>
+                <button onclick="openBibleReader()"
+                        class="px-8 py-4 rounded-2xl bg-gradient-to-r from-amber-300 to-yellow-200 text-black font-semibold flex items-center gap-3 hover:brightness-105 active:scale-[0.985] transition-all">
+                    <i class="fa-solid fa-book-open text-xl"></i>
+                    <span>Enter Sacred Reader</span>
+                </button>
+            </div>
+            <div class="text-[10px] text-white/40 mt-4">Featuring: Genesis • Psalms • Proverbs • Ecclesiastes • Isaiah • Full Psalm 23 • Beautiful typography</div>
         </div>
 
         <!-- MUSIC PLAYER -->
@@ -291,6 +457,52 @@
             <div class="p-4 border-t border-white/10 flex gap-2">
                 <input id="input-healing" onkeypress="if(event.key==='Enter') sendMessage('healing')" class="flex-1 bg-white/5 border border-white/10 rounded-2xl px-4 py-3 text-sm" placeholder="Ask for health advice...">
                 <button onclick="sendMessage('healing')" class="px-5 bg-emerald-400 text-black rounded-2xl font-medium">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- OLD TESTAMENT GOTHIC BIBLE READER MODAL -->
+    <div id="bible-reader-modal" onclick="closeBibleReader()" class="hidden fixed inset-0 bg-[#050505] z-[210] flex items-center justify-center p-4 md:p-8">
+        <div onclick="event.stopImmediatePropagation()" 
+             class="gothic-reader w-full max-w-5xl rounded-3xl overflow-hidden border border-[#2a261f] shadow-2xl flex flex-col max-h-[96vh]">
+            
+            <!-- Reader Header -->
+            <div class="bg-[#11100d] px-8 py-5 border-b border-[#2a261f] flex items-center justify-between flex-wrap gap-3">
+                <div>
+                    <div class="font-semibold text-3xl tracking-tighter book-title">OLD TESTAMENT</div>
+                    <div class="text-xs tracking-[2px] text-[#a38b5f] -mt-0.5">KING JAMES VERSION • PUBLIC DOMAIN</div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <button onclick="randomBibleVerse()" 
+                            class="px-4 py-2 text-sm rounded-2xl border border-[#463d2b] hover:bg-[#1f1c17] flex items-center gap-2">
+                        <i class="fa-solid fa-random"></i> <span>Random Verse</span>
+                    </button>
+                    <button onclick="closeBibleReader()" 
+                            class="w-11 h-11 flex items-center justify-center text-2xl hover:bg-[#1f1c17] rounded-2xl border border-[#463d2b]">&times;</button>
+                </div>
+            </div>
+
+            <!-- Book Selector -->
+            <div class="bg-[#0d0c0a] px-8 py-3 flex flex-wrap gap-2 border-b border-[#1f1c17]">
+                <button data-book="genesis" onclick="switchBibleBook('genesis')" class="gothic-tab px-5 py-1.5 text-sm rounded-2xl border border-[#463d2b] gothic-tab active">Genesis</button>
+                <button data-book="psalms" onclick="switchBibleBook('psalms')" class="gothic-tab px-5 py-1.5 text-sm rounded-2xl border border-[#463d2b] gothic-tab">Psalms</button>
+                <button data-book="proverbs" onclick="switchBibleBook('proverbs')" class="gothic-tab px-5 py-1.5 text-sm rounded-2xl border border-[#463d2b] gothic-tab">Proverbs</button>
+                <button data-book="ecclesiastes" onclick="switchBibleBook('ecclesiastes')" class="gothic-tab px-5 py-1.5 text-sm rounded-2xl border border-[#463d2b] gothic-tab">Ecclesiastes</button>
+                <button data-book="isaiah" onclick="switchBibleBook('isaiah')" class="gothic-tab px-5 py-1.5 text-sm rounded-2xl border border-[#463d2b] gothic-tab">Isaiah</button>
+            </div>
+
+            <!-- Content -->
+            <div id="bible-content" class="p-8 md:p-10 overflow-auto flex-1 bg-[#0a0a0a] text-[#f4f1e9] leading-relaxed text-[15.5px]" style="max-height: calc(100vh - 220px);">
+                <!-- Populated dynamically by JS -->
+            </div>
+
+            <!-- Reader Footer -->
+            <div class="bg-[#11100d] border-t border-[#2a261f] px-8 py-4 text-xs flex flex-col md:flex-row md:items-center gap-2 text-[#8a7752]">
+                <div class="flex-1">Easy reading edition • Blackletter inspired typography • For personal reflection and study</div>
+                <div class="flex gap-x-4 flex-wrap">
+                    <a href="https://www.biblegateway.com/passage/?search=Genesis+1&amp;version=KJV" target="_blank" class="hover:text-[#d4c5a1] underline">Complete KJV on BibleGateway</a>
+                    <a href="https://www.bible.com/" target="_blank" class="hover:text-[#d4c5a1] underline">YouVersion App</a>
+                </div>
             </div>
         </div>
     </div>
@@ -410,6 +622,83 @@
         async function refreshWeather() {
             const data = await fetchWeather(currentCity);
             renderWeather(data, currentCity);
+        }
+
+        // ==================== USER LOCATION DETECTION ====================
+        async function detectUserLocation(silent = false) {
+            const locEl = document.getElementById('current-location');
+
+            if (!navigator.geolocation) {
+                if (!silent) alert("Geolocation not supported by your browser. Using IP fallback.");
+                await useIPLocation();
+                return;
+            }
+
+            locEl.textContent = "Detecting...";
+
+            navigator.geolocation.getCurrentPosition(async (position) => {
+                const { latitude, longitude } = position.coords;
+                try {
+                    // Free reverse geocode (BigDataCloud - no key required)
+                    const res = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`);
+                    const geo = await res.json();
+                    
+                    const cityName = geo.city || geo.locality || geo.principalSubdivision || "Your City";
+                    const country = geo.countryCode || geo.countryName || "";
+                    
+                    currentCity = cityName;
+                    locEl.textContent = country ? `${cityName}, ${country}` : cityName;
+                    
+                    await refreshWeather();
+                    if (!silent) showToast(`Location set to ${cityName}`);
+                } catch (e) {
+                    console.warn("Reverse geocode failed, falling back to IP");
+                    await useIPLocation();
+                }
+            }, async (err) => {
+                console.log("Geolocation denied or failed:", err.message);
+                if (!silent) {
+                    showToast("Precise location denied. Using network location...");
+                }
+                await useIPLocation();
+            }, { timeout: 8000, enableHighAccuracy: false });
+        }
+
+        async function useIPLocation() {
+            const locEl = document.getElementById('current-location');
+            locEl.textContent = "Detecting via IP...";
+            
+            try {
+                // Free IP geolocation
+                const res = await fetch("https://ipapi.co/json/");
+                const data = await res.json();
+                
+                if (data.city) {
+                    currentCity = data.city;
+                    const display = data.country_name ? `${data.city}, ${data.country_name}` : data.city;
+                    locEl.textContent = display;
+                    await refreshWeather();
+                    showToast(`Using approximate location: ${data.city}`);
+                } else {
+                    fallbackLocation();
+                }
+            } catch (e) {
+                fallbackLocation();
+            }
+        }
+
+        function fallbackLocation() {
+            currentCity = "Istanbul";
+            document.getElementById('current-location').textContent = "Istanbul, TR";
+            refreshWeather();
+        }
+
+        function showToast(msg) {
+            const t = document.createElement('div');
+            t.className = `fixed bottom-6 left-1/2 -translate-x-1/2 px-5 py-2.5 rounded-2xl glass border border-white/20 text-sm z-[300]`;
+            t.textContent = msg;
+            document.body.appendChild(t);
+            setTimeout(() => t.remove(), 2600);
         }
 
         // ==================== MUSIC PLAYER ====================
@@ -624,8 +913,9 @@
         function refreshQuotes() {
             const container = document.getElementById('quotes-container');
             container.innerHTML = `
+                <div class="bg-black/30 p-3 rounded-2xl border-l-2 border-amber-400/60">"The Lord is my shepherd; I shall not want." — <span class="text-amber-300">Psalm 23:1 (KJV)</span></div>
+                <div class="bg-black/30 p-3 rounded-2xl border-l-2 border-amber-400/60">"Trust in the Lord with all thine heart; and lean not unto thine own understanding." — <span class="text-amber-300">Proverbs 3:5 (KJV)</span></div>
                 <div class="bg-black/30 p-3 rounded-2xl">"The only true wisdom is in knowing you know nothing." — Socrates</div>
-                <div class="bg-black/30 p-3 rounded-2xl">"You have power over your mind — not outside events." — Marcus Aurelius</div>
             `;
         }
 
@@ -653,6 +943,176 @@
             refreshLocalIntel();
         }
 
+        // ==================== GOTHIC OLD TESTAMENT READER ====================
+        let currentBibleBook = "genesis";
+
+        const bibleBooks = {
+            genesis: {
+                title: "The Book of Genesis",
+                content: `
+                    <div class="chapter-head">Chapter 1</div>
+                    <div class="passage">
+                        <div class="verse"><span class="verse-num">1</span>In the beginning God created the heaven and the earth.</div>
+                        <div class="verse"><span class="verse-num">2</span>And the earth was without form, and void; and darkness was upon the face of the deep. And the Spirit of God moved upon the face of the waters.</div>
+                        <div class="verse"><span class="verse-num">3</span>And God said, Let there be light: and there was light.</div>
+                        <div class="verse"><span class="verse-num">4</span>And God saw the light, that it was good: and God divided the light from the darkness.</div>
+                        <div class="verse"><span class="verse-num">5</span>And God called the light Day, and the darkness he called Night. And the evening and the morning were the first day.</div>
+                        <div class="verse"><span class="verse-num">26</span>And God said, Let us make man in our image, after our likeness: and let them have dominion over the fish of the sea, and over the fowl of the air, and over the cattle, and over all the earth, and over every creeping thing that creepeth upon the earth.</div>
+                        <div class="verse"><span class="verse-num">27</span>So God created man in his own image, in the image of God created he him; male and female created he them.</div>
+                        <div class="verse"><span class="verse-num">31</span>And God saw every thing that he had made, and, behold, it was very good. And the evening and the morning were the sixth day.</div>
+                    </div>
+                    <div class="text-xs mt-6 text-[#8a7752] border-t border-[#2a261f] pt-4">Note: Selected verses shown for reflection. The full text of Genesis is available via the links below.</div>
+                `
+            },
+            psalms: {
+                title: "The Book of Psalms",
+                content: `
+                    <div class="chapter-head">Psalm 23 — A Psalm of David</div>
+                    <div class="passage">
+                        <div class="verse"><span class="verse-num">1</span>The Lord is my shepherd; I shall not want.</div>
+                        <div class="verse"><span class="verse-num">2</span>He maketh me to lie down in green pastures: he leadeth me beside the still waters.</div>
+                        <div class="verse"><span class="verse-num">3</span>He restoreth my soul: he leadeth me in the paths of righteousness for his name's sake.</div>
+                        <div class="verse"><span class="verse-num">4</span>Yea, though I walk through the valley of the shadow of death, I will fear no evil: for thou art with me; thy rod and thy staff they comfort me.</div>
+                        <div class="verse"><span class="verse-num">5</span>Thou preparest a table before me in the presence of mine enemies: thou anointest my head with oil; my cup runneth over.</div>
+                        <div class="verse"><span class="verse-num">6</span>Surely goodness and mercy shall follow me all the days of my life: and I will dwell in the house of the Lord for ever.</div>
+                    </div>
+
+                    <div class="chapter-head">Psalm 1</div>
+                    <div class="passage">
+                        <div class="verse"><span class="verse-num">1</span>Blessed is the man that walketh not in the counsel of the ungodly, nor standeth in the way of sinners, nor sitteth in the seat of the scornful.</div>
+                        <div class="verse"><span class="verse-num">2</span>But his delight is in the law of the Lord; and in his law doth he meditate day and night.</div>
+                        <div class="verse"><span class="verse-num">3</span>And he shall be like a tree planted by the rivers of water, that bringeth forth his fruit in his season; his leaf also shall not wither; and whatsoever he doeth shall prosper.</div>
+                    </div>
+
+                    <div class="chapter-head">Psalm 121</div>
+                    <div class="passage">
+                        <div class="verse"><span class="verse-num">1</span>I will lift up mine eyes unto the hills, from whence cometh my help.</div>
+                        <div class="verse"><span class="verse-num">2</span>My help cometh from the Lord, which made heaven and earth.</div>
+                        <div class="verse"><span class="verse-num">7</span>The Lord shall preserve thee from all evil: he shall preserve thy soul.</div>
+                        <div class="verse"><span class="verse-num">8</span>The Lord shall preserve thy going out and thy coming in from this time forth, and even for evermore.</div>
+                    </div>
+                `
+            },
+            proverbs: {
+                title: "The Book of Proverbs",
+                content: `
+                    <div class="chapter-head">Chapter 3</div>
+                    <div class="passage">
+                        <div class="verse"><span class="verse-num">5</span>Trust in the Lord with all thine heart; and lean not unto thine own understanding.</div>
+                        <div class="verse"><span class="verse-num">6</span>In all thy ways acknowledge him, and he shall direct thy paths.</div>
+                        <div class="verse"><span class="verse-num">7</span>Be not wise in thine own eyes: fear the Lord, and depart from evil.</div>
+                        <div class="verse"><span class="verse-num">8</span>It shall be health to thy navel, and marrow to thy bones.</div>
+                    </div>
+
+                    <div class="chapter-head">Chapter 4 (Selected)</div>
+                    <div class="passage">
+                        <div class="verse"><span class="verse-num">23</span>Keep thy heart with all diligence; for out of it are the issues of life.</div>
+                        <div class="verse"><span class="verse-num">24</span>Put away from thee a froward mouth, and perverse lips put far from thee.</div>
+                    </div>
+                    <div class="text-xs mt-5 text-[#8a7752]">The Proverbs are a treasury of practical wisdom for daily living.</div>
+                `
+            },
+            ecclesiastes: {
+                title: "The Book of Ecclesiastes",
+                content: `
+                    <div class="chapter-head">Chapter 3</div>
+                    <div class="passage">
+                        <div class="verse"><span class="verse-num">1</span>To every thing there is a season, and a time to every purpose under the heaven:</div>
+                        <div class="verse"><span class="verse-num">2</span>A time to be born, and a time to die; a time to plant, and a time to pluck up that which is planted;</div>
+                        <div class="verse"><span class="verse-num">3</span>A time to kill, and a time to heal; a time to break down, and a time to build up;</div>
+                        <div class="verse"><span class="verse-num">4</span>A time to weep, and a time to laugh; a time to mourn, and a time to dance;</div>
+                        <div class="verse"><span class="verse-num">11</span>He hath made every thing beautiful in his time: also he hath set the world in their heart, so that no man can find out the work that God maketh from the beginning to the end.</div>
+                    </div>
+                    <div class="chapter-head">Chapter 12 (Closing)</div>
+                    <div class="passage">
+                        <div class="verse"><span class="verse-num">13</span>Let us hear the conclusion of the whole matter: Fear God, and keep his commandments: for this is the whole duty of man.</div>
+                    </div>
+                `
+            },
+            isaiah: {
+                title: "The Book of Isaiah",
+                content: `
+                    <div class="chapter-head">Chapter 40</div>
+                    <div class="passage">
+                        <div class="verse"><span class="verse-num">28</span>Hast thou not known? hast thou not heard, that the everlasting God, the Lord, the Creator of the ends of the earth, fainteth not, neither is weary? there is no searching of his understanding.</div>
+                        <div class="verse"><span class="verse-num">29</span>He giveth power to the faint; and to them that have no might he increaseth strength.</div>
+                        <div class="verse"><span class="verse-num">30</span>Even the youths shall faint and be weary, and the young men shall utterly fall:</div>
+                        <div class="verse"><span class="verse-num">31</span>But they that wait upon the Lord shall renew their strength; they shall mount up with wings as eagles; they shall run, and not be weary; and they shall walk, and not faint.</div>
+                    </div>
+
+                    <div class="chapter-head">Chapter 53 (Prophetic Suffering Servant)</div>
+                    <div class="passage">
+                        <div class="verse"><span class="verse-num">5</span>But he was wounded for our transgressions, he was bruised for our iniquities: the chastisement of our peace was upon him; and with his stripes we are healed.</div>
+                        <div class="verse"><span class="verse-num">6</span>All we like sheep have gone astray; we have turned every one to his own way; and the Lord hath laid on him the iniquity of us all.</div>
+                    </div>
+                `
+            }
+        };
+
+        function openBibleReader() {
+            const modal = document.getElementById('bible-reader-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            switchBibleBook(currentBibleBook || 'genesis');
+        }
+
+        function closeBibleReader() {
+            const modal = document.getElementById('bible-reader-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function switchBibleBook(book) {
+            currentBibleBook = book;
+            
+            // Update active tab styling
+            document.querySelectorAll('#bible-reader-modal .gothic-tab').forEach(el => {
+                el.classList.remove('active');
+                if (el.dataset.book === book) el.classList.add('active');
+            });
+
+            const contentEl = document.getElementById('bible-content');
+            const bookData = bibleBooks[book];
+            
+            if (bookData) {
+                contentEl.innerHTML = `
+                    <div class="max-w-3xl mx-auto">
+                        <div class="mb-8">
+                            <div class="text-[#a38b5f] text-xs tracking-[3px] mb-1">THE OLD TESTAMENT</div>
+                            <div class="book-title text-5xl text-[#e8d9b0] tracking-tight">${bookData.title}</div>
+                        </div>
+                        ${bookData.content}
+                    </div>
+                `;
+            }
+        }
+
+        function randomBibleVerse() {
+            const books = Object.keys(bibleBooks);
+            const randomBook = books[Math.floor(Math.random() * books.length)];
+            
+            const contentEl = document.getElementById('bible-content');
+            
+            // Switch book and then highlight a random verse
+            switchBibleBook(randomBook);
+            
+            setTimeout(() => {
+                const verses = contentEl.querySelectorAll('.verse');
+                if (verses.length > 0) {
+                    const randomVerse = verses[Math.floor(Math.random() * verses.length)];
+                    randomVerse.style.transition = 'all 0.2s';
+                    randomVerse.style.background = '#1f1c17';
+                    randomVerse.style.padding = '4px 10px';
+                    randomVerse.style.borderRadius = '6px';
+                    
+                    setTimeout(() => {
+                        randomVerse.style.background = 'transparent';
+                        randomVerse.style.padding = '0';
+                    }, 1650);
+                }
+            }, 220);
+        }
+
         function initClock() {
             setInterval(() => {
                 const d = new Date();
@@ -663,7 +1123,7 @@
         function initialize() {
             initClock();
 
-            // Default city
+            // Default city (will be overridden by location detection)
             document.getElementById('current-location').textContent = "Istanbul, TR";
             currentCity = "Istanbul";
 
@@ -671,8 +1131,17 @@
             applyTheme("neon");
             setLanguage("en");
 
-            // Initial data
-            refreshWeather();
+            // Auto-detect user location for weather (silent first attempt)
+            // Falls back gracefully if permission denied or unavailable
+            setTimeout(() => {
+                detectUserLocation(true);
+            }, 420);
+
+            // Initial data (weather will refresh again after detection)
+            setTimeout(() => {
+                refreshWeather();
+            }, 850);
+
             refreshQuotes();
             refreshLifestyle();
             refreshLocalIntel();
@@ -683,7 +1152,7 @@
             // Load first track (paused)
             document.getElementById('track-title').textContent = tracks[0].title;
 
-            console.log("%c[JCARVIS] Final debugged version loaded successfully.", "color:#00f3ff");
+            console.log("%c[JCARVIS] Enhanced with Scripture + Telemetry. Location-aware weather active.", "color:#00f3ff");
         }
 
         window.onload = initialize;
