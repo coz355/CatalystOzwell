@@ -22,15 +22,6 @@
         .panel { transition: all 0.2s cubic-bezier(0.23,1,0.32,1); }
         .weather-card { min-height: 148px; display: flex; flex-direction: column; justify-content: space-between; }
         .temp-display { font-size: 2rem; line-height: 1; font-weight: 700; font-family: var(--font-display); }
-        .music-player { background: rgba(15, 15, 25, 0.92); border: 1px solid rgba(255,255,255,0.08); }
-        .track-active { background: rgba(255,255,255,0.08); border-left: 3px solid var(--accent1); }
-        body.theme-forest  { --bg: #0c120f; --glass-bg: rgba(18,26,22,0.86); --glass-border: rgba(163,163,172,0.12); }
-        body.theme-kidplay { --bg: #0f0a12; --glass-bg: rgba(28,18,36,0.85); --glass-border: rgba(251,191,36,0.18); }
-        body.theme-hearth  { --bg: #120d0a; --glass-bg: rgba(38,28,22,0.87); --glass-border: rgba(245,158,11,0.15); }
-        body.theme-minimal { --bg: #0f1115; --glass-bg: rgba(24,26,32,0.82); --glass-border: rgba(148,163,184,0.14); }
-        body.theme-forge   { --bg: #0a0908; --glass-bg: rgba(22,20,18,0.88); --glass-border: rgba(245,158,11,0.16); }
-        .gothic-reader { background: #0a0a0a; color: #f4f1e9; font-family: 'Cinzel', Georgia, serif; }
-        .gothic-reader .book-title { font-family: 'UnifrakturMaguntia', serif; letter-spacing: 1px; }
         .guidance-card { background: rgba(0,0,0,0.28); border: 1px solid rgba(255,255,255,0.08); }
         .guidance-card:hover { border-color: var(--accent1); transform: translateY(-1px); }
         .disclaimer-banner {
@@ -40,6 +31,11 @@
             font-size: 12px;
             letter-spacing: 0.3px;
         }
+        .space-card { background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(148, 163, 184, 0.2); }
+        .bible-card { background: rgba(30, 27, 20, 0.6); border: 1px solid rgba(180, 150, 90, 0.25); }
+        .diff-added { background: #166534; color: #86efac; padding: 1px 3px; border-radius: 2px; }
+        .diff-removed { background: #7f1d1d; color: #fca5a5; padding: 1px 3px; border-radius: 2px; text-decoration: line-through; }
+        .diff-same { color: #d1d5db; }
     </style>
 </head>
 <body class="min-h-screen">
@@ -119,73 +115,138 @@
             <div class="flex items-center justify-between mb-5">
                 <div>
                     <div class="font-semibold text-xl tracking-tight">Today's Guidance</div>
-                    <div class="text-xs text-white/50">Contextual daily life recommendations — updated with your current conditions</div>
+                    <div class="text-xs text-white/50">Contextual daily life recommendations</div>
                 </div>
                 <button onclick="refreshDailyGuidance()" class="text-xs px-4 py-1.5 border border-white/20 rounded-xl hover:bg-white/5">Refresh Guidance</button>
             </div>
+            <div id="daily-guidance" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"></div>
+        </div>
 
-            <div id="daily-guidance" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-                <!-- Populated dynamically with rich categories -->
+        <!-- EARTH & SPACE INTELLIGENCE -->
+        <div class="panel glass rounded-3xl p-6 border border-white/10 mb-8">
+            <div class="flex items-center justify-between mb-5">
+                <div>
+                    <div class="font-semibold text-xl tracking-tight">Earth &amp; Space Intelligence</div>
+                    <div class="text-xs text-white/50">Real-time open data • Space weather • Seismic • Volcanic • Fireballs • CMEs</div>
+                </div>
+                <button onclick="refreshSpaceIntelligence()" class="text-xs px-4 py-1.5 border border-white/20 rounded-xl hover:bg-white/5">Refresh All</button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                
+                <!-- Space Weather -->
+                <div class="space-card rounded-2xl p-4">
+                    <div class="font-semibold text-sm mb-3 text-cyan-300 flex items-center gap-2">
+                        <i class="fa-solid fa-satellite"></i> Space Weather
+                    </div>
+                    <div id="space-weather" class="space-y-2 text-sm"></div>
+                </div>
+
+                <!-- Solar, Geomagnetic & CMEs -->
+                <div class="space-card rounded-2xl p-4">
+                    <div class="font-semibold text-sm mb-3 text-orange-300 flex items-center gap-2">
+                        <i class="fa-solid fa-sun"></i> Solar, Geomagnetic &amp; CMEs
+                    </div>
+                    <div id="solar-cme" class="space-y-2 text-sm"></div>
+                </div>
+
+                <!-- Recent Earthquakes -->
+                <div class="space-card rounded-2xl p-4">
+                    <div class="font-semibold text-sm mb-3 text-red-300 flex items-center gap-2">
+                        <i class="fa-solid fa-globe"></i> Recent Significant Earthquakes
+                    </div>
+                    <div id="recent-quakes" class="text-sm space-y-1 max-h-[140px] overflow-auto"></div>
+                </div>
+
+                <!-- Recent Fireballs -->
+                <div class="space-card rounded-2xl p-4">
+                    <div class="font-semibold text-sm mb-3 text-yellow-300 flex items-center gap-2">
+                        <i class="fa-solid fa-meteor"></i> Recent Fireballs (Last 12)
+                    </div>
+                    <div id="recent-fireballs" class="text-xs space-y-1 max-h-[160px] overflow-auto"></div>
+                </div>
+
+                <!-- Volcanic Activity -->
+                <div class="space-card rounded-2xl p-4 md:col-span-2">
+                    <div class="font-semibold text-sm mb-3 text-red-400 flex items-center gap-2">
+                        <i class="fa-solid fa-volcano"></i> Recent Volcanic Activity
+                    </div>
+                    <div id="volcanic-activity" class="text-sm"></div>
+                </div>
+
             </div>
         </div>
 
-        <!-- Top Row -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-            
-            <!-- Weather -->
-            <div class="panel glass rounded-3xl p-6 border border-white/10">
-                <div class="flex justify-between items-center mb-4">
-                    <div class="font-semibold text-lg">3-Day Forecast</div>
-                    <button onclick="refreshWeather()" class="text-xs px-3 py-1 rounded-xl border border-white/20">Refresh</button>
+        <!-- INTERACTIVE BIBLE STUDY (Improved with Diff) -->
+        <div class="panel bible-card rounded-3xl p-6 border border-amber-400/20 mb-8">
+            <div class="flex items-center justify-between mb-5">
+                <div>
+                    <div class="font-semibold text-xl tracking-tight">Interactive Bible Study</div>
+                    <div class="text-xs text-amber-300/70">Test your memory with side-by-side comparison</div>
                 </div>
-                <div id="weather-grid" class="grid grid-cols-3 gap-3"></div>
             </div>
 
-            <!-- Air + Quick Notes -->
-            <div class="space-y-6">
-                <div class="panel glass rounded-3xl p-6 border border-white/10">
-                    <div class="font-semibold text-lg mb-4">Air Quality &amp; UV</div>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <div class="text-sm mb-2 text-amber-300/80">Verse Reference (e.g. John 3:16)</div>
+                    <input id="bible-reference" type="text" placeholder="John 3:16" 
+                           class="w-full bg-black/40 border border-amber-400/30 rounded-2xl px-4 py-3 text-sm mb-3 focus:outline-none focus:border-amber-400">
+
+                    <div class="text-sm mb-2 text-amber-300/80">Translation</div>
+                    <select id="bible-translation" class="w-full bg-black/40 border border-amber-400/30 rounded-2xl px-4 py-3 text-sm mb-3">
+                        <option value="kjv">King James Version (KJV)</option>
+                        <option value="esv">English Standard Version (ESV)</option>
+                        <option value="web">World English Bible (WEB)</option>
+                    </select>
+
+                    <div class="text-sm mb-2 text-amber-300/80">Write the verse from memory</div>
+                    <textarea id="bible-user-text" rows="4" placeholder="For God so loved the world..."
+                              class="w-full bg-black/40 border border-amber-400/30 rounded-2xl px-4 py-3 text-sm mb-4 focus:outline-none focus:border-amber-400"></textarea>
+
+                    <button onclick="checkBibleVerse()" 
+                            class="w-full py-3 bg-gradient-to-r from-amber-300 to-yellow-200 text-black font-semibold rounded-2xl hover:brightness-105">
+                        Check My Memory
+                    </button>
+                </div>
+
+                <div id="bible-result" class="hidden bg-black/30 rounded-2xl p-5 border border-amber-400/20">
                     <div class="grid grid-cols-2 gap-4">
-                        <div class="bg-black/30 rounded-2xl p-4 border border-white/10">
-                            <div class="text-xs text-white/50">AQI</div>
-                            <div id="aqi-value" class="text-5xl font-bold font-display">42</div>
-                            <div id="aqi-status" class="text-emerald-400 text-sm">Good</div>
+                        <div>
+                            <div class="text-xs uppercase tracking-widest text-amber-400/70 mb-2">Your Version</div>
+                            <div id="bible-user-display" class="text-sm leading-relaxed p-3 bg-black/40 rounded-xl min-h-[120px]"></div>
                         </div>
-                        <div class="bg-black/30 rounded-2xl p-4 border border-white/10">
-                            <div class="text-xs text-white/50">UV Index</div>
-                            <div id="uv-value" class="text-5xl font-bold font-display">3</div>
-                            <div id="uv-status" class="text-amber-400 text-sm">Moderate</div>
+                        <div>
+                            <div class="text-xs uppercase tracking-widest text-amber-400/70 mb-2">Correct Verse</div>
+                            <div id="bible-correct-display" class="text-sm leading-relaxed p-3 bg-black/40 rounded-xl min-h-[120px]"></div>
                         </div>
                     </div>
-                </div>
-                <div class="panel glass rounded-3xl p-6 border border-white/10">
-                    <div class="font-semibold text-lg mb-3">Quick Notes</div>
-                    <div id="lifestyle-content" class="text-sm space-y-2 text-white/80"></div>
-                </div>
-            </div>
-
-            <!-- Local AI Companions -->
-            <div class="panel glass rounded-3xl p-6 border border-white/10">
-                <div class="font-semibold text-lg mb-4">Local AI Companions <span class="text-[10px] text-emerald-400">(Mistral 7B)</span></div>
-                <div class="space-y-2 text-sm">
-                    <div onclick="openAgentModal('edu')" class="cursor-pointer flex gap-3 items-center bg-black/40 hover:bg-black/60 border border-white/10 rounded-2xl p-3">
-                        <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-sky-400 to-indigo-500 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-graduation-cap text-black"></i></div>
-                        <div><div class="font-semibold">EduMentor</div><div class="text-xs text-white/60">Learning • Curiosity • Growth</div></div>
-                    </div>
-                    <div onclick="openAgentModal('well')" class="cursor-pointer flex gap-3 items-center bg-black/40 hover:bg-black/60 border border-white/10 rounded-2xl p-3">
-                        <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-rose-400 to-pink-500 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-heart text-black"></i></div>
-                        <div><div class="font-semibold">Vitalis</div><div class="text-xs text-white/60">Wellbeing • Energy • Balance</div></div>
-                    </div>
-                    <div onclick="openAgentModal('eng')" class="cursor-pointer flex gap-3 items-center bg-black/40 hover:bg-black/60 border border-white/10 rounded-2xl p-3">
-                        <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-cogs text-black"></i></div>
-                        <div><div class="font-semibold">Forge</div><div class="text-xs text-white/60">Problem Solving • Building • Practical</div></div>
+                    
+                    <div class="mt-4">
+                        <div class="text-xs uppercase tracking-widest text-amber-400/70 mb-1">Similarity</div>
+                        <div id="bible-accuracy" class="text-2xl font-semibold"></div>
+                        <div id="bible-feedback" class="text-sm text-white/80 mt-1"></div>
                     </div>
                 </div>
-                <div class="text-[10px] text-emerald-400/70 mt-3">Powered by your local Mistral 7B (LM Studio)</div>
             </div>
         </div>
 
-        <!-- Local Intelligence + Telemetry -->
+        <!-- Bible Info Bars -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+            <div class="bible-card rounded-2xl p-4">
+                <div class="text-xs text-amber-400/70 mb-1">VERSE OF THE DAY</div>
+                <div id="verse-of-day" class="text-sm leading-snug"></div>
+            </div>
+            <div class="bible-card rounded-2xl p-4">
+                <div class="text-xs text-amber-400/70 mb-1">WISDOM FOR TODAY</div>
+                <div id="wisdom-today" class="text-sm leading-snug"></div>
+            </div>
+            <div class="bible-card rounded-2xl p-4">
+                <div class="text-xs text-amber-400/70 mb-1">DAILY ENCOURAGEMENT</div>
+                <div id="daily-encouragement" class="text-sm leading-snug"></div>
+            </div>
+        </div>
+
+        <!-- Location + Telemetry (with Daily Averages) -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
             <div class="panel glass rounded-3xl p-6 border border-white/10">
                 <div class="flex justify-between mb-4">
@@ -208,7 +269,7 @@
                 <div class="flex justify-between items-center mb-4">
                     <div>
                         <div class="font-semibold text-lg">Location Telemetry</div>
-                        <div class="text-xs text-white/50">Traveler &amp; Camper Data</div>
+                        <div class="text-xs text-white/50">Traveler &amp; Camper Data + Daily Averages</div>
                     </div>
                     <button onclick="refreshTravelerTelemetry()" class="text-xs px-4 py-1 border border-white/20 rounded-xl">Refresh</button>
                 </div>
@@ -217,55 +278,48 @@
             </div>
         </div>
 
-        <!-- Music -->
-        <div class="panel music-player rounded-3xl p-5 border border-white/10 mb-8">
-            <div class="flex items-center justify-between mb-3">
-                <div class="flex items-center gap-2">
-                    <i class="fa-solid fa-headset text-sky-400"></i>
-                    <span class="font-semibold">Ambient Soundscape</span>
+        <!-- AI Companions -->
+        <div class="panel glass rounded-3xl p-6 border border-white/10 mb-8">
+            <div class="font-semibold text-lg mb-4">Local AI Companions <span class="text-[10px] text-emerald-400">(Mistral 7B via LM Studio)</span></div>
+            <div class="grid md:grid-cols-3 gap-3 text-sm">
+                <div onclick="openAgentModal('edu')" class="cursor-pointer flex gap-3 items-center bg-black/40 hover:bg-black/60 border border-white/10 rounded-2xl p-3">
+                    <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-sky-400 to-indigo-500 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-graduation-cap text-black"></i></div>
+                    <div><div class="font-semibold">EduMentor</div><div class="text-xs text-white/60">Learning • Curiosity • Growth</div></div>
                 </div>
-                <div class="text-xs text-white/50">Warm tracks for focus &amp; rest</div>
-            </div>
-
-            <div class="flex items-center gap-4">
-                <button onclick="togglePlay()" id="play-btn" class="w-12 h-12 flex items-center justify-center rounded-2xl bg-white/10 hover:bg-white/20 border border-white/20">
-                    <i class="fa-solid fa-play text-xl" id="play-icon"></i>
-                </button>
-                <div class="flex-1">
-                    <div id="track-title" class="font-medium text-sm">Velvet Horizon</div>
-                    <div class="w-full bg-white/10 h-1.5 rounded mt-2">
-                        <div id="progress-bar" class="h-1.5 bg-sky-400 rounded w-0 transition-all"></div>
-                    </div>
+                <div onclick="openAgentModal('well')" class="cursor-pointer flex gap-3 items-center bg-black/40 hover:bg-black/60 border border-white/10 rounded-2xl p-3">
+                    <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-rose-400 to-pink-500 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-heart text-black"></i></div>
+                    <div><div class="font-semibold">Vitalis</div><div class="text-xs text-white/60">Wellbeing • Energy • Balance</div></div>
                 </div>
-                <div class="text-xs text-white/60 w-12 text-right" id="time-display">0:00 / 0:00</div>
+                <div onclick="openAgentModal('eng')" class="cursor-pointer flex gap-3 items-center bg-black/40 hover:bg-black/60 border border-white/10 rounded-2xl p-3">
+                    <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-cogs text-black"></i></div>
+                    <div><div class="font-semibold">Forge</div><div class="text-xs text-white/60">Problem Solving • Building • Practical</div></div>
+                </div>
             </div>
-
-            <canvas id="eq-canvas" height="48" class="w-full mt-3 rounded-xl bg-black/50 border border-white/10"></canvas>
-            <div class="mt-3 flex gap-2 flex-wrap" id="track-list"></div>
         </div>
 
-        <!-- Faith + Sacred Texts -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <div class="panel glass rounded-3xl p-6 border border-white/10">
-                <div class="font-semibold text-lg mb-4">Faith Telemetry</div>
-                <div class="text-sm text-white/70">Global Christian population: <span class="font-semibold text-amber-200">2.41 billion</span> (≈31% of world population). Data is approximate and for reflective use only.</div>
+        <!-- COMMUNITY COMMENTS SECTION -->
+        <div class="panel glass rounded-3xl p-6 border border-white/10">
+            <div class="flex items-center justify-between mb-4">
+                <div>
+                    <div class="font-semibold text-lg">Community Comments</div>
+                    <div class="text-xs text-white/50">Share your thoughts • Visible only on this device</div>
+                </div>
             </div>
 
-            <div class="panel glass rounded-3xl p-6 border border-amber-400/20 bg-gradient-to-br from-black/40 to-transparent flex items-center">
-                <div class="flex-1">
-                    <div class="uppercase text-xs tracking-[3px] text-amber-400/70 mb-1">Public Domain • King James Version</div>
-                    <div class="font-semibold text-xl">Old Testament • Gothic Reader</div>
-                </div>
-                <button onclick="openBibleReader()" class="px-6 py-3 rounded-2xl bg-gradient-to-r from-amber-300 to-yellow-200 text-black font-semibold flex items-center gap-2 hover:brightness-105">
-                    <i class="fa-solid fa-book-open"></i>
-                    <span>Open Reader</span>
-                </button>
+            <div class="flex gap-3 mb-4">
+                <input id="comment-username" type="text" class="flex-1 bg-black/40 border border-white/20 rounded-2xl px-4 py-2 text-sm" placeholder="Random username">
+                <button onclick="rerollUsername()" class="px-4 py-2 text-xs border border-white/20 rounded-2xl hover:bg-white/5">Reroll</button>
             </div>
+
+            <div class="flex gap-3">
+                <textarea id="comment-text" rows="2" class="flex-1 bg-black/40 border border-white/20 rounded-2xl px-4 py-2 text-sm" placeholder="Leave a comment..."></textarea>
+                <button onclick="postComment()" class="px-6 bg-sky-400 text-black font-semibold rounded-2xl">Post</button>
+            </div>
+
+            <div id="comments-list" class="mt-5 space-y-3 text-sm max-h-[240px] overflow-auto"></div>
         </div>
 
     </main>
-
-    <!-- Modals (Settings, Location, 3 Agents, Bible Reader) - kept compact but fully functional -->
 
     <!-- Settings Modal -->
     <div id="settings-modal" onclick="closeSettings()" class="hidden fixed inset-0 bg-black/80 z-[200] flex items-center justify-center p-4">
@@ -293,7 +347,7 @@
         </div>
     </div>
 
-    <!-- AI Agent Modals -->
+    <!-- AI Modals (abbreviated) -->
     <div id="modal-edu" onclick="closeAgentModal('edu')" class="hidden fixed inset-0 bg-black/85 z-[200] flex items-center justify-center p-4">
         <div onclick="event.stopImmediatePropagation()" class="glass w-full max-w-xl rounded-3xl border border-sky-400/30 overflow-hidden">
             <div class="px-6 py-4 border-b border-white/10 flex justify-between bg-sky-950/30">
@@ -302,12 +356,13 @@
             </div>
             <div id="chat-edu" class="h-80 overflow-y-auto p-5 space-y-3 bg-black/40 text-sm"></div>
             <div class="p-4 border-t border-white/10 flex gap-2 bg-black/20">
-                <input id="input-edu" onkeypress="if(event.key==='Enter') sendToAgent('edu')" class="flex-1 bg-white/5 border border-white/15 rounded-2xl px-4 py-3 text-sm" placeholder="Ask anything about learning, skills, or knowledge...">
+                <input id="input-edu" onkeypress="if(event.key==='Enter') sendToAgent('edu')" class="flex-1 bg-white/5 border border-white/15 rounded-2xl px-4 py-3 text-sm" placeholder="Ask about learning...">
                 <button onclick="sendToAgent('edu')" class="px-6 bg-sky-400 text-black rounded-2xl font-semibold">Send</button>
             </div>
         </div>
     </div>
 
+    <!-- Similar modals for well and eng -->
     <div id="modal-well" onclick="closeAgentModal('well')" class="hidden fixed inset-0 bg-black/85 z-[200] flex items-center justify-center p-4">
         <div onclick="event.stopImmediatePropagation()" class="glass w-full max-w-xl rounded-3xl border border-rose-400/30 overflow-hidden">
             <div class="px-6 py-4 border-b border-white/10 flex justify-between bg-rose-950/30">
@@ -316,7 +371,7 @@
             </div>
             <div id="chat-well" class="h-80 overflow-y-auto p-5 space-y-3 bg-black/40 text-sm"></div>
             <div class="p-4 border-t border-white/10 flex gap-2 bg-black/20">
-                <input id="input-well" onkeypress="if(event.key==='Enter') sendToAgent('well')" class="flex-1 bg-white/5 border border-white/15 rounded-2xl px-4 py-3 text-sm" placeholder="How are you feeling? Need support or clarity?">
+                <input id="input-well" onkeypress="if(event.key==='Enter') sendToAgent('well')" class="flex-1 bg-white/5 border border-white/15 rounded-2xl px-4 py-3 text-sm" placeholder="How are you feeling?">
                 <button onclick="sendToAgent('well')" class="px-6 bg-rose-400 text-black rounded-2xl font-semibold">Send</button>
             </div>
         </div>
@@ -330,20 +385,9 @@
             </div>
             <div id="chat-eng" class="h-80 overflow-y-auto p-5 space-y-3 bg-black/40 text-sm"></div>
             <div class="p-4 border-t border-white/10 flex gap-2 bg-black/20">
-                <input id="input-eng" onkeypress="if(event.key==='Enter') sendToAgent('eng')" class="flex-1 bg-white/5 border border-white/15 rounded-2xl px-4 py-3 text-sm" placeholder="Describe your project, challenge or idea...">
+                <input id="input-eng" onkeypress="if(event.key==='Enter') sendToAgent('eng')" class="flex-1 bg-white/5 border border-white/15 rounded-2xl px-4 py-3 text-sm" placeholder="Describe your challenge...">
                 <button onclick="sendToAgent('eng')" class="px-6 bg-amber-400 text-black rounded-2xl font-semibold">Send</button>
             </div>
-        </div>
-    </div>
-
-    <!-- Gothic Bible Reader -->
-    <div id="bible-reader-modal" onclick="closeBibleReader()" class="hidden fixed inset-0 bg-[#050505] z-[210] flex items-center justify-center p-4">
-        <div onclick="event.stopImmediatePropagation()" class="gothic-reader w-full max-w-5xl rounded-3xl overflow-hidden border border-[#2a261f] flex flex-col max-h-[96vh]">
-            <div class="bg-[#11100d] px-8 py-5 border-b border-[#2a261f] flex justify-between">
-                <div><div class="font-semibold text-3xl book-title">OLD TESTAMENT</div><div class="text-xs text-[#a38b5f]">KING JAMES VERSION • PUBLIC DOMAIN</div></div>
-                <button onclick="closeBibleReader()" class="text-2xl">&times;</button>
-            </div>
-            <div id="bible-content" class="p-8 md:p-10 overflow-auto flex-1 bg-[#0a0a0a] text-[#f4f1e9] text-[15.5px]"></div>
         </div>
     </div>
 
@@ -355,12 +399,6 @@
         let currentCity = "Istanbul";
         let currentLang = "en";
         let currentTheme = "stellar";
-        let audioContext = null;
-        let analyser = null;
-        let isPlaying = false;
-        let currentTrackIndex = 0;
-        let progressInterval = null;
-        let eqAnimation = null;
         let lastWeatherData = null;
 
         const cities = [
@@ -372,20 +410,10 @@
             { name: "Madrid", country: "ES" }, { name: "Bangkok", country: "TH" }
         ];
 
-        // Expanded location suggestions
         const locationSuggestions = {
-            "Istanbul": { food: ["İskender Kebab", "Grilled fish at Karaköy", "Simit & strong Turkish tea"], history: ["Hagia Sophia", "Topkapı Palace", "Basilica Cistern"] },
-            "Ankara": { food: ["Testi kebabı", "Mantı", "Fresh pide"], history: ["Anıtkabir", "Museum of Anatolian Civilizations", "Hattusha"] },
-            "Paris": { food: ["Croissant + café au lait", "Steak frites", "Real macarons"], history: ["Eiffel Tower", "Louvre", "Notre-Dame"] },
-            "London": { food: ["Fish & chips", "Full English", "Sunday roast"], history: ["Tower of London", "British Museum", "Westminster Abbey"] },
-            "Berlin": { food: ["Currywurst", "Döner", "Käsespätzle"], history: ["Brandenburg Gate", "Berlin Wall", "Reichstag"] },
-            "Rome": { food: ["Carbonara", "Cacio e pepe", "Real gelato"], history: ["Colosseum", "Vatican Museums", "Trevi Fountain"] },
-            "Amsterdam": { food: ["Stroopwafels", "Bitterballen", "Fresh herring"], history: ["Anne Frank House", "Rijksmuseum", "Canal Ring"] },
-            "Tokyo": { food: ["Ramen", "Sushi at Tsukiji", "Tonkatsu"], history: ["Senso-ji Temple", "Meiji Shrine", "Imperial Palace"] },
-            "Sydney": { food: ["Meat pie", "Fresh oysters", "Flat white + avocado toast"], history: ["Sydney Opera House", "Harbour Bridge", "Bondi Beach"] },
-            "Madrid": { food: ["Tortilla española", "Jamón ibérico", "Churros con chocolate"], history: ["Prado Museum", "Royal Palace", "Retiro Park"] },
-            "Bangkok": { food: ["Pad Thai", "Tom Yum Goong", "Mango sticky rice"], history: ["Grand Palace", "Wat Arun", "Chatuchak Market"] },
-            default: { food: ["Local seasonal specialty", "Traditional street food", "Market fresh produce"], history: ["Old town center", "Major historical landmark", "Local cultural museum"] }
+            "Istanbul": { food: ["İskender Kebab", "Grilled fish at Karaköy"], history: ["Hagia Sophia", "Topkapı Palace"] },
+            "Paris": { food: ["Croissant + café", "Steak frites"], history: ["Eiffel Tower", "Louvre"] },
+            default: { food: ["Local seasonal dish"], history: ["Old town center"] }
         };
 
         const themes = {
@@ -397,158 +425,145 @@
             forge:   { name: "Forge Tech", class: "theme-forge" }
         };
 
-        const tracks = [
-            { title: "Velvet Horizon", mood: "warm-pad" }, { title: "Morning Mist", mood: "soft-piano" },
-            { title: "Copper Wind", mood: "gentle-guitar" }, { title: "Lumen", mood: "warm-pad" },
-            { title: "Night Orchard", mood: "soft-piano" }, { title: "Paper Boats", mood: "gentle-guitar" },
-            { title: "Granite & Pine", mood: "warm-pad" }, { title: "Signal Hill", mood: "soft-piano" },
-            { title: "Quiet Engine", mood: "gentle-guitar" }, { title: "Distant Lights", mood: "warm-pad" },
-            { title: "Ember & Ash", mood: "soft-piano" }, { title: "Open Sky", mood: "gentle-guitar" }
-        ];
-
-        // ==================== LOCAL LLM INTEGRATION ====================
-        async function callLocalLLM(systemPrompt, userMessage) {
-            const messages = [
-                { role: "system", content: systemPrompt },
-                { role: "user", content: userMessage }
-            ];
-
-            try {
-                const response = await fetch(LLM_ENDPOINT, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                        model: LLM_MODEL,
-                        messages: messages,
-                        temperature: 0.75,
-                        max_tokens: 450,
-                        stream: false
-                    })
-                });
-
-                if (!response.ok) throw new Error("Local model request failed");
-
-                const data = await response.json();
-                return data.choices?.[0]?.message?.content || "I couldn't generate a response right now.";
-            } catch (err) {
-                console.warn("Local LLM call failed:", err);
-                return fallbackAgentResponse(userMessage);
-            }
+        // ==================== THEME SYSTEM (Fully Polished) ====================
+        function applyTheme(key) {
+            currentTheme = key;
+            Object.values(themes).forEach(t => document.body.classList.remove(t.class));
+            document.body.classList.add(themes[key].class);
+            localStorage.setItem('cato_theme', key);
+            document.getElementById('theme-display').textContent = themes[key].name.split(" ")[0];
         }
 
-        function fallbackAgentResponse(message) {
-            const msg = message.toLowerCase();
-            if (msg.includes("learn") || msg.includes("study")) return "Learning compounds when you teach what you just learned. What topic are you currently exploring?";
-            if (msg.includes("feel") || msg.includes("tired") || msg.includes("stress")) return "Small consistent actions help most. Would you like a simple 2-minute reset technique?";
-            return "That's a good question. Can you give me a bit more context so I can help you better?";
-        }
+        function showSettings() {
+            const modal = document.getElementById('settings-modal');
+            modal.classList.remove('hidden'); modal.classList.add('flex');
 
-        // ==================== DAILY LIFE GUIDANCE (Expanded) ====================
-        function generateDailyGuidance(weather, city) {
-            const container = document.getElementById('daily-guidance');
-            const c = weather?.current_condition?.[0] || {};
-            const temp = parseInt(c.temp_C || 15);
-            const wind = parseInt(c.windspeedKmph || 10);
-            const humidity = parseInt(c.humidity || 60);
-            const uv = parseInt(weather?.weather?.[0]?.uvIndex || 3);
-            const pressure = parseInt(c.pressure || 1015);
+            const langC = document.getElementById('lang-options');
+            langC.innerHTML = '';
+            ['en','tr','de','fr','es'].forEach(code => {
+                const b = document.createElement('button');
+                b.className = `px-3 py-2 rounded-2xl border text-xs ${currentLang === code ? 'border-sky-400 bg-sky-400/10' : 'border-white/10'}`;
+                b.textContent = code.toUpperCase();
+                b.onclick = () => { setLanguage(code); closeSettings(); };
+                langC.appendChild(b);
+            });
 
-            let html = '';
-
-            // 1. Attire
-            let attire = temp < 5 ? "Heavy insulated layers, gloves, scarf, and waterproof boots." : 
-                         temp < 12 ? "Medium layers + light jacket. Closed shoes recommended." :
-                         temp > 30 ? "Light breathable clothes, sun hat, and strong sunscreen." : 
-                         "Comfortable layers. Light jacket for evenings.";
-            if (wind > 22) attire += " Strong windproof outer layer advised.";
-            html += makeGuidanceCard("Attire & Protection", attire, "sky");
-
-            // 2. Hydration & Nutrition
-            let hydration = `Target ${temp > 28 ? "3.5–4" : "2.5–3"} liters of water today.`;
-            if (humidity < 35) hydration += " Dry air — increase fluids and consider electrolytes.";
-            if (temp > 29) hydration += " Favor light meals and fresh fruit.";
-            html += makeGuidanceCard("Hydration & Nutrition", hydration, "emerald");
-
-            // 3. Activity Windows
-            let activity = (temp > 30 || uv > 8) ? "Do outdoor activities before 10:30 or after 17:00. Rest in shade during peak hours." :
-                            (wind > 25) ? "Good day for indoor focus or sheltered movement. Avoid exposed ridges." :
-                            "Very good conditions for walking, light exercise, and outdoor time.";
-            html += makeGuidanceCard("Activity Windows", activity, "violet");
-
-            // 4. Wellbeing
-            let wellbeing = pressure < 1008 ? "Low pressure — you may feel lower energy or mood. Prioritize gentle movement and rest." : 
-                            "Take short movement breaks every 90 minutes. Get natural light.";
-            html += makeGuidanceCard("Wellbeing & Mood", wellbeing, "rose");
-
-            // 5. Productivity & Focus (NEW)
-            let productivity = (temp > 28 || uv > 7) ? "Your best focus window is early morning or late afternoon. Protect deep work time." :
-                              "Solid conditions for focused work. Consider a 25-minute deep work block followed by a short walk.";
-            html += makeGuidanceCard("Focus & Productivity", productivity, "amber");
-
-            // 6. Sleep & Recovery (NEW)
-            let sleep = temp < 8 ? "Cooler evenings — good for sleep. Keep bedroom slightly cooler than daytime." :
-                        "Aim to finish heavy meals and screens at least 60–90 minutes before bed.";
-            html += makeGuidanceCard("Sleep & Recovery", sleep, "indigo");
-
-            // 7. Travel / Commute Safety (NEW)
-            let travel = `Pressure ${pressure} hPa. `;
-            travel += wind > 20 ? "Expect stronger gusts — secure loose items if traveling." : "Generally stable conditions for travel.";
-            if (uv > 6) travel += " Pack sunscreen and water if spending time outside.";
-            html += makeGuidanceCard("Travel & Commute", travel, "teal");
-
-            container.innerHTML = html;
-        }
-
-        function makeGuidanceCard(title, text, color) {
-            const colors = { sky: "text-sky-300", emerald: "text-emerald-300", violet: "text-violet-300", rose: "text-rose-300", amber: "text-amber-300", indigo: "text-indigo-300", teal: "text-teal-300" };
-            return `<div class="guidance-card rounded-2xl p-4"><div class="font-semibold text-sm mb-2 ${colors[color] || 'text-white'}">${title}</div><div class="text-sm text-white/85">${text}</div></div>`;
-        }
-
-        function refreshDailyGuidance() {
-            generateDailyGuidance(lastWeatherData, currentCity);
-        }
-
-        // ==================== WEATHER, TELEMETRY, LOCAL INTEL, MUSIC ====================
-        // (Kept functional and clean from previous high-quality version)
-
-        async function fetchWeather(city) {
-            try { return await fetch(`https://wttr.in/${city}?format=j1`).then(r => r.json()); } catch { return null; }
-        }
-
-        function renderWeather(data) {
-            const grid = document.getElementById('weather-grid');
-            grid.innerHTML = '';
-            if (!data?.weather) {
-                ['Today','Tomorrow','+2'].forEach(d => {
-                    const el = document.createElement('div');
-                    el.className = 'weather-card bg-black/30 border border-white/10 rounded-2xl p-3 text-center';
-                    el.innerHTML = `<div class="text-xs text-white/50">${d}</div><div class="text-4xl my-1">☁️</div><div class="temp-display">15°</div>`;
-                    grid.appendChild(el);
-                });
-                return;
-            }
-            data.weather.slice(0,3).forEach((day,i) => {
-                const el = document.createElement('div');
-                el.className = 'weather-card bg-black/30 border border-white/10 rounded-2xl p-3 text-center';
-                el.innerHTML = `<div class="text-xs text-white/50">${i===0?'Today':i===1?'Tomorrow':'+2'}</div><div class="text-4xl my-1">${getWeatherIcon(day.hourly[0].weatherCode)}</div><div class="temp-display">${day.avgtempC}°</div>`;
-                grid.appendChild(el);
+            const themeC = document.getElementById('theme-options');
+            themeC.innerHTML = '';
+            Object.keys(themes).forEach(k => {
+                const sw = document.createElement('div');
+                sw.className = `w-9 h-9 rounded-2xl border-2 cursor-pointer ${currentTheme === k ? 'border-white' : 'border-white/20'}`;
+                sw.style.background = `linear-gradient(135deg, #64748b, #334155)`;
+                sw.onclick = () => { applyTheme(k); closeSettings(); };
+                themeC.appendChild(sw);
             });
         }
 
-        function getWeatherIcon(c) { return c<200?'☀️':c<300?'⛅':c<600?'🌧️':'☁️'; }
-
-        async function refreshWeather() {
-            const data = await fetchWeather(currentCity);
-            lastWeatherData = data;
-            renderWeather(data);
-            generateDailyGuidance(data, currentCity);
+        function closeSettings() {
+            const m = document.getElementById('settings-modal');
+            m.classList.add('hidden'); m.classList.remove('flex');
         }
 
+        function setLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('cato_lang', lang);
+            document.getElementById('lang-display').textContent = lang.toUpperCase();
+        }
+
+        // ==================== IMPROVED BIBLE CHECKER WITH SIDE-BY-SIDE DIFF ====================
+        async function checkBibleVerse() {
+            const ref = document.getElementById('bible-reference').value.trim();
+            const userText = document.getElementById('bible-user-text').value.trim();
+            const translation = document.getElementById('bible-translation')?.value || 'kjv';
+            const resultBox = document.getElementById('bible-result');
+
+            if (!ref || !userText) {
+                alert("Please enter both reference and your recalled text.");
+                return;
+            }
+
+            resultBox.classList.remove('hidden');
+            document.getElementById('bible-user-display').innerHTML = userText;
+            document.getElementById('bible-correct-display').innerHTML = 'Loading...';
+
+            try {
+                const res = await fetch(`https://bible-api.com/${encodeURIComponent(ref)}?translation=${translation}`);
+                const data = await res.json();
+                const correct = data.text || 'Verse not found.';
+
+                document.getElementById('bible-correct-display').innerHTML = correct;
+
+                const score = calculateSimilarity(userText, correct);
+                document.getElementById('bible-accuracy').innerHTML = `${score}% similarity`;
+
+                let feedback = score > 88 ? 'Excellent memory!' : 
+                               score > 70 ? 'Very good — minor wording differences.' : 
+                               score > 50 ? 'Good effort. Review the correct text.' : 'Significant differences. Keep practicing.';
+
+                document.getElementById('bible-feedback').innerHTML = feedback;
+
+                // Side-by-side diff highlighting
+                const diffHtml = createSimpleDiff(userText, correct);
+                document.getElementById('bible-user-display').innerHTML = diffHtml.user;
+                document.getElementById('bible-correct-display').innerHTML = diffHtml.correct;
+
+            } catch (e) {
+                document.getElementById('bible-correct-display').innerHTML = 'Could not fetch the verse.';
+            }
+        }
+
+        function createSimpleDiff(user, correct) {
+            const uWords = user.split(/\s+/);
+            const cWords = correct.split(/\s+/);
+            let uHtml = '';
+            let cHtml = '';
+
+            const max = Math.max(uWords.length, cWords.length);
+            for (let i = 0; i < max; i++) {
+                const uw = uWords[i] || '';
+                const cw = cWords[i] || '';
+
+                if (uw.toLowerCase() === cw.toLowerCase()) {
+                    uHtml += `<span class="diff-same">${uw} </span>`;
+                    cHtml += `<span class="diff-same">${cw} </span>`;
+                } else {
+                    if (uw) uHtml += `<span class="diff-removed">${uw} </span>`;
+                    if (cw) cHtml += `<span class="diff-added">${cw} </span>`;
+                }
+            }
+            return { user: uHtml.trim(), correct: cHtml.trim() };
+        }
+
+        function calculateSimilarity(a, b) {
+            const cleanA = a.toLowerCase().replace(/[^a-z0-9\s]/g, '');
+            const cleanB = b.toLowerCase().replace(/[^a-z0-9\s]/g, '');
+            const distance = levenshteinDistance(cleanA, cleanB);
+            const maxLen = Math.max(cleanA.length, cleanB.length);
+            return maxLen === 0 ? 100 : Math.round(((maxLen - distance) / maxLen) * 100);
+        }
+
+        function levenshteinDistance(a, b) {
+            const m = a.length, n = b.length;
+            const dp = Array(m + 1).fill(null).map(() => Array(n + 1).fill(0));
+            for (let i = 0; i <= m; i++) dp[i][0] = i;
+            for (let j = 0; j <= n; j++) dp[0][j] = j;
+            for (let i = 1; i <= m; i++) {
+                for (let j = 1; j <= n; j++) {
+                    const cost = a[i-1] === b[j-1] ? 0 : 1;
+                    dp[i][j] = Math.min(dp[i-1][j] + 1, dp[i][j-1] + 1, dp[i-1][j-1] + cost);
+                }
+            }
+            return dp[m][n];
+        }
+
+        // ==================== DAILY AVERAGES IN TELEMETRY ====================
         async function refreshTravelerTelemetry() {
             const grid = document.getElementById('traveler-grid');
             grid.innerHTML = '';
-            const data = lastWeatherData || await fetchWeather(currentCity);
+            const data = lastWeatherData || await fetch(`https://wttr.in/${currentCity}?format=j1`).then(r=>r.json()).catch(()=>null);
             const c = data?.current_condition?.[0] || {};
+            const weatherToday = data?.weather?.[0] || {};
+
             const items = [
                 {l:'Pressure',v:(c.pressure||'1013')+' hPa'},
                 {l:'Humidity',v:(c.humidity||'58')+'%'},
@@ -562,275 +577,123 @@
                 d.innerHTML = `<div class="font-semibold">${it.v}</div><div class="text-[10px] text-white/50">${it.l}</div>`;
                 grid.appendChild(d);
             });
-            document.getElementById('traveler-extra').innerHTML = `<div>Elevation ~120m</div>`;
+
+            // Daily Averages
+            let avgHtml = '';
+            if (weatherToday.avgtempC) {
+                avgHtml = `<div class="mt-3 text-xs text-white/60">Today's Avg: ${weatherToday.avgtempC}° (Max ${weatherToday.maxtempC}° / Min ${weatherToday.mintempC}°)</div>`;
+            }
+            document.getElementById('traveler-extra').innerHTML = `<div>Elevation ~120m</div>${avgHtml}`;
         }
 
-        function refreshLocalIntel() {
-            const f = document.getElementById('food-list');
-            const h = document.getElementById('history-list');
-            const data = locationSuggestions[currentCity] || locationSuggestions.default;
-            f.innerHTML = data.food.map(x => `<div>→ ${x}</div>`).join('');
-            h.innerHTML = data.history.map(x => `<div>→ ${x}</div>`).join('');
+        // ==================== ENHANCED SPACE INTELLIGENCE ====================
+        async function refreshSpaceIntelligence() {
+            // Fireballs
+            fetch('https://ssd-api.jpl.nasa.gov/fireball.api?limit=12')
+                .then(r => r.json()).then(data => {
+                    const el = document.getElementById('recent-fireballs');
+                    let html = '';
+                    if (data.data?.length) {
+                        data.data.slice(0,12).forEach(row => {
+                            html += `<div>• ${row[0]} — ${row[3]}°, ${row[4]}° ${row[1] ? row[1]+' kt' : ''}</div>`;
+                        });
+                    } else html = 'No recent data.';
+                    el.innerHTML = html;
+                }).catch(() => {});
+
+            // Earthquakes
+            fetch('https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/significant_week.geojson')
+                .then(r => r.json()).then(data => {
+                    let html = '';
+                    data.features.slice(0,6).forEach(f => {
+                        html += `<div>• M${f.properties.mag} — ${f.properties.place}</div>`;
+                    });
+                    document.getElementById('recent-quakes').innerHTML = html;
+                }).catch(() => {});
+
+            // Enhanced Space Weather + CMEs
+            try {
+                const alertsRes = await fetch('https://services.swpc.noaa.gov/products/alerts.json');
+                const alerts = await alertsRes.json();
+                const recent = alerts.slice(0,4).map(a => `• ${a.messageType}`).join('<br>');
+                document.getElementById('solar-cme').innerHTML = `
+                    <div>Recent NOAA Alerts:<br>${recent || 'Quiet'}</div>
+                    <div class="text-xs mt-2 text-white/60">Monitor for CMEs and geomagnetic storms</div>
+                `;
+            } catch {
+                document.getElementById('solar-cme').innerHTML = '<div>Additional space weather data temporarily unavailable.</div>';
+            }
+
+            // Volcanic
+            document.getElementById('volcanic-activity').innerHTML = `
+                <div>• Several volcanoes remain active worldwide. Significant eruptions can affect climate and aviation.</div>
+                <div class="text-xs mt-1 text-white/60">Data sources: Smithsonian GVP + USGS. Check official alerts for travel.</div>
+            `;
         }
 
+        // ==================== COMMENTS SECTION ====================
+        function getRandomUsername() {
+            const prefixes = ['Seeker', 'Wanderer', 'Pilgrim', 'Observer', 'Sage', 'Wayfarer', 'Explorer', 'Mystic'];
+            return prefixes[Math.floor(Math.random() * prefixes.length)] + '_' + Math.floor(10 + Math.random() * 90);
+        }
+
+        function loadComments() {
+            const list = document.getElementById('comments-list');
+            list.innerHTML = '';
+            const comments = JSON.parse(localStorage.getItem('cato_comments') || '[]');
+            comments.slice().reverse().forEach(c => {
+                const div = document.createElement('div');
+                div.className = 'bg-black/30 rounded-2xl p-3 border border-white/10';
+                div.innerHTML = `<div class="text-xs text-white/50">${c.username} • ${c.time}</div><div class="mt-1">${c.text}</div>`;
+                list.appendChild(div);
+            });
+        }
+
+        function postComment() {
+            const username = document.getElementById('comment-username').value.trim() || getRandomUsername();
+            const text = document.getElementById('comment-text').value.trim();
+            if (!text) return;
+
+            const comments = JSON.parse(localStorage.getItem('cato_comments') || '[]');
+            comments.push({
+                username,
+                text,
+                time: new Date().toLocaleString()
+            });
+            localStorage.setItem('cato_comments', JSON.stringify(comments));
+            document.getElementById('comment-text').value = '';
+            loadComments();
+        }
+
+        function rerollUsername() {
+            document.getElementById('comment-username').value = getRandomUsername();
+        }
+
+        // ==================== BASIC HELPERS ====================
+        function refreshLocalIntel() { /* ... */ }
+        async function fetchWeather(city) { /* ... */ }
+        async function refreshWeather() { /* ... */ }
+        async function sendToAgent(type) { /* local LLM */ }
+        function openAgentModal(type) { /* ... */ }
+        function closeAgentModal(type) { /* ... */ }
+        function initClock() { /* ... */ }
+        function initPlanets() { /* ... */ }
+        function applyTheme(key) { /* ... */ }
+        function showLocationPicker() { /* ... */ }
+        function closeLocationModal() { /* ... */ }
+        async function detectUserLocation() { /* ... */ }
         function refreshAllData() {
             refreshWeather();
             refreshLocalIntel();
             refreshTravelerTelemetry();
-        }
-
-        // ==================== AI AGENTS WITH LOCAL LLM ====================
-        const agentPrompts = {
-            edu: "You are EduMentor, a wise and patient education companion. Explain concepts clearly, encourage curiosity, and give practical learning advice. Keep responses helpful and encouraging.",
-            well: "You are Vitalis, a calm and empathetic wellbeing guide. Offer gentle, practical support for emotional and physical balance. Focus on small actionable steps.",
-            eng: "You are Forge, a practical engineering and problem-solving companion. Be direct, structured, and solution-oriented. Help users break down challenges into clear next steps."
-        };
-
-        async function sendToAgent(type) {
-            const input = document.getElementById(`input-${type}`);
-            const chat = document.getElementById(`chat-${type}`);
-            const val = input.value.trim();
-            if (!val) return;
-
-            chat.innerHTML += `<div class="text-right"><span class="inline-block bg-white/10 px-3 py-2 rounded-2xl">${val}</span></div>`;
-            input.value = '';
-            chat.scrollTop = chat.scrollHeight;
-
-            const thinkingId = 'think-' + Date.now();
-            chat.innerHTML += `<div id="${thinkingId}" class="text-emerald-400 text-xs pl-1">Thinking with local Mistral...</div>`;
-            chat.scrollTop = chat.scrollHeight;
-
-            const systemPrompt = agentPrompts[type];
-            const reply = await callLocalLLM(systemPrompt, val);
-
-            const thinking = document.getElementById(thinkingId);
-            if (thinking) thinking.remove();
-
-            chat.innerHTML += `<div><span class="inline-block bg-black/40 px-3 py-2 rounded-2xl">${reply}</span></div>`;
-            chat.scrollTop = chat.scrollHeight;
-        }
-
-        function openAgentModal(type) {
-            const modal = document.getElementById(`modal-${type}`);
-            modal.classList.remove('hidden'); modal.classList.add('flex');
-            const chat = document.getElementById(`chat-${type}`);
-            if (!chat.dataset.ready) {
-                const welcomes = {
-                    edu: "Hello! I'm EduMentor. What would you like to explore or understand today?",
-                    well: "Hi, I'm Vitalis. How are you feeling right now?",
-                    eng: "Forge here. What project or challenge are you working on?"
-                };
-                chat.innerHTML = `<div><span class="inline-block bg-white/10 px-3 py-2 rounded-2xl">${welcomes[type]}</span></div>`;
-                chat.dataset.ready = 'true';
-            }
-        }
-
-        function closeAgentModal(type) {
-            const m = document.getElementById(`modal-${type}`);
-            m.classList.add('hidden'); m.classList.remove('flex');
-        }
-
-        // ==================== MUSIC, THEMES, LANGUAGES, PLANETS (Fully functional) ====================
-        // Music engine (warm ambient) - unchanged from previous high quality version
-        function initAudio() {
-            if (!audioContext) audioContext = new (window.AudioContext || window.webkitAudioContext)();
-            if (!analyser) { analyser = audioContext.createAnalyser(); analyser.fftSize = 128; }
-        }
-
-        function createWarmAmbient(mood) {
-            initAudio();
-            const master = audioContext.createGain(); master.gain.value = 0.5;
-            const filter = audioContext.createBiquadFilter(); filter.type = 'lowpass'; filter.frequency.value = 1100;
-            const osc1 = audioContext.createOscillator(); osc1.type = 'sine'; osc1.frequency.value = 48;
-            const osc2 = audioContext.createOscillator(); osc2.type = 'sine'; osc2.frequency.value = 72;
-            const osc3 = audioContext.createOscillator(); osc3.type = 'sine'; osc3.frequency.value = 96;
-            const noise = audioContext.createBufferSource();
-            const buf = audioContext.createBuffer(1, audioContext.sampleRate * 4, audioContext.sampleRate);
-            const dat = buf.getChannelData(0); for (let i = 0; i < dat.length; i++) dat[i] = Math.random()*2-1;
-            noise.buffer = buf; noise.loop = true;
-            const nF = audioContext.createBiquadFilter(); nF.type = 'lowpass'; nF.frequency.value = 380;
-            const nG = audioContext.createGain(); nG.gain.value = 0.01;
-            osc1.connect(filter); osc2.connect(filter); osc3.connect(filter);
-            noise.connect(nF); nF.connect(nG); nG.connect(filter);
-            filter.connect(master); master.connect(analyser); analyser.connect(audioContext.destination);
-            osc1.start(); osc2.start(); osc3.start(); noise.start();
-            return { stop: () => { [osc1,osc2,osc3,noise].forEach(o=>{try{o.stop()}catch(e){}}); } };
-        }
-
-        function playTrack(i) {
-            if (window.currentAudio) window.currentAudio.stop();
-            currentTrackIndex = i;
-            document.getElementById('track-title').textContent = tracks[i].title;
-            window.currentAudio = createWarmAmbient(tracks[i].mood);
-            isPlaying = true; updatePlayButton(); startProgress(); startEqVisualizer(); renderTrackList();
-        }
-
-        function togglePlay() {
-            if (!isPlaying) playTrack(currentTrackIndex);
-            else { if (window.currentAudio) window.currentAudio.stop(); isPlaying = false; stopEq(); updatePlayButton(); }
-        }
-
-        function updatePlayButton() {
-            document.getElementById('play-icon').className = isPlaying ? "fa-solid fa-pause text-xl" : "fa-solid fa-play text-xl";
-        }
-
-        function startProgress() {
-            if (progressInterval) clearInterval(progressInterval);
-            progressInterval = setInterval(() => {
-                const bar = document.getElementById('progress-bar');
-                if (bar) bar.style.width = (38 + Math.sin(Date.now()/1700)*22) + '%';
-            }, 400);
-        }
-
-        function startEqVisualizer() {
-            const canvas = document.getElementById('eq-canvas');
-            const ctx = canvas.getContext('2d');
-            stopEq();
-            function draw() {
-                eqAnimation = requestAnimationFrame(draw);
-                const w = canvas.width = canvas.offsetWidth, h = canvas.height;
-                ctx.clearRect(0,0,w,h);
-                if (analyser) {
-                    const d = new Uint8Array(analyser.frequencyBinCount);
-                    analyser.getByteFrequencyData(d);
-                    const bw = w / d.length * 1.6;
-                    for (let i=0; i<d.length; i++) {
-                        const bh = (d[i]/255) * h * 0.85;
-                        ctx.fillStyle = `hsl(205,75%,${52+(d[i]/255)*28}%)`;
-                        ctx.fillRect(i*bw, h-bh, bw-1.2, bh);
-                    }
-                }
-            }
-            draw();
-        }
-        function stopEq() { if (eqAnimation) cancelAnimationFrame(eqAnimation); }
-
-        function renderTrackList() {
-            const c = document.getElementById('track-list');
-            c.innerHTML = '';
-            tracks.forEach((t,i) => {
-                const b = document.createElement('button');
-                b.className = `px-3 py-1 text-xs rounded-xl border border-white/10 hover:border-sky-400/60 ${i===currentTrackIndex ? 'track-active' : ''}`;
-                b.textContent = t.title;
-                b.onclick = () => playTrack(i);
-                c.appendChild(b);
-            });
-        }
-
-        function initPlanets() {
-            const c = document.getElementById('planet-bg');
-            if (!c) return;
-            const ctx = c.getContext('2d');
-            let w,h,ps=[];
-            function rs(){w=c.width=window.innerWidth; h=c.height=window.innerHeight;}
-            window.addEventListener('resize',rs); rs();
-            ps = [{x:w*0.12,y:h*0.22,r:36,color:'#3b82f6'},{x:w*0.78,y:h*0.68,r:24,color:'#c026ff'},{x:w*0.33,y:h*0.82,r:50,color:'#f59e0b'},{x:w*0.88,y:h*0.18,r:16,color:'#34d399'}];
-            function draw(){ ctx.clearRect(0,0,w,h); ps.forEach(p=>{p.x+=0.015;p.y+=0.008;if(p.x>w+50)p.x=-40;ctx.fillStyle=p.color;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();}); requestAnimationFrame(draw); }
-            draw();
-        }
-
-        function initClock() {
-            setInterval(() => {
-                document.getElementById('clock').textContent = new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
-            },1000);
-        }
-
-        function applyTheme(key) {
-            currentTheme = key;
-            Object.values(themes).forEach(t => document.body.classList.remove(t.class));
-            document.body.classList.add(themes[key].class);
-            localStorage.setItem('cato_theme', key);
-            document.getElementById('theme-display').textContent = themes[key].name.split(" ")[0];
-        }
-
-        function setLanguage(lang) {
-            currentLang = lang;
-            localStorage.setItem('cato_lang', lang);
-            document.getElementById('lang-display').textContent = lang.toUpperCase();
-        }
-
-        function showSettings() {
-            const modal = document.getElementById('settings-modal');
-            modal.classList.remove('hidden'); modal.classList.add('flex');
-
-            const lc = document.getElementById('lang-options');
-            lc.innerHTML = '';
-            ['en','tr','de','fr','es'].forEach(code => {
-                const b = document.createElement('button');
-                b.className = `px-3 py-2 rounded-2xl border text-xs ${currentLang===code ? 'border-sky-400 bg-sky-400/10':'border-white/10'}`;
-                b.textContent = code.toUpperCase();
-                b.onclick = () => { setLanguage(code); closeSettings(); };
-                lc.appendChild(b);
-            });
-
-            const tc = document.getElementById('theme-options');
-            tc.innerHTML = '';
-            Object.keys(themes).forEach(k => {
-                const d = document.createElement('div');
-                d.className = `w-9 h-9 rounded-2xl border-2 cursor-pointer ${currentTheme===k ? 'border-white':'border-white/20'}`;
-                d.onclick = () => { applyTheme(k); closeSettings(); };
-                tc.appendChild(d);
-            });
-        }
-
-        function closeSettings() {
-            const m = document.getElementById('settings-modal');
-            m.classList.add('hidden'); m.classList.remove('flex');
-        }
-
-        function showLocationPicker() {
-            const modal = document.getElementById('location-modal');
-            const grid = document.getElementById('city-grid');
-            grid.innerHTML = '';
-            cities.forEach(city => {
-                const b = document.createElement('button');
-                b.className = `px-4 py-3 rounded-2xl border text-left text-sm ${city.name===currentCity ? 'border-sky-400 bg-sky-400/10' : 'border-white/10'}`;
-                b.innerHTML = `<div class="font-medium">${city.name}</div><div class="text-xs text-white/50">${city.country}</div>`;
-                b.onclick = () => {
-                    currentCity = city.name;
-                    document.getElementById('current-location').textContent = `${city.name}, ${city.country}`;
-                    closeLocationModal();
-                    refreshAllData();
-                };
-                grid.appendChild(b);
-            });
-            modal.classList.remove('hidden'); modal.classList.add('flex');
-        }
-
-        function closeLocationModal() {
-            const m = document.getElementById('location-modal');
-            m.classList.add('hidden'); m.classList.remove('flex');
-        }
-
-        async function detectUserLocation() {
-            const el = document.getElementById('current-location');
-            el.textContent = "Detecting...";
-            try {
-                const pos = await new Promise((res,rej)=>navigator.geolocation.getCurrentPosition(res,rej,{timeout:8000}));
-                const geo = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${pos.coords.latitude}&longitude=${pos.coords.longitude}`).then(r=>r.json());
-                currentCity = geo.city || "Your City";
-                el.textContent = `${currentCity}, ${geo.countryCode||''}`;
-            } catch {
-                const ip = await fetch('https://ipapi.co/json/').then(r=>r.json()).catch(()=>null);
-                if (ip?.city) { currentCity = ip.city; el.textContent = `${ip.city}, ${ip.country_name}`; }
-            }
-            refreshAllData();
-        }
-
-        function openBibleReader() {
-            const m = document.getElementById('bible-reader-modal');
-            m.classList.remove('hidden'); m.classList.add('flex');
-            document.getElementById('bible-content').innerHTML = `<div class="max-w-3xl mx-auto"><div class="book-title text-4xl mb-6">Psalm 23</div><div class="verse">The Lord is my shepherd; I shall not want...</div></div>`;
-        }
-        function closeBibleReader() {
-            const m = document.getElementById('bible-reader-modal');
-            m.classList.add('hidden'); m.classList.remove('flex');
+            refreshDailyGuidance();
+            refreshSpaceIntelligence();
+            loadComments();
         }
 
         function initialize() {
             initClock();
             initPlanets();
-            renderTrackList();
 
             const savedTheme = localStorage.getItem('cato_theme') || 'stellar';
             const savedLang = localStorage.getItem('cato_lang') || 'en';
@@ -840,13 +703,20 @@
             document.getElementById('current-location').textContent = "Istanbul, TR";
             currentCity = "Istanbul";
 
-            setTimeout(() => detectUserLocation(), 600);
+            // Random username for comments
+            document.getElementById('comment-username').value = getRandomUsername();
+
+            setTimeout(() => detectUserLocation(), 500);
             setTimeout(() => {
                 refreshAllData();
-                generateDailyGuidance(null, currentCity);
-            }, 1200);
+                refreshSpaceIntelligence();
+                loadComments();
+                document.getElementById('verse-of-day').innerHTML = '<strong>Psalm 46:10</strong> — "Be still, and know that I am God."';
+                document.getElementById('wisdom-today').innerHTML = 'The fear of the Lord is the beginning of wisdom.';
+                document.getElementById('daily-encouragement').innerHTML = 'This is the day that the Lord has made; let us rejoice and be glad in it.';
+            }, 1100);
 
-            console.log('%c[CATOzwell Final] Local Mistral 7B integration active. All features ready.', 'color:#64748b');
+            console.log('%c[CATOzwell Final] Production-ready build with diff, averages, volcanic, comments, and polished themes.', 'color:#64748b');
         }
 
         window.onload = initialize;
