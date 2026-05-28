@@ -1705,6 +1705,22 @@
         window.onload = initialize;
     </script>
 <script src="ai.js"></script>
-    
+
+    <script>
+    // Initialize CozWELL Local AI
+    document.addEventListener("DOMContentLoaded", () => {
+        if (window.CozWELL_AI) {
+            CozWELL_AI.init({
+                baseUrl: "http://192.168.178.72:1234/v1",   // ← Change if needed
+                defaultModel: "mistralai/mistral-7b-instruct-v0.3"
+            });
+            
+            // Optional: Check connection on load
+            CozWELL_AI.checkConnection().then(connected => {
+                console.log(connected ? "✅ Local AI connected" : "⚠️ Local AI offline");
+            });
+        }
+    });
+</script>
 </body>
 </html>
