@@ -8,62 +8,100 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@700&family=Cinzel:wght@400;500;700&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Playfair+Display:wght@700&display=swap');
 
         :root {
-            --accent1: #00f3ff;
-            --accent2: #ff00aa;
-            --accent3: #8b00ff;
-            --accent4: #39ff14;
+            /* TAG Heuer + LVMH Luxury Palette */
+            --lux-black: #0A0A0A;
+            --lux-gunmetal: #1C1C1C;
+            --lux-red: #E30613;
+            --lux-gold: #C9A227;
+            --lux-gold-light: #E8D5A3;
+            --lux-white: #F5F5F5;
+            --lux-gray: #8A8A8A;
+            
+            /* Legacy accents kept for compatibility */
+            --accent1: #C9A227;
+            --accent2: #E30613;
+            --accent3: #C9A227;
+            --accent4: #E30613;
+            
             --font-display: 'Space Grotesk', system_ui, sans-serif;
+            --font-telemetry: 'JetBrains Mono', 'Space Grotesk', system_ui, sans-serif;
         }
 
-        body { font-family: 'Inter', system_ui, sans-serif; }
-        .font-display { font-family: var(--font-display); letter-spacing: -0.025em; }
+        body { font-family: 'Inter', system_ui, sans-serif; background-color: var(--lux-black); }
+        
+        .font-display { 
+            font-family: var(--font-display); 
+            letter-spacing: -0.02em; 
+            font-weight: 600;
+        }
 
-        .cyber-bg { background-color: #0a0a0f; }
+        /* === LUXURY TELEMETRY - CAPITAL DIRECTIONAL TYPE === */
+        .telemetry-value {
+            font-family: var(--font-telemetry);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-feature-settings: "tnum";
+        }
+
+        .luxury-panel {
+            background: var(--lux-gunmetal);
+            border: 1px solid rgba(201, 162, 39, 0.2);
+            transition: all 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .luxury-panel:hover {
+            border-color: rgba(201, 162, 39, 0.4);
+            box-shadow: 0 0 0 1px rgba(201, 162, 39, 0.1);
+        }
+
+        .chronograph {
+            font-family: var(--font-telemetry);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-feature-settings: "tnum";
+        }
+
+        .luxury-red { color: var(--lux-red); }
+        .luxury-gold { color: var(--lux-gold); }
+        .luxury-white { color: var(--lux-white); }
+
         .glass {
-            background: rgba(20, 20, 30, 0.78);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(28, 28, 28, 0.85);
+            backdrop-filter: blur(24px);
+            border: 1px solid rgba(201, 162, 39, 0.15);
         }
-
-        .neon-cyan { color: var(--accent1); text-shadow: 0 0 10px var(--accent1); }
-        .neon-magenta { color: var(--accent2); text-shadow: 0 0 10px var(--accent2); }
-        .neon-violet { color: var(--accent3); text-shadow: 0 0 10px var(--accent3); }
 
         .panel { transition: all 0.2s cubic-bezier(0.23,1,0.32,1); }
-        .panel:hover { transform: translateY(-2px); }
+        .panel:hover { transform: translateY(-1px); }
 
         .weather-card {
             min-height: 148px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            background: var(--lux-gunmetal);
+            border: 1px solid rgba(201, 162, 39, 0.15);
         }
 
         .temp-display {
-            font-size: 2rem;
+            font-size: 2.25rem;
             line-height: 1;
             font-weight: 700;
-            font-family: var(--font-display);
-        }
-
-        .scanline {
-            position: absolute; inset: 0; pointer-events: none;
-            background: linear-gradient(to bottom, transparent 50%, rgba(0,243,255,0.02) 50%);
-            background-size: 100% 5px; animation: scan 4s linear infinite;
-            border-radius: inherit;
+            font-family: var(--font-telemetry);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
         .music-player {
-            background: rgba(15, 15, 25, 0.95);
-            border: 1px solid rgba(0, 243, 255, 0.15);
+            background: var(--lux-gunmetal);
+            border: 1px solid rgba(201, 162, 39, 0.15);
         }
 
         .track-active {
-            background: rgba(0, 243, 255, 0.1);
-            border-left: 3px solid var(--accent1);
+            background: rgba(201, 162, 39, 0.08);
+            border-left: 3px solid var(--lux-gold);
         }
 
         /* === NEW: Gothic Black & White Bible Reader === */
@@ -111,18 +149,35 @@
             border-color: #5c513a;
         }
 
-        /* === Faith Telemetry === */
+        /* === LUXURY FAITH & TELEMETRY BARS === */
         .telemetry-bar {
-            height: 9px;
-            background: linear-gradient(90deg, #5c513a, #a38b5f);
+            height: 6px;
+            background: linear-gradient(90deg, var(--lux-red), var(--lux-gold));
             border-radius: 999px;
-            transition: width 0.6s cubic-bezier(0.23,1,0.32,1);
+            transition: width 0.4s cubic-bezier(0.23,1,0.32,1);
         }
+
+        .luxury-telemetry-label {
+            font-family: var(--font-telemetry);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            font-size: 10px;
+            color: var(--lux-gray);
+        }
+
         .faith-stat {
             transition: transform 0.2s ease;
+            font-feature-settings: "tnum";
         }
         .faith-stat:hover {
             transform: translateY(-1px);
+        }
+
+        /* High-end micro details */
+        .instrument {
+            font-family: var(--font-telemetry);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
         }
     </style>
 </head>
@@ -140,6 +195,10 @@
                     <h1 id="logo" class="text-4xl font-display font-semibold tracking-tighter neon-cyan">CozWELL</h1>
                     <div class="text-[9px] text-white/40 -mt-1 tracking-[1.5px]">CATALYST OZWELL</div>
                 </div>
+                <!-- DEMO WATERMARK -->
+                <div class="hidden md:block absolute -top-1 -right-1 text-[9px] font-mono tracking-[3px] text-red-500/70 rotate-12 pointer-events-none">
+                    DEMO • UNDER CONSTRUCTION
+                </div>
             </div>
 
             <div class="flex items-center gap-3">
@@ -148,7 +207,7 @@
                     <div id="ai-status-dot" class="w-2 h-2 rounded-full bg-amber-400"></div>
                     <div class="text-left leading-none">
                         <div class="text-[9px] text-white/50 -mb-px">LOCAL AI</div>
-                        <div id="ai-status-text" class="text-xs font-medium text-white/80">192.168.178.72</div>
+                        <div id="ai-status-text" class="text-xs font-medium text-white/80">Local</div>
                     </div>
                 </div>
 
@@ -287,6 +346,7 @@
                         </div>
                     </div>
                     <div class="text-[10px] text-white/40 mt-3">Powered by CozWELL • Real Mistral & Gemma • 100% private on your hardware</div>
+                    <div class="text-[9px] text-red-500/50 mt-1 tracking-widest">DEMO • UNDER CONSTRUCTION</div>
                 </div>
             </div>
         </div>
@@ -414,7 +474,7 @@
                     <i class="fa-solid fa-headset text-cyan-400"></i>
                     <span class="font-semibold">Cyberpunk Soundscape</span>
                 </div>
-                <div class="text-xs text-white/50">12 Tracks • Free CC0 / Royalty Free</div>
+                <div class="text-xs text-white/50">6 Tracks • Cinematic Soundscapes</div>
             </div>
 
             <div class="flex items-center gap-4">
@@ -442,9 +502,193 @@
                 <!-- Populated by JS -->
             </div>
             <div class="text-[10px] text-white/40 mt-2 flex items-center gap-2">
-                <span>12 original ambient tracks • fully functional</span>
+                <span>6 cinematic tracks • royalty free style</span>
             </div>
         </div>
+
+        <!-- OPEN SOURCE RADIO & PODCASTS -->
+        <div class="mt-8 panel glass rounded-3xl p-6 border border-white/10">
+            <div class="flex items-center justify-between mb-4">
+                <div>
+                    <div class="font-semibold text-lg flex items-center gap-2">
+                        <i class="fa-solid fa-broadcast-tower text-emerald-400"></i>
+                        <span>Open Radio &amp; Podcasts</span>
+                    </div>
+                    <div class="text-xs text-white/50">100% Legal • Public Domain &amp; Creative Commons</div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 text-sm">
+                
+                <!-- 1 -->
+                <a href="https://archive.org/details/oldtimeradio" target="_blank" 
+                   class="block p-4 rounded-2xl border border-white/10 hover:border-emerald-400/50 bg-black/30 transition-colors group">
+                    <div class="font-medium group-hover:text-emerald-300">Old Time Radio</div>
+                    <div class="text-xs text-white/50">Internet Archive • Public Domain</div>
+                    <div class="text-[10px] text-emerald-400 mt-1">Classic radio dramas &amp; shows (free)</div>
+                </a>
+
+                <!-- 2 -->
+                <a href="https://www.jamendo.com/radio" target="_blank" 
+                   class="block p-4 rounded-2xl border border-white/10 hover:border-emerald-400/50 bg-black/30 transition-colors group">
+                    <div class="font-medium group-hover:text-emerald-300">Jamendo Radio</div>
+                    <div class="text-xs text-white/50">Creative Commons Music</div>
+                    <div class="text-[10px] text-emerald-400 mt-1">Royalty-free independent artists (free streams)</div>
+                </a>
+
+                <!-- 3 -->
+                <a href="https://freemusicarchive.org/" target="_blank" 
+                   class="block p-4 rounded-2xl border border-white/10 hover:border-emerald-400/50 bg-black/30 transition-colors group">
+                    <div class="font-medium group-hover:text-emerald-300">Free Music Archive</div>
+                    <div class="text-xs text-white/50">CC Licensed Audio</div>
+                    <div class="text-[10px] text-emerald-400 mt-1">Curated free music by genre (free)</div>
+                </a>
+
+                <!-- 4 -->
+                <a href="https://librivox.org/" target="_blank" 
+                   class="block p-4 rounded-2xl border border-white/10 hover:border-emerald-400/50 bg-black/30 transition-colors group">
+                    <div class="font-medium group-hover:text-emerald-300">Librivox Audiobooks</div>
+                    <div class="text-xs text-white/50">Public Domain</div>
+                    <div class="text-[10px] text-emerald-400 mt-1">Free public domain audiobooks &amp; podcasts</div>
+                </a>
+
+                <!-- 5 -->
+                <a href="https://archive.org/details/podcasts" target="_blank" 
+                   class="block p-4 rounded-2xl border border-white/10 hover:border-emerald-400/50 bg-black/30 transition-colors group">
+                    <div class="font-medium group-hover:text-emerald-300">Internet Archive Podcasts</div>
+                    <div class="text-xs text-white/50">Various Free Collections</div>
+                    <div class="text-[10px] text-emerald-400 mt-1">Thousands of free legal podcasts</div>
+                </a>
+
+                <!-- 6 -->
+                <a href="https://archive.org/details/radioprograms" target="_blank" 
+                   class="block p-4 rounded-2xl border border-white/10 hover:border-emerald-400/50 bg-black/30 transition-colors group">
+                    <div class="font-medium group-hover:text-emerald-300">Public Domain Radio</div>
+                    <div class="text-xs text-white/50">Internet Archive</div>
+                    <div class="text-[10px] text-emerald-400 mt-1">Historic radio broadcasts (free)</div>
+                </a>
+
+            </div>
+
+            <div class="text-[10px] text-white/40 mt-4">
+                All sources are legal, free, and either Public Domain or Creative Commons licensed.
+            </div>
+        </div>
+
+        <!-- GROKV35: COMPREHENSIVE LIFESTYLE, HEALTH & SAFETY -->
+        <div class="mt-8 panel luxury-panel rounded-3xl p-6 border border-white/10">
+            <div class="mb-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <div class="font-semibold text-xl tracking-tight">Lifestyle, Health &amp; Safety</div>
+                        <div class="text-xs text-white/50">Context-aware guidance • Location sensitive</div>
+                    </div>
+                    <div class="text-[10px] px-3 py-1 border border-white/20 rounded-xl text-white/60">GROKV35</div>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+
+                <!-- Clothing & Sun Protection -->
+                <div>
+                    <div class="luxury-telemetry-label mb-2">CLOTHING &amp; SUN PROTECTION</div>
+                    <div class="space-y-3 text-sm">
+                        <div class="p-3 bg-black/30 rounded-2xl border border-white/10">
+                            <div class="font-medium mb-1">Recommended Layers</div>
+                            <div class="text-xs text-white/70">Breathable base layer + light outer shell. UV-protective clothing strongly advised when UV &gt; 6.</div>
+                        </div>
+                        <div class="p-3 bg-black/30 rounded-2xl border border-white/10">
+                            <div class="font-medium mb-1">Sun Cream Guidance</div>
+                            <div class="text-xs text-white/70">Broad spectrum SPF 30+ (minimum). Reapply every 2 hours. Higher SPF (50+) recommended for fair skin or high UV locations (Turkey, Middle East, Southern Europe in summer).</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Eating, Drinking & Hydration -->
+                <div>
+                    <div class="luxury-telemetry-label mb-2">EATING, DRINKING &amp; HYDRATION</div>
+                    <div class="space-y-3 text-sm">
+                        <div class="p-3 bg-black/30 rounded-2xl border border-white/10">
+                            <div class="font-medium mb-1">Daily Hydration Target</div>
+                            <div class="text-xs text-white/70">2.5–3.5 liters of water per day in hot climates. Increase by 500ml for every hour of outdoor activity. Avoid excessive caffeine/alcohol.</div>
+                        </div>
+                        <div class="p-3 bg-black/30 rounded-2xl border border-white/10">
+                            <div class="font-medium mb-1">Eating Recommendations</div>
+                            <div class="text-xs text-white/70">Light, frequent meals. Prioritize local seasonal produce. In high heat: avoid heavy proteins after 2pm. Carry high-electrolyte snacks when hiking.</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Health Advice -->
+            <div class="mt-6">
+                <div class="luxury-telemetry-label mb-2">HEALTH GUIDANCE</div>
+                <div class="grid md:grid-cols-3 gap-3 text-sm">
+                    <div class="p-3 bg-black/30 rounded-2xl border border-white/10">
+                        <div class="text-emerald-400 text-xs mb-1">GENERAL WELLBEING</div>
+                        <div class="text-xs text-white/70">Maintain consistent sleep. Walk 8,000+ steps daily when possible. Monitor air quality (AQI) before outdoor activity.</div>
+                    </div>
+                    <div class="p-3 bg-black/30 rounded-2xl border border-white/10">
+                        <div class="text-emerald-400 text-xs mb-1">HEAT &amp; COLD STRESS</div>
+                        <div class="text-xs text-white/70">Recognize early signs of heat exhaustion. In cold climates: layer and stay dry. Never ignore shivering or dizziness.</div>
+                    </div>
+                    <div class="p-3 bg-black/30 rounded-2xl border border-white/10">
+                        <div class="text-emerald-400 text-xs mb-1">MEDICAL NOTE</div>
+                        <div class="text-xs text-white/70">This is general guidance only. Consult a local physician for personal medical advice. Carry any required medication.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Legal & Emergency -->
+            <div class="mt-6 pt-6 border-t border-white/10">
+                <div class="luxury-telemetry-label mb-3">LEGAL AWARENESS &amp; EMERGENCY NUMBERS</div>
+                
+                <div class="text-xs text-white/60 mb-3">
+                    <strong>Important:</strong> This is general information only and not legal advice. Laws vary significantly by country. Always verify with official local sources.
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+                    <div class="p-3 bg-black/30 rounded-2xl border border-white/10">
+                        <div class="text-xs text-red-400 mb-1">EUROPE (incl. TR, UA, DE)</div>
+                        <div class="font-mono text-xl font-semibold">112</div>
+                        <div class="text-[10px] text-white/50">General Emergency (Police, Ambulance, Fire)</div>
+                    </div>
+                    <div class="p-3 bg-black/30 rounded-2xl border border-white/10">
+                        <div class="text-xs text-red-400 mb-1">UNITED STATES</div>
+                        <div class="font-mono text-xl font-semibold">911</div>
+                        <div class="text-[10px] text-white/50">Police • Fire • Medical</div>
+                    </div>
+                    <div class="p-3 bg-black/30 rounded-2xl border border-white/10">
+                        <div class="text-xs text-red-400 mb-1">TURKEY</div>
+                        <div class="font-mono text-xl font-semibold">112 / 155</div>
+                        <div class="text-[10px] text-white/50">Emergency / Police</div>
+                    </div>
+                    <div class="p-3 bg-black/30 rounded-2xl border border-white/10">
+                        <div class="text-xs text-red-400 mb-1">UKRAINE</div>
+                        <div class="font-mono text-xl font-semibold">112</div>
+                        <div class="text-[10px] text-white/50">All Emergencies</div>
+                    </div>
+                </div>
+
+                <div class="text-[10px] text-white/40 mt-3">
+                    Always save the local emergency number for your destination before travel. In many countries, 112 works EU-wide.
+                </div>
+            </div>
+
+        </div>
+
+        <!-- GROKV35 DEMO / COMING SOON WATERMARKS -->
+        <div class="mt-6 text-center">
+            <div class="inline-flex items-center gap-4 text-xs tracking-[4px] text-white/30">
+                <span>DEMO</span>
+                <span class="text-white/20">•</span>
+                <span>UNDER CONSTRUCTION</span>
+                <span class="text-white/20">•</span>
+                <span>COMING SOON</span>
+            </div>
+        </div>
+
     </main>
 
     <!-- Location Picker Modal -->
@@ -599,30 +843,66 @@
             { name: "Kyiv", country: "UA" }
         ];
 
-        // 6 Beautiful Themes covering all age brackets (kids → seniors)
+        // 6 Cinematic Themes inspired by major movies
         const themes = {
-            stellar: { name: "Stellar Night", a1: "#7dd3fc", a2: "#a78bfa", a3: "#6366f1", a4: "#c0b3ff", font: "'Space Grotesk', system_ui, sans-serif" },
-            forest:  { name: "Forest Calm", a1: "#4ade80", a2: "#22c55e", a3: "#166534", a4: "#86efac", font: "'Inter', system_ui, sans-serif" },
-            kidplay: { name: "KidPlay", a1: "#f472b6", a2: "#fb923c", a3: "#a855f7", a4: "#facc15", font: "'Space Grotesk', system_ui, sans-serif" },
-            hearth:  { name: "Warm Hearth", a1: "#fb923c", a2: "#f59e0b", a3: "#854d0e", a4: "#fed7aa", font: "'Playfair Display', system_ui, sans-serif" },
-            minimal: { name: "Quiet Minimal", a1: "#64748b", a2: "#475569", a3: "#1e2937", a4: "#94a3b8", font: "'Inter', system_ui, sans-serif" },
-            forge:   { name: "Forge Tech", a1: "#f59e0b", a2: "#ea580c", a3: "#1c1917", a4: "#fbbf24", font: "'JetBrains Mono', monospace" }
+            matrix: {
+                name: "The Matrix",
+                a1: "#00ff41",
+                a2: "#0d2818",
+                a3: "#003b00",
+                a4: "#39ff14",
+                font: "'JetBrains Mono', monospace"
+            },
+            lionking: {
+                name: "The Lion King",
+                a1: "#f4a261",
+                a2: "#e76f51",
+                a3: "#d4a373",
+                a4: "#fefae0",
+                font: "'Playfair Display', system_ui, sans-serif"
+            },
+            starwars: {
+                name: "Star Wars",
+                a1: "#00bfff",
+                a2: "#ff0033",
+                a3: "#1a1a2e",
+                a4: "#e0e0ff",
+                font: "'Space Grotesk', system_ui, sans-serif"
+            },
+            interstellar: {
+                name: "Interstellar",
+                a1: "#ff8c42",
+                a2: "#1a1a2e",
+                a3: "#3d2b1f",
+                a4: "#f5e8c7",
+                font: "'Inter', system_ui, sans-serif"
+            },
+            got: {
+                name: "Game of Thrones",
+                a1: "#8b0000",
+                a2: "#2f4f4f",
+                a3: "#4a3f35",
+                a4: "#c9a227",
+                font: "'Cinzel', serif"
+            },
+            bladerunner: {
+                name: "Blade Runner",
+                a1: "#ff00aa",
+                a2: "#00f3ff",
+                a3: "#1a0033",
+                a4: "#e0b3ff",
+                font: "'Space Grotesk', system_ui, sans-serif"
+            }
         };
 
-        // 12 Beautiful, fully functional ambient tracks (procedural + real audio fallback)
+        // 6 Cinematic Royalty-Free Style Tracks (fitting each theme vibe)
         const tracks = [
-            { title: "Velvet Horizon", mood: "calm" },
-            { title: "Morning Mist", mood: "gentle" },
-            { title: "Copper Wind", mood: "warm" },
-            { title: "Lumen", mood: "bright" },
-            { title: "Night Orchard", mood: "deep" },
-            { title: "Paper Boats", mood: "light" },
-            { title: "Granite & Pine", mood: "earthy" },
-            { title: "Signal Hill", mood: "hopeful" },
-            { title: "Quiet Engine", mood: "steady" },
-            { title: "Distant Lights", mood: "dreamy" },
-            { title: "Ember & Ash", mood: "cozy" },
-            { title: "Open Sky", mood: "expansive" }
+            { title: "Digital Rain", mood: "cyber" },           // The Matrix
+            { title: "Pride of the Savannah", mood: "epic" },    // The Lion King
+            { title: "A Galaxy Awakens", mood: "space" },        // Star Wars
+            { title: "The Endurance", mood: "cosmic" },          // Interstellar
+            { title: "The Long Night", mood: "dark" },           // Game of Thrones
+            { title: "Neon Tears", mood: "synth" }               // Blade Runner
         ];
 
         // ==================== WEATHER (wttr.in - No API Key) ====================
@@ -1684,41 +1964,60 @@
             initClock();
             initPlanetBackground();
 
-            // Restore preferences (cozy persistent experience)
             const savedLang = localStorage.getItem('jc_lang') || 'en';
-            const savedTheme = localStorage.getItem('jc_theme') || 'stellar';
+            const savedTheme = localStorage.getItem('jc_theme') || 'matrix';
             
-            // Default city (will be overridden by location detection)
             document.getElementById('current-location').textContent = "Istanbul, TR";
             currentCity = "Istanbul";
 
-            // Apply saved theme + language
             applyTheme(savedTheme);
             setLanguage(savedLang);
 
-            // Auto-detect user location for weather (silent first attempt)
             setTimeout(() => {
                 detectUserLocation(true);
             }, 420);
 
-            // Initial data
             setTimeout(() => {
                 refreshWeather();
                 refreshTravelerTelemetry();
+                refreshAllData();
             }, 920);
 
             refreshQuotes();
             refreshLifestyle();
             refreshLocalIntel();
-
-            // Music player
             renderTrackList();
-
-            // Load first track title
             document.getElementById('track-title').textContent = tracks[0].title;
 
-            // Make the app feel alive and complete
-            console.log("%c[CozWELL] Professional fully-functional app ready — 3 local AI agents + traveler telemetry + working music visualizer + planets.", "color:#67e8f9");
+            // ============================================
+            // V35GROK — HIGH FREQUENCY ROBUST TELEMETRY
+            // TAG Heuer precision timing + LVMH luxury feel
+            // ============================================
+
+            // Weather — every 48 seconds (very robust)
+            setInterval(refreshWeather, 48000);
+
+            // Location Intelligence — every 26 seconds (high frequency)
+            setInterval(refreshTravelerTelemetry, 26000);
+
+            // AI Status heartbeat — every 18 seconds
+            setInterval(() => {
+                if (window.CozWELL_AI && typeof window.checkLocalAIStatus === 'function') {
+                    window.checkLocalAIStatus();
+                }
+            }, 18000);
+
+            // Visual pulse on all telemetry values (luxury instrument feel)
+            setInterval(() => {
+                const els = document.querySelectorAll('.telemetry-value, .chronograph, .instrument, .temp-display');
+                els.forEach(el => {
+                    el.style.transition = 'opacity 180ms ease';
+                    el.style.opacity = '0.55';
+                    setTimeout(() => { el.style.opacity = '1'; }, 160);
+                });
+            }, 42000);
+
+            console.log("%c[V35GROK] TAG Heuer / LVMH Luxury UI + High-Frequency Telemetry active", "color:#C9A227");
         }
 
         window.onload = initialize;
@@ -1766,5 +2065,13 @@
         // The three agents can gradually be upgraded to use CozWELL_AI.sendTo* methods
         // for real streaming responses from your local models.
     </script>
+
+    <!-- Professional Neon Watermarks -->
+    <div style="position: fixed; bottom: 8px; left: 50%; transform: translateX(-50%); z-index: 10000; font-size: 10px; opacity: 0.35; pointer-events: none; text-align: center; line-height: 1.2;">
+        <span style="color: #00f3ff; text-shadow: 0 0 6px #00f3ff;">We are not responsible for any outcomes</span>
+        <br>
+        <span style="color: #ff00aa; text-shadow: 0 0 6px #ff00aa;">Created by C. OZTOPRAK</span>
+    </div>
+
 </body>
 </html>
