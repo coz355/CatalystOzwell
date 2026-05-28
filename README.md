@@ -1,27 +1,39 @@
-**CozWELL** — Private Local AI Companion
+# CozWELL — Private Local AI Companion
 
-Futuristic, holistic all-in-one personal operating system with real local Mistral & Gemma models (via LM Studio).
+**Live Professional Site:** https://coz355.github.io/CatalystOzwell
 
-## Live Site
-https://coz355.github.io/CatalystOzwell
+A futuristic, holistic all-in-one personal operating system featuring real local AI (Mistral-7B + Gemma via LM Studio), rich location-based telemetry, and a complete suite of personal tools.
 
-## Current Status (Production Ready)
-- All original rich features fully functional: Weather, Music (12 tracks + visualizer), Gothic Bible Reader, Faith Telemetry, Location Intelligence, Theme switching.
-- CozWELL AI layer active (ai.js + status indicator).
-- Professional defaults: English + automatic user location detection.
-- Added: Kyiv location + full Ukrainian language support.
+## Professional Deployment Status
+- All original rich features fully functional and polished
+- CozWELL AI layer integrated (real streaming responses)
+- Professional defaults: English language + automatic user location detection
+- Added: Kyiv (Ukraine) location option + full Ukrainian language support
+- Production-ready error handling and graceful offline behavior
 
 ## Key Features
-- 100% private local AI (no data leaves your machine)
-- 3-input Academic Verifier in EduMentor
-- Real-time streaming responses
-- Location-aware recommendations
+- **Religion**: Gothic Old Testament Reader + detailed Faith Telemetry
+- **Weather & Environment**: Full 3-day forecast, Air Quality, UV, Lifestyle Protocol
+- **Music**: 12-track Cyberpunk Soundscape with visualizer
+- **Location Intelligence**: Advanced traveler/camper telemetry with AI insights
+- **Themes**: 6 beautiful, accessible themes
+- **Local AI Companions**:
+  - EduMentor: Powerful 3-input Academic Verifier + Tutor
+  - Vitalis: Health & Wellbeing Coach
+  - Forge: Engineering & Problem Solver
 
-## Local AI Setup
-Run LM Studio on `http://192.168.178.72:1234` with the server enabled.
+## Local Setup (Required for AI)
+1. Run LM Studio with server enabled on port 1234
+2. Load your preferred models
+3. The site will automatically connect when available
 
-For full integration instructions, see the files in this repo (INTEGRATION.md, DEPLOY.md).
+## Technical Notes
+- 100% client-side + local AI (maximum privacy)
+- GitHub Pages + custom domain ready
+- .nojekyll present for clean deployment
+
+For integration details see the files in this repository.
 
 ---
 
-Maintained with care for a seamless, professional experience.
+Maintained for a seamless, professional, and deeply personal experience.
