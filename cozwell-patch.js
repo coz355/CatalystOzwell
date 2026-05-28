@@ -1,1 +1,1 @@
-[Production version of the safe dynamic patch from /Users/user/CozWELL-final/cozwell-patch.js with better comments and error handling]
+[FULL professional cozwell-patch.js from /Users/user/CozWELL-final/cozwell-patch.js]
