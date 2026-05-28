@@ -1706,6 +1706,23 @@
     </script>
 <script src="ai.js"></script>
 
+    <button onclick="gradeWithCozWELL()">ANALYZE & GRADE MY ANSWER</button>
+
+<script>
+async function gradeWithCozWELL() {
+    const q = document.getElementById('edu-question').value;
+    const a = document.getElementById('edu-answer').value;
+    const model = document.getElementById('edu-model').value;
+
+    const result = await CozWELL_AI.gradeAcademicAnswer(q, a, model);
+    
+    // Display score, reasoning, and perfect answer
+    document.getElementById('edu-score').textContent = result.score;
+    // ... update the rest of your verdict panel
+}
+</script>
+    
+
     <script>
     // Initialize CozWELL Local AI
     document.addEventListener("DOMContentLoaded", () => {
